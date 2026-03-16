@@ -26,7 +26,7 @@ export default function ScenarioComparison({ scenarios }) {
             <CartesianGrid strokeDasharray="3 3" stroke="#E4D5C3" />
             <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#7C8E8E' }} />
             <YAxis tick={{ fontSize: 12, fill: '#7C8E8E' }} />
-            <Tooltip formatter={(v) => `${v}h`} />
+            <Tooltip formatter={(v) => `${v}h`} cursor={false} />
             <Legend wrapperStyle={{ fontSize: 12 }} />
             <Bar dataKey="Design" stackId="a" fill={DISCIPLINE_COLORS.design} />
             <Bar dataKey="Frontend" stackId="a" fill={DISCIPLINE_COLORS.frontend} />
