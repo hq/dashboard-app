@@ -83,6 +83,13 @@ export const MODULE_CATEGORIES = [
   { id: 'crm', name: 'CRM', pageNames: ['Settings', 'Profile', 'Billing'] },
 ]
 
+// Dummy baseline hours per module (used when no real annotations exist)
+export const MODULE_BASE_HOURS = {
+  marketing: { design: 80, frontend: 120, backend: 40 },
+  cms:       { design: 60, frontend: 100, backend: 140 },
+  crm:      { design: 50, frontend: 90,  backend: 110 },
+}
+
 /**
  * Returns the module id for a given page name, or 'other' if unmatched.
  */

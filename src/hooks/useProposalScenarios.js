@@ -1,11 +1,12 @@
 import { useMemo } from 'react'
 import { useProject } from './useProject'
-import { SCENARIOS, getModuleForPage } from '../lib/proposalData'
+import { SCENARIOS, getModuleForPage, MODULE_BASE_HOURS } from '../lib/proposalData'
 
 /**
  * Merges live annotation totals with scenario multipliers.
  * When moduleFilter is set (not 'all'), only annotations on pages
  * belonging to that module are summed.
+ * Falls back to dummy baseline hours when no real annotations exist.
  * Returns an array of { ...scenario, hours: { design, frontend, backend, misc, total } }
  */
 export default function useProposalScenarios(moduleFilter = 'all') {
@@ -24,6 +25,7 @@ export default function useProposalScenarios(moduleFilter = 'all') {
 
     // Sum raw hours from annotations, optionally filtered by module
     const raw = { design: 0, frontend: 0, backend: 0 }
+    let hasAnnotations = false
     for (const a of state.annotations) {
       if (moduleFilter !== 'all') {
         const pageName = screenshotToPageName[a.screenshotId]
@@ -32,6 +34,22 @@ export default function useProposalScenarios(moduleFilter = 'all') {
       raw.design += a.designHours || 0
       raw.frontend += a.frontendHours || 0
       raw.backend += a.backendHours || 0
+      hasAnnotations = true
+    }
+
+    // Fall back to dummy baseline hours when no real annotations exist
+    if (!hasAnnotations) {
+      if (moduleFilter === 'all') {
+        for (const mod of Object.values(MODULE_BASE_HOURS)) {
+          raw.design += mod.design
+          raw.frontend += mod.frontend
+          raw.backend += mod.backend
+        }
+      } else if (MODULE_BASE_HOURS[moduleFilter]) {
+        raw.design = MODULE_BASE_HOURS[moduleFilter].design
+        raw.frontend = MODULE_BASE_HOURS[moduleFilter].frontend
+        raw.backend = MODULE_BASE_HOURS[moduleFilter].backend
+      }
     }
 
     return SCENARIOS.map((scenario) => {
