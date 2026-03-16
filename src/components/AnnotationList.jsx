@@ -1,8 +1,8 @@
 import { useProject } from '../hooks/useProject'
 
 const COLORS = [
-  '#264A50', '#c97a3a', '#9333ea', '#2563eb', '#16a34a',
-  '#dc2626', '#ca8a04', '#0891b2', '#7c3aed', '#db2777',
+  '#264A50', '#FFB584', '#2FB2B8', '#84D7DC', '#335C63',
+  '#FAA46A', '#BCAB96', '#FFC198', '#153439', '#9BEFF4',
 ]
 
 export default function AnnotationList({

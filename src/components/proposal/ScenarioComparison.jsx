@@ -3,10 +3,10 @@ import {
 } from 'recharts'
 
 const DISCIPLINE_COLORS = {
-  design: '#9333ea',
-  frontend: '#2563eb',
-  backend: '#16a34a',
-  misc: '#c97a3a',
+  design: '#264A50',
+  frontend: '#84D7DC',
+  backend: '#FFB584',
+  misc: '#BCAB96',
 }
 
 export default function ScenarioComparison({ scenarios }) {

@@ -111,11 +111,11 @@ export function buildSitemapText(node, depth = 0) {
 // --- Timeline phases ---
 export const TIMELINE_PHASES = [
   { id: 'discovery', name: 'Discovery & Planning', fixedWeeks: 1, color: '#264A50' },
-  { id: 'design', name: 'Design', hourKey: 'design', color: '#9333ea' },
-  { id: 'frontend', name: 'Frontend Development', hourKey: 'frontend', color: '#2563eb' },
-  { id: 'backend', name: 'Backend Development', hourKey: 'backend', color: '#16a34a' },
-  { id: 'qa', name: 'QA & Testing', fixedWeeks: 2, color: '#c97a3a' },
-  { id: 'launch', name: 'Launch & Handoff', fixedWeeks: 1, color: '#dc2626' },
+  { id: 'design', name: 'Design', hourKey: 'design', color: '#2FB2B8' },
+  { id: 'frontend', name: 'Frontend Development', hourKey: 'frontend', color: '#84D7DC' },
+  { id: 'backend', name: 'Backend Development', hourKey: 'backend', color: '#FFB584' },
+  { id: 'qa', name: 'QA & Testing', fixedWeeks: 2, color: '#FAA46A' },
+  { id: 'launch', name: 'Launch & Handoff', fixedWeeks: 1, color: '#335C63' },
 ]
 
 /**

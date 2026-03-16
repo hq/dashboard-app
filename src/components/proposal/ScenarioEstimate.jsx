@@ -3,10 +3,10 @@ import {
 } from 'recharts'
 
 const DISCIPLINE_COLORS = {
-  design: '#9333ea',
-  frontend: '#2563eb',
-  backend: '#16a34a',
-  misc: '#c97a3a',
+  design: '#264A50',
+  frontend: '#84D7DC',
+  backend: '#FFB584',
+  misc: '#BCAB96',
 }
 
 export default function ScenarioEstimate({ scenarios, activeId }) {
@@ -33,10 +33,10 @@ export default function ScenarioEstimate({ scenarios, activeId }) {
       </div>
 
       <div className="flex gap-4 text-xs">
-        <span className="text-purple-600 font-medium">Design: {active.hours.design}h</span>
-        <span className="text-blue-600 font-medium">Frontend: {active.hours.frontend}h</span>
-        <span className="text-emerald-600 font-medium">Backend: {active.hours.backend}h</span>
-        <span className="text-orange-600 font-medium">Misc: {active.hours.misc}h</span>
+        <span className="font-medium" style={{ color: '#264A50' }}>Design: {active.hours.design}h</span>
+        <span className="font-medium" style={{ color: '#2FB2B8' }}>Frontend: {active.hours.frontend}h</span>
+        <span className="font-medium" style={{ color: '#FAA46A' }}>Backend: {active.hours.backend}h</span>
+        <span className="font-medium" style={{ color: '#BCAB96' }}>Misc: {active.hours.misc}h</span>
       </div>
 
       <div className="h-16">
