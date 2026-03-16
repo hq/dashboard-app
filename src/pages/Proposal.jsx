@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useProject } from '../hooks/useProject'
 import useProposalScenarios from '../hooks/useProposalScenarios'
@@ -12,15 +12,47 @@ import Timeline from '../components/proposal/Timeline'
 const MODULE_OPTIONS = [{ id: 'all', name: 'All' }, ...MODULE_CATEGORIES]
 
 function FilterButtonGroup({ options, activeId, onChange }) {
+  const containerRef = useRef(null)
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 })
+  const ready = useRef(false)
+
+  const updateIndicator = useCallback(() => {
+    const container = containerRef.current
+    if (!container) return
+    const activeBtn = container.querySelector(`[data-id="${activeId}"]`)
+    if (!activeBtn) return
+    const containerRect = container.getBoundingClientRect()
+    const btnRect = activeBtn.getBoundingClientRect()
+    setIndicator({
+      left: btnRect.left - containerRect.left,
+      width: btnRect.width,
+    })
+    ready.current = true
+  }, [activeId])
+
+  useEffect(() => {
+    updateIndicator()
+  }, [updateIndicator])
+
   return (
-    <div className="inline-flex rounded-lg border border-tan bg-sand-dark p-1 gap-1">
+    <div ref={containerRef} className="relative inline-flex rounded-lg border border-tan bg-sand-dark p-1 gap-1">
+      <div
+        className="absolute top-1 rounded-md bg-white shadow-sm"
+        style={{
+          left: indicator.left,
+          width: indicator.width,
+          height: 'calc(100% - 8px)',
+          transition: ready.current ? 'left 250ms cubic-bezier(0.4, 0, 0.2, 1), width 250ms cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
+        }}
+      />
       {options.map((opt) => (
         <button
           key={opt.id}
+          data-id={opt.id}
           onClick={() => onChange(opt.id)}
-          className={`px-5 py-2 rounded-md text-sm font-semibold transition-colors ${
+          className={`relative z-10 px-5 py-2 rounded-md text-sm font-semibold transition-colors duration-200 ${
             activeId === opt.id
-              ? 'bg-white text-deep shadow-sm'
+              ? 'text-deep'
               : 'text-deep-muted hover:text-deep'
           }`}
         >
