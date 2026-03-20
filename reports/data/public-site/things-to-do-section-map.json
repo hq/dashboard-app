@@ -1,0 +1,981 @@
+[
+  {
+    "index": 0,
+    "guid": "6bc396fa-ee33-41de-860a-97fa5529da58",
+    "widgetType": "core-hero-image",
+    "label": "Hero Image",
+    "position": {
+      "top": 75,
+      "height": 495
+    },
+    "config": {
+      "data-lazy-index": 0
+    },
+    "headings": [],
+    "content": {
+      "imageCount": 1,
+      "linkCount": 0,
+      "slides": [
+        {
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_476,q_65,w_640,x_2794,y_2812/v1/clients/saltlake/_18I6566_c1e4e240-3325-4091-a559-d7248cc5c046.jpg",
+            "alt": "View of downtown Salt Lake looking across a pool with 2 people standing near the edge overlooking the city"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "index": 1,
+    "guid": "b6cfba1a-9d64-4005-9ff2-66b5a440c9f2",
+    "widgetType": "content-block",
+    "label": "Page Intro (H1 + Body)",
+    "position": {
+      "top": 700,
+      "height": 244
+    },
+    "config": {},
+    "headings": [
+      "Things to Do in Salt Lake"
+    ],
+    "content": {
+      "imageCount": 0,
+      "linkCount": 5,
+      "paragraphCount": 2,
+      "links": [
+        {
+          "text": "events",
+          "href": "https://www.visitsaltlake.com/events/"
+        },
+        {
+          "text": "arts and culture",
+          "href": "https://www.visitsaltlake.com/things-to-do/arts-culture/"
+        },
+        {
+          "text": "shop til you drop",
+          "href": "https://www.visitsaltlake.com/things-to-do/shopping/"
+        },
+        {
+          "text": "family history",
+          "href": "https://www.visitsaltlake.com/things-to-do/attractions/genealogy/"
+        },
+        {
+          "text": "nearby national parks",
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/state-national-parks/"
+        }
+      ]
+    }
+  },
+  {
+    "index": 2,
+    "guid": "5173df29-de25-437e-b0fb-87d5a3a31347",
+    "widgetType": "related-content",
+    "label": "Related Content Slider",
+    "position": {
+      "top": 994,
+      "height": 820
+    },
+    "config": {
+      "data-slides-to-show": 4,
+      "data-lazy-loading": true,
+      "data-lazy-index": 1,
+      "data-position-arrows": true
+    },
+    "headings": [
+      "Explore all the things to do in Salt Lake",
+      "Where to See Salt Lake's Best Colors This Fall",
+      "Top Winter Things to Do in Salt Lake: Your Ultimate Guide",
+      "Celebrate the Holidays in Salt Lake",
+      "Why Salt Lake is a Hidden Gem for Fall Getaways",
+      "The Best Hiking Trails Near Salt Lake City for Out-of-State Visitors",
+      "Why Visit Salt Lake? Because Life\u2019s Too Short for Boring Vacations",
+      "A Solo Traveler's Guide to Visiting Salt Lake County",
+      "18 Fun and Must-Do Things with Kids in Salt Lake for Visitors",
+      "Top Things to Do in Downtown Salt Lake: A Playful Yet Practical Guide"
+    ],
+    "content": {
+      "imageCount": 9,
+      "linkCount": 18,
+      "slides": [
+        {
+          "title": "Where to See Salt Lake's Best Colors This Fall",
+          "description": "Fall in Salt Lake hits different\u2014a fleeting magic show where golden aspens shimmer against\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/AdobeStock_788207100_2c75c619-fdbe-4fe5-9dff-ec36218980f3.jpg",
+            "alt": "Salt Lake City in the fall."
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/where-to-see-salt-lakes-best-fall-colors-this-fall/"
+        },
+        {
+          "title": "Top Winter Things to Do in Salt Lake: Your Ultimate Guide",
+          "description": "Updated: October 30th, 2025 There's nothing quite like winter in Salt Lake City. Dive into the\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/Gallivan_Lights_On_Drone_Photo_from_SLCTV_Media_Nov_29th_jpg_be20a796-7370-4818-aa17-b7b31fcf39fe.jpg",
+            "alt": "Gallivan Plaza Lights in Winter"
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/top-winter-things-to-do-in-salt-lake/"
+        },
+        {
+          "title": "Celebrate the Holidays in Salt Lake",
+          "description": "Updated: November 3rd, 2025 \u2018Tis the season, and while the temps are dropping, the lights\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/TrolleyChristmas_9550_6b31b6a7-6828-4f41-8948-03f5780bb914.jpg",
+            "alt": "Trolley Square Christmas"
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/celebrate-the-holidays-in-salt-lake/"
+        },
+        {
+          "title": "Why Salt Lake is a Hidden Gem for Fall Getaways",
+          "description": "Salt Lake's fall is different because you can sip a maple latte downtown in the morning and be\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/AdobeStock_238841855_215c5e33-aa87-45b3-adc0-295d13db5411.jpg",
+            "alt": "Adobe Stock Fall imagery"
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/unforgettable-fall-experiences-in-salt-lake-for-first-time-visitors/"
+        },
+        {
+          "title": "The Best Hiking Trails Near Salt Lake City for Out-of-State Visitors",
+          "description": "In Salt Lake, some of Utah's best hiking trails start where our downtown ends. Our unique\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/living_room_5_c86913d3-e1c0-4d3c-a6cd-293756ad1b6a.jpg",
+            "alt": "Scenic Sunset from Living Room Hike"
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/the-best-hiking-trails-near-salt-lake/"
+        },
+        {
+          "title": "Why Visit Salt Lake? Because Life\u2019s Too Short for Boring Vacations",
+          "description": "Why Visit Salt Lake in 2025? Because Life\u2019s Too Short for Boring Vacations In Salt Lake, your\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/VSL_SugarhouseNeighborhood_HiRez_AustenDiamondPhotography_21_5f7959f8-a17d-4d88-bb6d-9735b8e5a2b7.jpg",
+            "alt": "Man and woman holding hands walking past some diners on a patio in the Sugarhouse neighborhood"
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/why-visit-salt-lake-because-lifes-too-short-for-boring-vacations/"
+        },
+        {
+          "title": "A Solo Traveler's Guide to Visiting Salt Lake County",
+          "description": "Traveling solo is like ordering a pizza with just the toppings you want\u2014there's no need\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/VisitSaltLake_WineAcademy_0563_ecf588bd-ac39-4b23-bafb-19d6e604bf88.jpg",
+            "alt": "Local whiskey tasting in Salt Lake"
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/a-solo-travelers-guide-to-visiting-salt-lake-county/"
+        },
+        {
+          "title": "18 Fun and Must-Do Things with Kids in Salt Lake for Visitors",
+          "description": "Salt Lake takes family fun to a whole new level. We're talking penguin encounters in the\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/20211014_VSL_MichaelKunde_10369_a0431149-254e-4363-a364-608319aa97ce.jpg",
+            "alt": "Father and son at the Loveland Living Planet Aquarium"
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/18-fun-and-must-do-things-with-kids-in-salt-lake-for-visitors/"
+        },
+        {
+          "title": "Top Things to Do in Downtown Salt Lake: A Playful Yet Practical Guide",
+          "description": "Our name might be Salt Lake but downtown serves up something decidedly sweeter. Take one part\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/VSL_Downtown_Alliance_Open_Streets_26_193f8318-f98d-42a9-b610-3e1e30388e2f.jpg",
+            "alt": "A group walking down Main Street during 2022\u2019s Open Streets."
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/top-things-to-do-in-downtown-salt-lake/"
+        }
+      ]
+    }
+  },
+  {
+    "index": 3,
+    "guid": "df4e9027-9286-41c1-880c-9cdc9741f0dc",
+    "widgetType": "core-side-by-side",
+    "label": "Side by Side",
+    "position": {
+      "top": 1864,
+      "height": 439
+    },
+    "config": {
+      "data-slides-across": 1,
+      "data-width": "controlled",
+      "data-lazy-loading": true,
+      "data-lazy-index": 2
+    },
+    "headings": [
+      "Tours & Experience Passes"
+    ],
+    "content": {
+      "imageCount": 1,
+      "linkCount": 4,
+      "slides": [
+        {
+          "title": "Tours & Experience Passes",
+          "description": "Whether you are looking to put together your own Salt Lake adventure or get\u00a0an expert to guide you, we've got you covere...",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_518,q_65,w_640,x_2370,y_2196/v1/clients/saltlake/Downtown_Drone_RyanMalavolta_2023_01_FINAL_94f1bfcb-bd1b-49c3-a3c9-2f74bd78140b.jpg",
+            "alt": "Skyline Summer 2023 Drone Shot"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/tours-experiences/"
+        }
+      ]
+    }
+  },
+  {
+    "index": 4,
+    "guid": "e735f0ae-6a65-4e26-a7e2-9ff18eb8f6ba",
+    "widgetType": "core-cards",
+    "label": "Cards (3 across)",
+    "position": {
+      "top": 2584,
+      "height": 824
+    },
+    "config": {
+      "data-slides-across": 3,
+      "data-lazy-loading": true,
+      "data-lazy-index": 3
+    },
+    "headings": [
+      "Attractions",
+      "The Great Salt Lake",
+      "Zoos & Gardens",
+      "Historic Sites",
+      "Free Things to Do",
+      "Things to Do with Kids"
+    ],
+    "content": {
+      "imageCount": 6,
+      "linkCount": 18,
+      "slides": [
+        {
+          "title": "Attractions",
+          "description": "Salt Lake's attractions run the gamut from\u00a0sightseeing tours\u00a0to museums\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VSL_ZooBrew_PrintReady_AustenDiamondPhotography_42_6d7e8f08-092e-4767-9991-fe234c604863.jpg",
+            "alt": "Peering Through Aquarium at Utah's Hogle Zoo Brew"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/attractions/"
+        },
+        {
+          "title": "The Great Salt Lake",
+          "description": "As the largest natural lake west of the Mississippi River and the largest salt water\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VisitSaltLake_GreatSaltLake_hirez_AustenDiamondPhotography_14_68f34c07-0923-453e-a25e-743db32e4b71.jpg",
+            "alt": "Great Salt Lake"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/attractions/the-great-salt-lake/"
+        },
+        {
+          "title": "Zoos & Gardens",
+          "description": "Take a walk on the wild side or just relax and enjoy nature in Salt Lake.\u00a0Exotic\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VSL_ZooBrew_PrintReady_AustenDiamondPhotography_11_6fe1809e-ba4d-4916-ae4b-32f129de4113.jpg",
+            "alt": "Female Lion at Utah's Hogle Zoo Brew"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/attractions/zoos-gardens/"
+        },
+        {
+          "title": "Historic Sites",
+          "description": "From the time the pioneers settled in the Salt Lake Valley in 1847, and even before\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/Salt_Lake_Temple_63061dd9-0544-45ce-8a0d-9261abf81c42.png",
+            "alt": "Temple Square"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/attractions/historic-sites/"
+        },
+        {
+          "title": "Free Things to Do",
+          "description": "Free activities in Salt Lake",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/DCU_6647_by_JayLynn_Photography_f8eaebba-9f8b-4084-b41c-f7bffa7d55fa.jpg",
+            "alt": "Days of '47 Parade Float"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/attractions/free-things-to-do/"
+        },
+        {
+          "title": "Things to Do with Kids",
+          "description": "Utah\u2019s remote mountains and deserts may hog the front of most of the state\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VSL_Aquarium_HiRez_AustenDiamondPhotography_19_77f2ea17-3c1a-42c3-b7c6-980ababb422b.jpg",
+            "alt": "Kids at the Loveland Living Planet Aquarium"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/attractions/things-to-do-with-kids/"
+        }
+      ]
+    }
+  },
+  {
+    "index": 5,
+    "guid": "cff66844-29fa-4677-9e02-6683c1d8ae32",
+    "widgetType": "core-cards",
+    "label": "Cards (4 across)",
+    "position": {
+      "top": 0,
+      "height": 0
+    },
+    "config": {
+      "data-slides-across": 4,
+      "data-lazy-loading": true,
+      "data-lazy-index": 4
+    },
+    "headings": [
+      "Museums",
+      "Art Galleries",
+      "Tours & Experiences",
+      "Discount Passport",
+      "Outdoor Arts Trail",
+      "LGBTQ",
+      "Arts & Culture",
+      "Shopping"
+    ],
+    "content": {
+      "imageCount": 8,
+      "linkCount": 24,
+      "slides": [
+        {
+          "title": "Museums",
+          "description": "Get enlightened in Salt Lake.\u00a0Check out the wide variety of museums available for your learning\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_NHMU_HiRez_AustenDiamondPhotography_9_a97afe83-2d59-47a6-8a62-4b3507b75eb0.jpg",
+            "alt": "Dinosaur Skeleton at Natural History Museum of Utah"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/arts-culture/museums/"
+        },
+        {
+          "title": "Art Galleries",
+          "description": "Get enlightened in Salt Lake.\u00a0Salt Lake's\u00a0galleries offer a wide variety of artistic styles\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VisitSaltLake_DowntownStreetArt_AustenDiamondPhotography_6_64ec678b-e200-44b2-92d4-c10e53eaa669.jpg",
+            "alt": "Urban Arts Gallery"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/arts-culture/art-galleries/"
+        },
+        {
+          "title": "Tours & Experiences",
+          "description": "There's so much to do in Salt Lake it can be overwhelming to decide. If you are looking for a packaged\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/dsc01602_52461184486_o_841325fb-e595-4ffd-8c0b-f81f30151969.jpg",
+            "alt": "A view of downtown Salt Lake from the 6th floor of the Hyatt Regency. Buildings, one with a mural, bathed in golden light"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/tours-experiences/"
+        },
+        {
+          "title": "Discount Passport",
+          "description": "Experience Salt Lake and save as you go!\u00a0 Visit Salt Lake has partnered with local attractions\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VisitSaltLake_Neighborhoods_DowntownCentralCity_HiRez_AustenDiamondPhotography_10_4a78de02-9a78-4151-befe-000f811e4976.jpg",
+            "alt": "Friends dining at Pallet in Salt Lake"
+          },
+          "href": "https://www.visitsaltlake.com/plan-your-visit/packages-deals/discount-passport/"
+        },
+        {
+          "title": "Outdoor Arts Trail",
+          "description": "Discover the soul of Salt Lake by taking a tour of the murals\u00a0scattered across the valley. You'll\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/Alley_998f5cd9-80c7-4039-b61d-c361462e843c.jpg",
+            "alt": "3 girls walking in sunlit alley with murals"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/tours-experiences/outdoor-arts-trail/"
+        },
+        {
+          "title": "LGBTQ",
+          "description": "Salt Lake City is very diverse and friendly with the LGBTQ community. View events and resources.",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_Pride_HiRez_AustenDiamondPhotography_42_1a458fbd-4246-4514-a167-f2541def34df.jpg",
+            "alt": "Pride Festival in Downtown Salt Lake"
+          },
+          "href": "https://www.visitsaltlake.com/plan-your-visit/community-diversity/lgbtq/"
+        },
+        {
+          "title": "Arts & Culture",
+          "description": "Get enlightened in Salt Lake.\u00a0Add some educational experiences to your Salt Lake trip with excursions to\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VisitSaltLake_UMFA_2048pxwide_AustenDiamondPhotography_13_58b1474e-c90d-4394-bb6f-ec41ebe24320.jpg",
+            "alt": "Utah Museum of Fine Art"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/arts-culture/"
+        },
+        {
+          "title": "Shopping",
+          "description": "Salt Lake City and shopping have gone hand in hand for over a century.\u00a0The first department store in the\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_DowntownMain_Hi_Rez_AustenDiamondPhotography_14_96357ee3-d44f-4c40-a616-2634176e6a81.jpg",
+            "alt": "View looking south on main street in Salt Lake in summer time showing the street bridge at City Creek Center"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/shopping/"
+        }
+      ]
+    }
+  },
+  {
+    "index": 6,
+    "guid": "0836cbdf-e019-4118-b7a8-389db2fcd826",
+    "widgetType": "core-cards",
+    "label": "Cards (4 across)",
+    "position": {
+      "top": 0,
+      "height": 0
+    },
+    "config": {
+      "data-slides-across": 4,
+      "data-lazy-loading": true,
+      "data-lazy-index": 5
+    },
+    "headings": [
+      "Skiing & Snowboarding",
+      "Ski Super Pass",
+      "Hiking",
+      "Mountains",
+      "National Parks, Monuments & Recreation Areas",
+      "Outdoor Recreation",
+      "State & National Parks",
+      "Fishing & Wildlife"
+    ],
+    "content": {
+      "imageCount": 8,
+      "linkCount": 24,
+      "slides": [
+        {
+          "title": "Skiing & Snowboarding",
+          "description": "Salt Lake is home to all kinds of skiers, riders, revelers, powder fiends, weekend warriors, and more. As a\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/nav_bg_e4c89daf-f719-451c-8a86-f391a919b1b6.png",
+            "alt": "Main Nav Background"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/skiing-snowboarding/"
+        },
+        {
+          "title": "Ski Super Pass",
+          "description": "The Salt Lake Ski Super Pass is your discounted lift ticket to Salt Lake\u2019s four world-class resorts\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_SkiResorts_HiRez_AustenDiamondPhotography_10_132ff754-4034-430b-b045-24c701818ba6.jpg",
+            "alt": "is your discounted lift ticket to Salt Lake\u2019s four world-class resorts The Ski City Super Pass"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/skiing-snowboarding/super-pass/"
+        },
+        {
+          "title": "Hiking",
+          "description": "Salt Lake City is synonymous with outdoor adventure. With the Wasatch Mountain range providing a surreal\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_SummerCottonwoodCanyons_HiRez_AustenDiamondPhotography_85_ed5c9ecb-1087-4bd9-87fb-a2273e7bf82b.jpg",
+            "alt": "Friends hiking to a lake in Big Cottonwood Canyon"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/hiking/"
+        },
+        {
+          "title": "Mountains",
+          "description": "Salt Lake City is an outdoor adventurer\u2019s dream. Bordered by the Great Salt Lake and the snow-capped\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_SummerCottonwoodCanyons_HiRez_AustenDiamondPhotography_33_1__c3df9f00-22a3-407b-ab0c-427a706a58b4.jpg",
+            "alt": "Family Hiking near Snowbird in Little Cottonwood Canyon"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/mountains/"
+        },
+        {
+          "title": "National Parks, Monuments & Recreation Areas",
+          "description": "Did you know there are over 20 national parks and monuments within a few hours' drive make Salt Lake?",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/63909faa_0ec4_435a_8bff_1d2341305bf5_ef5d37c6-3dca-4730-9f1b-012e831cb057.jpg",
+            "alt": "Bryce Canyon National Park"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/state-national-parks/national-parks-monuments-recreation-areas/"
+        },
+        {
+          "title": "Outdoor Recreation",
+          "description": "Utah is truly nature's playground\u2014and Salt Lake is the perfect base camp.Enjoy\u00a0hiking and\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/Wasatch_Crest_1080658_bc152311-509c-4ab5-8e32-202e578f258c.jpg",
+            "alt": "Wasatch Crest Trail Mountain Bike Ride"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/"
+        },
+        {
+          "title": "State & National Parks",
+          "description": "With over 60 national and state parks only a few hours away, Salt Lake is the perfect place to begin or unwind\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/99b05a85_7b5b_4d83_b774_533b0441fa4a_d2f53e70-f4f9-4815-8b70-58b9675c27c8.jpg",
+            "alt": "Bryce Canyon National Park"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/state-national-parks/"
+        },
+        {
+          "title": "Fishing & Wildlife",
+          "description": "Utah is truly nature's playground\u2014and Salt Lake is the perfect base camp.\u00a0Even though Salt Lake\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/FlyFishing_E_Schramm_02460_0de15a4d-4915-446c-9b77-f7abae5498ef.jpg",
+            "alt": "Fly Fishing"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/fishing-wildlife/"
+        }
+      ]
+    }
+  },
+  {
+    "index": 7,
+    "guid": "219ddc87-a18c-473e-9554-fba6d5cd917a",
+    "widgetType": "core-cards",
+    "label": "Cards (3 across)",
+    "position": {
+      "top": 0,
+      "height": 0
+    },
+    "config": {
+      "data-slides-across": 3,
+      "data-lazy-loading": true,
+      "data-lazy-index": 6
+    },
+    "headings": [
+      "Nightlife & Entertainment",
+      "Dance Clubs",
+      "Concerts & Live Music",
+      "Gay Bars",
+      "Comedy Clubs",
+      "Social Activities"
+    ],
+    "content": {
+      "imageCount": 6,
+      "linkCount": 18,
+      "slides": [
+        {
+          "title": "Nightlife & Entertainment",
+          "description": "As the sun sets over the Oquirrh Mountains, Salt Lake\u2019s bars, clubs, and night\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VisitSaltLake_CocktailGuide_HiRez_AustenDiamondPhotography_44_e08a4035-02a1-4b6e-ae6c-7ff5b4a9a05d.jpg",
+            "alt": "Bartender at Water Witch"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/"
+        },
+        {
+          "title": "Dance Clubs",
+          "description": "Looking for somewhere to shake your booty or do the twist? We have 80s nights, gay\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/34321052_1080339892123782_2015605981391618048_n_2c88b099-74e0-4619-a6fb-01d01982f4f8.jpg",
+            "alt": "Revolution Fridays at The Moose Lounge"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/dance-clubs/"
+        },
+        {
+          "title": "Concerts & Live Music",
+          "description": "Salt Lake is alive with music! From homegrown talent to global acts, you can always\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/a1bc896c_aa38_48b7_87a4_04500adfe866_ecf2e9b6-edd5-421a-96a8-5d7884703fb4.jpg",
+            "alt": "Salt Lake City Concert-goer in the crowd raising their hands"
+          },
+          "href": "https://www.visitsaltlake.com/events/concerts-live-music/"
+        },
+        {
+          "title": "Gay Bars",
+          "description": "Sure, a statue of the Mormon angel Moroni stands prominent watch over downtown Salt\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/7d538a9a_859d_4151_80fe_9de78171926e_124b69e0-2e8b-4fc5-b4d9-26a8cf307c45.jpg",
+            "alt": "Bartender at Bar X"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/gay-bars/"
+        },
+        {
+          "title": "Comedy Clubs",
+          "description": "Enjoy a few laughs with friends while you are in Salt Lake at one of the Comedy Clubs\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/The_Lounge_At_Wiseguys_3_The_Gateway_fed59d11-4fcc-49ea-9818-b947afb576d8.jpg",
+            "alt": "Wiseguys Comedy Club at The Gateway"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/comedy-clubs/"
+        },
+        {
+          "title": "Social Activities",
+          "description": "Looking for something fun and exciting to do? Or maybe something new and unusual?\u2026",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/Social_Axe_8_3cb150495056a36_3cb15124_5056_a36a_064121414f7d7d11_134fc69a-d4fe-48f7-a55f-66726e73556f.jpg",
+            "alt": "Social Axe Throwing"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/social-activities/"
+        }
+      ]
+    }
+  },
+  {
+    "index": 8,
+    "guid": "3626c011-6bab-4be8-bf0f-448831eca066",
+    "widgetType": "content-block",
+    "label": "Section Heading (UGC)",
+    "position": {
+      "top": 3523,
+      "height": 40
+    },
+    "config": {},
+    "headings": [
+      "See How Visitors Share Their Adventures"
+    ],
+    "content": {
+      "imageCount": 0,
+      "linkCount": 0
+    }
+  },
+  {
+    "index": 9,
+    "guid": "476d7df2-4fa1-40c9-8557-e07963dd666a",
+    "widgetType": "marquee-side-by-side",
+    "label": "Marquee Side by Side",
+    "position": {
+      "top": 4068,
+      "height": 689
+    },
+    "config": {
+      "data-lazy-loading": true,
+      "data-lazy-index": 7
+    },
+    "headings": [
+      "The Salt\n        Lake Scene",
+      "Related Stories",
+      "Spring Skiing Near Salt Lake: Trade Sand for Snow and Spring Break on the Slopes",
+      "Insider View: Snowbird Ski Resort",
+      "Alta Ski Area: Insider Insights on Utah's Paradise",
+      "Best Time for a Ski Vacation in Salt Lake: Travel Tips and Peak Slope Conditions"
+    ],
+    "content": {
+      "imageCount": 4,
+      "linkCount": 12,
+      "slides": [
+        {
+          "title": "Spring Skiing Near Salt Lake: Trade Sand for Snow and Spring Break on the Slopes",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_582,q_65,w_640/v1/clients/saltlake/SkiCity_ResortsMarch2017_HiRez_AustenDiamondPhotography_90_1__5d2a6820-396f-4e9d-974d-423465b6f25c.jpg",
+            "alt": "Solitude Skier"
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/spring-skiing-near-salt-lake-trade-sand-for-snow-and-spring-break-on-the-slopes/"
+        },
+        {
+          "title": "Insider View: Snowbird Ski Resort",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_201,q_65,w_320/v1/clients/saltlake/VSL_Snowbird_6_feb72b82-4a5e-438c-8306-ccf5467d5af3.jpg",
+            "alt": "A skier looks over the Who Dunnit intermediate trail."
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/insider-view-snowbird-ski-resort/"
+        },
+        {
+          "title": "Alta Ski Area: Insider Insights on Utah's Paradise",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_201,q_65,w_320/v1/clients/saltlake/VSL_Alta_Supreme_Bowl_1_144ebbb3-3988-4407-9574-9b44b49bccd9.jpg",
+            "alt": "Alta\u2019s Supreme Bowl off of the Supreme Lift allows expert skiers deep stashes of fresh snow to carve."
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/alta-ski-area-insider-insights-on-utahs-paradise/"
+        },
+        {
+          "title": "Best Time for a Ski Vacation in Salt Lake: Travel Tips and Peak Slope Conditions",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_201,q_65,w_320/v1/clients/saltlake/PJ_12_9_23b_2__14dc6fcd-cc96-4ae2-bbd0-cfe7ef8e7b6c.jpg",
+            "alt": "Skiers at Alta Ski Area in winter 2024"
+          },
+          "href": "https://www.visitsaltlake.com/blog/stories/post/best-time-for-a-ski-vacation-in-salt-lake-travel-tips-and-peak-slope-conditions/"
+        }
+      ],
+      "sectionTitle": "The Salt\n        Lake Scene"
+    }
+  },
+  {
+    "index": 10,
+    "guid": "8ce30839-6654-4739-b626-7fda438658ba",
+    "widgetType": "core-marquee",
+    "label": "Marquee",
+    "position": {
+      "top": 4807,
+      "height": 727
+    },
+    "config": {
+      "data-layout": "vertical",
+      "data-width": "controlled",
+      "data-lazy-loading": true,
+      "data-lazy-index": 8
+    },
+    "headings": [
+      "State & National Parks",
+      "Cycling the City & Nearby Canyons",
+      "Scenic Drives",
+      "Get Outside",
+      "Adventure Sports",
+      "Golf",
+      "Skiing & Snowboarding"
+    ],
+    "content": {
+      "imageCount": 6,
+      "linkCount": 16,
+      "slides": [
+        {
+          "title": "State & National Parks",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_582,q_65,w_640/v1/clients/saltlake/99b05a85_7b5b_4d83_b774_533b0441fa4a_d2f53e70-f4f9-4815-8b70-58b9675c27c8.jpg",
+            "alt": "Bryce Canyon National Park"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/state-national-parks/"
+        },
+        {
+          "title": "Cycling the City & Nearby Canyons",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_355,q_65,w_320/v1/clients/saltlake/Big_Mountain_Trail_Mountain_Bike_02_1d989093-b66a-482c-b254-318c0b88f9d2.jpg",
+            "alt": "Mountain Biking"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/biking/cycling-the-city-nearby-canyons/"
+        },
+        {
+          "title": "Scenic Drives",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_355,q_65,w_320,x_1440,y_1241/v1/clients/saltlake/Scenic_GuardsmanPass_A_Barker_0172_c62bfc66-9f5b-49d8-9cae-64dbf44403dc.jpg",
+            "alt": "Scenic view of Guardsman Pass in autumn"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/scenic-drives/"
+        },
+        {
+          "title": "Get Outside",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_355,q_65,w_320,x_2245,y_1062/v1/clients/saltlake/Recreation_ATVRiding_E_Schramm_02390_2_3787f60e-d705-4e67-af31-f2b0f1b3c8fd.jpg",
+            "alt": "ATV Riding at Snowbird"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/"
+        },
+        {
+          "title": "Adventure Sports",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_355,q_65,w_320/v1/clients/saltlake/GolfSouthMountain_Brian_Oar_24db8b7e-93bb-4806-92d6-4de72bf4af25.jpg",
+            "alt": "South Mountain Golf Course"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/adventure-sports/"
+        },
+        {
+          "title": "Golf",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_329,q_65,w_640/v1/clients/saltlake/nav_bg_e4c89daf-f719-451c-8a86-f391a919b1b6.png",
+            "alt": "Main Nav Background"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/golf/"
+        },
+        {
+          "title": "Skiing & Snowboarding",
+          "href": "https://www.visitsaltlake.com/things-to-do/skiing-snowboarding/"
+        }
+      ]
+    }
+  },
+  {
+    "index": 11,
+    "guid": "8971fb9d-e64f-4466-959c-10b9c6289821",
+    "widgetType": "content-block",
+    "label": "Section Heading (FAQs Intro)",
+    "position": {
+      "top": 5585,
+      "height": 75
+    },
+    "config": {},
+    "headings": [
+      "Frequently Asked Questions"
+    ],
+    "content": {
+      "imageCount": 0,
+      "linkCount": 1,
+      "paragraphCount": 1,
+      "links": [
+        {
+          "text": "Check out more FAQs",
+          "href": "https://www.visitsaltlake.com/plan-your-visit/frequently-asked-questions/"
+        }
+      ]
+    }
+  },
+  {
+    "index": 12,
+    "guid": "f9c03b80-9802-47b9-8c4c-73d2b3f2dab2",
+    "widgetType": "core-faqs",
+    "label": "FAQs",
+    "position": {
+      "top": 5710,
+      "height": 261
+    },
+    "config": {
+      "data-lazy-loading": true,
+      "data-lazy-index": 9
+    },
+    "headings": [
+      "Things to Do"
+    ],
+    "content": {
+      "imageCount": 0,
+      "linkCount": 16,
+      "faqItems": [
+        {
+          "question": "Where are the best locations for cycling in Salt Lake City?",
+          "answerList": [
+            "City Creek Canyon",
+            "Millcreek Canyon",
+            "Little Cottonwood Canyon",
+            "Wasatch Boulevard",
+            "Saltair"
+          ]
+        },
+        {
+          "question": "What historic sites should I visit in Salt Lake City?",
+          "answerList": [
+            "This is the Place State Park",
+            "Temple Square",
+            "The Lion House",
+            "The Cathedral of St. Mark",
+            "The Golden Spike National Historic Site"
+          ]
+        },
+        {
+          "question": "What dog-friendly activities are there in Salt Lake City?",
+          "answerList": [
+            "Memory Grove Park",
+            "City Creek Canyon",
+            "The Bonneville Shoreline Trail",
+            "Tanner Dog Park",
+            "The Pipeline Trail",
+            "Dog Lake",
+            "Jordan River Parkway"
+          ]
+        },
+        {
+          "question": "What are the top things to do in downtown Salt Lake City?",
+          "answerList": [
+            "Visit a Local Coffee Shop",
+            "Shop the Unique Boutique Stores",
+            "Get Some Ink (Tattoo)",
+            "Enjoy a Drink at a Local Bar",
+            "Dine at One of the Many Restaurants"
+          ]
+        }
+      ],
+      "faqGroupHeading": "Things to Do"
+    }
+  },
+  {
+    "index": 13,
+    "guid": "865bf48b-db24-4968-8d25-0a6374412422",
+    "widgetType": "content-block",
+    "label": "Discount Passport CTA",
+    "position": {
+      "top": 5971,
+      "height": 279
+    },
+    "config": {},
+    "headings": [
+      "Get the Salt Lake Discount Passport",
+      "Sign-up now and save!",
+      "Deals Include:"
+    ],
+    "content": {
+      "imageCount": 0,
+      "linkCount": 0,
+      "paragraphCount": 1,
+      "dealsList": [
+        "10-20% off food at select dining locations",
+        "10-20% off merchandise at select locations",
+        "20-25% discount on tickets for Sports & Performing Art Shows",
+        "And Even More with new deals added regularly!"
+      ]
+    }
+  },
+  {
+    "index": 14,
+    "guid": "b236c282-a81b-4c82-8f77-03d4e75b4a61",
+    "widgetType": "core-side-by-side",
+    "label": "Side by Side",
+    "position": {
+      "top": 6300,
+      "height": 439
+    },
+    "config": {
+      "data-slides-across": 1,
+      "data-width": "controlled",
+      "data-lazy-loading": true,
+      "data-lazy-index": 10
+    },
+    "headings": [],
+    "content": {
+      "imageCount": 1,
+      "linkCount": 1,
+      "slides": [
+        {
+          "description": "FREE",
+          "image": {
+            "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_518,q_65,w_640/v1/clients/saltlake/VSL_Pass_Products_App_Discount_Passport_Card_9d074836-acc4-4a71-a5f8-89fb7bd03b87.jpg",
+            "alt": "Drinks and food - Discount Passport"
+          },
+          "href": "https://www.visitsaltlake.com/things-to-do/"
+        }
+      ]
+    }
+  },
+  {
+    "index": 15,
+    "guid": "2c7f1462-e138-444c-9512-a83a6958d0d3",
+    "widgetType": "footer-contact",
+    "label": "Footer Contact Info",
+    "position": {
+      "top": 7112,
+      "height": 78
+    },
+    "config": {},
+    "headings": [],
+    "content": {
+      "imageCount": 0,
+      "linkCount": 0,
+      "text": "90 South West Temple\nSalt Lake City, UT 84101\n801.534.4900 | 800.541.4955"
+    }
+  },
+  {
+    "index": 16,
+    "guid": "0e057948-f589-4af8-a860-f221a252c249",
+    "widgetType": "partner-logo",
+    "label": "Partner Logo (Visit Utah)",
+    "position": {
+      "top": 7303,
+      "height": 46
+    },
+    "config": {},
+    "headings": [],
+    "content": {
+      "imageCount": 1,
+      "linkCount": 1,
+      "image": {
+        "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_46,q_75,w_100/v1/clients/saltlake/utah_life_elevated_logo_e1567628045117_1__fcc145f1-3118-474b-8b7f-334edd2ddd59.png",
+        "alt": "Text logo for Utah. Words say Utah Life Elevated"
+      },
+      "href": "https://www.visitutah.com/"
+    }
+  },
+  {
+    "index": 17,
+    "guid": "f5728afc-93f3-4463-a75c-8c5ee5ce93d6",
+    "widgetType": "partner-logo",
+    "label": "Partner Logo (Delta)",
+    "position": {
+      "top": 7316,
+      "height": 20
+    },
+    "config": {},
+    "headings": [],
+    "content": {
+      "imageCount": 1,
+      "linkCount": 1,
+      "image": {
+        "src": "https://assets.simpleviewinc.com/simpleview/image/upload/v1/clients/saltlake-redesign/logo_footer_delta_74f6d43d-6bc7-4c89-a699-7d3148412084.png",
+        "alt": "Delta"
+      },
+      "href": "https://www.delta.com/"
+    }
+  },
+  {
+    "index": 18,
+    "guid": "faba6fde-f125-451f-a41d-be9f6bc49e7a",
+    "widgetType": "partner-logo",
+    "label": "Partner Logo (Visit The USA)",
+    "position": {
+      "top": 7284,
+      "height": 83
+    },
+    "config": {},
+    "headings": [],
+    "content": {
+      "imageCount": 1,
+      "linkCount": 1,
+      "image": {
+        "src": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_198,q_75,w_300/v1/clients/saltlake/USA_horiz_url_KO_5fcd75e6-363a-4e01-8d94-515d103a36ba.png",
+        "alt": "USA logo with VisitTheUSA.com"
+      },
+      "href": "https://www.visittheusa.com/"
+    }
+  }
+]

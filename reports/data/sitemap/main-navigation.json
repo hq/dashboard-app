@@ -1,0 +1,88 @@
+{
+  "scraped_at": "2026-03-16",
+  "source": "https://saltlake.simpleviewcms.com/nav/sitemap/site_primary/section_main/",
+  "section": "Main Navigation",
+  "columns": ["Action", "Title", "Folder", "Type", "Status", "Show in Nav", "Updated", "Custom - Icon"],
+  "pages": [
+    {
+      "title": "Things To Do",
+      "folder": "things-to-do",
+      "publicUrl": "https://www.visitsaltlake.com/things-to-do/",
+      "type": "Page",
+      "status": "Published",
+      "showInNav": true,
+      "updated": "2025-12-22",
+      "customIcon": null
+    },
+    {
+      "title": "Skiing & Snowboarding",
+      "folder": "skiing-snowboarding",
+      "publicUrl": "https://www.visitsaltlake.com/things-to-do/skiing-snowboarding/",
+      "type": "Link",
+      "status": "Published",
+      "showInNav": true,
+      "updated": "2022-10-01",
+      "customIcon": null
+    },
+    {
+      "title": "Home",
+      "folder": "home",
+      "publicUrl": "https://www.visitsaltlake.com/",
+      "type": "Page",
+      "status": "Published",
+      "showInNav": false,
+      "updated": "2026-03-03",
+      "customIcon": null
+    },
+    {
+      "title": "Events",
+      "folder": "events",
+      "publicUrl": "https://www.visitsaltlake.com/events/",
+      "type": "Page",
+      "status": "Published",
+      "showInNav": true,
+      "updated": "2026-03-03",
+      "customIcon": "calendar-2"
+    },
+    {
+      "title": "Restaurants",
+      "folder": "restaurants",
+      "publicUrl": "https://www.visitsaltlake.com/restaurants/",
+      "type": "Page",
+      "status": "Published",
+      "showInNav": true,
+      "updated": "2025-11-12",
+      "customIcon": null
+    },
+    {
+      "title": "Places To Stay",
+      "folder": "places-to-stay",
+      "publicUrl": "https://www.visitsaltlake.com/places-to-stay/",
+      "type": "Page",
+      "status": "Published",
+      "showInNav": true,
+      "updated": "2025-09-04",
+      "customIcon": "suitcase-1"
+    },
+    {
+      "title": "Plan Your Visit",
+      "folder": "plan-your-visit",
+      "publicUrl": "https://www.visitsaltlake.com/plan-your-visit/",
+      "type": "Page",
+      "status": "Published",
+      "showInNav": true,
+      "updated": "2026-03-03",
+      "customIcon": "direction-sign"
+    },
+    {
+      "title": "Neighborhoods",
+      "folder": "neighborhoods",
+      "publicUrl": "https://www.visitsaltlake.com/neighborhoods/",
+      "type": "Page",
+      "status": "Published",
+      "showInNav": true,
+      "updated": "2025-04-23",
+      "customIcon": null
+    }
+  ]
+}

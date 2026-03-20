@@ -1,0 +1,198 @@
+{
+  "scraped_at": "2026-03-16",
+  "url": "https://www.visitsaltlake.com/things-to-do/",
+  "title": "Things to Do in Salt Lake City | Attractions, Parks & Art",
+  "page_stats": {
+    "html_bytes": 1167003,
+    "total_images": 85,
+    "total_links": 246,
+    "total_sections": 19
+  },
+  "og_tags": {
+    "og:title": "Things to Do in Salt Lake City | Attractions, Parks & Art",
+    "og:url": "https://www.visitsaltlake.com/things-to-do/",
+    "og:description": "Fun things to do in Salt Lake City include attractions, family activities, museums, art galleries, national parks and sports. View details, maps & photos.",
+    "og:image": "https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,h_1200,q_75,w_1200/v1/clients/saltlake/VSL_Aquarium_HiRez_AustenDiamondPhotography_19_ef8eaead-6d3d-49f7-a1a7-972fac4e1070.jpg",
+    "og:type": "website"
+  },
+  "structured_data": {
+    "breadcrumbs": ["Home", "Things To Do"],
+    "faq_questions": [
+      "Where are the best locations for cycling in Salt Lake City?",
+      "What historic sites should I visit in Salt Lake City?",
+      "What dog-friendly activities are there in Salt Lake City?",
+      "What are the top things to do in downtown Salt Lake City?"
+    ]
+  },
+  "sections": [
+    {
+      "index": 0,
+      "widget_type": "core-hero-image",
+      "guid": "6bc396fa-ee33-41de-860a-97fa5529da58",
+      "images": 1,
+      "links": 0,
+      "description": "Full-width hero banner with city skyline photo"
+    },
+    {
+      "index": 1,
+      "widget_type": "text-block",
+      "guid": "b6cfba1a-9d64-4005-9ff2-66b5a440c9f2",
+      "headings": ["H1: Things to Do in Salt Lake"],
+      "description": "Page intro text with inline links to events, arts, shopping, genealogy, national parks"
+    },
+    {
+      "index": 2,
+      "widget_type": "related-content",
+      "guid": "5173df29-de25-437e-b0fb-87d5a3a31347",
+      "config": { "slides_to_show": 4, "lazy_loading": true, "position_arrows": true },
+      "images": 9,
+      "links": 9,
+      "description": "Horizontal scrolling blog post cards (9 articles)"
+    },
+    {
+      "index": 3,
+      "widget_type": "core-side-by-side",
+      "guid": "df4e9027-9286-41c1-880c-9cdc9741f0dc",
+      "config": { "width": "controlled", "slides_across": 1 },
+      "headings": ["H2: Tours & Experience Passes"],
+      "images": 1,
+      "links": 3,
+      "description": "Split layout — skyline image + text about tours and discount passes"
+    },
+    {
+      "index": 4,
+      "widget_type": "core-cards",
+      "guid": "e735f0ae-6a65-4e26-a7e2-9ff18eb8f6ba",
+      "config": { "slides_across": 3, "graphic": false },
+      "headings": ["Attractions", "The Great Salt Lake", "Zoos & Gardens", "Historic Sites", "Free Things to Do", "Things to Do with Kids"],
+      "images": 6,
+      "links": 10,
+      "description": "3-column card grid — main attraction categories"
+    },
+    {
+      "index": 5,
+      "widget_type": "core-cards",
+      "guid": "cff66844-29fa-4677-9e02-6683c1d8ae32",
+      "config": { "slides_across": 4, "graphic": false },
+      "headings": ["Museums", "Art Galleries", "Tours & Experiences", "Discount Passport", "Outdoor Arts Trail", "LGBTQ", "Arts & Culture", "Shopping"],
+      "images": 8,
+      "links": 10,
+      "description": "4-column card grid — arts, culture, experiences"
+    },
+    {
+      "index": 6,
+      "widget_type": "core-cards",
+      "guid": "0836cbdf-e019-4118-b7a8-389db2fcd826",
+      "config": { "slides_across": 4, "graphic": false },
+      "headings": ["Skiing & Snowboarding", "Ski Super Pass", "Hiking", "Mountains", "National Parks", "Outdoor Recreation", "State & National Parks", "Fishing & Wildlife"],
+      "images": 8,
+      "links": 10,
+      "description": "4-column card grid — outdoor activities"
+    },
+    {
+      "index": 7,
+      "widget_type": "core-cards",
+      "guid": "219ddc87-a18c-473e-9554-fba6d5cd917a",
+      "config": { "slides_across": 3, "graphic": false },
+      "headings": ["Nightlife & Entertainment", "Dance Clubs", "Concerts & Live Music", "Gay Bars", "Comedy Clubs", "Social Activities"],
+      "images": 6,
+      "links": 10,
+      "description": "3-column card grid — nightlife"
+    },
+    {
+      "index": 8,
+      "widget_type": "text-block",
+      "guid": "3626c011-6bab-4be8-bf0f-448831eca066",
+      "headings": ["H3: See How Visitors Share Their Adventures"],
+      "description": "Social proof heading (likely UGC/social embed below)"
+    },
+    {
+      "index": 9,
+      "widget_type": "marquee-side-by-side",
+      "guid": "476d7df2-4fa1-40c9-8557-e07963dd666a",
+      "headings": ["H2: The Salt Lake Scene", "H3: Related Stories"],
+      "images": 4,
+      "links": 8,
+      "description": "Blog feature section — hero image + 4 related story cards"
+    },
+    {
+      "index": 10,
+      "widget_type": "core-marquee",
+      "guid": "8ce30839-6654-4739-b626-7fda438658ba",
+      "config": { "layout": "vertical", "width": "controlled" },
+      "headings": ["State & National Parks", "Cycling", "Scenic Drives", "Get Outside", "Adventure Sports", "Golf", "Skiing & Snowboarding"],
+      "images": 6,
+      "links": 10,
+      "description": "Multi-slide carousel with thumbnail sidebar"
+    },
+    {
+      "index": 11,
+      "widget_type": "text-block",
+      "guid": "8971fb9d-e64f-4466-959c-10b9c6289821",
+      "headings": ["H3: Frequently Asked Questions"],
+      "description": "FAQ section heading"
+    },
+    {
+      "index": 12,
+      "widget_type": "core-faqs",
+      "guid": "f9c03b80-9802-47b9-8c4c-73d2b3f2dab2",
+      "headings": ["H2: Things to Do"],
+      "links": 10,
+      "description": "Expandable FAQ accordion — 4 questions with rich HTML answers (cycling, historic sites, dogs, downtown)"
+    },
+    {
+      "index": 13,
+      "widget_type": "text-block",
+      "guid": "865bf48b-db24-4968-8d25-0a6374412422",
+      "headings": ["H2: Get the Salt Lake Discount Passport", "H3: Sign-up now and save!", "H4: Deals Include:"],
+      "description": "Discount passport CTA block"
+    },
+    {
+      "index": 14,
+      "widget_type": "core-side-by-side",
+      "guid": "b236c282-a81b-4c82-8f77-03d4e75b4a61",
+      "config": { "width": "controlled", "slides_across": 1 },
+      "images": 1,
+      "description": "Split layout — passport product image"
+    },
+    {
+      "index": 15,
+      "widget_type": "spacer",
+      "guid": "2c7f1462-e138-444c-9512-a83a6958d0d3",
+      "description": "Empty spacer section"
+    },
+    {
+      "index": 16,
+      "widget_type": "sponsor-logo",
+      "guid": "0e057948-f589-4af8-a860-f221a252c249",
+      "images": 1,
+      "description": "Utah Life Elevated logo"
+    },
+    {
+      "index": 17,
+      "widget_type": "sponsor-logo",
+      "guid": "f5728afc-93f3-4463-a75c-8c5ee5ce93d6",
+      "images": 1,
+      "description": "Delta Airlines logo"
+    },
+    {
+      "index": 18,
+      "widget_type": "sponsor-logo",
+      "guid": "faba6fde-f125-451f-a41d-be9f6bc49e7a",
+      "images": 1,
+      "description": "VisitTheUSA.com logo"
+    }
+  ],
+  "image_cdn": {
+    "host": "assets.simpleviewinc.com",
+    "path_pattern": "/simpleview/image/upload/{transforms}/v1/clients/saltlake/{filename}",
+    "transform_examples": [
+      "c_fill,f_jpg,h_476,q_65,w_640 (hero)",
+      "c_fill,f_jpg,h_396,q_65,w_640 (3-across card)",
+      "c_fill,f_jpg,h_205,q_65,w_320 (4-across card)",
+      "c_fill,f_jpg,h_582,q_65,w_640 (marquee)",
+      "c_limit,h_1200,q_75,w_1200 (og:image)"
+    ],
+    "note": "Cloudinary-based CDN with on-the-fly transforms"
+  }
+}

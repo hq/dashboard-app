@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visit Salt Lake — CMS Extraction Demo</title>
+<style>
+:root {
+  --navy: #0f1b2d; --navy-mid: #243650; --blue: #2d8cf0; --teal: #3db5a5;
+  --green: #4ade80; --yellow: #fbbf24; --red: #f87171; --orange: #fb923c;
+  --text: #e2e8f0; --text-dim: #8899aa; --text-bright: #f8fafc;
+  --border: #2a3a50; --card-bg: #162032;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; background: var(--navy); color: var(--text); }
+a { color: var(--blue); text-decoration: none; cursor: pointer; }
+code { font-family: 'SF Mono', Monaco, monospace; font-size: 12px; background: var(--navy-mid); padding: 1px 5px; border-radius: 3px; color: var(--teal); }
+
+/* NAV */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 48px; background: rgba(15,27,45,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 24px; gap: 24px;
+}
+.topnav .logo { font-size: 14px; font-weight: 700; color: var(--teal); letter-spacing: 0.5px; }
+.topnav .nav-links { display: flex; gap: 4px; }
+.topnav .nav-link {
+  padding: 6px 16px; border-radius: 6px; font-size: 13px; font-weight: 500;
+  color: var(--text-dim); cursor: pointer; transition: all 0.15s;
+}
+.topnav .nav-link:hover { color: var(--text); background: var(--navy-mid); }
+.topnav .nav-link.active { color: var(--teal); background: rgba(61,181,165,0.12); }
+
+/* PAGES */
+.page { display: none; padding-top: 48px; min-height: 100vh; }
+.page.active { display: block; }
+
+/* === REPORT PAGE === */
+.report { max-width: 860px; margin: 0 auto; padding: 48px 32px; }
+.report h1 { font-size: 28px; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; }
+.report .subtitle { font-size: 15px; color: var(--text-dim); margin-bottom: 32px; max-width: 680px; line-height: 1.7; }
+.report h2 { font-size: 20px; font-weight: 700; color: var(--text-bright); margin: 32px 0 12px; }
+.report p { font-size: 14px; color: var(--text-dim); line-height: 1.7; margin-bottom: 12px; }
+
+.pipeline { counter-reset: pipe; margin: 24px 0; }
+.pipe-step {
+  counter-increment: pipe; position: relative; padding: 20px 20px 20px 60px; margin-bottom: 12px;
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
+}
+.pipe-step::before {
+  content: counter(pipe); position: absolute; left: 18px; top: 20px;
+  width: 28px; height: 28px; border-radius: 50%; background: var(--navy-mid);
+  border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--teal);
+}
+.pipe-step h3 { font-size: 15px; font-weight: 700; color: var(--text-bright); margin-bottom: 4px; }
+.pipe-step p { margin-bottom: 0; }
+.pipe-step .arrow-label {
+  display: inline-block; margin-top: 8px; padding: 2px 10px; border-radius: 4px;
+  font-size: 11px; font-weight: 600;
+}
+.arrow-label.agent { background: rgba(45,140,240,0.12); color: var(--blue); border: 1px solid rgba(45,140,240,0.25); }
+.arrow-label.human { background: rgba(251,191,36,0.12); color: var(--yellow); border: 1px solid rgba(251,191,36,0.25); }
+.arrow-label.output { background: rgba(61,181,165,0.12); color: var(--teal); border: 1px solid rgba(61,181,165,0.25); }
+
+.cta-box {
+  margin: 32px 0; padding: 20px 24px; background: var(--card-bg); border: 1px solid var(--teal);
+  border-radius: 10px; display: flex; align-items: center; gap: 16px;
+}
+.cta-box .cta-text { font-size: 14px; color: var(--text); flex: 1; }
+.cta-box .cta-btn {
+  padding: 8px 20px; background: var(--teal); color: var(--navy); border: none;
+  border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
+}
+.cta-box .cta-btn:hover { opacity: 0.9; }
+
+/* === EXPLORER PAGE === */
+.explorer { display: flex; height: calc(100vh - 48px); overflow: hidden; }
+
+.explorer-main {
+  flex: 1; overflow-y: auto; position: relative; background: #e8e8e8;
+}
+.explorer-main .page-screenshot {
+  width: 100%; display: block;
+}
+
+/* Widget overlays */
+.widget-overlay {
+  position: absolute; left: 0; right: 0; cursor: pointer;
+  border: 3px solid rgba(61,181,165,0.6); background: rgba(61,181,165,0.08);
+  transition: all 0.2s; z-index: 10;
+}
+.widget-overlay:hover {
+  border-color: var(--teal); background: rgba(61,181,165,0.15);
+  box-shadow: 0 0 12px rgba(61,181,165,0.3);
+}
+.widget-overlay.selected {
+  border-color: var(--blue); background: rgba(45,140,240,0.12);
+  box-shadow: 0 0 20px rgba(45,140,240,0.3);
+}
+.widget-overlay .overlay-label {
+  position: absolute; top: 6px; left: 6px; padding: 3px 10px;
+  background: rgba(15,27,45,0.92); backdrop-filter: blur(4px);
+  border-radius: 4px; font-size: 11px; font-weight: 600; color: var(--teal);
+  opacity: 1; pointer-events: none; white-space: nowrap;
+}
+.widget-overlay.selected .overlay-label { color: var(--blue); }
+
+/* JSON Panel */
+.json-panel {
+  width: 440px; flex-shrink: 0; background: var(--navy); border-left: 1px solid var(--border);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.json-panel-header {
+  padding: 16px 20px; border-bottom: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.json-panel-header h3 { font-size: 14px; font-weight: 700; color: var(--text-bright); }
+.json-panel-header .widget-type {
+  font-size: 12px; color: var(--teal); margin-top: 2px;
+}
+.json-panel-body { flex: 1; overflow-y: auto; padding: 0; }
+
+/* JSON tree */
+.json-layer {
+  border-bottom: 1px solid var(--border);
+}
+.json-layer-header {
+  padding: 10px 20px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600; color: var(--text-dim); transition: all 0.15s;
+}
+.json-layer-header:hover { background: rgba(45,140,240,0.05); color: var(--text); }
+.json-layer-header .layer-icon { font-size: 10px; transition: transform 0.2s; }
+.json-layer-header.open .layer-icon { transform: rotate(90deg); }
+.json-layer-header .layer-name { color: var(--text-bright); }
+.json-layer-header .layer-badge {
+  margin-left: auto; padding: 1px 8px; border-radius: 4px;
+  font-size: 10px; font-weight: 600; background: var(--navy-mid); color: var(--text-dim);
+}
+.json-layer-content {
+  display: none; padding: 0 20px 12px;
+}
+.json-layer-content.open { display: block; }
+
+.json-block {
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px;
+  padding: 12px; font-family: 'SF Mono', Monaco, monospace; font-size: 11px;
+  line-height: 1.6; color: var(--text-dim); overflow-x: auto; white-space: pre-wrap;
+  word-break: break-all;
+}
+.json-block .key { color: var(--blue); }
+.json-block .string { color: var(--green); }
+.json-block .number { color: var(--orange); }
+.json-block .bool { color: var(--yellow); }
+
+/* Card preview in panel */
+.card-preview {
+  display: flex; gap: 10px; padding: 8px; background: var(--card-bg);
+  border: 1px solid var(--border); border-radius: 6px; margin-bottom: 8px;
+}
+.card-preview img { width: 80px; height: 56px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
+.card-preview .cp-info { flex: 1; min-width: 0; }
+.card-preview .cp-title { font-size: 12px; font-weight: 600; color: var(--text-bright); }
+.card-preview .cp-desc { font-size: 11px; color: var(--text-dim); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-preview .cp-link { font-size: 10px; color: var(--blue); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* FAQ preview in panel */
+.faq-preview {
+  padding: 10px 12px; background: var(--card-bg);
+  border: 1px solid var(--border); border-radius: 6px; margin-bottom: 8px;
+}
+.faq-preview .faq-q { font-size: 12px; font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+.faq-preview .faq-a { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+.faq-preview .faq-a li { margin-left: 16px; margin-bottom: 2px; }
+
+/* Deal item in panel */
+.deal-item {
+  display: flex; align-items: baseline; gap: 6px; padding: 4px 0;
+  font-size: 12px; color: var(--text-dim);
+}
+.deal-item::before { content: "\2022"; color: var(--teal); font-weight: 700; }
+
+/* Link preview in panel */
+.link-preview {
+  display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: var(--card-bg);
+  border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px;
+}
+.link-preview .lp-text { font-size: 12px; font-weight: 500; color: var(--text-bright); }
+.link-preview .lp-href { font-size: 10px; color: var(--blue); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+
+/* Text block in panel */
+.text-block {
+  padding: 12px; background: var(--card-bg);
+  border: 1px solid var(--border); border-radius: 6px;
+  font-size: 12px; color: var(--text-dim); line-height: 1.6; white-space: pre-wrap;
+}
+
+/* Partner logo preview */
+.partner-preview {
+  display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--card-bg);
+  border: 1px solid var(--border); border-radius: 6px;
+}
+.partner-preview img { max-height: 46px; max-width: 120px; object-fit: contain; }
+.partner-preview .pp-info { flex: 1; min-width: 0; }
+.partner-preview .pp-alt { font-size: 12px; font-weight: 500; color: var(--text-bright); }
+.partner-preview .pp-link { font-size: 10px; color: var(--blue); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Empty state */
+.empty-state {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100%; color: var(--text-dim); text-align: center; padding: 40px;
+}
+.empty-state .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
+.empty-state p { font-size: 13px; max-width: 240px; }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="topnav">
+  <span class="logo">HQ // Visit Salt Lake</span>
+  <div class="nav-links">
+    <div class="nav-link active" onclick="showPage('report')">Process</div>
+    <div class="nav-link" onclick="showPage('explorer')">Explorer</div>
+  </div>
+</div>
+
+<!-- REPORT PAGE -->
+<div class="page active" id="page-report">
+  <div class="report">
+    <h1>CMS Replacement — Extraction Process</h1>
+    <p class="subtitle">We're replacing Visit Salt Lake's SimpleView CMS. The approach: scrape every page, decompose it into structured JSON, import that JSON into our CMS, and render it identically. Here's the pipeline.</p>
+
+    <div class="pipeline">
+      <div class="pipe-step">
+        <h3>Snapshot every page</h3>
+        <p>Crawl all 1,275 pages on visitsaltlake.com. For each page, capture the full rendered DOM — not a screenshot, the actual HTML structure with all elements, classes, attributes, and content. This gives us the ground truth of what the site looks like today.</p>
+        <span class="arrow-label agent">AI Agent — crawler</span>
+        <span class="arrow-label output">Output: data/snapshots/{slug}.html</span>
+      </div>
+
+      <div class="pipe-step">
+        <h3>Decompose into widgets</h3>
+        <p>Each page is composed of widgets — cards, heroes, side-by-sides, marquees, FAQs. An agent walks the DOM and identifies each widget by its <code>ccl-widget</code> class and <code>data-guid</code> attribute, then extracts every piece of content: titles, descriptions, images (with CDN transforms), links, and configuration (slides-across, layout, lazy-loading).</p>
+        <span class="arrow-label agent">AI Agent — DOM parser</span>
+        <span class="arrow-label output">Output: data/widgets/{guid}.json</span>
+      </div>
+
+      <div class="pipe-step">
+        <h3>Map CRM connections</h3>
+        <p>Some widgets pull data from the CMS (collections, blog feeds). Others pull from the CRM (events, listings). The agent identifies which by checking feed sources, <code>data-gtm-vars</code> tracking, and URL patterns (CRM links redirect through <code>/plugins/cms/product/redirect/?product=crm</code>). This produces a map of every CRM → page connection.</p>
+        <span class="arrow-label agent">AI Agent — cross-reference</span>
+        <span class="arrow-label output">Output: data/connections.json</span>
+      </div>
+
+      <div class="pipe-step">
+        <h3>Import into our CMS</h3>
+        <p>The extracted JSON becomes seed data for the replacement CMS. Each widget type maps to a component in our system. Each piece of content (title, image, link) maps to a field. The import is automated — 1,275 pages with all their widgets, pre-populated with real content.</p>
+        <span class="arrow-label agent">Automated migration script</span>
+        <span class="arrow-label output">Output: populated CMS database</span>
+      </div>
+
+      <div class="pipe-step">
+        <h3>Render and diff-test</h3>
+        <p>Our CMS renders each page. We compare our render against the original snapshot. Any visual differences get flagged and fixed. The goal: pixel-identical output. When the diff is clean, we're ready to cut over.</p>
+        <span class="arrow-label agent">Visual regression testing</span>
+        <span class="arrow-label output">Output: diff report per page</span>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <div class="cta-text">
+        <strong>See it in action.</strong> We ran this pipeline on <code>/things-to-do/</code> — hover over any widget to see the extracted JSON layers.
+      </div>
+      <button class="cta-btn" onclick="showPage('explorer')">Open Explorer &rarr;</button>
+    </div>
+
+    <h2>What the Explorer proves</h2>
+    <p>The Explorer tab shows a screenshot of the actual live page. Each colored overlay represents a widget we identified in the DOM. Hover over any widget to see the structured JSON we extracted — every title, image URL, description, link, and configuration option, organized into layers.</p>
+    <p>This is the same data that would be imported into our CMS. If we can extract it reliably, we can populate the replacement system automatically. No manual re-entry of 1,275 pages.</p>
+  </div>
+</div>
+
+<!-- EXPLORER PAGE -->
+<div class="page" id="page-explorer">
+  <div class="explorer">
+    <div class="explorer-main" id="explorerMain">
+      <img class="page-screenshot" id="pageScreenshot" src="data/screenshots/things-to-do-full.jpg" alt="Visit Salt Lake - Things To Do page">
+      <!-- Widget overlays will be injected here -->
+    </div>
+    <div class="json-panel" id="jsonPanel">
+      <div class="json-panel-header" id="jsonPanelHeader">
+        <h3>Select a widget</h3>
+        <div class="widget-type">Hover over a section on the page to inspect</div>
+      </div>
+      <div class="json-panel-body" id="jsonPanelBody">
+        <div class="empty-state">
+          <div class="empty-icon">&#8678;</div>
+          <p>Hover over any highlighted widget on the page to see its extracted JSON data layers</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// === WIDGETS — positions mapped to screenshot logical space (1185x7087) ===
+// Sections 5-7 are hidden accordion tabs — their data is merged into section 4 as additionalTabs.
+const WIDGETS = [
+  {
+    index: "header",
+    guid: "site-header",
+    type: "site-navigation",
+    label: "Site Header & Navigation",
+    position: { top: 0, height: 75 },
+    config: { "role": "global-nav", "sticky": true },
+    headings: [],
+    content: {
+      imageCount: 1,
+      linkCount: 8,
+      note: "Global site navigation \u2014 not a ccl-widget. Rendered by site-wide header template.",
+      links: [
+        { text: "Things to Do", href: "https://www.visitsaltlake.com/things-to-do/" },
+        { text: "Places to Stay", href: "https://www.visitsaltlake.com/places-to-stay/" },
+        { text: "Events", href: "https://www.visitsaltlake.com/events/" },
+        { text: "Food & Drink", href: "https://www.visitsaltlake.com/food-drink/" },
+        { text: "Plan Your Visit", href: "https://www.visitsaltlake.com/plan-your-visit/" },
+        { text: "Skiing", href: "https://www.visitsaltlake.com/things-to-do/skiing-snowboarding/" },
+        { text: "Request Visitors Guide", href: "https://www.visitsaltlake.com/plan-your-visit/visitors-guide/" },
+        { text: "Discount Passport", href: "https://www.visitsaltlake.com/plan-your-visit/packages-deals/discount-passport/" }
+      ]
+    }
+  },
+  {
+    index: 0,
+    guid: "6bc396fa-ee33-41de-860a-97fa5529da58",
+    type: "core-hero-image",
+    label: "Hero Image",
+    position: { top: 75, height: 495 },
+    config: { "data-lazy-index": 0 },
+    headings: [],
+    content: {
+      imageCount: 1,
+      linkCount: 0,
+      slides: [{
+        image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_476,q_65,w_640,x_2794,y_2812/v1/clients/saltlake/_18I6566_c1e4e240-3325-4091-a559-d7248cc5c046.jpg", alt: "View of downtown Salt Lake looking across a pool with 2 people standing near the edge overlooking the city" }
+      }]
+    }
+  },
+  {
+    index: 1,
+    guid: "b6cfba1a-9d64-4005-9ff2-66b5a440c9f2",
+    type: "content-block",
+    label: "Page Intro \u2014 H1 + Body Text",
+    position: { top: 604, height: 232 },
+    config: {},
+    headings: ["Things to Do in Salt Lake"],
+    content: {
+      imageCount: 0,
+      linkCount: 5,
+      paragraphCount: 2,
+      links: [
+        { text: "events", href: "https://www.visitsaltlake.com/events/" },
+        { text: "arts and culture", href: "https://www.visitsaltlake.com/things-to-do/arts-culture/" },
+        { text: "shop til you drop", href: "https://www.visitsaltlake.com/things-to-do/shopping/" },
+        { text: "family history", href: "https://www.visitsaltlake.com/things-to-do/attractions/genealogy/" },
+        { text: "nearby national parks", href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/state-national-parks/" }
+      ]
+    }
+  },
+  {
+    index: 2,
+    guid: "5173df29-de25-437e-b0fb-87d5a3a31347",
+    type: "related-content",
+    label: "Blog Slider \u2014 9 Articles",
+    position: { top: 866, height: 670 },
+    config: {
+      "data-slides-to-show": 4,
+      "data-lazy-loading": true,
+      "data-lazy-index": 1,
+      "data-position-arrows": true
+    },
+    headings: [
+      "Explore all the things to do in Salt Lake",
+      "Where to See Salt Lake\u2019s Best Colors This Fall",
+      "Top Winter Things to Do in Salt Lake: Your Ultimate Guide",
+      "Celebrate the Holidays in Salt Lake",
+      "Why Salt Lake is a Hidden Gem for Fall Getaways",
+      "The Best Hiking Trails Near Salt Lake City for Out-of-State Visitors",
+      "Why Visit Salt Lake? Because Life\u2019s Too Short for Boring Vacations",
+      "A Solo Traveler\u2019s Guide to Visiting Salt Lake County",
+      "18 Fun and Must-Do Things with Kids in Salt Lake for Visitors",
+      "Top Things to Do in Downtown Salt Lake: A Playful Yet Practical Guide"
+    ],
+    content: {
+      imageCount: 9,
+      linkCount: 18,
+      slides: [
+        { title: "Where to See Salt Lake\u2019s Best Colors This Fall", description: "Fall in Salt Lake hits different\u2014a fleeting magic show where golden aspens shimmer against\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/AdobeStock_788207100_2c75c619-fdbe-4fe5-9dff-ec36218980f3.jpg", alt: "Salt Lake City in the fall." }, href: "https://www.visitsaltlake.com/blog/stories/post/where-to-see-salt-lakes-best-fall-colors-this-fall/" },
+        { title: "Top Winter Things to Do in Salt Lake: Your Ultimate Guide", description: "Updated: October 30th, 2025 There\u2019s nothing quite like winter in Salt Lake City. Dive into the\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/Gallivan_Lights_On_Drone_Photo_from_SLCTV_Media_Nov_29th_jpg_be20a796-7370-4818-aa17-b7b31fcf39fe.jpg", alt: "Gallivan Plaza Lights in Winter" }, href: "https://www.visitsaltlake.com/blog/stories/post/top-winter-things-to-do-in-salt-lake/" },
+        { title: "Celebrate the Holidays in Salt Lake", description: "Updated: November 3rd, 2025 \u2018Tis the season, and while the temps are dropping, the lights\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/TrolleyChristmas_9550_6b31b6a7-6828-4f41-8948-03f5780bb914.jpg", alt: "Trolley Square Christmas" }, href: "https://www.visitsaltlake.com/blog/stories/post/celebrate-the-holidays-in-salt-lake/" },
+        { title: "Why Salt Lake is a Hidden Gem for Fall Getaways", description: "Salt Lake\u2019s fall is different because you can sip a maple latte downtown in the morning and be\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/AdobeStock_238841855_215c5e33-aa87-45b3-adc0-295d13db5411.jpg", alt: "Adobe Stock Fall imagery" }, href: "https://www.visitsaltlake.com/blog/stories/post/unforgettable-fall-experiences-in-salt-lake-for-first-time-visitors/" },
+        { title: "The Best Hiking Trails Near Salt Lake City for Out-of-State Visitors", description: "In Salt Lake, some of Utah\u2019s best hiking trails start where our downtown ends. Our unique\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/living_room_5_c86913d3-e1c0-4d3c-a6cd-293756ad1b6a.jpg", alt: "Scenic Sunset from Living Room Hike" }, href: "https://www.visitsaltlake.com/blog/stories/post/the-best-hiking-trails-near-salt-lake/" },
+        { title: "Why Visit Salt Lake? Because Life\u2019s Too Short for Boring Vacations", description: "Why Visit Salt Lake in 2025? Because Life\u2019s Too Short for Boring Vacations In Salt Lake, your\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/VSL_SugarhouseNeighborhood_HiRez_AustenDiamondPhotography_21_5f7959f8-a17d-4d88-bb6d-9735b8e5a2b7.jpg", alt: "Man and woman holding hands walking past some diners on a patio in the Sugarhouse neighborhood" }, href: "https://www.visitsaltlake.com/blog/stories/post/why-visit-salt-lake-because-lifes-too-short-for-boring-vacations/" },
+        { title: "A Solo Traveler\u2019s Guide to Visiting Salt Lake County", description: "Traveling solo is like ordering a pizza with just the toppings you want\u2014there\u2019s no need\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/VisitSaltLake_WineAcademy_0563_ecf588bd-ac39-4b23-bafb-19d6e604bf88.jpg", alt: "Local whiskey tasting in Salt Lake" }, href: "https://www.visitsaltlake.com/blog/stories/post/a-solo-travelers-guide-to-visiting-salt-lake-county/" },
+        { title: "18 Fun and Must-Do Things with Kids in Salt Lake for Visitors", description: "Salt Lake takes family fun to a whole new level. We\u2019re talking penguin encounters in the\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/20211014_VSL_MichaelKunde_10369_a0431149-254e-4363-a364-608319aa97ce.jpg", alt: "Father and son at the Loveland Living Planet Aquarium" }, href: "https://www.visitsaltlake.com/blog/stories/post/18-fun-and-must-do-things-with-kids-in-salt-lake-for-visitors/" },
+        { title: "Top Things to Do in Downtown Salt Lake: A Playful Yet Practical Guide", description: "Our name might be Salt Lake but downtown serves up something decidedly sweeter. Take one part\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/VSL_Downtown_Alliance_Open_Streets_26_193f8318-f98d-42a9-b610-3e1e30388e2f.jpg", alt: "A group walking down Main Street during 2022\u2019s Open Streets." }, href: "https://www.visitsaltlake.com/blog/stories/post/top-things-to-do-in-downtown-salt-lake/" }
+      ]
+    }
+  },
+  {
+    index: 3,
+    guid: "df4e9027-9286-41c1-880c-9cdc9741f0dc",
+    type: "core-side-by-side",
+    label: "Side by Side \u2014 Tours & Passes",
+    position: { top: 1583, height: 439 },
+    config: {
+      "data-slides-across": 1,
+      "data-width": "controlled",
+      "data-lazy-loading": true,
+      "data-lazy-index": 2
+    },
+    headings: ["Tours & Experience Passes"],
+    content: {
+      imageCount: 1,
+      linkCount: 4,
+      slides: [{
+        title: "Tours & Experience Passes",
+        description: "Whether you are looking to put together your own Salt Lake adventure or get\u00a0an expert to guide you, we\u2019ve got you covered...",
+        image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_518,q_65,w_640,x_2370,y_2196/v1/clients/saltlake/Downtown_Drone_RyanMalavolta_2023_01_FINAL_94f1bfcb-bd1b-49c3-a3c9-2f74bd78140b.jpg", alt: "Skyline Summer 2023 Drone Shot" },
+        href: "https://www.visitsaltlake.com/things-to-do/tours-experiences/"
+      }]
+    }
+  },
+  {
+    index: "category-tabs",
+    guid: "category-tab-nav",
+    type: "category-tab-navigation",
+    label: "\"Experience the Unexpected\" + Category Tabs",
+    position: { top: 2022, height: 281 },
+    config: { "role": "tab-navigation", "controls": "accordion-panels" },
+    headings: ["Experience the Unexpected in Salt Lake"],
+    content: {
+      imageCount: 4,
+      linkCount: 4,
+      note: "Tab navigation header above the cards section. Controls which card set (Attractions / Arts & Culture / Outdoor / Nightlife) is displayed. Part of the SimpleView accordion panel system.",
+      tabs: [
+        { label: "Attractions", active: true },
+        { label: "Arts & Culture", active: false },
+        { label: "Outdoor", active: false },
+        { label: "Nightlife", active: false }
+      ]
+    }
+  },
+  {
+    index: 4,
+    guid: "e735f0ae-6a65-4e26-a7e2-9ff18eb8f6ba",
+    type: "core-cards",
+    label: "Cards \u2014 Attractions (4 tabs)",
+    position: { top: 2303, height: 824 },
+    config: {
+      "data-slides-across": 3,
+      "data-lazy-loading": true,
+      "data-lazy-index": 3
+    },
+    headings: ["Attractions", "The Great Salt Lake", "Zoos & Gardens", "Historic Sites", "Free Things to Do", "Things to Do with Kids"],
+    content: {
+      imageCount: 6,
+      linkCount: 18,
+      slides: [
+        { title: "Attractions", description: "Salt Lake\u2019s attractions run the gamut from\u00a0sightseeing tours\u00a0to museums\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VSL_ZooBrew_PrintReady_AustenDiamondPhotography_42_6d7e8f08-092e-4767-9991-fe234c604863.jpg", alt: "Peering Through Aquarium at Utah\u2019s Hogle Zoo Brew" }, href: "https://www.visitsaltlake.com/things-to-do/attractions/" },
+        { title: "The Great Salt Lake", description: "As the largest natural lake west of the Mississippi River and the largest salt water\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VisitSaltLake_GreatSaltLake_hirez_AustenDiamondPhotography_14_68f34c07-0923-453e-a25e-743db32e4b71.jpg", alt: "Great Salt Lake" }, href: "https://www.visitsaltlake.com/things-to-do/attractions/the-great-salt-lake/" },
+        { title: "Zoos & Gardens", description: "Take a walk on the wild side or just relax and enjoy nature in Salt Lake.\u00a0Exotic\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VSL_ZooBrew_PrintReady_AustenDiamondPhotography_11_6fe1809e-ba4d-4916-ae4b-32f129de4113.jpg", alt: "Female Lion at Utah\u2019s Hogle Zoo Brew" }, href: "https://www.visitsaltlake.com/things-to-do/attractions/zoos-gardens/" },
+        { title: "Historic Sites", description: "From the time the pioneers settled in the Salt Lake Valley in 1847, and even before\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/Salt_Lake_Temple_63061dd9-0544-45ce-8a0d-9261abf81c42.png", alt: "Temple Square" }, href: "https://www.visitsaltlake.com/things-to-do/attractions/historic-sites/" },
+        { title: "Free Things to Do", description: "Free activities in Salt Lake", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/DCU_6647_by_JayLynn_Photography_f8eaebba-9f8b-4084-b41c-f7bffa7d55fa.jpg", alt: "Days of \u201947 Parade Float" }, href: "https://www.visitsaltlake.com/things-to-do/attractions/free-things-to-do/" },
+        { title: "Things to Do with Kids", description: "Utah\u2019s remote mountains and deserts may hog the front of most of the state\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VSL_Aquarium_HiRez_AustenDiamondPhotography_19_77f2ea17-3c1a-42c3-b7c6-980ababb422b.jpg", alt: "Kids at the Loveland Living Planet Aquarium" }, href: "https://www.visitsaltlake.com/things-to-do/attractions/things-to-do-with-kids/" }
+      ],
+      additionalTabs: [
+        {
+          tabName: "Arts & Culture",
+          guid: "cff66844-29fa-4677-9e02-6683c1d8ae32",
+          config: { "data-slides-across": 4, "data-lazy-loading": true, "data-lazy-index": 4 },
+          headings: ["Museums", "Art Galleries", "Tours & Experiences", "Discount Passport", "Outdoor Arts Trail", "LGBTQ", "Arts & Culture", "Shopping"],
+          slides: [
+            { title: "Museums", description: "Get enlightened in Salt Lake.\u00a0Check out the wide variety of museums available for your learning\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_NHMU_HiRez_AustenDiamondPhotography_9_a97afe83-2d59-47a6-8a62-4b3507b75eb0.jpg", alt: "Dinosaur Skeleton at Natural History Museum of Utah" }, href: "https://www.visitsaltlake.com/things-to-do/arts-culture/museums/" },
+            { title: "Art Galleries", description: "Get enlightened in Salt Lake.\u00a0Salt Lake\u2019s\u00a0galleries offer a wide variety of artistic styles\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VisitSaltLake_DowntownStreetArt_AustenDiamondPhotography_6_64ec678b-e200-44b2-92d4-c10e53eaa669.jpg", alt: "Urban Arts Gallery" }, href: "https://www.visitsaltlake.com/things-to-do/arts-culture/art-galleries/" },
+            { title: "Tours & Experiences", description: "There\u2019s so much to do in Salt Lake it can be overwhelming to decide. If you are looking for a packaged\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/dsc01602_52461184486_o_841325fb-e595-4ffd-8c0b-f81f30151969.jpg", alt: "A view of downtown Salt Lake from the 6th floor of the Hyatt Regency" }, href: "https://www.visitsaltlake.com/things-to-do/tours-experiences/" },
+            { title: "Discount Passport", description: "Experience Salt Lake and save as you go!\u00a0 Visit Salt Lake has partnered with local attractions\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VisitSaltLake_Neighborhoods_DowntownCentralCity_HiRez_AustenDiamondPhotography_10_4a78de02-9a78-4151-befe-000f811e4976.jpg", alt: "Friends dining at Pallet in Salt Lake" }, href: "https://www.visitsaltlake.com/plan-your-visit/packages-deals/discount-passport/" },
+            { title: "Outdoor Arts Trail", description: "Discover the soul of Salt Lake by taking a tour of the murals\u00a0scattered across the valley. You\u2019ll\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/Alley_998f5cd9-80c7-4039-b61d-c361462e843c.jpg", alt: "3 girls walking in sunlit alley with murals" }, href: "https://www.visitsaltlake.com/things-to-do/tours-experiences/outdoor-arts-trail/" },
+            { title: "LGBTQ", description: "Salt Lake City is very diverse and friendly with the LGBTQ community. View events and resources.", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_Pride_HiRez_AustenDiamondPhotography_42_1a458fbd-4246-4514-a167-f2541def34df.jpg", alt: "Pride Festival in Downtown Salt Lake" }, href: "https://www.visitsaltlake.com/plan-your-visit/community-diversity/lgbtq/" },
+            { title: "Arts & Culture", description: "Get enlightened in Salt Lake.\u00a0Add some educational experiences to your Salt Lake trip with excursions to\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VisitSaltLake_UMFA_2048pxwide_AustenDiamondPhotography_13_58b1474e-c90d-4394-bb6f-ec41ebe24320.jpg", alt: "Utah Museum of Fine Art" }, href: "https://www.visitsaltlake.com/things-to-do/arts-culture/" },
+            { title: "Shopping", description: "Salt Lake City and shopping have gone hand in hand for over a century.\u00a0The first department store in the\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_DowntownMain_Hi_Rez_AustenDiamondPhotography_14_96357ee3-d44f-4c40-a616-2634176e6a81.jpg", alt: "View looking south on main street in Salt Lake" }, href: "https://www.visitsaltlake.com/things-to-do/shopping/" }
+          ]
+        },
+        {
+          tabName: "Outdoor",
+          guid: "0836cbdf-e019-4118-b7a8-389db2fcd826",
+          config: { "data-slides-across": 4, "data-lazy-loading": true, "data-lazy-index": 5 },
+          headings: ["Skiing & Snowboarding", "Ski Super Pass", "Hiking", "Mountains", "National Parks, Monuments & Recreation Areas", "Outdoor Recreation", "State & National Parks", "Fishing & Wildlife"],
+          slides: [
+            { title: "Skiing & Snowboarding", description: "Salt Lake is home to all kinds of skiers, riders, revelers, powder fiends, weekend warriors, and more. As a\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/nav_bg_e4c89daf-f719-451c-8a86-f391a919b1b6.png", alt: "Main Nav Background" }, href: "https://www.visitsaltlake.com/things-to-do/skiing-snowboarding/" },
+            { title: "Ski Super Pass", description: "The Salt Lake Ski Super Pass is your discounted lift ticket to Salt Lake\u2019s four world-class resorts\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_SkiResorts_HiRez_AustenDiamondPhotography_10_132ff754-4034-430b-b045-24c701818ba6.jpg", alt: "The Ski City Super Pass" }, href: "https://www.visitsaltlake.com/things-to-do/skiing-snowboarding/super-pass/" },
+            { title: "Hiking", description: "Salt Lake City is synonymous with outdoor adventure. With the Wasatch Mountain range providing a surreal\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_SummerCottonwoodCanyons_HiRez_AustenDiamondPhotography_85_ed5c9ecb-1087-4bd9-87fb-a2273e7bf82b.jpg", alt: "Friends hiking to a lake in Big Cottonwood Canyon" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/hiking/" },
+            { title: "Mountains", description: "Salt Lake City is an outdoor adventurer\u2019s dream. Bordered by the Great Salt Lake and the snow-capped\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_SummerCottonwoodCanyons_HiRez_AustenDiamondPhotography_33_1__c3df9f00-22a3-407b-ab0c-427a706a58b4.jpg", alt: "Family Hiking near Snowbird in Little Cottonwood Canyon" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/mountains/" },
+            { title: "National Parks", description: "Did you know there are over 20 national parks and monuments within a few hours\u2019 drive of Salt Lake?", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/63909faa_0ec4_435a_8bff_1d2341305bf5_ef5d37c6-3dca-4730-9f1b-012e831cb057.jpg", alt: "Bryce Canyon National Park" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/state-national-parks/national-parks-monuments-recreation-areas/" },
+            { title: "Outdoor Recreation", description: "Utah is truly nature\u2019s playground\u2014and Salt Lake is the perfect base camp. Enjoy\u00a0hiking and\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/Wasatch_Crest_1080658_bc152311-509c-4ab5-8e32-202e578f258c.jpg", alt: "Wasatch Crest Trail Mountain Bike Ride" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/" },
+            { title: "State & National Parks", description: "With over 60 national and state parks only a few hours away, Salt Lake is the perfect place to begin or unwind\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/99b05a85_7b5b_4d83_b774_533b0441fa4a_d2f53e70-f4f9-4815-8b70-58b9675c27c8.jpg", alt: "Bryce Canyon National Park" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/state-national-parks/" },
+            { title: "Fishing & Wildlife", description: "Utah is truly nature\u2019s playground\u2014and Salt Lake is the perfect base camp.\u00a0Even though Salt Lake\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/FlyFishing_E_Schramm_02460_0de15a4d-4915-446c-9b77-f7abae5498ef.jpg", alt: "Fly Fishing" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/fishing-wildlife/" }
+          ]
+        },
+        {
+          tabName: "Nightlife",
+          guid: "219ddc87-a18c-473e-9554-fba6d5cd917a",
+          config: { "data-slides-across": 3, "data-lazy-loading": true, "data-lazy-index": 6 },
+          headings: ["Nightlife & Entertainment", "Dance Clubs", "Concerts & Live Music", "Gay Bars", "Comedy Clubs", "Social Activities"],
+          slides: [
+            { title: "Nightlife & Entertainment", description: "As the sun sets over the Oquirrh Mountains, Salt Lake\u2019s bars, clubs, and night\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VisitSaltLake_CocktailGuide_HiRez_AustenDiamondPhotography_44_e08a4035-02a1-4b6e-ae6c-7ff5b4a9a05d.jpg", alt: "Bartender at Water Witch" }, href: "https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/" },
+            { title: "Dance Clubs", description: "Looking for somewhere to shake your booty or do the twist? We have 80s nights, gay\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/34321052_1080339892123782_2015605981391618048_n_2c88b099-74e0-4619-a6fb-01d01982f4f8.jpg", alt: "Revolution Fridays at The Moose Lounge" }, href: "https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/dance-clubs/" },
+            { title: "Concerts & Live Music", description: "Salt Lake is alive with music! From homegrown talent to global acts, you can always\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/a1bc896c_aa38_48b7_87a4_04500adfe866_ecf2e9b6-edd5-421a-96a8-5d7884703fb4.jpg", alt: "Salt Lake City Concert-goer in the crowd" }, href: "https://www.visitsaltlake.com/events/concerts-live-music/" },
+            { title: "Gay Bars", description: "Sure, a statue of the Mormon angel Moroni stands prominent watch over downtown Salt\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/7d538a9a_859d_4151_80fe_9de78171926e_124b69e0-2e8b-4fc5-b4d9-26a8cf307c45.jpg", alt: "Bartender at Bar X" }, href: "https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/gay-bars/" },
+            { title: "Comedy Clubs", description: "Enjoy a few laughs with friends while you are in Salt Lake at one of the Comedy Clubs\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/The_Lounge_At_Wiseguys_3_The_Gateway_fed59d11-4fcc-49ea-9818-b947afb576d8.jpg", alt: "Wiseguys Comedy Club at The Gateway" }, href: "https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/comedy-clubs/" },
+            { title: "Social Activities", description: "Looking for something fun and exciting to do? Or maybe something new and unusual?\u2026", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/Social_Axe_8_3cb150495056a36_3cb15124_5056_a36a_064121414f7d7d11_134fc69a-d4fe-48f7-a55f-66726e73556f.jpg", alt: "Social Axe Throwing" }, href: "https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/social-activities/" }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    index: 8,
+    guid: "3626c011-6bab-4be8-bf0f-448831eca066",
+    type: "content-block",
+    label: "UGC Section Heading",
+    position: { top: 3160, height: 40 },
+    config: {},
+    headings: ["See How Visitors Share Their Adventures"],
+    content: {
+      imageCount: 0,
+      linkCount: 0
+    }
+  },
+  {
+    index: "ugc-embed",
+    guid: "social-gallery",
+    type: "third-party-embed",
+    label: "Social Media / UGC Gallery",
+    position: { top: 3200, height: 350 },
+    config: { "embed-type": "ugc-gallery", "provider": "CrowdRiff" },
+    headings: [],
+    content: {
+      imageCount: 0,
+      linkCount: 0,
+      note: "Third-party UGC embed (CrowdRiff). Loads via external JavaScript \u2014 content is not stored in the CMS. Would need replacement with a new UGC integration or custom gallery in the new platform.",
+      provider: "CrowdRiff",
+      embedType: "social-photo-gallery",
+      cmsManaged: false
+    }
+  },
+  {
+    index: 9,
+    guid: "476d7df2-4fa1-40c9-8557-e07963dd666a",
+    type: "marquee-side-by-side",
+    label: "Blog Feature \u2014 Salt Lake Scene",
+    position: { top: 3550, height: 700 },
+    config: {
+      "data-lazy-loading": true,
+      "data-lazy-index": 7
+    },
+    headings: ["The Salt Lake Scene", "Related Stories"],
+    content: {
+      imageCount: 4,
+      linkCount: 12,
+      sectionTitle: "The Salt Lake Scene",
+      slides: [
+        { title: "Spring Skiing Near Salt Lake: Trade Sand for Snow and Spring Break on the Slopes", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_582,q_65,w_640/v1/clients/saltlake/SkiCity_ResortsMarch2017_HiRez_AustenDiamondPhotography_90_1__5d2a6820-396f-4e9d-974d-423465b6f25c.jpg", alt: "Solitude Skier" }, href: "https://www.visitsaltlake.com/blog/stories/post/spring-skiing-near-salt-lake-trade-sand-for-snow-and-spring-break-on-the-slopes/" },
+        { title: "Insider View: Snowbird Ski Resort", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_201,q_65,w_320/v1/clients/saltlake/VSL_Snowbird_6_feb72b82-4a5e-438c-8306-ccf5467d5af3.jpg", alt: "A skier looks over the Who Dunnit intermediate trail." }, href: "https://www.visitsaltlake.com/blog/stories/post/insider-view-snowbird-ski-resort/" },
+        { title: "Alta Ski Area: Insider Insights on Utah\u2019s Paradise", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_201,q_65,w_320/v1/clients/saltlake/VSL_Alta_Supreme_Bowl_1_144ebbb3-3988-4407-9574-9b44b49bccd9.jpg", alt: "Alta\u2019s Supreme Bowl" }, href: "https://www.visitsaltlake.com/blog/stories/post/alta-ski-area-insider-insights-on-utahs-paradise/" },
+        { title: "Best Time for a Ski Vacation in Salt Lake: Travel Tips and Peak Slope Conditions", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_201,q_65,w_320/v1/clients/saltlake/PJ_12_9_23b_2__14dc6fcd-cc96-4ae2-bbd0-cfe7ef8e7b6c.jpg", alt: "Skiers at Alta Ski Area in winter 2024" }, href: "https://www.visitsaltlake.com/blog/stories/post/best-time-for-a-ski-vacation-in-salt-lake-travel-tips-and-peak-slope-conditions/" }
+      ]
+    }
+  },
+  {
+    index: "featured",
+    guid: "featured-block",
+    type: "promotional-block",
+    label: "Featured Content / Divider",
+    position: { top: 4250, height: 276 },
+    config: {},
+    headings: [],
+    content: {
+      imageCount: 1,
+      linkCount: 1,
+      note: "Promotional or interstitial content block between the blog marquee and outdoor activities marquee. Contains background imagery and a CTA link."
+    }
+  },
+  {
+    index: 10,
+    guid: "8ce30839-6654-4739-b626-7fda438658ba",
+    type: "core-marquee",
+    label: "Marquee \u2014 Outdoor Activities",
+    position: { top: 4526, height: 727 },
+    config: {
+      "data-layout": "vertical",
+      "data-width": "controlled",
+      "data-lazy-loading": true,
+      "data-lazy-index": 8
+    },
+    headings: ["State & National Parks", "Cycling the City & Nearby Canyons", "Scenic Drives", "Get Outside", "Adventure Sports", "Golf", "Skiing & Snowboarding"],
+    content: {
+      imageCount: 6,
+      linkCount: 16,
+      slides: [
+        { title: "State & National Parks", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_582,q_65,w_640/v1/clients/saltlake/99b05a85_7b5b_4d83_b774_533b0441fa4a_d2f53e70-f4f9-4815-8b70-58b9675c27c8.jpg", alt: "Bryce Canyon National Park" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/state-national-parks/" },
+        { title: "Cycling the City & Nearby Canyons", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_355,q_65,w_320/v1/clients/saltlake/Big_Mountain_Trail_Mountain_Bike_02_1d989093-b66a-482c-b254-318c0b88f9d2.jpg", alt: "Mountain Biking" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/biking/cycling-the-city-nearby-canyons/" },
+        { title: "Scenic Drives", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_355,q_65,w_320,x_1440,y_1241/v1/clients/saltlake/Scenic_GuardsmanPass_A_Barker_0172_c62bfc66-9f5b-49d8-9cae-64dbf44403dc.jpg", alt: "Scenic view of Guardsman Pass in autumn" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/scenic-drives/" },
+        { title: "Get Outside", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_355,q_65,w_320,x_2245,y_1062/v1/clients/saltlake/Recreation_ATVRiding_E_Schramm_02390_2_3787f60e-d705-4e67-af31-f2b0f1b3c8fd.jpg", alt: "ATV Riding at Snowbird" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/" },
+        { title: "Adventure Sports", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_355,q_65,w_320/v1/clients/saltlake/GolfSouthMountain_Brian_Oar_24db8b7e-93bb-4806-92d6-4de72bf4af25.jpg", alt: "South Mountain Golf Course" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/adventure-sports/" },
+        { title: "Golf", image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_329,q_65,w_640/v1/clients/saltlake/nav_bg_e4c89daf-f719-451c-8a86-f391a919b1b6.png", alt: "Main Nav Background" }, href: "https://www.visitsaltlake.com/things-to-do/outdoor-recreation/golf/" },
+        { title: "Skiing & Snowboarding", href: "https://www.visitsaltlake.com/things-to-do/skiing-snowboarding/" }
+      ]
+    }
+  },
+  {
+    index: 11,
+    guid: "8971fb9d-e64f-4466-959c-10b9c6289821",
+    type: "content-block",
+    label: "FAQ Section Heading",
+    position: { top: 5280, height: 50 },
+    config: {},
+    headings: ["Frequently Asked Questions"],
+    content: {
+      imageCount: 0,
+      linkCount: 1,
+      paragraphCount: 1,
+      links: [{ text: "Check out more FAQs", href: "https://www.visitsaltlake.com/plan-your-visit/frequently-asked-questions/" }]
+    }
+  },
+  {
+    index: 12,
+    guid: "f9c03b80-9802-47b9-8c4c-73d2b3f2dab2",
+    type: "core-faqs",
+    label: "FAQ Accordion \u2014 4 Questions",
+    position: { top: 5360, height: 200 },
+    config: {
+      "data-lazy-loading": true,
+      "data-lazy-index": 9
+    },
+    headings: ["Things to Do"],
+    content: {
+      imageCount: 0,
+      linkCount: 16,
+      faqGroupHeading: "Things to Do",
+      faqItems: [
+        { question: "Where are the best locations for cycling in Salt Lake City?", answerList: ["City Creek Canyon", "Millcreek Canyon", "Little Cottonwood Canyon", "Wasatch Boulevard", "Saltair"] },
+        { question: "What historic sites should I visit in Salt Lake City?", answerList: ["This is the Place State Park", "Temple Square", "The Lion House", "The Cathedral of St. Mark", "The Golden Spike National Historic Site"] },
+        { question: "What dog-friendly activities are there in Salt Lake City?", answerList: ["Memory Grove Park", "City Creek Canyon", "The Bonneville Shoreline Trail", "Tanner Dog Park", "The Pipeline Trail", "Dog Lake", "Jordan River Parkway"] },
+        { question: "What are the top things to do in downtown Salt Lake City?", answerList: ["Visit a Local Coffee Shop", "Shop the Unique Boutique Stores", "Get Some Ink (Tattoo)", "Enjoy a Drink at a Local Bar", "Dine at One of the Many Restaurants"] }
+      ]
+    }
+  },
+  {
+    index: 13,
+    guid: "865bf48b-db24-4968-8d25-0a6374412422",
+    type: "content-block",
+    label: "Discount Passport CTA",
+    position: { top: 5590, height: 380 },
+    config: {},
+    headings: ["Get the Salt Lake Discount Passport", "Sign-up now and save!", "Deals Include:"],
+    content: {
+      imageCount: 0,
+      linkCount: 0,
+      paragraphCount: 1,
+      dealsList: [
+        "10-20% off food at select dining locations",
+        "10-20% off merchandise at select locations",
+        "20-25% discount on tickets for Sports & Performing Art Shows",
+        "And Even More with new deals added regularly!"
+      ]
+    }
+  },
+  {
+    index: 14,
+    guid: "b236c282-a81b-4c82-8f77-03d4e75b4a61",
+    type: "core-side-by-side",
+    label: "Side by Side \u2014 Passport Image",
+    position: { top: 6018, height: 439 },
+    config: {
+      "data-slides-across": 1,
+      "data-width": "controlled",
+      "data-lazy-loading": true,
+      "data-lazy-index": 10
+    },
+    headings: [],
+    content: {
+      imageCount: 1,
+      linkCount: 1,
+      slides: [{
+        description: "FREE",
+        image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_518,q_65,w_640/v1/clients/saltlake/VSL_Pass_Products_App_Discount_Passport_Card_9d074836-acc4-4a71-a5f8-89fb7bd03b87.jpg", alt: "Drinks and food - Discount Passport" },
+        href: "https://www.visitsaltlake.com/things-to-do/"
+      }]
+    }
+  },
+  {
+    index: "footer-nav",
+    guid: "footer-navigation",
+    type: "footer-navigation",
+    label: "Footer Nav + Visitors Guide Bar",
+    position: { top: 6457, height: 213 },
+    config: { "role": "global-footer" },
+    headings: [],
+    content: {
+      imageCount: 0,
+      linkCount: 12,
+      note: "Site-wide footer navigation and 'Request a Visitors Guide' CTA bar. Not a ccl-widget \u2014 rendered by footer template.",
+      links: [
+        { text: "Things to Do", href: "https://www.visitsaltlake.com/things-to-do/" },
+        { text: "Places to Stay", href: "https://www.visitsaltlake.com/places-to-stay/" },
+        { text: "Events", href: "https://www.visitsaltlake.com/events/" },
+        { text: "Food & Drink", href: "https://www.visitsaltlake.com/food-drink/" },
+        { text: "Plan Your Visit", href: "https://www.visitsaltlake.com/plan-your-visit/" },
+        { text: "About Us", href: "https://www.visitsaltlake.com/about/" },
+        { text: "Request Visitors Guide", href: "https://www.visitsaltlake.com/plan-your-visit/visitors-guide/" },
+        { text: "Newsletter Signup", href: "https://www.visitsaltlake.com/newsletter/" },
+        { text: "Privacy Policy", href: "https://www.visitsaltlake.com/privacy-policy/" },
+        { text: "Accessibility", href: "https://www.visitsaltlake.com/accessibility/" },
+        { text: "Sitemap", href: "https://www.visitsaltlake.com/sitemap/" },
+        { text: "Contact Us", href: "https://www.visitsaltlake.com/contact/" }
+      ]
+    }
+  },
+  {
+    index: 15,
+    guid: "2c7f1462-e138-444c-9512-a83a6958d0d3",
+    type: "footer-contact",
+    label: "Footer Contact Info",
+    position: { top: 6670, height: 70 },
+    config: {},
+    headings: [],
+    content: {
+      imageCount: 0,
+      linkCount: 0,
+      text: "90 South West Temple\nSalt Lake City, UT 84101\n801.534.4900 | 800.541.4955"
+    }
+  },
+  {
+    index: 16,
+    guid: "0e057948-f589-4af8-a860-f221a252c249",
+    type: "partner-logo",
+    label: "Partner Logo \u2014 Visit Utah",
+    position: { top: 6800, height: 40 },
+    config: {},
+    headings: [],
+    content: {
+      imageCount: 1,
+      linkCount: 1,
+      image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_46,q_75,w_100/v1/clients/saltlake/utah_life_elevated_logo_e1567628045117_1__fcc145f1-3118-474b-8b7f-334edd2ddd59.png", alt: "Text logo for Utah. Words say Utah Life Elevated" },
+      href: "https://www.visitutah.com/"
+    }
+  },
+  {
+    index: 17,
+    guid: "f5728afc-93f3-4463-a75c-8c5ee5ce93d6",
+    type: "partner-logo",
+    label: "Partner Logo \u2014 Delta",
+    position: { top: 6850, height: 20 },
+    config: {},
+    headings: [],
+    content: {
+      imageCount: 1,
+      linkCount: 1,
+      image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/v1/clients/saltlake-redesign/logo_footer_delta_74f6d43d-6bc7-4c89-a699-7d3148412084.png", alt: "Delta" },
+      href: "https://www.delta.com/"
+    }
+  },
+  {
+    index: 18,
+    guid: "faba6fde-f125-451f-a41d-be9f6bc49e7a",
+    type: "partner-logo",
+    label: "Partner Logo \u2014 VisitTheUSA",
+    position: { top: 6880, height: 60 },
+    config: {},
+    headings: [],
+    content: {
+      imageCount: 1,
+      linkCount: 1,
+      image: { src: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_198,q_75,w_300/v1/clients/saltlake/USA_horiz_url_KO_5fcd75e6-363a-4e01-8d94-515d103a36ba.png", alt: "USA logo with VisitTheUSA.com" },
+      href: "https://www.visittheusa.com/"
+    }
+  },
+  {
+    index: "copyright",
+    guid: "copyright-bar",
+    type: "copyright-bar",
+    label: "Copyright & Legal",
+    position: { top: 6940, height: 147 },
+    config: { "role": "legal-footer" },
+    headings: [],
+    content: {
+      imageCount: 0,
+      linkCount: 2,
+      note: "Copyright notice, legal disclaimers, and accessibility links. Site-wide template element.",
+      text: "\u00a9 Visit Salt Lake. All rights reserved.",
+      links: [
+        { text: "Terms of Use", href: "https://www.visitsaltlake.com/terms/" },
+        { text: "Privacy Policy", href: "https://www.visitsaltlake.com/privacy-policy/" }
+      ]
+    }
+  }
+];
+
+// Page dimensions from the live site
+// The screenshot is 2370x14174 physical pixels at DPR 2, so logical page = 1185 x 7087.
+const PAGE_WIDTH = 1185;
+const PAGE_HEIGHT = 7087;
+const DPR = 2;
+
+// === PAGE NAVIGATION ===
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelector(`[onclick="showPage('${id}')"]`).classList.add('active');
+  if (id === 'explorer') refreshOverlays();
+}
+
+// === EXPLORER ===
+function refreshOverlays() {
+  document.querySelectorAll('.widget-overlay').forEach(o => o.remove());
+  const main = document.getElementById('explorerMain');
+  const img = document.getElementById('pageScreenshot');
+  const displayWidth = img.clientWidth;
+  const displayHeight = img.clientHeight;
+  if (!displayWidth || !displayHeight) return;
+
+  // The image is displayed at its natural aspect ratio.
+  // Map logical positions to displayed pixel positions using the image's actual rendered size.
+  // Screenshot physical: 2370 x 14174. Logical at DPR=2: 1185 x 7087.
+  // Our position coordinates are in a logical space of PAGE_WIDTH x PAGE_HEIGHT.
+  // Scale factor: displayed pixels / (logical position space).
+  const scaleX = displayWidth / PAGE_WIDTH;
+  const scaleY = displayHeight / PAGE_HEIGHT;
+
+  WIDGETS.forEach(w => {
+    const overlay = document.createElement('div');
+    overlay.className = 'widget-overlay';
+    overlay.style.top = (w.position.top * scaleY) + 'px';
+    overlay.style.height = Math.max(w.position.height * scaleY, 20) + 'px';
+    overlay.innerHTML = `<span class="overlay-label">${w.label}</span>`;
+    overlay.onmouseenter = () => selectWidget(w, overlay);
+    main.appendChild(overlay);
+  });
+}
+
+let selectedOverlay = null;
+
+function selectWidget(w, overlay) {
+  if (selectedOverlay) selectedOverlay.classList.remove('selected');
+  overlay.classList.add('selected');
+  selectedOverlay = overlay;
+  renderJsonPanel(w);
+}
+
+function renderJsonPanel(w) {
+  document.getElementById('jsonPanelHeader').innerHTML = `
+    <h3>${w.label}</h3>
+    <div class="widget-type">Type: ${w.type} &nbsp;|&nbsp; GUID: ${w.guid.substring(0,8)}&hellip;</div>
+  `;
+
+  let html = '';
+
+  // Layer 1: Widget identity
+  html += makeLayer('Widget Identity', 'object', formatJson({
+    index: w.index,
+    guid: w.guid,
+    type: w.type,
+    label: w.label
+  }), true);
+
+  // Layer 2: Configuration
+  const configKeys = Object.keys(w.config);
+  if (configKeys.length > 0) {
+    html += makeLayer('Configuration', configKeys.length + ' props', formatJson(w.config), true);
+  }
+
+  // Layer 3: Headings (if any)
+  if (w.headings && w.headings.length > 0) {
+    let headingsHtml = '<div style="padding: 0;">';
+    w.headings.forEach(h => {
+      headingsHtml += `<div style="padding: 6px 10px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: var(--text-bright);">${escapeHtml(h)}</div>`;
+    });
+    headingsHtml += '</div>';
+    html += makeLayer('Headings', w.headings.length + (w.headings.length === 1 ? ' heading' : ' headings'), headingsHtml, true);
+  }
+
+  // Layer 4: Content items — varies by widget type
+  const c = w.content;
+
+  // Slides (cards, heroes, side-by-sides, marquees)
+  if (c.slides && c.slides.length > 0) {
+    let cardsHtml = '';
+    c.slides.forEach((s, i) => {
+      cardsHtml += `<div class="card-preview">`;
+      if (s.image) cardsHtml += `<img src="${s.image.src}" alt="${escapeHtml(s.image.alt || '')}">`;
+      cardsHtml += `<div class="cp-info">`;
+      if (s.title) cardsHtml += `<div class="cp-title">${escapeHtml(s.title)}</div>`;
+      if (s.description) cardsHtml += `<div class="cp-desc">${escapeHtml(s.description)}</div>`;
+      if (s.href) cardsHtml += `<div class="cp-link">${escapeHtml(s.href)}</div>`;
+      cardsHtml += `</div></div>`;
+    });
+    html += makeLayer('Content Items', c.slides.length + ' slides', cardsHtml, true);
+  }
+
+  // Additional hidden accordion tabs (merged from sections 5-7)
+  if (c.additionalTabs && c.additionalTabs.length > 0) {
+    let tabsHtml = '';
+    c.additionalTabs.forEach(tab => {
+      tabsHtml += `<div style="margin-bottom: 12px;">`;
+      tabsHtml += `<div style="padding: 8px 12px; background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); border-radius: 6px 6px 0 0; font-size: 12px; font-weight: 700; color: var(--yellow); display: flex; align-items: center; justify-content: space-between;">`;
+      tabsHtml += `<span>${escapeHtml(tab.tabName)}</span>`;
+      tabsHtml += `<span style="font-size: 10px; font-weight: 500; color: var(--text-dim);">${tab.slides.length} slides &middot; GUID: ${tab.guid.substring(0,8)}&hellip;</span>`;
+      tabsHtml += `</div>`;
+      tab.slides.forEach(s => {
+        tabsHtml += `<div class="card-preview" style="border-radius: 0; border-top: none;">`;
+        if (s.image) tabsHtml += `<img src="${s.image.src}" alt="${escapeHtml(s.image.alt || '')}">`;
+        tabsHtml += `<div class="cp-info">`;
+        if (s.title) tabsHtml += `<div class="cp-title">${escapeHtml(s.title)}</div>`;
+        if (s.description) tabsHtml += `<div class="cp-desc">${escapeHtml(s.description)}</div>`;
+        if (s.href) tabsHtml += `<div class="cp-link">${escapeHtml(s.href)}</div>`;
+        tabsHtml += `</div></div>`;
+      });
+      tabsHtml += `</div>`;
+    });
+    const totalSlides = c.additionalTabs.reduce((sum, t) => sum + t.slides.length, 0);
+    html += makeLayer('Hidden Accordion Tabs', c.additionalTabs.length + ' tabs, ' + totalSlides + ' slides', tabsHtml, true);
+  }
+
+  // FAQ items
+  if (c.faqItems && c.faqItems.length > 0) {
+    let faqHtml = '';
+    c.faqItems.forEach(faq => {
+      faqHtml += `<div class="faq-preview">`;
+      faqHtml += `<div class="faq-q">${escapeHtml(faq.question)}</div>`;
+      if (faq.answerList && faq.answerList.length > 0) {
+        faqHtml += `<div class="faq-a"><ul>`;
+        faq.answerList.forEach(a => {
+          faqHtml += `<li>${escapeHtml(a)}</li>`;
+        });
+        faqHtml += `</ul></div>`;
+      }
+      faqHtml += `</div>`;
+    });
+    html += makeLayer('FAQ Items', c.faqItems.length + ' questions', faqHtml, true);
+  }
+
+  // Links (for content-block widgets)
+  if (c.links && c.links.length > 0) {
+    let linksHtml = '';
+    c.links.forEach(l => {
+      linksHtml += `<div class="link-preview">
+        <span class="lp-text">${escapeHtml(l.text)}</span>
+        <span class="lp-href">${escapeHtml(l.href)}</span>
+      </div>`;
+    });
+    html += makeLayer('Links', c.links.length + ' links', linksHtml, true);
+  }
+
+  // Deals list (discount passport CTA)
+  if (c.dealsList && c.dealsList.length > 0) {
+    let dealsHtml = '<div style="padding: 8px 0;">';
+    c.dealsList.forEach(d => {
+      dealsHtml += `<div class="deal-item">${escapeHtml(d)}</div>`;
+    });
+    dealsHtml += '</div>';
+    html += makeLayer('Deals List', c.dealsList.length + ' deals', dealsHtml, true);
+  }
+
+  // Text content (footer contact)
+  if (c.text) {
+    html += makeLayer('Text Content', 'text', `<div class="text-block">${escapeHtml(c.text)}</div>`, true);
+  }
+
+  // Partner logo (single image + link)
+  if (c.image && c.image.src) {
+    let logoHtml = `<div class="partner-preview">
+      <img src="${c.image.src}" alt="${escapeHtml(c.image.alt || '')}">
+      <div class="pp-info">
+        <div class="pp-alt">${escapeHtml(c.image.alt || '')}</div>
+        ${w.content.href ? `<div class="pp-link">${escapeHtml(w.content.href)}</div>` : ''}
+      </div>
+    </div>`;
+    html += makeLayer('Partner Logo', 'image', logoHtml, true);
+  }
+
+  // Note / extraction commentary
+  if (c.note) {
+    html += makeLayer('Extraction Note', 'info', `<div class="text-block" style="color: var(--yellow); font-style: italic;">${escapeHtml(c.note)}</div>`, true);
+  }
+
+  // Category tabs (tab navigation)
+  if (c.tabs && c.tabs.length > 0) {
+    let tabsHtml = '<div style="display: flex; gap: 8px; flex-wrap: wrap;">';
+    c.tabs.forEach(t => {
+      const bg = t.active ? 'rgba(61,181,165,0.15)' : 'var(--card-bg)';
+      const border = t.active ? 'rgba(61,181,165,0.5)' : 'var(--border)';
+      const color = t.active ? 'var(--accent)' : 'var(--text-dim)';
+      tabsHtml += `<div style="padding: 6px 14px; background: ${bg}; border: 1px solid ${border}; border-radius: 6px; font-size: 12px; font-weight: 600; color: ${color};">${escapeHtml(t.label)}${t.active ? ' (active)' : ''}</div>`;
+    });
+    tabsHtml += '</div>';
+    html += makeLayer('Tab Navigation', c.tabs.length + ' tabs', tabsHtml, true);
+  }
+
+  // Third-party embed info
+  if (c.provider) {
+    html += makeLayer('Third-Party Integration', c.provider, formatJson({
+      provider: c.provider,
+      embedType: c.embedType || 'unknown',
+      cmsManaged: c.cmsManaged !== undefined ? c.cmsManaged : 'unknown'
+    }), true);
+  }
+
+  // Section title (marquee side by side)
+  if (c.sectionTitle) {
+    html += makeLayer('Section Title', 'text', `<div class="text-block">${escapeHtml(c.sectionTitle)}</div>`, false);
+  }
+
+  // CDN image transforms (if any slide has an image)
+  const firstImg = c.slides?.[0]?.image || c.image;
+  if (firstImg && firstImg.src) {
+    const urlParts = firstImg.src.match(/upload\/([^/]+)\/v1/);
+    const transforms = urlParts ? urlParts[1] : 'none';
+    html += makeLayer('Image CDN', 'Cloudinary', formatJson({
+      host: "assets.simpleviewinc.com",
+      transforms: transforms,
+      path_pattern: "/simpleview/image/upload/{transforms}/v1/clients/saltlake/{filename}",
+      full_url: firstImg.src,
+      alt_text: firstImg.alt || ''
+    }), false);
+  }
+
+  // Content stats
+  html += makeLayer('Content Stats', 'counts', formatJson({
+    imageCount: c.imageCount,
+    linkCount: c.linkCount,
+    ...(c.paragraphCount !== undefined ? { paragraphCount: c.paragraphCount } : {}),
+    ...(c.faqItems ? { faqCount: c.faqItems.length } : {}),
+    ...(c.slides ? { slideCount: c.slides.length } : {}),
+    ...(c.dealsList ? { dealsCount: c.dealsList.length } : {})
+  }), false);
+
+  // Full widget JSON
+  html += makeLayer('Complete Widget JSON', 'full export', formatJson(w), false);
+
+  document.getElementById('jsonPanelBody').innerHTML = html;
+
+  // Add click handlers for layer toggling
+  document.querySelectorAll('.json-layer-header').forEach(h => {
+    h.onclick = () => {
+      h.classList.toggle('open');
+      h.nextElementSibling.classList.toggle('open');
+    };
+  });
+}
+
+function makeLayer(name, badge, content, openByDefault) {
+  return `<div class="json-layer">
+    <div class="json-layer-header ${openByDefault ? 'open' : ''}">
+      <span class="layer-icon">&#9654;</span>
+      <span class="layer-name">${name}</span>
+      <span class="layer-badge">${badge}</span>
+    </div>
+    <div class="json-layer-content ${openByDefault ? 'open' : ''}">${content}</div>
+  </div>`;
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function formatJson(obj) {
+  const json = JSON.stringify(obj, null, 2);
+  const escaped = json
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const highlighted = escaped
+    .replace(/"([^"]+)":/g, '<span class="key">"$1"</span>:')
+    .replace(/: "((?:[^"\\]|\\.)*)"/g, ': <span class="string">"$1"</span>')
+    .replace(/: (\d+)/g, ': <span class="number">$1</span>')
+    .replace(/: (true|false|null)/g, ': <span class="bool">$1</span>');
+  return `<div class="json-block">${highlighted}</div>`;
+}
+
+// Re-layout on window resize and image load
+window.addEventListener('resize', refreshOverlays);
+document.getElementById('pageScreenshot').addEventListener('load', refreshOverlays);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "scraped_at": "2026-03-16",
+  "source": "https://saltlake.simpleviewcms.com/nav/sitemap/",
+  "site": "Primary",
+  "navigation_sections": [
+    { "name": "Main Navigation", "url": "https://saltlake.simpleviewcms.com/nav/sitemap/site_primary/section_main/" },
+    { "name": "Secondary Navigation", "url": "https://saltlake.simpleviewcms.com/nav/sitemap/site_primary/section_secondary/" },
+    { "name": "Footer Navigation", "url": "https://saltlake.simpleviewcms.com/nav/sitemap/site_primary/section_footer/" },
+    { "name": "Microsites", "url": "https://saltlake.simpleviewcms.com/nav/sitemap/site_primary/section_microsites/" },
+    { "name": "Meetings Microsite Nav", "url": "https://saltlake.simpleviewcms.com/nav/sitemap/site_primary/section_microsite_nav/" },
+    { "name": "Conventions", "url": "https://saltlake.simpleviewcms.com/nav/sitemap/site_primary/section_conventions/" },
+    { "name": "Landing Pages", "url": "https://saltlake.simpleviewcms.com/nav/sitemap/site_primary/section_landing/" },
+    { "name": "External Links", "url": "https://saltlake.simpleviewcms.com/nav/sitemap/site_primary/section_external_links/" },
+    { "name": "System", "url": "https://saltlake.simpleviewcms.com/nav/sitemap/site_primary/section_system/" },
+    { "name": "Industry", "url": "https://saltlake.simpleviewcms.com/nav/sitemap/site_primary/section_industry/" }
+  ]
+}

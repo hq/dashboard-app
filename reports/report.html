@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SimpleView CMS — Page Builder — /things-to-do/</title>
+<style>
+:root {
+  --cms-header: #2a2a3a;
+  --cms-sidebar: #1e1e2e;
+  --tree-bg: #f5f5f0;
+  --widget-border: #e8a735;
+  --widget-bg: #fdf8e8;
+  --container-border: #3db5a5;
+  --container-bg: #e8f5f3;
+  --section-border: #333;
+  --btn-blue: #0099cc;
+  --btn-green: #5cb85c;
+  --btn-gray: #666;
+  --editor-bg: #e8e0d4;
+  --text-dark: #222;
+  --text-mid: #555;
+  --text-light: #999;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background:#1a1a2e; overflow:hidden; height:100vh; }
+
+/* === TOP BAR === */
+.cms-topbar {
+  height:48px; background:var(--cms-header); display:flex; align-items:center; justify-content:space-between;
+  padding:0 16px; color:#fff; z-index:100; position:relative; border-bottom:1px solid #3a3a4a;
+}
+.cms-topbar .logo { display:flex; align-items:center; gap:12px; }
+.cms-topbar .logo svg { width:28px; height:28px; }
+.cms-topbar .logo-text { font-size:15px; font-weight:600; letter-spacing:0.5px; color:#ccc; }
+.cms-topbar .logo-text span { color:#0099cc; }
+.cms-topbar .site-info { display:flex; align-items:center; gap:16px; font-size:13px; }
+.cms-topbar .site-info .dropdown { background:#3a3a4a; padding:4px 12px; border-radius:4px; cursor:pointer; font-size:12px; }
+.cms-topbar .site-name { color:#8899aa; font-size:13px; }
+.cms-topbar .user-area { display:flex; align-items:center; gap:12px; font-size:13px; color:#aaa; }
+.cms-topbar .user-area .avatar { width:28px; height:28px; border-radius:50%; background:#3db5a5; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#fff; }
+.cms-topbar .icon-btn { width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:4px; cursor:pointer; color:#888; }
+.cms-topbar .icon-btn:hover { background:#3a3a4a; color:#fff; }
+
+/* === MAIN LAYOUT === */
+.cms-body { display:flex; height:calc(100vh - 48px); }
+
+/* === LEFT SIDEBAR ICONS === */
+.cms-sidebar {
+  width:56px; background:var(--cms-sidebar); display:flex; flex-direction:column; align-items:center;
+  padding:12px 0; gap:4px; border-right:1px solid #2a2a3a; flex-shrink:0;
+}
+.sidebar-icon {
+  width:44px; height:44px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  border-radius:6px; cursor:pointer; color:#667; font-size:9px; gap:2px; transition:all 0.15s;
+}
+.sidebar-icon svg { width:20px; height:20px; stroke:#667; fill:none; stroke-width:1.5; }
+.sidebar-icon:hover, .sidebar-icon.active { background:#2a2a3a; color:#aab; }
+.sidebar-icon:hover svg, .sidebar-icon.active svg { stroke:#aab; }
+.sidebar-icon.active { border-left:2px solid #0099cc; }
+
+/* === PAGE BUILDER PANEL === */
+.builder-panel {
+  width:400px; background:var(--tree-bg); display:flex; flex-direction:column;
+  border-right:1px solid #ccc; flex-shrink:0; position:relative; overflow:hidden;
+}
+.builder-header {
+  padding:12px 16px; background:#e2ddd5; border-bottom:1px solid #ccc;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.builder-header h2 { font-size:14px; font-weight:600; color:var(--text-dark); }
+.builder-header .page-label { font-size:11px; color:var(--text-mid); }
+
+.tree-scroll { flex:1; overflow-y:auto; padding:8px 0; }
+
+/* === TREE ITEMS === */
+.tree-item {
+  display:flex; align-items:center; padding:5px 8px 5px 0; cursor:pointer;
+  font-size:12px; color:var(--text-dark); position:relative; transition:background 0.1s;
+  min-height:30px; border-bottom:1px solid rgba(0,0,0,0.04);
+}
+.tree-item:hover { background:rgba(0,0,0,0.05); }
+.tree-item .indent { flex-shrink:0; }
+.tree-item .bar {
+  width:4px; min-height:22px; border-radius:2px; margin-right:8px; flex-shrink:0; align-self:stretch;
+}
+.tree-item .label { flex:1; line-height:1.3; word-break:break-word; }
+.tree-item .gear {
+  opacity:0; width:24px; height:24px; display:flex; align-items:center; justify-content:center;
+  border-radius:4px; font-size:13px; color:#888; flex-shrink:0; transition:opacity 0.15s;
+}
+.tree-item:hover .gear { opacity:1; }
+.tree-item .gear:hover { background:rgba(0,0,0,0.1); color:#333; }
+.tree-item .lock { font-size:10px; margin-left:4px; color:#aaa; }
+
+.tree-item.section .bar { background:var(--section-border); }
+.tree-item.section { font-weight:600; color:#333; }
+.tree-item.container .bar { background:var(--container-border); }
+.tree-item.container { background:var(--container-bg); }
+.tree-item.widget .bar { background:var(--widget-border); }
+.tree-item.widget { background:var(--widget-bg); }
+.tree-item.widget:hover { background:#f5edd5; }
+
+/* === WIDGET EDITOR === */
+.editor-panel {
+  position:absolute; top:0; left:0; right:0; bottom:0; background:var(--editor-bg);
+  transform:translateX(100%); transition:transform 0.25s ease; z-index:10;
+  display:flex; flex-direction:column;
+}
+.editor-panel.open { transform:translateX(0); }
+
+.editor-topbar {
+  padding:10px 16px; background:#d5cdc0; border-bottom:1px solid #bbb;
+  display:flex; align-items:center; justify-content:space-between; flex-shrink:0;
+}
+.editor-topbar .back-btn {
+  background:none; border:1px solid #999; border-radius:4px; padding:4px 12px;
+  font-size:12px; cursor:pointer; color:#555; display:flex; align-items:center; gap:4px;
+}
+.editor-topbar .back-btn:hover { background:#c5bdb0; }
+.editor-topbar .actions { display:flex; gap:8px; }
+.editor-topbar .btn-save {
+  background:var(--btn-blue); color:#fff; border:none; border-radius:4px;
+  padding:6px 16px; font-size:12px; font-weight:600; cursor:pointer;
+}
+.editor-topbar .btn-cancel {
+  background:var(--btn-gray); color:#fff; border:none; border-radius:4px;
+  padding:6px 14px; font-size:12px; cursor:pointer;
+}
+
+.editor-scroll { flex:1; overflow-y:auto; padding:16px; }
+.editor-scroll h3 { font-size:15px; font-weight:600; color:#333; margin-bottom:12px; }
+.editor-scroll h4 {
+  font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px;
+  color:#777; margin:16px 0 8px; padding-bottom:4px; border-bottom:1px solid #ccc;
+}
+
+.field { margin-bottom:12px; }
+.field label { display:block; font-size:11px; font-weight:600; color:#555; margin-bottom:3px; }
+.field label .req { color:#c33; }
+.field select, .field input[type="text"], .field textarea {
+  width:100%; padding:6px 8px; border:1px solid #bbb; border-radius:4px; font-size:12px;
+  background:#fff; font-family:inherit;
+}
+.field textarea { min-height:80px; resize:vertical; }
+.field .desc { font-size:10px; color:#888; margin-top:2px; }
+
+.toggle-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+.toggle-row .toggle-label { font-size:12px; color:#555; min-width:120px; }
+.toggle {
+  width:36px; height:20px; border-radius:10px; background:#ccc; position:relative;
+  cursor:pointer; transition:background 0.2s;
+}
+.toggle.on { background:var(--container-border); }
+.toggle::after {
+  content:''; width:16px; height:16px; border-radius:50%; background:#fff;
+  position:absolute; top:2px; left:2px; transition:left 0.2s; box-shadow:0 1px 3px rgba(0,0,0,0.2);
+}
+.toggle.on::after { left:18px; }
+
+.radio-group { display:flex; gap:12px; margin-bottom:8px; }
+.radio-group label { font-size:12px; color:#555; display:flex; align-items:center; gap:4px; cursor:pointer; }
+
+.chosen-items { margin-top:8px; }
+.chosen-items .browse-btn {
+  background:var(--btn-blue); color:#fff; border:none; border-radius:4px;
+  padding:5px 14px; font-size:11px; font-weight:600; cursor:pointer; margin-bottom:8px;
+}
+.chosen-table { width:100%; border-collapse:collapse; font-size:11px; background:#fff; border-radius:4px; overflow:hidden; }
+.chosen-table th {
+  background:#d5cdc0; padding:5px 8px; text-align:left; font-weight:600; color:#555;
+  font-size:10px; text-transform:uppercase;
+}
+.chosen-table td { padding:5px 8px; border-bottom:1px solid #e5e0d8; color:#444; vertical-align:middle; }
+.chosen-table .thumb { width:48px; height:32px; object-fit:cover; border-radius:3px; }
+.chosen-table .actions-cell { display:flex; gap:4px; }
+.chosen-table .icon-sm {
+  width:22px; height:22px; display:flex; align-items:center; justify-content:center;
+  border-radius:3px; cursor:pointer; font-size:11px; color:#888;
+}
+.chosen-table .icon-sm:hover { background:#eee; color:#333; }
+
+.guid-badge {
+  font-size:9px; font-family:'SF Mono', Monaco, monospace; color:#999;
+  background:#f0ece5; padding:2px 6px; border-radius:3px; display:inline-block; margin-top:4px;
+}
+
+/* === PREVIEW PANEL === */
+.preview-panel { flex:1; display:flex; flex-direction:column; background:#e0e0e0; }
+.preview-toolbar {
+  height:36px; background:#ddd; border-bottom:1px solid #bbb; display:flex;
+  align-items:center; padding:0 12px; gap:8px; flex-shrink:0;
+}
+.preview-toolbar .dots { display:flex; gap:5px; }
+.preview-toolbar .dot { width:10px; height:10px; border-radius:50%; }
+.preview-toolbar .dot.r { background:#ff5f56; }
+.preview-toolbar .dot.y { background:#ffbd2e; }
+.preview-toolbar .dot.g { background:#27c93f; }
+.preview-toolbar .url-bar {
+  flex:1; background:#fff; border:1px solid #bbb; border-radius:12px;
+  padding:3px 12px; font-size:11px; color:#555; font-family:inherit;
+}
+.preview-toolbar .refresh {
+  width:24px; height:24px; display:flex; align-items:center; justify-content:center;
+  border-radius:4px; cursor:pointer; font-size:14px; color:#888;
+}
+
+.preview-scroll { flex:1; overflow-y:auto; background:#fff; }
+.preview-content { max-width:1200px; margin:0 auto; }
+
+/* === PREVIEW STYLES === */
+.pv-hero {
+  width:100%; height:400px; background-size:cover; background-position:center;
+  position:relative; display:flex; align-items:flex-end;
+}
+.pv-hero::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:50%;
+  background:linear-gradient(transparent, rgba(0,0,0,0.4));
+}
+
+.pv-section { padding:30px 40px; }
+.pv-section h1 { font-size:28px; color:#1a3a5c; margin-bottom:12px; font-weight:700; }
+.pv-section h2 { font-size:22px; color:#1a3a5c; margin-bottom:10px; font-weight:700; }
+.pv-section h3 { font-size:18px; color:#1a3a5c; margin-bottom:8px; }
+.pv-section p { font-size:14px; color:#444; line-height:1.7; margin-bottom:10px; }
+.pv-section a { color:#0099cc; text-decoration:none; }
+.pv-section a:hover { text-decoration:underline; }
+
+.pv-nav { display:flex; gap:20px; padding:12px 40px; border-bottom:2px solid #eee; flex-wrap:wrap; }
+.pv-nav a { font-size:12px; color:#0099cc; text-decoration:none; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+
+.pv-cards { display:grid; gap:20px; padding:0 40px 30px; }
+.pv-cards.cols-3 { grid-template-columns:repeat(3, 1fr); }
+.pv-cards.cols-4 { grid-template-columns:repeat(4, 1fr); }
+.pv-card {
+  border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  transition:transform 0.2s, box-shadow 0.2s; cursor:pointer;
+}
+.pv-card:hover { transform:translateY(-3px); box-shadow:0 6px 16px rgba(0,0,0,0.15); }
+.pv-card img { width:100%; height:160px; object-fit:cover; display:block; }
+.pv-card .card-body { padding:12px; }
+.pv-card .card-body h2 { font-size:15px; margin-bottom:6px; }
+.pv-card .card-body p { font-size:12px; color:#666; line-height:1.5; }
+.pv-card .card-body .read-more { font-size:11px; color:#0099cc; font-weight:600; margin-top:6px; display:inline-block; }
+
+.pv-sbs {
+  display:flex; gap:0; margin:0 40px 30px; border-radius:8px; overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+.pv-sbs img { width:50%; object-fit:cover; display:block; }
+.pv-sbs .sbs-content { width:50%; padding:30px; display:flex; flex-direction:column; justify-content:center; background:#f8f8f8; }
+.pv-sbs .sbs-content h2 { font-size:20px; color:#1a3a5c; margin-bottom:10px; }
+.pv-sbs .sbs-content p { font-size:13px; color:#555; line-height:1.7; }
+.pv-sbs .sbs-content .cta-btn {
+  display:inline-block; margin-top:14px; padding:8px 20px; background:#0099cc;
+  color:#fff; border-radius:4px; font-size:12px; font-weight:600; text-decoration:none; width:fit-content;
+}
+
+.pv-marquee {
+  margin:0 40px 30px; border-radius:8px; overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1); display:flex;
+}
+.pv-marquee .marquee-main { width:55%; position:relative; }
+.pv-marquee .marquee-main img { width:100%; height:100%; object-fit:cover; display:block; min-height:350px; }
+.pv-marquee .marquee-list { width:45%; display:flex; flex-direction:column; }
+.pv-marquee .marquee-item {
+  flex:1; display:flex; gap:12px; padding:12px; border-bottom:1px solid #eee;
+  align-items:center; cursor:pointer; transition:background 0.15s;
+}
+.pv-marquee .marquee-item:hover { background:#f5f5f5; }
+.pv-marquee .marquee-item img { width:100px; height:64px; object-fit:cover; border-radius:4px; flex-shrink:0; }
+.pv-marquee .marquee-item h4 { font-size:12px; color:#1a3a5c; line-height:1.4; }
+
+.pv-marquee-vert {
+  margin:0 60px 30px; display:grid; grid-template-columns:1fr 1fr; gap:0;
+  border-radius:8px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+.pv-marquee-vert .mv-main { position:relative; }
+.pv-marquee-vert .mv-main img { width:100%; height:100%; object-fit:cover; display:block; min-height:400px; }
+.pv-marquee-vert .mv-main .mv-title {
+  position:absolute; bottom:20px; left:20px; color:#fff; font-size:20px;
+  font-weight:700; text-shadow:0 2px 6px rgba(0,0,0,0.5);
+}
+.pv-marquee-vert .mv-list { display:flex; flex-direction:column; }
+.pv-marquee-vert .mv-item {
+  flex:1; display:flex; align-items:center; gap:12px; padding:12px 16px;
+  border-bottom:1px solid #eee; cursor:pointer; transition:background 0.15s;
+}
+.pv-marquee-vert .mv-item:hover { background:#f5f5f5; }
+.pv-marquee-vert .mv-item img { width:100px; height:70px; object-fit:cover; border-radius:4px; flex-shrink:0; }
+.pv-marquee-vert .mv-item h2 { font-size:13px; color:#1a3a5c; }
+
+.pv-faq { margin:0 40px 30px; }
+.pv-faq-item { border-bottom:1px solid #ddd; }
+.pv-faq-item .faq-q {
+  padding:14px 0; font-size:14px; font-weight:600; color:#1a3a5c; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.pv-faq-item .faq-q::after { content:'+'; font-size:18px; color:#999; }
+.pv-faq-item.open .faq-q::after { content:'\2212'; }
+.pv-faq-item .faq-a { display:none; padding:0 0 14px; font-size:13px; color:#555; line-height:1.7; }
+.pv-faq-item.open .faq-a { display:block; }
+
+.pv-embed {
+  margin:0 40px 30px; background:#f0f0f0; border:2px dashed #ccc;
+  border-radius:8px; padding:40px; text-align:center; color:#888; font-size:13px;
+}
+
+.pv-footer {
+  background:#1a3a5c; color:#fff; padding:40px; margin-top:30px;
+}
+.pv-footer .footer-inner { display:flex; gap:40px; justify-content:space-between; align-items:center; }
+.pv-footer .footer-addr { font-size:12px; line-height:1.8; color:#aac; }
+.pv-footer .footer-logos { display:flex; gap:16px; align-items:center; }
+.pv-footer .footer-logos img { height:30px; opacity:0.7; }
+
+.pv-related {
+  padding:0 40px 30px;
+}
+.pv-related h4 { font-size:13px; color:#888; text-transform:uppercase; letter-spacing:1px; margin-bottom:16px; }
+.pv-related-grid { display:flex; gap:16px; overflow-x:auto; padding-bottom:8px; }
+.pv-related-card {
+  min-width:220px; max-width:220px; border-radius:8px; overflow:hidden;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1); flex-shrink:0; cursor:pointer;
+  transition:transform 0.2s;
+}
+.pv-related-card:hover { transform:translateY(-2px); }
+.pv-related-card img { width:100%; height:130px; object-fit:cover; display:block; }
+.pv-related-card .rc-body { padding:10px; }
+.pv-related-card .rc-body h4 { font-size:12px; color:#1a3a5c; margin:0; text-transform:none; letter-spacing:0; }
+.pv-related-card .rc-body p { font-size:11px; color:#888; margin-top:4px; }
+
+.pv-discount {
+  margin:0 40px 30px; display:flex; border-radius:8px; overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1); background:#f8f8f8;
+}
+.pv-discount img { width:45%; object-fit:cover; }
+.pv-discount .disc-body { padding:30px; display:flex; flex-direction:column; justify-content:center; }
+.pv-discount .disc-body h2 { font-size:20px; color:#1a3a5c; margin-bottom:8px; }
+.pv-discount .disc-body h3 { font-size:16px; color:#0099cc; margin-bottom:12px; }
+.pv-discount .disc-body p { font-size:13px; color:#555; line-height:1.6; }
+.pv-discount .disc-body .cta-btn {
+  display:inline-block; margin-top:14px; padding:10px 24px; background:#5cb85c;
+  color:#fff; border-radius:4px; font-size:13px; font-weight:600; text-decoration:none; width:fit-content;
+}
+
+/* Highlight active tree item */
+.tree-item.active { outline:2px solid var(--btn-blue); outline-offset:-2px; border-radius:3px; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="cms-topbar">
+  <div class="logo">
+    <svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="#0099cc" opacity="0.2"/><circle cx="14" cy="14" r="8" fill="#0099cc" opacity="0.4"/><circle cx="14" cy="14" r="4" fill="#0099cc"/></svg>
+    <span class="logo-text"><span>simpleview</span></span>
+    <div class="site-info">
+      <span class="dropdown">CMS &#9662;</span>
+      <span class="site-name">Visit Salt Lake</span>
+    </div>
+  </div>
+  <div style="font-size:13px;color:#8899aa;">Page Builder &mdash; /things-to-do/</div>
+  <div class="user-area">
+    <span class="icon-btn">&#128269;</span>
+    <span class="icon-btn">&#128276;</span>
+    <span style="color:#ccc;">Admin User</span>
+    <span class="avatar">AU</span>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="cms-body">
+
+  <!-- SIDEBAR -->
+  <div class="cms-sidebar">
+    <div class="sidebar-icon active">
+      <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4"/></svg>
+      <span>HOME</span>
+    </div>
+    <div class="sidebar-icon">
+      <svg viewBox="0 0 24 24"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
+      <span>SITEMAP</span>
+    </div>
+    <div class="sidebar-icon">
+      <svg viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      <span>ASSETS</span>
+    </div>
+    <div class="sidebar-icon">
+      <svg viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+      <span>MODULES</span>
+    </div>
+    <div class="sidebar-icon">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      <span>SETTINGS</span>
+    </div>
+  </div>
+
+  <!-- PAGE BUILDER + EDITOR -->
+  <div class="builder-panel" id="builderPanel">
+    <div class="builder-header">
+      <div>
+        <h2>Page Builder</h2>
+        <span class="page-label">/things-to-do/</span>
+      </div>
+      <span style="font-size:11px;color:#999;">19 widgets</span>
+    </div>
+
+    <div class="tree-scroll" id="treeScroll"></div>
+
+    <!-- EDITOR OVERLAY -->
+    <div class="editor-panel" id="editorPanel">
+      <div class="editor-topbar">
+        <button class="back-btn" onclick="closeEditor()">&#9664; BACK</button>
+        <div class="actions">
+          <button class="btn-cancel" onclick="closeEditor()">CANCEL</button>
+          <button class="btn-save">SAVE CHANGES</button>
+        </div>
+      </div>
+      <div class="editor-scroll" id="editorContent"></div>
+    </div>
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview-panel">
+    <div class="preview-toolbar">
+      <div class="dots">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      </div>
+      <div class="url-bar">https://www.visitsaltlake.com/things-to-do/</div>
+      <div class="refresh">&#8635;</div>
+    </div>
+    <div class="preview-scroll" id="previewScroll"></div>
+  </div>
+
+</div>
+
+<script>
+// === SECTION DATA (embedded from /tmp/sections_data.json) ===
+const SECTIONS = [{"index":0,"widgetType":"core-hero-image","guid":"6bc396fa-ee33-41de-860a-97fa5529da58","headings":[],"paragraphs":[],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_476,q_65,w_640,x_2794,y_2812/v1/clients/saltlake/_18I6566_c1e4e240-3325-4091-a559-d7248cc5c046.jpg","alt":"View of downtown Salt Lake looking across a pool"}],"links":[],"dataAttrs":{"data-guid":"6bc396fa-ee33-41de-860a-97fa5529da58"},"counts":{"images":1,"links":0,"headings":0,"paragraphs":0}},{"index":1,"widgetType":"text-block","guid":"b6cfba1a-9d64-4005-9ff2-66b5a440c9f2","headings":[{"level":"H1","text":"Things to Do in Salt Lake"}],"paragraphs":["There are two main factors involved in planning the perfect trip: making sure everyone has fun and experiencing things you don\u2019t experience\u00a0every day.","In addition to Salt Lake\u2019s full calendar of\u00a0events, there are thousands of\u00a0interesting places, sights, and curiosities\u00a0waiting to be explored. Check out our favorite attractions, arts and culture, shop til you drop, family history, and nearby national parks."],"images":[],"links":[{"text":"events","href":"https://www.visitsaltlake.com/events/"},{"text":"arts and culture","href":"https://www.visitsaltlake.com/things-to-do/arts-culture/"},{"text":"shop til you drop","href":"https://www.visitsaltlake.com/things-to-do/shopping/"},{"text":"family history","href":"https://www.visitsaltlake.com/things-to-do/attractions/genealogy/"},{"text":"nearby national parks","href":"https://www.visitsaltlake.com/things-to-do/outdoor-recreation/state-national-parks/"}],"dataAttrs":{"data-guid":"b6cfba1a-9d64-4005-9ff2-66b5a440c9f2"},"counts":{"images":0,"links":5,"headings":1,"paragraphs":2}},{"index":2,"widgetType":"related-content","guid":"5173df29-de25-437e-b0fb-87d5a3a31347","headings":[{"level":"H4","text":"Explore all the things to do in Salt Lake"},{"level":"H4","text":"Where to See Salt Lake\u2019s Best Colors This Fall"},{"level":"H4","text":"Top Winter Things to Do in Salt Lake: Your Ultimate Guide"},{"level":"H4","text":"Celebrate the Holidays in Salt Lake"},{"level":"H4","text":"Why Salt Lake is a Hidden Gem for Fall Getaways"},{"level":"H4","text":"The Best Hiking Trails Near Salt Lake City for Out-of-State Visitors"}],"paragraphs":["Fall in Salt Lake hits different\u2014a fleeting magic show where golden aspens shimmer against\u2026","Updated: October 30th, 2025 There\u2019s nothing quite like winter in Salt Lake City. Dive into the\u2026","Updated: November 3rd, 2025 \u2018Tis the season, and while the temps are dropping, the lights\u2026"],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/AdobeStock_788207100_2c75c619-fdbe-4fe5-9dff-ec36218980f3.jpg","alt":"Salt Lake City in the fall."},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/Gallivan_Lights_On_Drone_Photo_from_SLCTV_Media_Nov_29th_jpg_be20a796-7370-4818-aa17-b7b31fcf","alt":"Gallivan Plaza Lights in Winter"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/TrolleyChristmas_9550_6b31b6a7-6828-4f41-8948-03f5780bb914.jpg","alt":"Trolley Square Christmas"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_427,q_65,w_640/v1/clients/saltlake/AdobeStock_238841855_215c5e33-aa87-45b3-adc0-295d13db5411.jpg","alt":"Adobe Stock Fall imagery"}],"links":[{"text":"Where to See Salt Lake\u2019s Best Colors This Fall","href":"https://www.visitsaltlake.com/blog/stories/post/where-to-see-salt-lakes-best-fall-colors-this-fall/"},{"text":"Top Winter Things to Do in Salt Lake: Your Ultimate Guide","href":"https://www.visitsaltlake.com/blog/stories/post/top-winter-things-to-do-in-salt-lake/"},{"text":"Celebrate the Holidays in Salt Lake","href":"https://www.visitsaltlake.com/blog/stories/post/celebrate-the-holidays-in-salt-lake/"},{"text":"Why Salt Lake is a Hidden Gem for Fall Getaways","href":"https://www.visitsaltlake.com/blog/stories/post/unforgettable-fall-experiences-in-salt-lake-for-first-time-visitors/"}],"dataAttrs":{"data-guid":"5173df29-de25-437e-b0fb-87d5a3a31347","data-slides-to-show":"4"},"counts":{"images":9,"links":18,"headings":10,"paragraphs":9}},{"index":3,"widgetType":"core-side-by-side","guid":"df4e9027-9286-41c1-880c-9cdc9741f0dc","headings":[{"level":"H2","text":"Tours & Experience Passes"}],"paragraphs":["Whether you are looking to put together your own Salt Lake adventure or get\u00a0an expert to guide you, we\u2019ve got you covered. Our\u00a0discount passes\u00a0and\u00a0recommended guided tours offer fun experiences for the whole family."],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_518,q_65,w_640,x_2370,y_2196/v1/clients/saltlake/Downtown_Drone_RyanMalavolta_2023_01_FINAL_94f1bfcb-bd1b-49c3-a3c9-","alt":"Skyline Summer 2023 Drone Shot"}],"links":[{"text":"Tours & Experience Passes","href":"https://www.visitsaltlake.com/things-to-do/tours-experiences/"},{"text":"recommended\u00a0guided tours","href":"https://www.visitsaltlake.com/things-to-do/tours-experiences/guided-tours-services/"},{"text":"Get Discount Passes","href":"https://www.visitsaltlake.com/things-to-do/tours-experiences/"}],"dataAttrs":{"data-width":"controlled","data-slides-across":"1","data-guid":"df4e9027-9286-41c1-880c-9cdc9741f0dc"},"counts":{"images":1,"links":4,"headings":1,"paragraphs":1}},{"index":4,"widgetType":"core-cards-3","guid":"e735f0ae-6a65-4e26-a7e2-9ff18eb8f6ba","headings":[{"level":"H2","text":"Attractions"},{"level":"H2","text":"The Great Salt Lake"},{"level":"H2","text":"Zoos & Gardens"},{"level":"H2","text":"Historic Sites"},{"level":"H2","text":"Free Things to Do"},{"level":"H2","text":"Things to Do with Kids"}],"paragraphs":["Salt Lake\u2019s attractions run the gamut from\u00a0sightseeing tours\u00a0to museums\u2026","As the largest natural lake west of the Mississippi River and the largest salt water\u2026","Take a walk on the wild side or just relax and enjoy nature in Salt Lake.\u00a0Exotic\u2026","From the time the pioneers settled in the Salt Lake Valley in 1847, and even before\u2026","Free activities in Salt Lake"],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VSL_ZooBrew_PrintReady_AustenDiamondPhotography_42_6d7e8f08-092e-4767-9991-fe234c604863.jpg","alt":"Peering Through Aquarium at Utah's Hogle Zoo Brew"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VisitSaltLake_GreatSaltLake_hirez_AustenDiamondPhotography_14_68f34c07-0923-453e-a25e-743db32","alt":"Great Salt Lake"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VSL_ZooBrew_PrintReady_AustenDiamondPhotography_11_6fe1809e-ba4d-4916-ae4b-32f129de4113.jpg","alt":"Female Lion at Utah's Hogle Zoo Brew"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/Salt_Lake_Temple_63061dd9-0544-45ce-8a0d-9261abf81c42.png","alt":"Temple Square"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/DCU_6647_by_JayLynn_Photography_f8eaebba-9f8b-4084-b41c-f7bffa7d55fa.jpg","alt":"Days of '47 Parade Float"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VSL_Aquarium_HiRez_AustenDiamondPhotography_19_77f2ea17-3c1a-42c3-b7c6-980ababb422b.jpg","alt":"Kids at the Loveland Living Planet Aquarium"}],"links":[{"text":"Attractions","href":"https://www.visitsaltlake.com/things-to-do/attractions/"},{"text":"The Great Salt Lake","href":"https://www.visitsaltlake.com/things-to-do/attractions/the-great-salt-lake/"},{"text":"Zoos & Gardens","href":"https://www.visitsaltlake.com/things-to-do/attractions/zoos-gardens/"}],"dataAttrs":{"data-slides-across":"3","data-guid":"e735f0ae-6a65-4e26-a7e2-9ff18eb8f6ba"},"counts":{"images":6,"links":18,"headings":6,"paragraphs":6}},{"index":5,"widgetType":"core-cards-4","guid":"cff66844-29fa-4677-9e02-6683c1d8ae32","headings":[{"level":"H2","text":"Museums"},{"level":"H2","text":"Art Galleries"},{"level":"H2","text":"Tours & Experiences"},{"level":"H2","text":"Discount Passport"},{"level":"H2","text":"Outdoor Arts Trail"},{"level":"H2","text":"LGBTQ"},{"level":"H2","text":"Arts & Culture"},{"level":"H2","text":"Shopping"}],"paragraphs":["Get enlightened in Salt Lake.\u00a0Check out the wide variety of museums available for your learning\u2026","Get enlightened in Salt Lake.\u00a0Salt Lake\u2019s\u00a0galleries offer a wide variety of artistic styles\u2026","There\u2019s so much to do in Salt Lake it can be overwhelming to decide.\u2026","Experience Salt Lake and save as you go!\u00a0Visit Salt Lake has partnered with local attractions\u2026","Discover the soul of Salt Lake by taking a tour of the murals\u00a0scattered across the valley.\u2026"],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_NHMU_HiRez_AustenDiamondPhotography_9_a97afe83-2d59-47a6-8a62-4b3507b75eb0.jpg","alt":"Dinosaur Skeleton at Natural History Museum of Utah"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VisitSaltLake_DowntownStreetArt_AustenDiamondPhotography_6_64ec678b-e200-44b2-92d4-c10e53eaa6","alt":"Urban Arts Gallery"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/dsc01602_52461184486_o_841325fb-e595-4ffd-8c0b-f81f30151969.jpg","alt":"Downtown Salt Lake from the 6th floor of the Hyatt Regency"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VisitSaltLake_Neighborhoods_DowntownCentralCity_HiRez_AustenDiamondPhotography_10_4a78de02-9a","alt":"Friends dining at Pallet in Salt Lake"}],"links":[{"text":"Museums","href":"https://www.visitsaltlake.com/things-to-do/arts-culture/museums/"},{"text":"Art Galleries","href":"https://www.visitsaltlake.com/things-to-do/arts-culture/art-galleries/"},{"text":"Tours & Experiences","href":"https://www.visitsaltlake.com/things-to-do/tours-experiences/"}],"dataAttrs":{"data-slides-across":"4","data-guid":"cff66844-29fa-4677-9e02-6683c1d8ae32"},"counts":{"images":8,"links":24,"headings":8,"paragraphs":8}},{"index":6,"widgetType":"core-cards-4","guid":"0836cbdf-e019-4118-b7a8-389db2fcd826","headings":[{"level":"H2","text":"Skiing & Snowboarding"},{"level":"H2","text":"Ski Super Pass"},{"level":"H2","text":"Hiking"},{"level":"H2","text":"Mountains"},{"level":"H2","text":"National Parks, Monuments & Recreation Areas"},{"level":"H2","text":"Outdoor Recreation"},{"level":"H2","text":"State & National Parks"},{"level":"H2","text":"Fishing & Wildlife"}],"paragraphs":["Salt Lake is home to all kinds of skiers, riders, revelers, powder fiends\u2026","The Salt Lake Ski Super Pass is your discounted lift ticket\u2026","Salt Lake City is synonymous with outdoor adventure\u2026","Salt Lake City is an outdoor adventurer\u2019s dream\u2026","Did you know there are over 20 national parks and monuments within a few hours\u2019 drive?"],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/nav_bg_e4c89daf-f719-451c-8a86-f391a919b1b6.png","alt":"Skiing"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_SkiResorts_HiRez_AustenDiamondPhotography_10_132ff754-4034-430b-b045-24c701818ba6.jpg","alt":"Ski Super Pass"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_SummerCottonwoodCanyons_HiRez_AustenDiamondPhotography_85_ed5c9ecb-1087-4bd9-87fb-a2273e7","alt":"Friends hiking to a lake in Big Cottonwood Canyon"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_205,q_65,w_320/v1/clients/saltlake/VSL_SummerCottonwoodCanyons_HiRez_AustenDiamondPhotography_33_1__c3df9f00-22a3-407b-ab0c-427a","alt":"Family Hiking near Snowbird"}],"links":[{"text":"Skiing & Snowboarding","href":"https://www.visitsaltlake.com/things-to-do/skiing-snowboarding/"},{"text":"Ski Super Pass","href":"https://www.visitsaltlake.com/things-to-do/skiing-snowboarding/super-pass/"},{"text":"Hiking","href":"https://www.visitsaltlake.com/things-to-do/outdoor-recreation/hiking/"}],"dataAttrs":{"data-slides-across":"4","data-guid":"0836cbdf-e019-4118-b7a8-389db2fcd826"},"counts":{"images":8,"links":24,"headings":8,"paragraphs":8}},{"index":7,"widgetType":"core-cards-3","guid":"219ddc87-a18c-473e-9554-fba6d5cd917a","headings":[{"level":"H2","text":"Nightlife & Entertainment"},{"level":"H2","text":"Dance Clubs"},{"level":"H2","text":"Concerts & Live Music"},{"level":"H2","text":"Gay Bars"},{"level":"H2","text":"Comedy Clubs"},{"level":"H2","text":"Social Activities"}],"paragraphs":["As the sun sets over the Oquirrh Mountains, Salt Lake\u2019s bars, clubs\u2026","Looking for somewhere to shake your booty or do the twist?\u2026","Salt Lake is alive with music! From homegrown talent to global acts\u2026","Sure, a statue of the Mormon angel Moroni stands prominent watch\u2026","Enjoy a few laughs with friends while you are in Salt Lake\u2026"],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/VisitSaltLake_CocktailGuide_HiRez_AustenDiamondPhotography_44_e08a4035-02a1-4b6e-ae6c-7ff5b4a","alt":"Bartender at Water Witch"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/34321052_1080339892123782_2015605981391618048_n_2c88b099-74e0-4619-a6fb-01d01982f4f8.jpg","alt":"Revolution Fridays at The Moose Lounge"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/a1bc896c_aa38_48b7_87a4_04500adfe866_ecf2e9b6-edd5-421a-96a8-5d7884703fb4.jpg","alt":"Concert-goer raising their hands"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/7d538a9a_859d_4151_80fe_9de78171926e_124b69e0-2e8b-4fc5-b4d9-26a8cf307c45.jpg","alt":"Bartender at Bar X"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/The_Lounge_At_Wiseguys_3_The_Gateway_fed59d11-4fcc-49ea-9818-b947afb576d8.jpg","alt":"Wiseguys Comedy Club"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_396,q_65,w_640/v1/clients/saltlake/Social_Axe_8_3cb150495056a36_3cb15124_5056_a36a_064121414f7d7d11_134fc69a-d4fe-48f7-a55f-6672","alt":"Social Axe Throwing"}],"links":[{"text":"Nightlife & Entertainment","href":"https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/"},{"text":"Dance Clubs","href":"https://www.visitsaltlake.com/things-to-do/nightlife-entertainment/dance-clubs/"},{"text":"Concerts & Live Music","href":"https://www.visitsaltlake.com/events/concerts-live-music/"}],"dataAttrs":{"data-slides-across":"3","data-guid":"219ddc87-a18c-473e-9554-fba6d5cd917a"},"counts":{"images":6,"links":18,"headings":6,"paragraphs":6}},{"index":8,"widgetType":"text-block","guid":"3626c011-6bab-4be8-bf0f-448831eca066","headings":[{"level":"H3","text":"See How Visitors Share Their Adventures"}],"paragraphs":[],"images":[],"links":[],"dataAttrs":{"data-guid":"3626c011-6bab-4be8-bf0f-448831eca066"},"counts":{"images":0,"links":0,"headings":1,"paragraphs":0}},{"index":9,"widgetType":"marquee-side-by-side","guid":"476d7df2-4fa1-40c9-8557-e07963dd666a","headings":[{"level":"H2","text":"The Salt Lake Scene"},{"level":"H3","text":"Related Stories"},{"level":"H4","text":"Spring Skiing Near Salt Lake: Trade Sand for Snow"},{"level":"H4","text":"Insider View: Snowbird Ski Resort"},{"level":"H4","text":"Alta Ski Area: Insider Insights on Utah\u2019s Paradise"},{"level":"H4","text":"Best Time for a Ski Vacation in Salt Lake"}],"paragraphs":[],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_582,q_65,w_640/v1/clients/saltlake/SkiCity_ResortsMarch2017_HiRez_AustenDiamondPhotography_90_1__5d2a6820-396f-4e9d-974d-423465b","alt":"Solitude Skier"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_201,q_65,w_320/v1/clients/saltlake/VSL_Snowbird_6_feb72b82-4a5e-438c-8306-ccf5467d5af3.jpg","alt":"Snowbird trail"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_201,q_65,w_320/v1/clients/saltlake/VSL_Alta_Supreme_Bowl_1_144ebbb3-3988-4407-9574-9b44b49bccd9.jpg","alt":"Alta Supreme Bowl"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_201,q_65,w_320/v1/clients/saltlake/PJ_12_9_23b_2__14dc6fcd-cc96-4ae2-bbd0-cfe7ef8e7b6c.jpg","alt":"Skiers at Alta Ski Area"}],"links":[{"text":"Spring Skiing Near Salt Lake","href":"https://www.visitsaltlake.com/blog/stories/post/spring-skiing-near-salt-lake-trade-sand-for-snow-and-spring-break-on-the-slopes/"},{"text":"Insider View: Snowbird Ski Resort","href":"https://www.visitsaltlake.com/blog/stories/post/insider-view-snowbird-ski-resort/"},{"text":"Alta Ski Area: Insider Insights","href":"https://www.visitsaltlake.com/blog/stories/post/alta-ski-area-insider-insights-on-utahs-paradise/"}],"dataAttrs":{"data-guid":"476d7df2-4fa1-40c9-8557-e07963dd666a"},"counts":{"images":4,"links":12,"headings":6,"paragraphs":0}},{"index":10,"widgetType":"core-marquee","guid":"8ce30839-6654-4739-b626-7fda438658ba","headings":[{"level":"H2","text":"State & National Parks"},{"level":"H2","text":"Cycling the City & Nearby Canyons"},{"level":"H2","text":"Scenic Drives"},{"level":"H2","text":"Get Outside"},{"level":"H2","text":"Adventure Sports"},{"level":"H2","text":"Golf"},{"level":"H2","text":"Skiing & Snowboarding"}],"paragraphs":[],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_582,q_65,w_640/v1/clients/saltlake/99b05a85_7b5b_4d83_b774_533b0441fa4a_d2f53e70-f4f9-4815-8b70-58b9675c27c8.jpg","alt":"Bryce Canyon National Park"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_355,q_65,w_320/v1/clients/saltlake/Big_Mountain_Trail_Mountain_Bike_02_1d989093-b66a-482c-b254-318c0b88f9d2.jpg","alt":"Mountain Biking"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_355,q_65,w_320,x_1440,y_1241/v1/clients/saltlake/Scenic_GuardsmanPass_A_Barker_0172_c62bfc66-9f5b-49d8-9cae-64dbf444","alt":"Scenic view of Guardsman Pass in autumn"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_355,q_65,w_320,x_2245,y_1062/v1/clients/saltlake/Recreation_ATVRiding_E_Schramm_02390_2_3787f60e-d705-4e67-af31-f2b0","alt":"ATV Riding at Snowbird"},{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_355,q_65,w_320/v1/clients/saltlake/GolfSouthMountain_Brian_Oar_24db8b7e-93bb-4806-92d6-4de72bf4af25.jpg","alt":"South Mountain Golf Course"}],"links":[{"text":"State & National Parks","href":"https://www.visitsaltlake.com/things-to-do/outdoor-recreation/state-national-parks/"},{"text":"Cycling the City & Nearby Canyons","href":"https://www.visitsaltlake.com/things-to-do/outdoor-recreation/biking/cycling-the-city-nearby-canyons/"},{"text":"Scenic Drives","href":"https://www.visitsaltlake.com/things-to-do/outdoor-recreation/scenic-drives/"}],"dataAttrs":{"data-guid":"8ce30839-6654-4739-b626-7fda438658ba","data-layout":"vertical","data-width":"controlled"},"counts":{"images":6,"links":16,"headings":7,"paragraphs":0}},{"index":11,"widgetType":"text-block","guid":"8971fb9d-e64f-4466-959c-10b9c6289821","headings":[{"level":"H3","text":"Frequently Asked Questions"}],"paragraphs":["Get answers to some of\u00a0Salt Lake City\u2019s frequently asked questions\u00a0below. Check out more FAQs."],"images":[],"links":[{"text":"Check out more FAQs","href":"https://www.visitsaltlake.com/plan-your-visit/frequently-asked-questions/"}],"dataAttrs":{"data-guid":"8971fb9d-e64f-4466-959c-10b9c6289821"},"counts":{"images":0,"links":1,"headings":1,"paragraphs":1}},{"index":12,"widgetType":"core-faqs","guid":"f9c03b80-9802-47b9-8c4c-73d2b3f2dab2","headings":[{"level":"H2","text":"Things to Do"}],"paragraphs":["Where are the best locations for cycling in Salt Lake City?","Some of the top cycling locations in Salt Lake include:","What historic sites should I visit in Salt Lake City?","Historic sites in Salt Lake include:","What dog-friendly activities are there in Salt Lake City?"],"images":[],"links":[{"text":"View the Top 10 Cycling Rides in Salt Lake","href":"https://www.visitsaltlake.com/blog/stories/post/top-10-cycling-rides-in-salt-lake/"},{"text":"This is the Place State Park","href":"https://www.visitsaltlake.com/things-to-do/attractions/historic-sites/this-is-the-place-heritage-park/"},{"text":"Temple Square","href":"https://www.visitsaltlake.com/things-to-do/attractions/historic-sites/historic-temple-square/"}],"dataAttrs":{"data-guid":"f9c03b80-9802-47b9-8c4c-73d2b3f2dab2"},"counts":{"images":0,"links":16,"headings":1,"paragraphs":9}},{"index":13,"widgetType":"text-block","guid":"865bf48b-db24-4968-8d25-0a6374412422","headings":[{"level":"H2","text":"Get the Salt Lake Discount Passport"},{"level":"H3","text":"Sign-up now and save!"},{"level":"H4","text":"Deals Include:"}],"paragraphs":["Experience Salt Lake and save as you go! Visit Salt Lake has partnered with local attractions, restaurants, retailers, to offer a collection of discounts and deals."],"images":[],"links":[],"dataAttrs":{"data-guid":"865bf48b-db24-4968-8d25-0a6374412422"},"counts":{"images":0,"links":0,"headings":3,"paragraphs":1}},{"index":14,"widgetType":"core-side-by-side","guid":"b236c282-a81b-4c82-8f77-03d4e75b4a61","headings":[],"paragraphs":["FREE","Get FREE Passport"],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_518,q_65,w_640/v1/clients/saltlake/VSL_Pass_Products_App_Discount_Passport_Card_9d074836-acc4-4a71-a5f8-89fb7bd03b87.jpg","alt":"Drinks and food - Discount Passport"}],"links":[{"text":"","href":"https://www.visitsaltlake.com/things-to-do/"}],"dataAttrs":{"data-width":"controlled","data-slides-across":"1","data-guid":"b236c282-a81b-4c82-8f77-03d4e75b4a61"},"counts":{"images":1,"links":1,"headings":0,"paragraphs":2}},{"index":15,"widgetType":"spacer/text","guid":"2c7f1462-e138-444c-9512-a83a6958d0d3","headings":[],"paragraphs":["90 South West Temple\nSalt Lake City, UT 84101\n801.534.4900 | 800.541.4955"],"images":[],"links":[],"dataAttrs":{"data-guid":"2c7f1462-e138-444c-9512-a83a6958d0d3"},"counts":{}},{"index":16,"widgetType":"sponsor-logo","guid":"0e057948-f589-4af8-a860-f221a252c249","headings":[],"paragraphs":[],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_46,q_75,w_100/v1/clients/saltlake/utah_life_elevated_logo_e1567628045117_1__fcc145f1-3118-474b-8b7f-334edd2ddd59.png","alt":"Utah Life Elevated"}],"links":[{"text":"","href":"https://www.visitutah.com/"}],"dataAttrs":{"data-guid":"0e057948-f589-4af8-a860-f221a252c249"},"counts":{}},{"index":17,"widgetType":"sponsor-logo","guid":"f5728afc-93f3-4463-a75c-8c5ee5ce93d6","headings":[],"paragraphs":[],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/v1/clients/saltlake-redesign/logo_footer_delta_74f6d43d-6bc7-4c89-a699-7d3148412084.png","alt":"Delta"}],"links":[{"text":"","href":"https://www.delta.com/"}],"dataAttrs":{"data-guid":"f5728afc-93f3-4463-a75c-8c5ee5ce93d6"},"counts":{}},{"index":18,"widgetType":"sponsor-logo","guid":"faba6fde-f125-451f-a41d-be9f6bc49e7a","headings":[],"paragraphs":[],"images":[{"src":"https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_198,q_75,w_300/v1/clients/saltlake/USA_horiz_url_KO_5fcd75e6-363a-4e01-8d94-515d103a36ba.png","alt":"USA VisitTheUSA.com"}],"links":[{"text":"","href":"https://www.visittheusa.com/"}],"dataAttrs":{"data-guid":"faba6fde-f125-451f-a41d-be9f6bc49e7a"},"counts":{}}];
+
+// === TREE STRUCTURE ===
+const TREE = [
+  { type:'section', label:'Header', depth:0 },
+  { type:'container', label:'Header - Default - REDESIGN', depth:1, lock:true },
+  { type:'section', label:'Hero', depth:0 },
+  { type:'widget', label:'Collections - Hero Image - Hero Slides', depth:1, sIdx:0 },
+  { type:'section', label:'Content', depth:0 },
+  { type:'container', label:'Navigation and Share Container - Main Nav', depth:1, lock:true },
+  { type:'container', label:'Expand Content Container', depth:0 },
+  { type:'section', label:'Content', depth:1 },
+  { type:'widget', label:'Text - Text Box', depth:2, sIdx:1 },
+  { type:'widget', label:'Collections - Related Content - PR - Blog Feed', depth:1, sIdx:2 },
+  { type:'widget', label:'Collections - Side-By-Side, 1 Across - Slides', depth:1, sIdx:3 },
+  { type:'container', label:'Container', depth:0 },
+  { type:'container', label:'Activity Card Panel', depth:1 },
+  { type:'section', label:'Activities', depth:2 },
+  { type:'widget', label:'Activity \u2192 Collections - Cards, 3 Across (Attractions)', depth:3, sIdx:4 },
+  { type:'widget', label:'Activity \u2192 Collections - Cards, 4 Across (Arts & Culture)', depth:3, sIdx:5 },
+  { type:'widget', label:'Activity \u2192 Collections - Cards, 4 Across (Outdoor)', depth:3, sIdx:6 },
+  { type:'widget', label:'Activity \u2192 Collections - Cards, 3 Across (Nightlife)', depth:3, sIdx:7 },
+  { type:'widget', label:'Text - Text Box ("See How Visitors Share")', depth:0, sIdx:8 },
+  { type:'widget', label:'Utilities - Embed (Social Feed)', depth:0, sIdx:null },
+  { type:'widget', label:'Collections - Marquee, Side by Side - PR - Blog Feed', depth:0, sIdx:9 },
+  { type:'widget', label:'Collections - Marquee - Nav - Primary Feed', depth:0, sIdx:10 },
+  { type:'container', label:'Container - Things to Do - FAQs', depth:0 },
+  { type:'widget', label:'Text - Text Box (FAQ Heading)', depth:1, sIdx:11 },
+  { type:'widget', label:'Collections - Frequently Asked Questions', depth:1, sIdx:12 },
+  { type:'container', label:'Container - Discount Passport', depth:0 },
+  { type:'widget', label:'Text - Text Box (Discount Passport)', depth:1, sIdx:13 },
+  { type:'widget', label:'Collections - Side-By-Side - Passport CTA', depth:1, sIdx:14 },
+  { type:'section', label:'Footer', depth:0 },
+  { type:'container', label:'Footer - Default - REDESIGN', depth:1, lock:true },
+];
+
+// === BUILD TREE ===
+function buildTree() {
+  const el = document.getElementById('treeScroll');
+  let html = '';
+  TREE.forEach((item, i) => {
+    const indent = 12 + item.depth * 20;
+    const lockIcon = item.lock ? ' <span class="lock">&#128274;</span>' : '';
+    const hasEditor = item.type === 'widget' && item.sIdx !== undefined;
+    const gear = hasEditor ? `<span class="gear" onclick="event.stopPropagation();openEditor(${i})" title="Edit Widget">&#9881;</span>` : '';
+    html += `<div class="tree-item ${item.type}" data-idx="${i}" onclick="${hasEditor ? 'openEditor('+i+')' : ''}" style="padding-left:${indent}px;">
+      <div class="bar"></div>
+      <span class="label">${item.label}${lockIcon}</span>
+      ${gear}
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+
+// === WIDGET TYPE LABELS ===
+function widgetTypeLabel(wt) {
+  const map = {
+    'core-hero-image': 'Hero Image',
+    'text-block': 'Text Box',
+    'related-content': 'Related Content',
+    'core-side-by-side': 'Side by Side',
+    'core-cards-3': 'Cards, 3 Across',
+    'core-cards-4': 'Cards, 4 Across',
+    'marquee-side-by-side': 'Marquee, Side by Side',
+    'core-marquee': 'Marquee',
+    'core-faqs': 'Frequently Asked Questions',
+    'spacer/text': 'Spacer / Text'
+  };
+  return map[wt] || wt;
+}
+
+// === EDITOR ===
+function openEditor(treeIdx) {
+  const item = TREE[treeIdx];
+  if (item.sIdx === null || item.sIdx === undefined) {
+    // Embed widget (no section data)
+    renderEmbedEditor();
+    document.getElementById('editorPanel').classList.add('open');
+    highlightTreeItem(treeIdx);
+    return;
+  }
+  const s = SECTIONS[item.sIdx];
+  const panel = document.getElementById('editorContent');
+  let html = '';
+  const wLabel = widgetTypeLabel(s.widgetType);
+
+  html += `<h3>Widget: ${wLabel}</h3>`;
+  html += `<div class="guid-badge">GUID: ${s.guid}</div>`;
+
+  // Template dropdown
+  html += `<div class="field" style="margin-top:12px;">
+    <label>Template <span class="req">*</span></label>
+    <select><option selected>${wLabel}</option></select>
+    <div class="desc">The display template for this widget</div>
+  </div>`;
+
+  // TYPE-SPECIFIC FIELDS
+  if (s.widgetType === 'text-block') {
+    html += renderTextEditor(s);
+  } else if (s.widgetType === 'core-hero-image') {
+    html += renderHeroEditor(s);
+  } else if (s.widgetType === 'related-content') {
+    html += renderRelatedEditor(s);
+  } else if (s.widgetType === 'core-side-by-side') {
+    html += renderSideBySideEditor(s);
+  } else if (s.widgetType === 'core-cards-3' || s.widgetType === 'core-cards-4') {
+    html += renderCardsEditor(s);
+  } else if (s.widgetType === 'marquee-side-by-side' || s.widgetType === 'core-marquee') {
+    html += renderMarqueeEditor(s);
+  } else if (s.widgetType === 'core-faqs') {
+    html += renderFaqEditor(s);
+  } else {
+    html += `<h4>Content</h4>`;
+    if (s.headings.length) html += s.headings.map(h => `<div style="font-size:13px;font-weight:600;margin:4px 0;">${h.text}</div>`).join('');
+    if (s.paragraphs.length) html += s.paragraphs.map(p => `<div style="font-size:12px;color:#555;margin:4px 0;">${p}</div>`).join('');
+  }
+
+  // Data attributes
+  html += `<h4>Data Attributes</h4>`;
+  html += `<div style="background:#f0ece5;border-radius:4px;padding:8px;font-size:10px;font-family:monospace;color:#666;">`;
+  Object.entries(s.dataAttrs).forEach(([k,v]) => {
+    const display = typeof v === 'string' && v.length > 60 ? v.substring(0,60) + '...' : v;
+    html += `<div><strong>${k}</strong>: ${display}</div>`;
+  });
+  html += `</div>`;
+
+  // Stats
+  html += `<h4>Element Counts</h4>`;
+  html += `<div style="display:flex;gap:8px;flex-wrap:wrap;">`;
+  const c = s.counts;
+  if (c.images) html += `<span style="background:#e3f2fd;padding:2px 8px;border-radius:10px;font-size:11px;">${c.images} images</span>`;
+  if (c.links) html += `<span style="background:#e8f5e9;padding:2px 8px;border-radius:10px;font-size:11px;">${c.links} links</span>`;
+  if (c.headings) html += `<span style="background:#fff3e0;padding:2px 8px;border-radius:10px;font-size:11px;">${c.headings} headings</span>`;
+  if (c.paragraphs) html += `<span style="background:#fce4ec;padding:2px 8px;border-radius:10px;font-size:11px;">${c.paragraphs} paragraphs</span>`;
+  html += `</div>`;
+
+  panel.innerHTML = html;
+  document.getElementById('editorPanel').classList.add('open');
+  highlightTreeItem(treeIdx);
+}
+
+function renderTextEditor(s) {
+  let html = '<h4>Content</h4>';
+  html += `<div class="field"><label>Rich Text Content</label>
+    <textarea style="min-height:120px;font-size:12px;">`;
+  s.headings.forEach(h => { html += `<${h.level.toLowerCase()}>${h.text}</${h.level.toLowerCase()}>\n`; });
+  s.paragraphs.forEach(p => { html += `<p>${p}</p>\n`; });
+  html += `</textarea></div>`;
+  if (s.links.length) {
+    html += `<h4>Inline Links (${s.links.length})</h4>`;
+    html += `<table class="chosen-table"><tr><th>Text</th><th>URL</th></tr>`;
+    s.links.forEach(l => { html += `<tr><td>${l.text}</td><td style="font-size:10px;color:#0099cc;word-break:break-all;">${l.href}</td></tr>`; });
+    html += `</table>`;
+  }
+  return html;
+}
+
+function renderHeroEditor(s) {
+  let html = '<h4>Template Settings</h4>';
+  html += `<div class="field"><label>Hero Style</label>
+    <select><option selected>Hero Image - Full Width</option><option>Hero Image - Contained</option></select></div>`;
+  html += `<div class="toggle-row"><span class="toggle-label">Hide Content:</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>`;
+  html += `<h4>Populate Template</h4>`;
+  html += `<div class="field"><label>Source Type <span class="req">*</span></label>
+    <div class="radio-group"><label><input type="radio" name="src" checked> Slides</label><label><input type="radio" name="src"> Feed</label></div></div>`;
+  if (s.images.length) {
+    html += `<h4>Chosen Slides (${s.images.length})</h4>`;
+    html += `<div class="chosen-items"><button class="browse-btn">BROWSE</button>`;
+    html += `<table class="chosen-table"><tr><th></th><th>Image</th><th>Alt Text</th></tr>`;
+    s.images.forEach(img => {
+      html += `<tr><td class="actions-cell"><span class="icon-sm">&#9998;</span><span class="icon-sm">&#128465;</span></td>
+        <td><img class="thumb" src="${img.src}" alt="${img.alt}"></td>
+        <td style="font-size:10px;">${img.alt}</td></tr>`;
+    });
+    html += `</table></div>`;
+  }
+  return html;
+}
+
+function renderRelatedEditor(s) {
+  let html = '<h4>Template Settings</h4>';
+  html += `<div class="field"><label>Slides to Show</label>
+    <input type="text" value="${s.dataAttrs['data-slides-to-show'] || '4'}"></div>`;
+  html += `<div class="toggle-row"><span class="toggle-label">Position Arrows:</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>`;
+  html += `<div class="toggle-row"><span class="toggle-label">Lazy Loading:</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>`;
+  html += `<h4>Populate Template</h4>`;
+  html += `<div class="field"><label>Source Type <span class="req">*</span></label>
+    <div class="radio-group"><label><input type="radio" name="src"> Slides</label><label><input type="radio" name="src" checked> Feed</label></div></div>`;
+  html += `<div class="field"><label>Feed Source</label><select><option selected>PR - Blog Feed</option><option>Nav - Primary Feed</option></select></div>`;
+  if (s.images.length) {
+    html += `<h4>Chosen Items (${s.images.length})</h4>`;
+    html += `<div class="chosen-items"><button class="browse-btn">BROWSE</button>`;
+    html += `<table class="chosen-table"><tr><th></th><th>Thumb</th><th>Title</th><th>Category</th></tr>`;
+    s.headings.slice(0,6).forEach((h, i) => {
+      const img = s.images[i] || s.images[0];
+      html += `<tr><td class="actions-cell"><span class="icon-sm">&#9998;</span><span class="icon-sm">&#128465;</span></td>
+        <td><img class="thumb" src="${img.src}"></td>
+        <td style="font-size:11px;">${h.text}</td>
+        <td style="font-size:10px;color:#888;">Blog</td></tr>`;
+    });
+    html += `</table></div>`;
+  }
+  return html;
+}
+
+function renderSideBySideEditor(s) {
+  let html = '<h4>Template Settings</h4>';
+  html += `<div class="field"><label>More Caption</label><input type="text" value="Read More" placeholder="Changes 'Read More' button text"></div>`;
+  html += `<div class="toggle-row"><span class="toggle-label">Show Title?</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>`;
+  html += `<div class="field"><label>Image Alignment <span class="req">*</span></label>
+    <div class="radio-group"><label><input type="radio" name="align" checked> Left</label><label><input type="radio" name="align"> Right</label></div></div>`;
+  html += `<div class="toggle-row"><span class="toggle-label">Alternate Slides:</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>`;
+  html += `<div class="field"><label>Override Accent Color</label><input type="text" value="" placeholder="#hex color"></div>`;
+  html += `<h4>Populate Template</h4>`;
+  html += `<div class="field"><label>Source Type <span class="req">*</span></label>
+    <div class="radio-group"><label><input type="radio" name="src" checked> Slides</label><label><input type="radio" name="src"> Feed</label></div></div>`;
+  html += `<div class="field"><label>Width</label><select><option selected>Controlled</option><option>Full Width</option></select></div>`;
+  if (s.images.length) {
+    html += `<h4>Chosen Slides (${s.images.length})</h4>`;
+    html += `<div class="chosen-items"><button class="browse-btn">BROWSE</button>`;
+    html += `<table class="chosen-table"><tr><th></th><th>Image</th><th>Title</th><th>CTA</th></tr>`;
+    s.images.forEach((img, i) => {
+      const title = s.headings[i] ? s.headings[i].text : (s.paragraphs[i] || '');
+      const cta = s.links.find(l => l.text && l.text.includes('Get')) || s.links[0] || {};
+      html += `<tr><td class="actions-cell"><span class="icon-sm">&#9998;</span><span class="icon-sm">&#128465;</span></td>
+        <td><img class="thumb" src="${img.src}"></td>
+        <td style="font-size:11px;">${title}</td>
+        <td style="font-size:10px;color:#0099cc;">${cta.text || 'Read More'}</td></tr>`;
+    });
+    html += `</table></div>`;
+  }
+  return html;
+}
+
+function renderCardsEditor(s) {
+  const across = s.widgetType === 'core-cards-3' ? '3' : '4';
+  let html = '<h4>Template Settings</h4>';
+  html += `<div class="field"><label>Cards Across</label><select><option ${across==='3'?'selected':''}>3 Across</option><option ${across==='4'?'selected':''}>4 Across</option></select></div>`;
+  html += `<div class="toggle-row"><span class="toggle-label">Show Graphic:</span><div class="toggle" onclick="this.classList.toggle('on')"></div></div>`;
+  html += `<div class="toggle-row"><span class="toggle-label">Lazy Loading:</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>`;
+  html += `<h4>Populate Template</h4>`;
+  html += `<div class="field"><label>Source Type <span class="req">*</span></label>
+    <div class="radio-group"><label><input type="radio" name="src"> Slides</label><label><input type="radio" name="src" checked> Feed</label></div></div>`;
+  html += `<div class="field"><label>Feed Navigation Source</label><select><option selected>Activity Slides</option><option>Nav - Primary</option></select></div>`;
+  if (s.headings.length) {
+    html += `<h4>Card Items (${s.headings.length})</h4>`;
+    html += `<div class="chosen-items"><button class="browse-btn">BROWSE</button>`;
+    html += `<table class="chosen-table"><tr><th></th><th>Thumb</th><th>Title</th><th>Description</th><th>Link</th></tr>`;
+    s.headings.forEach((h, i) => {
+      const img = s.images[i] || s.images[0];
+      const desc = s.paragraphs[i] || '';
+      const link = s.links[i] || {};
+      html += `<tr><td class="actions-cell"><span class="icon-sm">&#9998;</span><span class="icon-sm">&#128465;</span></td>
+        <td>${img ? '<img class="thumb" src="'+img.src+'">' : ''}</td>
+        <td style="font-size:11px;font-weight:600;">${h.text}</td>
+        <td style="font-size:10px;color:#666;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${desc.substring(0,60)}${desc.length>60?'...':''}</td>
+        <td style="font-size:9px;color:#0099cc;word-break:break-all;">${link.href||''}</td></tr>`;
+    });
+    html += `</table></div>`;
+  }
+  return html;
+}
+
+function renderMarqueeEditor(s) {
+  const isSBS = s.widgetType === 'marquee-side-by-side';
+  let html = '<h4>Template Settings</h4>';
+  if (!isSBS && s.dataAttrs['data-layout']) {
+    html += `<div class="field"><label>Layout</label><select><option selected>${s.dataAttrs['data-layout']}</option><option>horizontal</option></select></div>`;
+  }
+  if (!isSBS && s.dataAttrs['data-width']) {
+    html += `<div class="field"><label>Width</label><select><option selected>${s.dataAttrs['data-width']}</option><option>full</option></select></div>`;
+  }
+  html += `<div class="toggle-row"><span class="toggle-label">Lazy Loading:</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>`;
+  html += `<h4>Populate Template</h4>`;
+  html += `<div class="field"><label>Source Type <span class="req">*</span></label>
+    <div class="radio-group"><label><input type="radio" name="src"> Slides</label><label><input type="radio" name="src" checked> Feed</label></div></div>`;
+  html += `<div class="field"><label>Feed Source</label><select><option selected>${isSBS ? 'PR - Blog Feed' : 'Nav - Primary Feed'}</option></select></div>`;
+  if (s.headings.length) {
+    html += `<h4>Marquee Items (${s.headings.length})</h4>`;
+    html += `<div class="chosen-items"><button class="browse-btn">BROWSE</button>`;
+    html += `<table class="chosen-table"><tr><th></th><th>Thumb</th><th>Title</th></tr>`;
+    s.headings.forEach((h, i) => {
+      const img = s.images[i] || s.images[0];
+      html += `<tr><td class="actions-cell"><span class="icon-sm">&#9998;</span><span class="icon-sm">&#128465;</span></td>
+        <td>${img ? '<img class="thumb" src="'+img.src+'">' : ''}</td>
+        <td style="font-size:11px;">${h.text}</td></tr>`;
+    });
+    html += `</table></div>`;
+  }
+  return html;
+}
+
+function renderFaqEditor(s) {
+  let html = '<h4>Template Settings</h4>';
+  html += `<div class="field"><label>Display Style</label><select><option selected>Expandable</option><option>Flat</option></select></div>`;
+  html += `<div class="toggle-row"><span class="toggle-label">Lazy Loading:</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>`;
+  html += `<h4>Populate Template</h4>`;
+  html += `<div class="field"><label>Source Type <span class="req">*</span></label>
+    <div class="radio-group"><label><input type="radio" name="src"> Slides</label><label><input type="radio" name="src" checked> Feed</label></div></div>`;
+  html += `<div class="field"><label>FAQ Category</label><select><option selected>Things to Do</option></select></div>`;
+  if (s.paragraphs.length) {
+    const questions = s.paragraphs.filter(p => p.endsWith('?'));
+    html += `<h4>FAQ Items (${questions.length})</h4>`;
+    html += `<div class="chosen-items"><button class="browse-btn">BROWSE</button>`;
+    html += `<table class="chosen-table"><tr><th></th><th>Question</th><th>Enabled</th></tr>`;
+    questions.forEach(q => {
+      html += `<tr><td class="actions-cell"><span class="icon-sm">&#9998;</span><span class="icon-sm">&#128465;</span></td>
+        <td style="font-size:11px;">${q}</td>
+        <td><div class="toggle on" style="width:30px;height:16px;" onclick="this.classList.toggle('on')"></div></td></tr>`;
+    });
+    html += `</table></div>`;
+  }
+  if (s.links.length) {
+    html += `<h4>Answer Links (${s.links.length})</h4>`;
+    html += `<table class="chosen-table"><tr><th>Text</th><th>URL</th></tr>`;
+    s.links.slice(0,5).forEach(l => {
+      html += `<tr><td style="font-size:11px;">${l.text}</td><td style="font-size:9px;color:#0099cc;word-break:break-all;">${l.href}</td></tr>`;
+    });
+    if (s.links.length > 5) html += `<tr><td colspan="2" style="font-size:10px;color:#888;text-align:center;">+ ${s.links.length - 5} more links</td></tr>`;
+    html += `</table>`;
+  }
+  return html;
+}
+
+function renderEmbedEditor() {
+  const panel = document.getElementById('editorContent');
+  panel.innerHTML = `<h3>Widget: Embed</h3>
+    <div class="guid-badge">Type: Utilities - Embed</div>
+    <div class="field" style="margin-top:12px;"><label>Template <span class="req">*</span></label>
+      <select><option selected>Embed</option></select></div>
+    <h4>Embed Settings</h4>
+    <div class="field"><label>Embed Code</label>
+      <textarea style="min-height:140px;font-family:monospace;font-size:11px;">&lt;!-- Social media embed / UGC widget --&gt;
+&lt;script src="https://widget.example.com/social-feed.js"&gt;&lt;/script&gt;
+&lt;div class="social-feed-widget" data-feed="visitsaltlake"&gt;&lt;/div&gt;</textarea>
+      <div class="desc">Paste raw HTML/JS embed code. This will render as-is on the page.</div></div>
+    <h4>Display Options</h4>
+    <div class="toggle-row"><span class="toggle-label">Lazy Load:</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+    <div class="field"><label>Max Height (px)</label><input type="text" value="" placeholder="e.g. 600"></div>`;
+}
+
+function closeEditor() {
+  document.getElementById('editorPanel').classList.remove('open');
+  document.querySelectorAll('.tree-item.active').forEach(el => el.classList.remove('active'));
+}
+
+function highlightTreeItem(idx) {
+  document.querySelectorAll('.tree-item.active').forEach(el => el.classList.remove('active'));
+  const el = document.querySelector(`.tree-item[data-idx="${idx}"]`);
+  if (el) { el.classList.add('active'); el.scrollIntoView({block:'nearest'}); }
+}
+
+// === BUILD PREVIEW ===
+function buildPreview() {
+  const el = document.getElementById('previewScroll');
+  let html = '<div class="preview-content">';
+
+  // Hero (section 0)
+  const hero = SECTIONS[0];
+  if (hero.images.length) {
+    html += `<div class="pv-hero" style="background-image:url('${hero.images[0].src}');"></div>`;
+  }
+
+  // Sub-nav
+  html += `<div class="pv-nav">
+    <a href="#">Attractions</a><a href="#">Arts & Culture</a><a href="#">Shopping</a>
+    <a href="#">Outdoor Recreation</a><a href="#">Nightlife</a><a href="#">Tours & Experiences</a>
+    <a href="#">Skiing & Snowboarding</a><a href="#">Events</a>
+  </div>`;
+
+  // Text block (section 1)
+  const text1 = SECTIONS[1];
+  html += `<div class="pv-section">`;
+  text1.headings.forEach(h => { html += `<h1>${h.text}</h1>`; });
+  text1.paragraphs.forEach(p => { html += `<p>${p}</p>`; });
+  html += `</div>`;
+
+  // Related content (section 2) - horizontal card slider
+  const rel = SECTIONS[2];
+  html += `<div class="pv-related"><h4>Explore all the things to do in Salt Lake</h4>`;
+  html += `<div class="pv-related-grid">`;
+  rel.headings.slice(1,6).forEach((h, i) => {
+    const img = rel.images[i] || rel.images[0];
+    const para = rel.paragraphs[i] || '';
+    html += `<div class="pv-related-card">
+      <img src="${img.src}" alt="${img.alt || ''}">
+      <div class="rc-body"><h4>${h.text}</h4><p>${para.substring(0,60)}${para.length>60?'...':''}</p></div>
+    </div>`;
+  });
+  html += `</div></div>`;
+
+  // Side-by-side (section 3) - Tours
+  const sbs1 = SECTIONS[3];
+  html += `<div class="pv-sbs">`;
+  if (sbs1.images.length) html += `<img src="${sbs1.images[0].src}" alt="${sbs1.images[0].alt || ''}">`;
+  html += `<div class="sbs-content">`;
+  sbs1.headings.forEach(h => { html += `<h2>${h.text}</h2>`; });
+  sbs1.paragraphs.forEach(p => { html += `<p>${p}</p>`; });
+  if (sbs1.links.length > 2) html += `<a href="${sbs1.links[2].href}" class="cta-btn">${sbs1.links[2].text}</a>`;
+  html += `</div></div>`;
+
+  // Cards 3-across (section 4) - Attractions
+  html += renderCards(SECTIONS[4], 3);
+
+  // Cards 4-across (section 5) - Arts
+  html += renderCards(SECTIONS[5], 4);
+
+  // Cards 4-across (section 6) - Outdoor
+  html += renderCards(SECTIONS[6], 4);
+
+  // Cards 3-across (section 7) - Nightlife
+  html += renderCards(SECTIONS[7], 3);
+
+  // Text heading (section 8)
+  const text8 = SECTIONS[8];
+  html += `<div class="pv-section" style="text-align:center;padding:20px 40px;">`;
+  text8.headings.forEach(h => { html += `<h3>${h.text}</h3>`; });
+  html += `</div>`;
+
+  // Embed placeholder
+  html += `<div class="pv-embed">
+    <div style="font-size:16px;margin-bottom:8px;">&#128247; Social Media Embed</div>
+    <div>User-generated content widget loads here</div>
+    <div style="margin-top:8px;font-size:11px;color:#aaa;">#VisitSaltLake</div>
+  </div>`;
+
+  // Marquee side-by-side (section 9) - Blog
+  const msbs = SECTIONS[9];
+  html += `<div class="pv-marquee">`;
+  html += `<div class="marquee-main">`;
+  if (msbs.images.length) html += `<img src="${msbs.images[0].src}" alt="${msbs.images[0].alt || ''}">`;
+  html += `<div style="position:absolute;bottom:20px;left:20px;color:#fff;z-index:1;">
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;opacity:0.8;margin-bottom:4px;">The Salt Lake Scene</div>
+    <div style="font-size:14px;font-weight:600;">Related Stories</div></div>`;
+  html += `</div><div class="marquee-list">`;
+  msbs.headings.slice(2).forEach((h, i) => {
+    const img = msbs.images[i+1] || msbs.images[0];
+    html += `<div class="marquee-item"><img src="${img.src}" alt="${img.alt || ''}"><h4>${h.text}</h4></div>`;
+  });
+  html += `</div></div>`;
+
+  // Core marquee (section 10) - Outdoor Nav
+  const cm = SECTIONS[10];
+  html += `<div class="pv-marquee-vert">`;
+  html += `<div class="mv-main">`;
+  if (cm.images.length) html += `<img src="${cm.images[0].src}" alt="${cm.images[0].alt || ''}">`;
+  if (cm.headings.length) html += `<div class="mv-title">${cm.headings[0].text}</div>`;
+  html += `</div><div class="mv-list">`;
+  cm.headings.slice(1,6).forEach((h, i) => {
+    const img = cm.images[i+1] || cm.images[0];
+    html += `<div class="mv-item"><img src="${img.src}" alt="${img.alt || ''}"><h2>${h.text}</h2></div>`;
+  });
+  html += `</div></div>`;
+
+  // FAQ heading (section 11)
+  const faqHead = SECTIONS[11];
+  html += `<div class="pv-section">`;
+  faqHead.headings.forEach(h => { html += `<h3>${h.text}</h3>`; });
+  faqHead.paragraphs.forEach(p => { html += `<p>${p}</p>`; });
+  html += `</div>`;
+
+  // FAQs (section 12)
+  const faqs = SECTIONS[12];
+  html += `<div class="pv-faq">`;
+  const faqQuestions = faqs.paragraphs.filter(p => p.endsWith('?'));
+  const faqAnswers = faqs.paragraphs.filter(p => !p.endsWith('?'));
+  faqQuestions.forEach((q, i) => {
+    const a = faqAnswers[i] || '';
+    html += `<div class="pv-faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">${q}</div>
+      <div class="faq-a">${a}</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // Discount Passport text (section 13)
+  const dp = SECTIONS[13];
+  html += `<div class="pv-section" style="text-align:center;background:#f0f8ff;margin:0 40px;border-radius:8px;padding:30px;">`;
+  dp.headings.forEach(h => {
+    const tag = h.level.toLowerCase();
+    html += `<${tag}>${h.text}</${tag}>`;
+  });
+  dp.paragraphs.forEach(p => { html += `<p>${p}</p>`; });
+  html += `</div>`;
+
+  // Discount Passport SBS (section 14)
+  const dpSbs = SECTIONS[14];
+  html += `<div class="pv-discount">`;
+  if (dpSbs.images.length) html += `<img src="${dpSbs.images[0].src}" alt="${dpSbs.images[0].alt || ''}">`;
+  html += `<div class="disc-body"><h2>Salt Lake Discount Passport</h2><h3>FREE</h3>
+    <p>Experience Salt Lake and save as you go!</p>
+    <a href="#" class="cta-btn">Get FREE Passport</a></div></div>`;
+
+  // Footer
+  html += `<div class="pv-footer"><div class="footer-inner">
+    <div class="footer-addr">90 South West Temple<br>Salt Lake City, UT 84101<br>801.534.4900 | 800.541.4955</div>
+    <div class="footer-logos">`;
+  [16,17,18].forEach(i => {
+    const s = SECTIONS[i];
+    if (s.images.length) html += `<img src="${s.images[0].src}" alt="${s.images[0].alt || ''}">`;
+  });
+  html += `</div></div></div>`;
+
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderCards(s, cols) {
+  const limit = Math.min(cols === 3 ? 3 : 4, s.headings.length);
+  let html = `<div class="pv-section" style="padding-bottom:0;"><h2 style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#888;">${s.headings[0] ? '' : ''}</h2></div>`;
+  html += `<div class="pv-cards cols-${cols}">`;
+  for (let i = 0; i < limit; i++) {
+    const h = s.headings[i];
+    const img = s.images[i] || s.images[0];
+    const p = s.paragraphs[i] || '';
+    html += `<div class="pv-card">`;
+    if (img) html += `<img src="${img.src}" alt="${img.alt || ''}">`;
+    html += `<div class="card-body"><h2>${h ? h.text : ''}</h2>
+      <p>${p.substring(0,100)}${p.length>100?'...':''}</p>
+      <span class="read-more">Read More &rarr;</span></div></div>`;
+  }
+  html += `</div>`;
+  return html;
+}
+
+// === INIT ===
+buildTree();
+buildPreview();
+
+// Graceful image fallback for truncated CDN URLs
+document.querySelectorAll('.preview-scroll img').forEach(img => {
+  img.onerror = function() {
+    this.onerror = null;
+    this.style.background = 'linear-gradient(135deg, #1a3a5c 0%, #2a6a8a 50%, #3db5a5 100%)';
+    this.style.objectFit = 'contain';
+    this.style.padding = '20px';
+    this.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120"><rect width="200" height="120" fill="none"/><text x="100" y="55" text-anchor="middle" fill="white" font-family="system-ui" font-size="11" opacity="0.8">Visit Salt Lake</text><text x="100" y="72" text-anchor="middle" fill="white" font-family="system-ui" font-size="9" opacity="0.5">' + (this.alt || 'Image') + '</text></svg>');
+  };
+});
+</script>
+</body>
+</html>

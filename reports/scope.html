@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visit Salt Lake — Extraction Process</title>
+<style>
+:root {
+  --navy: #0f1b2d;
+  --navy-light: #1a2940;
+  --navy-mid: #243650;
+  --blue: #2d8cf0;
+  --teal: #3db5a5;
+  --green: #4ade80;
+  --yellow: #fbbf24;
+  --red: #f87171;
+  --orange: #fb923c;
+  --text: #e2e8f0;
+  --text-dim: #8899aa;
+  --text-bright: #f8fafc;
+  --border: #2a3a50;
+  --card-bg: #162032;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; background: var(--navy); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+a { color: var(--blue); }
+code { font-family: 'SF Mono', Monaco, monospace; font-size: 12px; background: var(--navy-mid); padding: 2px 6px; border-radius: 3px; color: var(--teal); }
+
+.container { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+
+.header { padding: 48px 0 32px; border-bottom: 1px solid var(--border); }
+.header h1 { font-size: 28px; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; }
+.header p { font-size: 15px; color: var(--text-dim); max-width: 680px; }
+
+.section { padding: 36px 0; border-bottom: 1px solid var(--border); }
+.section:last-of-type { border-bottom: none; }
+.section h2 { font-size: 20px; font-weight: 700; color: var(--text-bright); margin-bottom: 6px; }
+.section > p { font-size: 14px; color: var(--text-dim); margin-bottom: 20px; }
+
+/* Process steps */
+.process { counter-reset: proc; }
+.proc-step {
+  position: relative; padding: 20px 20px 20px 60px; margin-bottom: 16px;
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
+}
+.proc-step::before {
+  counter-increment: proc;
+  content: counter(proc);
+  position: absolute; left: 18px; top: 20px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--navy-mid); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--teal);
+}
+.proc-step h3 { font-size: 15px; font-weight: 700; color: var(--text-bright); margin-bottom: 4px; }
+.proc-step p { font-size: 13px; color: var(--text-dim); }
+.proc-step .output {
+  margin-top: 10px; padding: 8px 12px; background: var(--navy); border-radius: 6px;
+  font-size: 12px; color: var(--text-dim); border-left: 3px solid var(--teal);
+}
+.proc-step .output strong { color: var(--teal); }
+.proc-step .agent-tag {
+  display: inline-block; margin-top: 8px; padding: 2px 10px; border-radius: 4px;
+  font-size: 11px; font-weight: 600; background: rgba(45,140,240,0.12); color: var(--blue);
+  border: 1px solid rgba(45,140,240,0.25);
+}
+.proc-step .human-tag {
+  display: inline-block; margin-top: 8px; padding: 2px 10px; border-radius: 4px;
+  font-size: 11px; font-weight: 600; background: rgba(251,191,36,0.12); color: var(--yellow);
+  border: 1px solid rgba(251,191,36,0.25);
+}
+
+/* Diagram */
+.diagram {
+  margin: 24px 0; padding: 24px; background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 10px; text-align: center;
+}
+.diagram svg { max-width: 100%; }
+
+/* Status table */
+.status-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+.status-table th {
+  text-align: left; padding: 8px 12px; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--text-dim); border-bottom: 2px solid var(--border); font-weight: 600;
+}
+.status-table td { padding: 8px 12px; border-bottom: 1px solid rgba(42,58,80,0.5); color: var(--text); }
+.status-table .mono { font-family: 'SF Mono', Monaco, monospace; font-size: 11px; color: var(--text-dim); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+.tag-done { background: rgba(61,181,165,0.15); color: var(--teal); }
+.tag-next { background: rgba(45,140,240,0.15); color: var(--blue); }
+.tag-blocked { background: rgba(251,191,36,0.15); color: var(--yellow); }
+
+.footer { padding: 32px 0; text-align: center; font-size: 12px; color: var(--text-dim); margin-top: 32px; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+  <h1>Extraction & Mapping Process</h1>
+  <p>Systematic process for reverse-engineering Visit Salt Lake's SimpleView CMS — scraping the public site, scraping the CRM admin, and mapping how the two connect. The output is a complete blueprint for building the replacement.</p>
+</div>
+
+<!-- THE MODEL -->
+<div class="section">
+  <h2>The Problem</h2>
+  <p>SimpleView has two systems that feed one website. We need to understand both independently, then map the connections between them.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg">
+      <!-- CMS Box -->
+      <rect x="20" y="30" width="200" height="160" rx="10" fill="#162032" stroke="#2a3a50" stroke-width="1.5"/>
+      <text x="120" y="58" text-anchor="middle" fill="#2d8cf0" font-size="13" font-weight="700">CMS</text>
+      <text x="120" y="78" text-anchor="middle" fill="#8899aa" font-size="10">Pages &amp; Widgets</text>
+      <text x="120" y="98" text-anchor="middle" fill="#8899aa" font-size="10">Collections (15 types)</text>
+      <text x="120" y="118" text-anchor="middle" fill="#8899aa" font-size="10">Blog / Articles</text>
+      <text x="120" y="138" text-anchor="middle" fill="#8899aa" font-size="10">Asset Library</text>
+      <text x="120" y="158" text-anchor="middle" fill="#8899aa" font-size="10">Publishing Workflow</text>
+      <text x="120" y="178" text-anchor="middle" fill="#3db5a5" font-size="10" font-weight="600">1,275 pages</text>
+
+      <!-- CRM Box -->
+      <rect x="540" y="30" width="200" height="160" rx="10" fill="#162032" stroke="#2a3a50" stroke-width="1.5"/>
+      <text x="640" y="58" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="700">CRM</text>
+      <text x="640" y="78" text-anchor="middle" fill="#8899aa" font-size="10">Events Calendar</text>
+      <text x="640" y="98" text-anchor="middle" fill="#8899aa" font-size="10">Business Listings</text>
+      <text x="640" y="118" text-anchor="middle" fill="#8899aa" font-size="10">Maps &amp; Geocoding</text>
+      <text x="640" y="138" text-anchor="middle" fill="#8899aa" font-size="10">Members &amp; Payments</text>
+      <text x="640" y="158" text-anchor="middle" fill="#8899aa" font-size="10">Contact Management</text>
+      <text x="640" y="178" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="600">3,723 listings + events</text>
+
+      <!-- Arrows -->
+      <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3db5a5"/></marker></defs>
+      <line x1="220" y1="80" x2="540" y2="80" stroke="#3db5a5" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#arrow)"/>
+      <line x1="540" y1="120" x2="220" y2="120" stroke="#3db5a5" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#arrow)"/>
+
+      <!-- Connection labels -->
+      <rect x="305" y="65" width="150" height="22" rx="4" fill="#0f1b2d"/>
+      <text x="380" y="80" text-anchor="middle" fill="#3db5a5" font-size="10">events-marquee widget</text>
+      <rect x="305" y="108" width="150" height="22" rx="4" fill="#0f1b2d"/>
+      <text x="380" y="122" text-anchor="middle" fill="#3db5a5" font-size="10">listing data → cards</text>
+
+      <!-- Public Site -->
+      <rect x="280" y="170" width="200" height="40" rx="8" fill="#162032" stroke="#3db5a5" stroke-width="1.5"/>
+      <text x="380" y="195" text-anchor="middle" fill="#3db5a5" font-size="12" font-weight="700">visitsaltlake.com</text>
+      <line x1="120" y1="190" x2="280" y2="190" stroke="#2a3a50" stroke-width="1" marker-end="url(#arrow)"/>
+      <line x1="640" y1="190" x2="480" y2="190" stroke="#2a3a50" stroke-width="1" marker-end="url(#arrow)"/>
+    </svg>
+  </div>
+</div>
+
+<!-- EXTRACTION PROCESS -->
+<div class="section">
+  <h2>Extraction Process</h2>
+  <p>Three parallel tracks that converge into a unified data model. Steps 1-3 can run simultaneously.</p>
+
+  <div class="process">
+
+    <div class="proc-step">
+      <h3>Crawl the public site — every page, every widget</h3>
+      <p>Hit all 1,275 pages. For each page, extract the DOM structure and identify which widgets are used, what content they contain, and what data attributes they carry (GUIDs, feed sources, layout config). Group pages by template pattern — most pages reuse the same 5-6 widget combinations.</p>
+      <div class="output">
+        <strong>Output:</strong> <code>data/pages/{slug}.json</code> — one file per page with widget tree, content, images, links, and data attributes. Plus <code>data/templates.json</code> — a map of unique page template patterns and which pages use each one.
+      </div>
+      <span class="agent-tag">AI Agent — DOM parser + classifier</span>
+    </div>
+
+    <div class="proc-step">
+      <h3>Scrape the CRM admin — listings, events, maps</h3>
+      <p>Navigate the SimpleView admin panel and catalog everything the CRM manages. For each entity type (events, listings, members), capture: field names, data types, relationships, filters, sort options, and any workflow states (pending, published, archived). Record network requests to reveal the internal API patterns.</p>
+      <div class="output">
+        <strong>Output:</strong> <code>data/crm/events-schema.json</code>, <code>data/crm/listings-schema.json</code>, <code>data/crm/members-schema.json</code> — data models for each CRM entity. Plus <code>data/crm/api-patterns.json</code> — captured XHR/fetch requests showing how the CMS talks to the CRM.
+      </div>
+      <span class="human-tag">Human — admin panel access required</span>
+      <span class="agent-tag">AI Agent — network capture analysis</span>
+    </div>
+
+    <div class="proc-step">
+      <h3>Map the connections — where does CRM data appear on the public site?</h3>
+      <p>This is the key step. Cross-reference the public site crawl (Step 1) with the CRM schema (Step 2). For every widget that displays dynamic data (events-marquee, upcoming-events, listing cards, maps), trace where that data comes from. Identify the feed source, any filtering/sorting, and the display template.</p>
+      <div class="output">
+        <strong>Output:</strong> <code>data/connections.json</code> — a mapping of every CRM → CMS connection point. Example: <code>{"widget": "events-marquee", "source": "crm/events", "filter": "featured=true", "display": "marquee-slide", "pages": ["/", "/events/"]}</code>
+      </div>
+      <span class="agent-tag">AI Agent — cross-referencing crawl data + CRM schema</span>
+    </div>
+
+    <div class="proc-step">
+      <h3>Catalog back-office workflows</h3>
+      <p>Screen-record 3-5 back-office users doing their daily tasks. Feed the recordings to an AI agent that extracts: every screen visited, every action taken, every form filled, every button clicked. Build a workflow map of how staff actually use the system — not just what buttons exist, but which ones matter.</p>
+      <div class="output">
+        <strong>Output:</strong> <code>data/workflows/</code> — one file per user role with annotated workflow maps. Identifies which CMS/CRM features are actually used daily vs. which are dead weight.
+      </div>
+      <span class="human-tag">Human — schedule interviews</span>
+      <span class="agent-tag">AI Agent — video analysis + workflow extraction</span>
+    </div>
+
+    <div class="proc-step">
+      <h3>Generate the replacement blueprint</h3>
+      <p>Take all outputs from Steps 1-4 and produce the final artifact: a complete specification for the replacement CMS. This includes the data model (Prisma schema), the widget component library spec, the CRM entity definitions, the connection map, and the page templates. This is what we build from.</p>
+      <div class="output">
+        <strong>Output:</strong> <code>blueprint/schema.prisma</code> — database schema. <code>blueprint/widgets/</code> — component specs per widget type. <code>blueprint/templates/</code> — page template definitions. <code>blueprint/api/</code> — API route specs for CRM data.
+      </div>
+      <span class="agent-tag">AI Agent — synthesis + schema generation</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- WHAT WE HAVE -->
+<div class="section">
+  <h2>Current Progress</h2>
+  <p>What's been extracted so far and what's next.</p>
+
+  <table class="status-table">
+    <tr><th>Artifact</th><th>Description</th><th>Status</th></tr>
+    <tr>
+      <td class="mono">data/sitemap/all-pages-raw.json</td>
+      <td>Full inventory of all 1,275 pages (title, path, section, type)</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td class="mono">data/sitemap/pages-by-section.json</td>
+      <td>Pages organized by 10 navigation sections</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td class="mono">data/modules/modules-overview.json</td>
+      <td>6 CMS modules + 15 collection types</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td class="mono">data/dashboard/overview.json</td>
+      <td>Traffic stats, top pages, action items</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td class="mono">data/public-site/things-to-do-*.json</td>
+      <td>Deep extraction of /things-to-do/ — all 19 widgets with full content</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td class="mono">report.html</td>
+      <td>Interactive page builder prototype (proof of concept)</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td class="mono">data/pages/*.json</td>
+      <td>Full DOM extraction for remaining 1,274 pages</td>
+      <td><span class="tag tag-next">Step 1</span></td>
+    </tr>
+    <tr>
+      <td class="mono">data/templates.json</td>
+      <td>Unique page template patterns (how many distinct layouts exist)</td>
+      <td><span class="tag tag-next">Step 1</span></td>
+    </tr>
+    <tr>
+      <td class="mono">data/crm/*.json</td>
+      <td>CRM entity schemas (events, listings, members)</td>
+      <td><span class="tag tag-next">Step 2</span></td>
+    </tr>
+    <tr>
+      <td class="mono">data/crm/api-patterns.json</td>
+      <td>Network request capture from admin panel</td>
+      <td><span class="tag tag-next">Step 2</span></td>
+    </tr>
+    <tr>
+      <td class="mono">data/connections.json</td>
+      <td>CRM → CMS connection map (which widgets pull what CRM data)</td>
+      <td><span class="tag tag-blocked">Needs Steps 1+2</span></td>
+    </tr>
+    <tr>
+      <td class="mono">data/workflows/</td>
+      <td>Back-office user workflow maps</td>
+      <td><span class="tag tag-blocked">Needs interviews</span></td>
+    </tr>
+    <tr>
+      <td class="mono">blueprint/</td>
+      <td>Replacement spec (schema, widgets, templates, API)</td>
+      <td><span class="tag tag-blocked">Needs Steps 1-4</span></td>
+    </tr>
+  </table>
+</div>
+
+<!-- PROOF OF CONCEPT -->
+<div class="section">
+  <h2>Proof of Concept: <a href="report.html">report.html</a></h2>
+  <p>We took one page — <code>/things-to-do/</code> — and ran the full extraction process on it to prove the approach works. Here's what it demonstrates.</p>
+
+  <div class="process">
+
+    <div class="proc-step">
+      <h3>We can reverse-engineer the page builder from the DOM alone</h3>
+      <p>Without any access to SimpleView's source code, we extracted the complete widget tree for <code>/things-to-do/</code>: 19 widgets across sections, containers, and nested groups. Each widget's type, configuration, content, images, and links were captured — including internal data attributes like <code>data-guid</code>, <code>data-slides-across</code>, and <code>data-layout</code> that reveal how SimpleView configures each component.</p>
+      <div class="output">
+        <strong>What this means:</strong> We don't need their code. The DOM tells us everything about how pages are structured and configured. This scales to all 1,275 pages.
+      </div>
+    </div>
+
+    <div class="proc-step">
+      <h3>We can recreate their admin UI from scraped data</h3>
+      <p>The left panel in <code>report.html</code> is a working page builder tree — sections, containers, and widgets with proper nesting. Click any widget and you get an editor panel with the real fields SimpleView uses: template selection, feed sources (Slides vs Feed), layout options (3-across vs 4-across), image browsers, and content tables. All populated with actual Visit Salt Lake content.</p>
+      <div class="output">
+        <strong>What this means:</strong> We already know what the replacement admin interface needs to look like. The editor fields we show are derived from the DOM — they represent the actual configuration options SimpleView provides. This is the spec for our page builder.
+      </div>
+    </div>
+
+    <div class="proc-step">
+      <h3>We can identify the CRM connection points</h3>
+      <p>The widget tree reveals which components pull from CMS collections (slides, FAQs) vs. CRM feeds (events, listings). For example, the "Related Content" widget has <code>data-slides-to-show="4"</code> and its feed source is "PR - Blog Feed" — that's a CMS-managed blog. But the events-marquee and upcoming-events widgets on the homepage pull from the CRM. These connection points are visible in the DOM.</p>
+      <div class="output">
+        <strong>What this means:</strong> By crawling every page, we can automatically identify every place the CRM feeds data into the public site — which is exactly Step 3 of our extraction process.
+      </div>
+    </div>
+
+    <div class="proc-step">
+      <h3>We can render a live preview from pure data</h3>
+      <p>The right panel is a pixel-accurate preview of <code>/things-to-do/</code> built entirely from the extracted JSON — hero images, card grids, side-by-side layouts, marquees, FAQ accordions, and footer. Real images from their Cloudinary CDN. Real copy. Real links. All generated from the same data that the editor panel reads.</p>
+      <div class="output">
+        <strong>What this means:</strong> The scraped data is complete enough to render the page. If we can render it, we can rebuild it. The same JSON that powers the preview becomes the seed data for the replacement CMS.
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:20px;padding:16px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;">
+    <p style="font-size:14px;color:var(--text);"><strong style="color:var(--teal);">Bottom line:</strong> <code>report.html</code> proves that for one page, we can go from "zero source code access" to "fully reverse-engineered page builder with working preview" using only DOM scraping. The extraction process in this document is how we scale that to the entire site.</p>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">HQ — Visit Salt Lake — Extraction Process — March 2026</div>
+
+</body>
+</html>

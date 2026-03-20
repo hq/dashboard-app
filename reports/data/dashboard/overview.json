@@ -1,0 +1,53 @@
+{
+  "scraped_at": "2026-03-16",
+  "source": "https://saltlake.simpleviewcms.com/nav/home/",
+  "logged_in_as": "Jackson Ogles",
+  "at_a_glance": {
+    "active_users": 251,
+    "member_views": 44412477,
+    "avg_session_duration": "00:03:27",
+    "pageviews": 136037
+  },
+  "action_items": [
+    { "count": 163, "label": "Events - Without an Image" },
+    { "count": 2, "label": "Events - Without Geocoding" },
+    { "count": 2, "label": "Listings - Pending" },
+    { "count": 3, "label": "Listings - Without Geocoding" },
+    { "count": 3723, "label": "Listings - Without Media" },
+    { "count": 4, "label": "Public Relations - Articles - Ski City - Unpublished Posts" },
+    { "count": 1030, "label": "Public Relations - Articles - Unpublished Posts" },
+    { "count": 1229, "label": "Public Relations - Blog - Unpublished Posts" },
+    { "count": 2, "label": "Public Relations - The Salt Lake Scene - Posts with Autosaved Drafts Expiring Soon" },
+    { "count": 3, "label": "Sitemap - Pages with Autosaved Drafts Expiring Soon" },
+    { "count": 195, "label": "Sitemap - Primary - Unpublished Pages" }
+  ],
+  "device_stats": {
+    "desktop": "61%",
+    "mobile": "38%",
+    "tablet": "<1%",
+    "smart_tv": "<1%"
+  },
+  "top_pages_weekly": [
+    { "rank": 1, "views": 14604, "path": "/events/" },
+    { "rank": 2, "views": 6795, "path": "/" },
+    { "rank": 3, "views": 4998, "path": "/mountain-america-expo-center/attend/facility-events-calendar/" },
+    { "rank": 4, "views": 3243, "path": "/things-to-do/" },
+    { "rank": 5, "views": 3119, "path": "/events/festivals-special-events/" },
+    { "rank": 6, "views": 3117, "path": "/events/concerts-live-music/" },
+    { "rank": 7, "views": 3006, "path": "/event/festivals-and-special-events/2026-st-patricks-day-parade-&-siamsa/76252/" },
+    { "rank": 8, "views": 2554, "path": "/event/2026-hyrox/conventions_47489/" },
+    { "rank": 9, "views": 2499, "path": "/mountain-america-expo-center/" },
+    { "rank": 10, "views": 2179, "path": "/salt-palace-convention-center/" },
+    { "rank": 11, "views": 2043, "path": "/things-to-do/skiing-snowboarding/super-pass/" },
+    { "rank": 12, "views": 1415, "path": "/events/free-events/" },
+    { "rank": 13, "views": 1340, "path": "/salt-palace-convention-center/attend/facility-events-calendar/" },
+    { "rank": 14, "views": 1329, "path": "/things-to-do/attractions/" },
+    { "rank": 15, "views": 1222, "path": "/things-to-do/skiing-snowboarding/ski-resorts/alta-ski-area/alta-trail-map/" },
+    { "rank": 16, "views": 1131, "path": "/mountain-america-expo-center/attend/" },
+    { "rank": 17, "views": 1099, "path": "/event/festivals-and-special-events/2026-millcreek-doxie-derby/77325/" },
+    { "rank": 18, "views": 1083, "path": "/things-to-do/tours-experiences/salt-lake-explorer-pass/" },
+    { "rank": 19, "views": 1081, "path": "/search/" },
+    { "rank": 20, "views": 1047, "path": "/event/international-sportsmens-exposition/67232/" }
+  ],
+  "cms_sections": ["HOME", "SITEMAP", "ASSETS", "MODULES", "SETTINGS"]
+}

@@ -1,0 +1,62 @@
+{
+  "scraped_at": "2026-03-16",
+  "source": "https://saltlake.simpleviewcms.com/nav/home/ (Modules panel)",
+  "modules": {
+    "auto_responder": {
+      "name": "Auto Responder",
+      "sub_items": []
+    },
+    "collection_types": {
+      "name": "Collection Types",
+      "sub_items": [
+        { "name": "Alerts", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_alerts/" },
+        { "name": "Announcements", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_announcements/" },
+        { "name": "Contact Slides", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_contact_slides/" },
+        { "name": "Expanding Content", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_expanding_content_question/" },
+        { "name": "Hero Slides", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_header_slides/" },
+        { "name": "Microsite Slides", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_microsite_slides/" },
+        { "name": "Navigation Links", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_navigation_links/" },
+        { "name": "Neighborhood Slides", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_neighborhood_slides/" },
+        { "name": "Questions (FAQ)", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_faq_question/" },
+        { "name": "Regions Slides", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_regions_slides/" },
+        { "name": "Resort Slides", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_resort_slides/" },
+        { "name": "Slides", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_slides/" },
+        { "name": "Social Slides", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_social_slides/" },
+        { "name": "Staff Departments", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_staff_departments/" },
+        { "name": "Vertical Videos", "url": "https://saltlake.simpleviewcms.com/nav/modules/collections/custom_vertical_video_slides/" }
+      ]
+    },
+    "dynamic_content": {
+      "name": "Dynamic Content",
+      "sub_items": []
+    },
+    "map_publisher": {
+      "name": "Map Publisher",
+      "sub_items": []
+    },
+    "public_relations": {
+      "name": "Public Relations",
+      "sub_items": [
+        { "name": "Articles", "slug": "articles" },
+        { "name": "Articles - Ski City", "slug": "articles_ski" },
+        { "name": "Blog", "slug": "leisure_blog" }
+      ],
+      "content_counts": {
+        "articles_unpublished": 1030,
+        "articles_ski_unpublished": 4,
+        "blog_unpublished": 1229,
+        "blog_autosaved_drafts_expiring": 2
+      }
+    },
+    "visitors": {
+      "name": "Visitors",
+      "sub_items": []
+    }
+  },
+  "notes": [
+    "Events and Listings are managed via CRM (external SimpleView product), not CMS modules",
+    "CRM redirects to: /plugins/cms/product/redirect/?product=crm",
+    "Events without images: 163, Events without geocoding: 2",
+    "Listings pending: 2, Listings without geocoding: 3, Listings without media: 3723"
+  ]
+}

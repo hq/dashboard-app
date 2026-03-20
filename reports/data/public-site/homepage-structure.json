@@ -1,0 +1,64 @@
+{
+  "scraped_at": "2026-03-16",
+  "source": "https://www.visitsaltlake.com/",
+  "title": "Salt Lake City Hotels, Restaurants, Events, Things to Do & Shopping",
+  "navigation": {
+    "primary": [
+      { "text": "Things to do", "href": "/things-to-do/" },
+      { "text": "Skiing", "href": "/things-to-do/skiing-snowboarding/" },
+      { "text": "Restaurants", "href": "/restaurants/" },
+      { "text": "Places to Stay", "href": "/places-to-stay/" },
+      { "text": "Plan", "href": "/plan-your-visit/" },
+      { "text": "Events", "href": "/events/" }
+    ],
+    "hamburger_menu": [
+      { "text": "Things To Do", "href": "/things-to-do/" },
+      { "text": "Skiing & Snowboarding", "href": "/things-to-do/skiing-snowboarding/" },
+      { "text": "Restaurants", "href": "/restaurants/" },
+      { "text": "Places To Stay", "href": "/places-to-stay/" },
+      { "text": "Plan Your Visit", "href": "/plan-your-visit/" },
+      { "text": "Events", "href": "/events/" },
+      { "text": "Neighborhoods", "href": "/neighborhoods/" },
+      { "text": "Meetings", "href": "/meetings/" },
+      { "text": "Travel Trade", "href": "/travel-trade/" },
+      { "text": "Sports", "href": "/sports/" },
+      { "text": "Film", "href": "/film/" },
+      { "text": "Blog", "href": "/blog/" },
+      { "text": "Local Crafts & Gifts", "href": "https://visit-salt-lake.myshopify.com/" },
+      { "text": "Members", "href": "/members/" },
+      { "text": "Press & Research", "href": "/press-research/" },
+      { "text": "About Us", "href": "/about-us/" },
+      { "text": "Contact", "href": "/contact/" }
+    ],
+    "utility": [
+      { "text": "Subscribe", "href": "/plan-your-visit/subscribe/" },
+      { "text": "Sitemap", "href": "/sitemap/" },
+      { "text": "Privacy Policy", "href": "/privacy-policy/" }
+    ]
+  },
+  "homepage_sections": [
+    { "type": "core-marquee", "class": "ccl-widget core-marquee marquee", "description": "Hero slider/carousel" },
+    { "type": "core-side-by-side", "class": "ccl-widget core-side-by-side side-by-side-1-across", "description": "Side-by-side content block" },
+    { "type": "events-marquee", "class": "events-marquee", "description": "Featured events marquee" },
+    { "type": "upcoming-events", "class": "upcoming-events", "description": "Upcoming events list" },
+    { "type": "related-content", "class": "related-content core-styles", "description": "Related content cards" },
+    { "type": "marquee-side-by-side", "class": "marquee-side-by-side", "description": "Marquee + side-by-side combo" },
+    { "type": "callout-tiles-2", "class": "ccl-widget core-callout-tiles callout-tiles-2-across", "description": "2-column callout tiles" },
+    { "type": "callout-tiles-3", "class": "ccl-widget core-callout-tiles callout-tiles-3-across", "description": "3-column callout tiles" }
+  ],
+  "css_framework": "ccl-widget (SimpleView CCL - Custom Component Library)",
+  "page_wrapper": "contentRender contentRender_type_panel contentRender_name_plugins_common_page",
+  "third_party_integrations": [
+    "Google Tag Manager (G-Q3027Z5YJW)",
+    "Microsoft Clarity (4k98p3u3c3)",
+    "Facebook Pixel (752363390410810, 768637601546801)",
+    "Pinterest Tag",
+    "Monsido (heatmaps + page correct)",
+    "Storygize (native advertising)",
+    "Datafy (pxl tracking)",
+    "Act-On Marketing Automation"
+  ],
+  "external_services": [
+    { "service": "Shopify", "url": "visit-salt-lake.myshopify.com", "purpose": "Local Crafts & Gifts store" }
+  ]
+}
