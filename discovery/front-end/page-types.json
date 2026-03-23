@@ -1,0 +1,199 @@
+[
+  {
+    "id": "homepage",
+    "name": "Homepage",
+    "urlPattern": "/",
+    "count": 1,
+    "description": "Main landing page — hero imagery, featured events, things to do, neighborhoods, trip planning CTAs.",
+    "sampleUrls": ["https://www.visitsaltlake.com/"],
+    "features": ["Hero carousel/video", "Featured events widget", "Things to do highlights", "Neighborhood explorer", "Trip planning CTAs", "Search bar", "Seasonal content"],
+    "rebuildNotes": "Custom layout. Pulls from multiple content types (events, listings, neighborhoods). Highest-visibility page — needs strong performance and visual impact.",
+    "section": "public"
+  },
+  {
+    "id": "event-detail",
+    "name": "Event Detail",
+    "urlPattern": "/event/{category}/{slug}",
+    "count": 1800,
+    "description": "Individual event pages grouped by category — music, art, theatre, festivals, sports, dance, outdoor recreation, and more.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/event/music/2026-draper-jam/77403/",
+      "https://www.visitsaltlake.com/event/festivals/utah-arts-festival/77100/"
+    ],
+    "features": ["Event title/description", "Date/time with recurrence", "Venue with map", "Category breadcrumb", "Image gallery", "Related events", "Add to calendar", "Share buttons"],
+    "rebuildNotes": "Single template serving ~1,800 events. Data-driven from CMS. Must handle recurring events, multi-day events, and past/future states. Category taxonomy has 15+ categories.",
+    "section": "events"
+  },
+  {
+    "id": "event-category",
+    "name": "Event Category Index",
+    "urlPattern": "/events/{category}",
+    "count": 30,
+    "description": "Category landing pages for events — filterable grid by date, category, and location.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/events/music/",
+      "https://www.visitsaltlake.com/events/festivals/"
+    ],
+    "features": ["Filterable event grid", "Date range picker", "Category nav/sidebar", "Map view toggle", "Pagination/infinite scroll", "Featured events"],
+    "rebuildNotes": "Search/filter UX is the core challenge. Need fast filtering across ~1,800 events. Consider faceted search.",
+    "section": "events"
+  },
+  {
+    "id": "listing-detail",
+    "name": "Listing/Business Detail",
+    "urlPattern": "/listing/{business-name}/{location}",
+    "count": 2000,
+    "description": "Business and attraction pages — restaurants, hotels, shops, services. Many businesses have multiple location entries.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/listing/red-iguana/salt-lake-city/12345/"
+    ],
+    "features": ["Business info", "Hours of operation", "Location map", "Photo gallery", "Reviews/ratings", "Contact info", "Related listings", "Amenity tags"],
+    "rebuildNotes": "Single template serving ~2,000 listings. Data from Simpleview CRM. Multi-location businesses create separate pages per location. Need to handle data quality variability.",
+    "section": "listings"
+  },
+  {
+    "id": "category-index",
+    "name": "Category Index",
+    "urlPattern": "/things-to-do/{category}, /restaurants/{type}",
+    "count": 100,
+    "description": "Filterable listing pages for browsing things to do, restaurants, attractions by category.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/things-to-do/hiking-in-salt-lake/",
+      "https://www.visitsaltlake.com/restaurants/"
+    ],
+    "features": ["Filterable grid/list", "Map view", "Category sidebar", "Sort options", "Result count", "Featured/promoted items"],
+    "rebuildNotes": "Similar UX to event index but for listings. Core search/filter experience. Needs to be fast with 2,000+ listings.",
+    "section": "listings"
+  },
+  {
+    "id": "blog-article",
+    "name": "Blog / Article",
+    "urlPattern": "/blog/stories/{slug}, /articles/post/{slug}",
+    "count": 460,
+    "description": "Editorial content — blog posts, stories, and press articles. Two separate content areas that may be consolidatable.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/blog/stories/best-hiking-trails-near-salt-lake/"
+    ],
+    "features": ["Rich text content", "Featured image", "Author byline", "Category tags", "Related articles", "Social sharing", "SEO metadata"],
+    "rebuildNotes": "Two existing content hubs (blog + articles) — consider consolidating into one. ~460 total posts to migrate. Standard CMS content type.",
+    "section": "content"
+  },
+  {
+    "id": "neighborhood",
+    "name": "Neighborhood / Area Profile",
+    "urlPattern": "/salt-lake-city/{area}, /midvalley/{area}, /south-valley/{area}",
+    "count": 50,
+    "description": "Neighborhood and geographic area profile pages with local listings, character descriptions, and area guides.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/salt-lake-city/downtown/",
+      "https://www.visitsaltlake.com/midvalley/murray/"
+    ],
+    "features": ["Area description", "Photo gallery", "Local listings", "Map with boundaries", "Nearby events", "Getting there info"],
+    "rebuildNotes": "Hierarchical geographic structure: regions → cities → neighborhoods. Each level has listings and events. Map integration important.",
+    "section": "content"
+  },
+  {
+    "id": "plan-your-visit",
+    "name": "Plan Your Visit",
+    "urlPattern": "/plan-your-visit/{topic}",
+    "count": 50,
+    "description": "Trip planning content — itineraries, transportation guides, accessibility, seasonal tips, and about Salt Lake City.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/plan-your-visit/trip-ideas-itineraries/",
+      "https://www.visitsaltlake.com/plan-your-visit/getting-around/"
+    ],
+    "features": ["Rich text content", "Itinerary builder/display", "Transportation info", "Seasonal recommendations", "Downloadable guides", "Related content links"],
+    "rebuildNotes": "Mix of static content and dynamic itineraries. Consider whether itinerary builder is Phase 1 or Phase 2 scope.",
+    "section": "content"
+  },
+  {
+    "id": "meetings-convention",
+    "name": "Meetings & Convention",
+    "urlPattern": "/meetings/*, /salt-palace-convention-center/*, /mountain-america-expo-center/*",
+    "count": 50,
+    "description": "Convention and meetings sales content — venue information, services, planning tools, and RFP forms.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/meetings/",
+      "https://www.visitsaltlake.com/salt-palace-convention-center/"
+    ],
+    "features": ["Venue details", "Floor plans/capacity", "Services list", "RFP form", "Virtual tour", "Contact/sales team", "Testimonials"],
+    "rebuildNotes": "Functions as mini-sites within the main domain. Convention center pages are a high-value lead generation tool. RFP form integration critical.",
+    "section": "meetings"
+  },
+  {
+    "id": "places-to-stay",
+    "name": "Places to Stay",
+    "urlPattern": "/places-to-stay/*",
+    "count": 20,
+    "description": "Hotel and accommodation pages — search, filter, and detail views for lodging options.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/places-to-stay/"
+    ],
+    "features": ["Hotel search/filter", "Star ratings", "Amenity filters", "Map view", "Booking links", "Area grouping"],
+    "rebuildNotes": "Likely pulls from Simpleview's lodging database. Booking integration may need third-party API. Smaller section but high commercial value.",
+    "section": "listings"
+  },
+  {
+    "id": "sports",
+    "name": "Sports",
+    "urlPattern": "/sports/*, /sports/facilities/*",
+    "count": 15,
+    "description": "Sports venues, teams, and sporting events content.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/sports/"
+    ],
+    "features": ["Venue profiles", "Team info", "Event calendar", "Facility details", "Ticket links"],
+    "rebuildNotes": "Small section. Mix of static content and venue profiles. May integrate with event detail template.",
+    "section": "content"
+  },
+  {
+    "id": "hospitality-jobs",
+    "name": "Hospitality Jobs",
+    "urlPattern": "/hospitality-jobs/listing/*",
+    "count": 72,
+    "description": "Job board for hospitality industry positions in the Salt Lake area.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/hospitality-jobs/"
+    ],
+    "features": ["Job listing grid", "Search/filter", "Job detail view", "Apply link", "Category filters"],
+    "rebuildNotes": "Separate content type in CMS. Low complexity — standard listing template. Consider whether to keep or replace with third-party job board.",
+    "section": "admin"
+  },
+  {
+    "id": "static-corporate",
+    "name": "Static / Corporate Pages",
+    "urlPattern": "/about-us/*, /members/*, /press-research/*, /travel-trade/*",
+    "count": 30,
+    "description": "About, membership, press room, research data, and travel trade information — corporate/organizational pages.",
+    "sampleUrls": [
+      "https://www.visitsaltlake.com/about-us/",
+      "https://www.visitsaltlake.com/members/",
+      "https://www.visitsaltlake.com/press-research/"
+    ],
+    "features": ["Rich text content", "Team/staff directory", "Member login area", "Press releases", "Research/stats downloads", "Contact forms"],
+    "rebuildNotes": "Standard CMS pages. Member area may need authentication. Press room needs media asset management. Travel trade section serves B2B audience.",
+    "section": "admin"
+  },
+  {
+    "id": "search-results",
+    "name": "Search Results",
+    "urlPattern": "/search",
+    "count": 1,
+    "description": "Global site search results page.",
+    "sampleUrls": [],
+    "features": ["Full-text search", "Result type filtering", "Result previews", "Pagination", "Search suggestions"],
+    "rebuildNotes": "Needs to search across all content types (events, listings, articles, pages). Consider Algolia, Typesense, or similar for fast search.",
+    "section": "public"
+  },
+  {
+    "id": "error-404",
+    "name": "404 / Error Page",
+    "urlPattern": "/404",
+    "count": 1,
+    "description": "Error and not-found pages.",
+    "sampleUrls": [],
+    "features": ["Friendly error message", "Search bar", "Popular links", "Back to home CTA"],
+    "rebuildNotes": "Standard implementation. Important for SEO — ensure proper 404 status codes and redirect strategy for migrated URLs.",
+    "section": "public"
+  }
+]
