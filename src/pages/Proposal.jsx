@@ -6,6 +6,7 @@ import { buildSitemapFromPages, buildSitemapText, MODULE_CATEGORIES } from '../l
 import ScenarioComparison from '../components/proposal/ScenarioComparison'
 import ScenarioEstimate from '../components/proposal/ScenarioEstimate'
 import Sitemap from '../components/proposal/Sitemap'
+import VslSitemap from '../components/proposal/VslSitemap'
 import ScreensBreakdown from '../components/proposal/ScreensBreakdown'
 import Timeline from '../components/proposal/Timeline'
 import PopIn from '../components/PopIn'
@@ -18,6 +19,100 @@ import DiscoveryDashboard from '../components/proposal/DiscoveryDashboard'
 import { useProposalTab } from '../contexts/ProposalTabContext'
 
 const MODULE_OPTIONS = [{ id: 'all', name: 'All' }, ...MODULE_CATEGORIES]
+
+const SCOPE_OUTER_TABS = [
+  { id: 'sitemap', name: 'Site Map' },
+  { id: 'screenshots', name: 'Screenshots' },
+]
+
+const SCOPE_INNER_TABS = [
+  { id: 'marketing', name: 'Marketing Site' },
+  { id: 'cms', name: 'CMS' },
+  { id: 'crm', name: 'CRM' },
+]
+
+function ScopeTabBar({ tabs, activeId, onChange }) {
+  return (
+    <div className="flex gap-1 border-b border-tan">
+      {tabs.map((tab) => (
+        <button
+          key={tab.id}
+          onClick={() => onChange(tab.id)}
+          className={`px-4 py-2 text-sm font-semibold transition-colors border-b-2 -mb-px ${
+            activeId === tab.id
+              ? 'border-deep text-deep'
+              : 'border-transparent text-deep-muted hover:text-deep'
+          }`}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+function ScopeTabs() {
+  const [outerTab, setOuterTab] = useState('sitemap')
+  const [innerTab, setInnerTab] = useState('marketing')
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center gap-3">
+        <FilterButtonGroup
+          options={SCOPE_OUTER_TABS}
+          activeId={outerTab}
+          onChange={setOuterTab}
+        />
+        <FilterButtonGroup
+          options={SCOPE_INNER_TABS}
+          activeId={innerTab}
+          onChange={setInnerTab}
+        />
+      </div>
+
+      {outerTab === 'sitemap' && (
+        <>
+          {innerTab === 'marketing' && <VslSitemap />}
+          {innerTab === 'cms' && (
+            <div className="rounded-xl border border-tan bg-sand-light p-8 text-center text-sm text-deep-muted">
+              CMS sitemap coming soon — pending admin access.
+            </div>
+          )}
+          {innerTab === 'crm' && (
+            <div className="rounded-xl border border-tan bg-sand-light p-8 text-center text-sm text-deep-muted">
+              CRM sitemap coming soon — pending admin access.
+            </div>
+          )}
+        </>
+      )}
+
+      {outerTab === 'screenshots' && (
+        <>
+          {innerTab === 'marketing' && (
+            <>
+              <ScreensBreakdown />
+              <div className="flex justify-center">
+                <button className="btn-draw-border text-sm">
+                  See all 1,041
+                </button>
+              </div>
+            </>
+          )}
+          {innerTab === 'cms' && (
+            <div className="rounded-xl border border-tan bg-sand-light p-8 text-center text-sm text-deep-muted">
+              CMS screenshots coming soon — pending admin access.
+            </div>
+          )}
+          {innerTab === 'crm' && (
+            <div className="rounded-xl border border-tan bg-sand-light p-8 text-center text-sm text-deep-muted">
+              CRM screenshots coming soon — pending admin access.
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  )
+}
 
 function FilterButtonGroup({ options, activeId, onChange }) {
   const containerRef = useRef(null)
@@ -186,7 +281,7 @@ export default function Proposal() {
         )}
 
         {/* Scope (sitemap + screens) */}
-        {activeTab === 1 && (
+        {activeTab === 2 && (
           <div className="space-y-8">
             <div className="-mx-6 -mt-6 bg-deep h-[342px] flex">
               <img src="/assets/hero-scope.jpg" alt="" className="h-full w-auto object-cover object-center" />
@@ -197,45 +292,15 @@ export default function Proposal() {
                 </div>
               </div>
             </div>
-            <div className="space-y-4">
-              <p className="preheading mb-3">Information Architecture</p>
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <FilterButtonGroup
-                  options={MODULE_OPTIONS}
-                  activeId={activeModuleId}
-                  onChange={setActiveModuleId}
-                />
-                <button
-                  onClick={handleDownloadSitemap}
-                  className="btn-draw-border text-sm"
-                >
-                  Download text version
-                </button>
-              </div>
-              <Sitemap
-                sitemapRoot={sitemapRoot}
-                onClickPage={handleClickPage}
-                activeModuleId={activeModuleId}
-              />
-            </div>
-
-            <div className="space-y-4">
-              <p className="preheading mb-3">Screen Inventory</p>
-              <ScreensBreakdown />
-              <div className="flex justify-center">
-                <button className="btn-draw-border text-sm">
-                  See all 1,041
-                </button>
-              </div>
-            </div>
+            <ScopeTabs />
           </div>
         )}
 
         {/* Discovery */}
-        {activeTab === 2 && (
+        {activeTab === 1 && (
           <div className="space-y-8">
             <div className="-mx-6 -mt-6 bg-deep h-[342px] flex">
-              <img src="/assets/hero-scope.jpg" alt="" className="h-full w-auto object-cover object-center" />
+              <img src="/assets/hero-discovery.jpg" alt="" className="h-full w-auto object-cover object-center" />
               <div className="flex items-center ml-[80px]">
                 <div>
                   <p className="preheading text-orange mb-4">Discovery</p>
@@ -337,7 +402,7 @@ export default function Proposal() {
           <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
             <path d="M10 3L5 8l5 5V3z" />
           </svg>
-          {activeTab > 0 ? ['Intro', 'Scope', 'Discovery', 'Estimate', 'Scenarios'][activeTab - 1] : 'Previous'}
+          {activeTab > 0 ? ['Intro', 'Discovery', 'Scope', 'Estimate', 'Scenarios'][activeTab - 1] : 'Previous'}
         </button>
 
         <button
@@ -349,7 +414,7 @@ export default function Proposal() {
               : 'text-deep hover:text-deep-dark'
           }`}
         >
-          {activeTab < 4 ? ['Intro', 'Scope', 'Discovery', 'Estimate', 'Scenarios'][activeTab + 1] : 'Next'}
+          {activeTab < 4 ? ['Intro', 'Discovery', 'Scope', 'Estimate', 'Scenarios'][activeTab + 1] : 'Next'}
           <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
             <path d="M6 3l5 5-5 5V3z" />
           </svg>

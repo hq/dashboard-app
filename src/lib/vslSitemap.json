@@ -1,0 +1,2466 @@
+{
+  "id": "home",
+  "name": "Home",
+  "children": [
+    {
+      "id": "/things-to-do",
+      "name": "Things To Do",
+      "children": [
+        {
+          "id": "/things-to-do/attractions",
+          "name": "Attractions",
+          "children": [
+            {
+              "id": "/things-to-do/attractions/the-great-salt-lake",
+              "name": "The Great Salt Lake"
+            },
+            {
+              "id": "/things-to-do/attractions/zoos-gardens",
+              "name": "Zoos & Gardens"
+            },
+            {
+              "id": "/things-to-do/attractions/historic-sites",
+              "name": "Historic Sites",
+              "children": [
+                {
+                  "id": "/things-to-do/attractions/historic-sites/historic-temple-square",
+                  "name": "Historic Temple Square"
+                },
+                {
+                  "id": "/things-to-do/attractions/historic-sites/this-is-the-place-heritage-park",
+                  "name": "This is the Place Heritage Park"
+                }
+              ]
+            },
+            {
+              "id": "/things-to-do/attractions/movie-theaters",
+              "name": "Movie Theaters"
+            },
+            {
+              "id": "/things-to-do/attractions/olympic-venues",
+              "name": "Olympic Venues"
+            },
+            {
+              "id": "/things-to-do/attractions/amusement-parks-water-parks",
+              "name": "Amusement Parks & Water Parks"
+            },
+            {
+              "id": "/things-to-do/attractions/things-to-do-with-kids",
+              "name": "Things to Do with Kids"
+            },
+            {
+              "id": "/things-to-do/attractions/free-things-to-do",
+              "name": "Free Things to Do"
+            },
+            {
+              "id": "/things-to-do/attractions/genealogy",
+              "name": "Genealogy",
+              "children": [
+                {
+                  "id": "/things-to-do/attractions/genealogy/familysearch-library",
+                  "name": "FamilySearch Library"
+                },
+                {
+                  "id": "/things-to-do/attractions/genealogy/genealogy-service-providers",
+                  "name": "Genealogy Service Providers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "/things-to-do/tours-experiences",
+          "name": "Tours & Experiences",
+          "children": [
+            {
+              "id": "/things-to-do/tours-experiences/salt-lake-explorer-pass",
+              "name": "Salt Lake Explorer Pass"
+            },
+            {
+              "id": "/things-to-do/tours-experiences/uniquely-salt-lake-pass",
+              "name": "Uniquely Salt Lake Pass",
+              "children": [
+                {
+                  "id": "/things-to-do/tours-experiences/uniquely-salt-lake-pass/salt-lake-discount-passes-faq",
+                  "name": "Salt Lake Passes FAQ"
+                }
+              ]
+            },
+            {
+              "id": "/things-to-do/tours-experiences/salt-lake-downtown-discovery-pass",
+              "name": "Salt Lake Downtown Discovery Pass"
+            },
+            {
+              "id": "/things-to-do/tours-experiences/salt-lake-family-faves",
+              "name": "Salt Lake Family Faves"
+            },
+            {
+              "id": "/things-to-do/tours-experiences/salt-lake-arts-culture-pass",
+              "name": "Salt Lake Arts & Culture Pass"
+            },
+            {
+              "id": "/things-to-do/tours-experiences/salt-lake-sips-trail",
+              "name": "Salt Lake Sips Trail"
+            },
+            {
+              "id": "/things-to-do/tours-experiences/outdoor-arts-trail",
+              "name": "Outdoor Arts Trail"
+            },
+            {
+              "id": "/things-to-do/tours-experiences/attractions-passes",
+              "name": "Salt Lake Attractions Passes",
+              "children": [
+                {
+                  "id": "/things-to-do/tours-experiences/attractions-passes/frequently-asked-questions",
+                  "name": "Frequently Asked Questions"
+                }
+              ]
+            },
+            {
+              "id": "/things-to-do/tours-experiences/guided-tours-services",
+              "name": "Guided Tours & Services"
+            }
+          ]
+        },
+        {
+          "id": "/things-to-do/skiing-snowboarding",
+          "name": "Skiing & Snowboarding",
+          "children": [
+            {
+              "id": "/things-to-do/skiing-snowboarding/super-pass",
+              "name": "Ski Super Pass",
+              "children": [
+                {
+                  "id": "/things-to-do/skiing-snowboarding/super-pass/faq",
+                  "name": "Super Pass FAQ"
+                },
+                {
+                  "id": "/things-to-do/skiing-snowboarding/super-pass/pricing-and-savings",
+                  "name": "Super Pass Pricing And Savings"
+                },
+                {
+                  "id": "/things-to-do/skiing-snowboarding/super-pass/tour-partners",
+                  "name": "Tour Partners"
+                }
+              ]
+            },
+            {
+              "id": "/things-to-do/skiing-snowboarding/ski-resorts",
+              "name": "Ski Resorts",
+              "children": [
+                {
+                  "id": "/things-to-do/skiing-snowboarding/ski-resorts/alta-ski-area",
+                  "name": "Alta Ski Area",
+                  "children": [
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/alta-ski-area/alta-trail-map",
+                      "name": "Alta Trail Map"
+                    },
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/alta-ski-area/lodging-near-alta-ski-area",
+                      "name": "Lodging near Alta Ski Area"
+                    },
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/alta-ski-area/lift-tickets-and-passes-for-alta",
+                      "name": "Lift tickets and passes for Alta"
+                    }
+                  ]
+                },
+                {
+                  "id": "/things-to-do/skiing-snowboarding/ski-resorts/brighton-resort",
+                  "name": "Brighton Resort",
+                  "children": [
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/brighton-resort/brighton-trail-map",
+                      "name": "Brighton Trail Map"
+                    },
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/brighton-resort/hotels-and-lodging-near-brighton",
+                      "name": "Hotels and Lodging Near Brighton"
+                    },
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/brighton-resort/brighton-ski-passes-lift-tickets",
+                      "name": "Brighton Ski Passes & Lift Tickets"
+                    }
+                  ]
+                },
+                {
+                  "id": "/things-to-do/skiing-snowboarding/ski-resorts/snowbird",
+                  "name": "Snowbird",
+                  "children": [
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/snowbird/snowbird-trail-map",
+                      "name": "Snowbird Trail Map"
+                    },
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/snowbird/snowbird-lift-tickets-and-passes",
+                      "name": "Snowbird Lift Tickets and Passes"
+                    },
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/snowbird/lodging-options-at-and-near-snowbird",
+                      "name": "Lodging Options At and Near Snowbird"
+                    }
+                  ]
+                },
+                {
+                  "id": "/things-to-do/skiing-snowboarding/ski-resorts/solitude-mountain-resort",
+                  "name": "Solitude Mountain Resort",
+                  "children": [
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/solitude-mountain-resort/solitude-trail-map",
+                      "name": "Solitude Trail Map"
+                    },
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/solitude-mountain-resort/lodging-at-solitude-mountain-resort",
+                      "name": "Lodging at Solitude Mountain Resort"
+                    },
+                    {
+                      "id": "/things-to-do/skiing-snowboarding/ski-resorts/solitude-mountain-resort/solitude-passes-and-lift-tickets",
+                      "name": "Solitude Passes and Lift Tickets"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "/things-to-do/skiing-snowboarding/resort-maps",
+              "name": "Resort Maps"
+            },
+            {
+              "id": "/things-to-do/skiing-snowboarding/ski-rentals",
+              "name": "Ski Rentals"
+            },
+            {
+              "id": "/things-to-do/skiing-snowboarding/webcams",
+              "name": "Webcams"
+            },
+            {
+              "id": "/things-to-do/skiing-snowboarding/snow-reports-conditions",
+              "name": "Snow Reports & Conditions"
+            },
+            {
+              "id": "/things-to-do/skiing-snowboarding/transportation",
+              "name": "Transportation",
+              "children": [
+                {
+                  "id": "/things-to-do/skiing-snowboarding/transportation/how-to-use-the-ski-bus",
+                  "name": "How to Use the Ski Bus"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "/things-to-do/arts-culture",
+          "name": "Arts & Culture",
+          "children": [
+            {
+              "id": "/things-to-do/arts-culture/museums",
+              "name": "Museums",
+              "children": [
+                {
+                  "id": "/things-to-do/arts-culture/museums/natural-history-museum-of-utah",
+                  "name": "Natural History Museum of Utah"
+                },
+                {
+                  "id": "/things-to-do/arts-culture/museums/thanksgiving-point-institute",
+                  "name": "Thanksgiving Point Institute"
+                }
+              ]
+            },
+            {
+              "id": "/things-to-do/arts-culture/art-galleries",
+              "name": "Art Galleries"
+            },
+            {
+              "id": "/things-to-do/arts-culture/performing-arts-theater",
+              "name": "Performing Arts & Theater"
+            },
+            {
+              "id": "/things-to-do/arts-culture/dinner-theater",
+              "name": "Dinner Theater"
+            }
+          ]
+        },
+        {
+          "id": "/things-to-do/nightlife-entertainment",
+          "name": "Nightlife & Entertainment",
+          "children": [
+            {
+              "id": "/things-to-do/nightlife-entertainment/social-activities",
+              "name": "Social Activities"
+            },
+            {
+              "id": "/things-to-do/nightlife-entertainment/comedy-clubs",
+              "name": "Comedy Clubs"
+            },
+            {
+              "id": "/things-to-do/nightlife-entertainment/dance-clubs",
+              "name": "Dance Clubs"
+            },
+            {
+              "id": "/things-to-do/nightlife-entertainment/gay-bars",
+              "name": "Gay Bars"
+            },
+            {
+              "id": "/things-to-do/nightlife-entertainment/live-music",
+              "name": "Live Music"
+            }
+          ]
+        },
+        {
+          "id": "/things-to-do/outdoor-recreation",
+          "name": "Outdoor Recreation",
+          "children": [
+            {
+              "id": "/things-to-do/outdoor-recreation/state-national-parks",
+              "name": "State & National Parks",
+              "children": [
+                {
+                  "id": "/things-to-do/outdoor-recreation/state-national-parks/national-parks-monuments-recreation-areas",
+                  "name": "National Parks, Monuments & Recreation Areas"
+                },
+                {
+                  "id": "/things-to-do/outdoor-recreation/state-national-parks/utah-state-parks",
+                  "name": "Utah State Parks"
+                }
+              ]
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/city-local-parks",
+              "name": "City & Local Parks"
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/mountains",
+              "name": "Mountains"
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/scenic-drives",
+              "name": "Scenic Drives"
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/hiking",
+              "name": "Hiking"
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/biking",
+              "name": "Biking",
+              "children": [
+                {
+                  "id": "/things-to-do/outdoor-recreation/biking/cycling-the-city-nearby-canyons",
+                  "name": "Cycling the City & Nearby Canyons"
+                }
+              ]
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/fishing-wildlife",
+              "name": "Fishing & Wildlife"
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/birdwatching-areas",
+              "name": "Birdwatching Areas"
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/rafting-kayaking",
+              "name": "Rafting & Kayaking"
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/adventure-sports",
+              "name": "Adventure Sports"
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/golf",
+              "name": "Golf"
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/winter-activities",
+              "name": "Winter Activities",
+              "children": [
+                {
+                  "id": "/things-to-do/outdoor-recreation/winter-activities/ice-skating",
+                  "name": "Ice Skating"
+                },
+                {
+                  "id": "/things-to-do/outdoor-recreation/winter-activities/cross-country-skiing",
+                  "name": "Cross-Country Skiing"
+                },
+                {
+                  "id": "/things-to-do/outdoor-recreation/winter-activities/snowmobiling",
+                  "name": "Snowmobiling"
+                },
+                {
+                  "id": "/things-to-do/outdoor-recreation/winter-activities/snowshoeing",
+                  "name": "Snowshoeing"
+                },
+                {
+                  "id": "/things-to-do/outdoor-recreation/winter-activities/snow-tubing-sledding",
+                  "name": "Snow Tubing & Sledding"
+                }
+              ]
+            },
+            {
+              "id": "/things-to-do/outdoor-recreation/recreation-centers",
+              "name": "Recreation Centers"
+            }
+          ]
+        },
+        {
+          "id": "/things-to-do/sports",
+          "name": "Sports",
+          "children": [
+            {
+              "id": "/things-to-do/sports/collegiate-sports",
+              "name": "Collegiate Sports"
+            },
+            {
+              "id": "/things-to-do/sports/professional-sports",
+              "name": "Professional Sports"
+            },
+            {
+              "id": "/things-to-do/sports/sports-venues",
+              "name": "Sports Venues"
+            }
+          ]
+        },
+        {
+          "id": "/things-to-do/shopping",
+          "name": "Shopping",
+          "children": [
+            {
+              "id": "/things-to-do/shopping/equipment-rentals-sales",
+              "name": "Equipment Rentals & Sales"
+            },
+            {
+              "id": "/things-to-do/shopping/gifts-clothing-retail",
+              "name": "Gifts, Clothing & Retail"
+            },
+            {
+              "id": "/things-to-do/shopping/malls",
+              "name": "Malls"
+            },
+            {
+              "id": "/things-to-do/shopping/shopping-villages",
+              "name": "Shopping Villages"
+            },
+            {
+              "id": "/things-to-do/shopping/specialty-shops",
+              "name": "Specialty Shops"
+            },
+            {
+              "id": "/things-to-do/shopping/farmers-markets",
+              "name": "Farmers Markets"
+            },
+            {
+              "id": "/things-to-do/shopping/antiques",
+              "name": "Antiques"
+            },
+            {
+              "id": "/things-to-do/shopping/outlets",
+              "name": "Outlets"
+            }
+          ]
+        },
+        {
+          "id": "/things-to-do/wellness",
+          "name": "Wellness",
+          "children": [
+            {
+              "id": "/things-to-do/wellness/spas",
+              "name": "Spas"
+            },
+            {
+              "id": "/things-to-do/wellness/salons",
+              "name": "Salons"
+            },
+            {
+              "id": "/things-to-do/wellness/gyms-fitness-centers",
+              "name": "Gyms & Fitness Centers"
+            },
+            {
+              "id": "/things-to-do/wellness/yoga",
+              "name": "Yoga"
+            }
+          ]
+        },
+        {
+          "id": "/things-to-do/salt-lakes-winter-games",
+          "name": "Salt Lake's Winter Games"
+        }
+      ]
+    },
+    {
+      "id": "/plan-your-visit",
+      "name": "Plan Your Visit",
+      "children": [
+        {
+          "id": "/plan-your-visit/packages-deals",
+          "name": "Packages & Deals",
+          "children": [
+            {
+              "id": "/plan-your-visit/packages-deals/discount-passport",
+              "name": "Discount Passport"
+            }
+          ]
+        },
+        {
+          "id": "/plan-your-visit/community-diversity",
+          "name": "Community Diversity",
+          "children": [
+            {
+              "id": "/plan-your-visit/community-diversity/lgbtq",
+              "name": "LGBTQ",
+              "children": [
+                {
+                  "id": "/plan-your-visit/community-diversity/lgbtq/lgbtq-events",
+                  "name": "LGBTQ Events"
+                },
+                {
+                  "id": "/plan-your-visit/community-diversity/lgbtq/lgbtq-businesses",
+                  "name": "LGBTQ Businesses"
+                },
+                {
+                  "id": "/plan-your-visit/community-diversity/lgbtq/lgbtq-community-resources",
+                  "name": "LGBTQ Community Resources"
+                }
+              ]
+            },
+            {
+              "id": "/plan-your-visit/community-diversity/black",
+              "name": "Black"
+            },
+            {
+              "id": "/plan-your-visit/community-diversity/hispanic-latinx",
+              "name": "Hispanic / Latinx"
+            },
+            {
+              "id": "/plan-your-visit/community-diversity/asian",
+              "name": "Asian"
+            },
+            {
+              "id": "/plan-your-visit/community-diversity/accessibility",
+              "name": "Accessibility",
+              "children": [
+                {
+                  "id": "/plan-your-visit/community-diversity/accessibility/wheelchair-accessible-businesses",
+                  "name": "Wheelchair Accessible Businesses"
+                }
+              ]
+            },
+            {
+              "id": "/plan-your-visit/community-diversity/pacific-islander",
+              "name": "Pacific Islander"
+            },
+            {
+              "id": "/plan-your-visit/community-diversity/women",
+              "name": "Women"
+            }
+          ]
+        },
+        {
+          "id": "/plan-your-visit/free-visitors-guide",
+          "name": "Free Visitors Guide"
+        },
+        {
+          "id": "/plan-your-visit/trip-ideas-itineraries",
+          "name": "Trip Ideas & Itineraries",
+          "children": [
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/a-quick-guide-to-fun-in-salt-lake",
+              "name": "A Quick Guide to Fun in Salt Lake"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/must-do",
+              "name": "Must Do"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/romantic-getaway",
+              "name": "Romantic Getaway"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/family-vacation",
+              "name": "Family Vacation"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/day-trips",
+              "name": "Day Trips"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/winter-vacation",
+              "name": "Winter Vacation"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/salt-lake-bucket-list",
+              "name": "Salt Lake Bucket List"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/summer-outdoor-adventure",
+              "name": "Summer Outdoor Adventure"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/lgbtq-friendly",
+              "name": "LGBTQ Friendly"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/fall-colors",
+              "name": "Fall Colors"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/downtown-salt-lake",
+              "name": "Downtown Salt Lake"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/where-the-locals-go",
+              "name": "Where the Locals Go"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/salt-lake-and-beyond",
+              "name": "Salt Lake and Beyond"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/a-need-for-speed",
+              "name": "A Need for Speed"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/the-great-salt-lake-region",
+              "name": "The Great Salt Lake Region"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/winter-outdoor-adventure",
+              "name": "Winter Outdoor Adventure"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/holiday-itineraries",
+              "name": "Holiday Itineraries"
+            },
+            {
+              "id": "/plan-your-visit/trip-ideas-itineraries/a-western-weekend",
+              "name": "A Western Weekend"
+            }
+          ]
+        },
+        {
+          "id": "/plan-your-visit/visitors-center-info",
+          "name": "Visitors Center & Info"
+        },
+        {
+          "id": "/plan-your-visit/frequently-asked-questions",
+          "name": "Frequently Asked Questions",
+          "children": [
+            {
+              "id": "/plan-your-visit/frequently-asked-questions/drinking-in-utah",
+              "name": "Drinking in Utah"
+            }
+          ]
+        },
+        {
+          "id": "/plan-your-visit/about-salt-lake",
+          "name": "About Salt Lake",
+          "children": [
+            {
+              "id": "/plan-your-visit/about-salt-lake/quick-facts-stats",
+              "name": "Quick Facts & Stats"
+            },
+            {
+              "id": "/plan-your-visit/about-salt-lake/community-resources",
+              "name": "Community Resources"
+            },
+            {
+              "id": "/plan-your-visit/about-salt-lake/history-of-salt-lake",
+              "name": "History of Salt Lake"
+            },
+            {
+              "id": "/plan-your-visit/about-salt-lake/weather-climate",
+              "name": "Weather & Climate"
+            },
+            {
+              "id": "/plan-your-visit/about-salt-lake/social-hub",
+              "name": "Social Hub"
+            },
+            {
+              "id": "/plan-your-visit/about-salt-lake/podcasts",
+              "name": "Podcasts"
+            },
+            {
+              "id": "/plan-your-visit/about-salt-lake/salt-of-the-earth",
+              "name": "Salt of the Earth"
+            },
+            {
+              "id": "/plan-your-visit/about-salt-lake/sustainable-salt-lake",
+              "name": "Sustainable Salt Lake",
+              "children": [
+                {
+                  "id": "/plan-your-visit/about-salt-lake/sustainable-salt-lake/green-members",
+                  "name": "Green Members"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "/plan-your-visit/transportation",
+          "name": "Transportation",
+          "children": [
+            {
+              "id": "/plan-your-visit/transportation/greenbike-slc",
+              "name": "GREENbike SLC"
+            },
+            {
+              "id": "/plan-your-visit/transportation/airports-airlines",
+              "name": "Airports & Airlines"
+            },
+            {
+              "id": "/plan-your-visit/transportation/electric-scooters",
+              "name": "Electric Scooters"
+            },
+            {
+              "id": "/plan-your-visit/transportation/ground-transportation",
+              "name": "Ground Transportation"
+            },
+            {
+              "id": "/plan-your-visit/transportation/public-transportation",
+              "name": "Public Transportation"
+            },
+            {
+              "id": "/plan-your-visit/transportation/parking",
+              "name": "Parking"
+            }
+          ]
+        },
+        {
+          "id": "/plan-your-visit/maps",
+          "name": "Maps"
+        },
+        {
+          "id": "/plan-your-visit/virtual-tours",
+          "name": "Virtual Tours"
+        },
+        {
+          "id": "/plan-your-visit/subscribe",
+          "name": "Subscribe"
+        }
+      ]
+    },
+    {
+      "id": "/events",
+      "name": "Events",
+      "children": [
+        {
+          "id": "/events/festivals-special-events",
+          "name": "Festivals & Special Events"
+        },
+        {
+          "id": "/events/concerts-live-music",
+          "name": "Concerts & Live Music"
+        },
+        {
+          "id": "/events/holiday-events",
+          "name": "Holiday Events"
+        },
+        {
+          "id": "/events/kids-families",
+          "name": "Kids & Families"
+        },
+        {
+          "id": "/events/free-events",
+          "name": "Free Events"
+        },
+        {
+          "id": "/events/performing-arts",
+          "name": "Performing Arts"
+        },
+        {
+          "id": "/events/sports-outdoors",
+          "name": "Sports & Outdoors"
+        },
+        {
+          "id": "/events/annual-events",
+          "name": "Annual Events"
+        },
+        {
+          "id": "/events/submit-events",
+          "name": "Submit Events"
+        },
+        {
+          "id": "/events/this-weekend",
+          "name": "This Weekend"
+        }
+      ]
+    },
+    {
+      "id": "/restaurants",
+      "name": "Restaurants",
+      "children": [
+        {
+          "id": "/restaurants/breweries-microbreweries",
+          "name": "Breweries & Microbreweries"
+        },
+        {
+          "id": "/restaurants/distilleries",
+          "name": "Distilleries"
+        },
+        {
+          "id": "/restaurants/outdoor-seating",
+          "name": "Outdoor Seating"
+        },
+        {
+          "id": "/restaurants/fine-dining",
+          "name": "Fine Dining"
+        },
+        {
+          "id": "/restaurants/romantic",
+          "name": "Romantic"
+        },
+        {
+          "id": "/restaurants/kid-friendly",
+          "name": "Kid Friendly"
+        },
+        {
+          "id": "/restaurants/food-trucks",
+          "name": "Food Trucks"
+        },
+        {
+          "id": "/restaurants/cuisine-types",
+          "name": "Cuisine Types",
+          "children": [
+            {
+              "id": "/restaurants/cuisine-types/american-burgers",
+              "name": "American & Burgers"
+            },
+            {
+              "id": "/restaurants/cuisine-types/bbq",
+              "name": "BBQ"
+            },
+            {
+              "id": "/restaurants/cuisine-types/breakfast-brunch",
+              "name": "Breakfast & Brunch"
+            },
+            {
+              "id": "/restaurants/cuisine-types/buffet",
+              "name": "Buffet"
+            },
+            {
+              "id": "/restaurants/cuisine-types/chinese",
+              "name": "Chinese"
+            },
+            {
+              "id": "/restaurants/cuisine-types/german",
+              "name": "German"
+            },
+            {
+              "id": "/restaurants/cuisine-types/greek",
+              "name": "Greek"
+            },
+            {
+              "id": "/restaurants/cuisine-types/indian",
+              "name": "Indian"
+            },
+            {
+              "id": "/restaurants/cuisine-types/italian",
+              "name": "Italian"
+            },
+            {
+              "id": "/restaurants/cuisine-types/korean",
+              "name": "Korean"
+            },
+            {
+              "id": "/restaurants/cuisine-types/japanese",
+              "name": "Japanese"
+            },
+            {
+              "id": "/restaurants/cuisine-types/mediterranean",
+              "name": "Mediterranean"
+            },
+            {
+              "id": "/restaurants/cuisine-types/mexican",
+              "name": "Mexican"
+            },
+            {
+              "id": "/restaurants/cuisine-types/pho-vietnamese",
+              "name": "Pho & Vietnamese"
+            },
+            {
+              "id": "/restaurants/cuisine-types/pizza",
+              "name": "Pizza"
+            },
+            {
+              "id": "/restaurants/cuisine-types/seafood",
+              "name": "Seafood"
+            },
+            {
+              "id": "/restaurants/cuisine-types/steakhouses",
+              "name": "Steakhouses"
+            },
+            {
+              "id": "/restaurants/cuisine-types/sushi",
+              "name": "Sushi"
+            },
+            {
+              "id": "/restaurants/cuisine-types/thai",
+              "name": "Thai"
+            },
+            {
+              "id": "/restaurants/cuisine-types/vegan-vegetarian",
+              "name": "Vegan / Vegetarian"
+            }
+          ]
+        },
+        {
+          "id": "/restaurants/coffee-shops",
+          "name": "Coffee Shops"
+        },
+        {
+          "id": "/restaurants/ice-cream-desserts",
+          "name": "Ice Cream & Desserts"
+        },
+        {
+          "id": "/restaurants/group-dining",
+          "name": "Group Dining"
+        }
+      ]
+    },
+    {
+      "id": "/blog",
+      "name": "Blog",
+      "children": [
+        {
+          "id": "/blog/stories",
+          "name": "Stories",
+          "children": [
+            {
+              "id": "/blog/stories/post",
+              "name": "Post",
+              "children": [
+                {
+                  "id": "/blog/stories/post/where-to-eat-in-salt-lake",
+                  "name": "New Restaurant Openings"
+                }
+              ]
+            },
+            {
+              "id": "/blog/stories/category",
+              "name": "Category",
+              "children": [
+                {
+                  "id": "/blog/stories/category/arts-%26-culture",
+                  "name": "Arts %26 Culture",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/arts-%26-culture/5a9dab99cd9d441d5835b2ce",
+                      "name": "Arts & Culture"
+                    }
+                  ]
+                },
+                {
+                  "id": "/blog/stories/category/events-%26-festivals",
+                  "name": "Events %26 Festivals",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/events-%26-festivals/5a9dab99cd9d441d5835b2d8",
+                      "name": "Events & Festivals"
+                    }
+                  ]
+                },
+                {
+                  "id": "/blog/stories/category/family-fun",
+                  "name": "Family Fun",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/family-fun/5a9dab99cd9d441d5835b2cd",
+                      "name": "Family Fun"
+                    }
+                  ]
+                },
+                {
+                  "id": "/blog/stories/category/genealogy-%26-family-history",
+                  "name": "Genealogy %26 Family History",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/genealogy-%26-family-history/5a9dab99cd9d441d5835b2d2",
+                      "name": "Genealogy & Family History"
+                    }
+                  ]
+                },
+                {
+                  "id": "/blog/stories/category/salt-lake-history",
+                  "name": "Salt Lake History",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/salt-lake-history/5a9dab99cd9d441d5835b2d6",
+                      "name": "History"
+                    }
+                  ]
+                },
+                {
+                  "id": "/blog/stories/category/holidays",
+                  "name": "Holidays",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/holidays/5a9dab99cd9d441d5835b2d9",
+                      "name": "Holidays"
+                    }
+                  ]
+                },
+                {
+                  "id": "/blog/stories/category/meetings-%26-conventions",
+                  "name": "Meetings %26 Conventions",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/meetings-%26-conventions/5a9dab99cd9d441d5835b2d3",
+                      "name": "Meetings & Conventions"
+                    }
+                  ]
+                },
+                {
+                  "id": "/blog/stories/category/neighborhoods",
+                  "name": "Neighborhoods",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/neighborhoods/5bce088111f2ef203ebcaf45",
+                      "name": "Neighborhoods"
+                    }
+                  ]
+                },
+                {
+                  "id": "/blog/stories/category/outdoor-recreation-%26-sports",
+                  "name": "Outdoor Recreation %26 Sports",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/outdoor-recreation-%26-sports/5a9dab99cd9d441d5835b2d4",
+                      "name": "Outdoor Recreation & Sports"
+                    }
+                  ]
+                },
+                {
+                  "id": "/blog/stories/category/restaurants-%26-bars",
+                  "name": "Restaurants %26 Bars",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/restaurants-%26-bars/5a9dab99cd9d441d5835b2d1",
+                      "name": "Restaurants & Bars"
+                    }
+                  ]
+                },
+                {
+                  "id": "/blog/stories/category/shopping",
+                  "name": "Shopping",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/shopping/5a9dab99cd9d441d5835b2d0",
+                      "name": "Shopping"
+                    }
+                  ]
+                },
+                {
+                  "id": "/blog/stories/category/things-to-do",
+                  "name": "Things to Do",
+                  "children": [
+                    {
+                      "id": "/blog/stories/category/things-to-do/5bca146a11f2ef203ebb4f29",
+                      "name": "Things to Do"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "/places-to-stay",
+      "name": "Places To Stay",
+      "children": [
+        {
+          "id": "/places-to-stay/special-package-deals",
+          "name": "Special Package Deals",
+          "children": [
+            {
+              "id": "/places-to-stay/special-package-deals/super-pass-hotels",
+              "name": "Super Pass Hotels"
+            }
+          ]
+        },
+        {
+          "id": "/places-to-stay/hotels",
+          "name": "Hotels",
+          "children": [
+            {
+              "id": "/places-to-stay/hotels/near-airport",
+              "name": "Near Airport"
+            },
+            {
+              "id": "/places-to-stay/hotels/with-a-pool",
+              "name": "With A Pool"
+            },
+            {
+              "id": "/places-to-stay/hotels/near-convention-center",
+              "name": "Near Convention Center"
+            },
+            {
+              "id": "/places-to-stay/hotels/luxury",
+              "name": "Luxury"
+            }
+          ]
+        },
+        {
+          "id": "/places-to-stay/resorts",
+          "name": "Resorts"
+        },
+        {
+          "id": "/places-to-stay/bed-breakfasts-inns",
+          "name": "Bed & Breakfasts & Inns"
+        },
+        {
+          "id": "/places-to-stay/campgrounds-rv-parks",
+          "name": "Campgrounds & RV Parks"
+        },
+        {
+          "id": "/places-to-stay/extended-stay",
+          "name": "Extended Stay"
+        },
+        {
+          "id": "/places-to-stay/hostels-universities",
+          "name": "Hostels & Universities"
+        },
+        {
+          "id": "/places-to-stay/pet-friendly",
+          "name": "Pet Friendly"
+        },
+        {
+          "id": "/places-to-stay/cabins-vacation-rentals",
+          "name": "Cabins & Vacation Rentals"
+        }
+      ]
+    },
+    {
+      "id": "/neighborhoods",
+      "name": "Neighborhoods",
+      "children": [
+        {
+          "id": "/neighborhoods/salt-lake-city",
+          "name": "Salt Lake City",
+          "children": [
+            {
+              "id": "/neighborhoods/salt-lake-city/downtown",
+              "name": "Downtown",
+              "children": [
+                {
+                  "id": "/neighborhoods/salt-lake-city/downtown/hotels-lodging",
+                  "name": "Downtown"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/downtown/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/downtown/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/downtown/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/downtown/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/salt-lake-city/university-foothill",
+              "name": "University/Foothill",
+              "children": [
+                {
+                  "id": "/neighborhoods/salt-lake-city/university-foothill/hotels-lodging",
+                  "name": "Near the University"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/university-foothill/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/university-foothill/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/university-foothill/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/university-foothill/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/salt-lake-city/airport-fairgrounds",
+              "name": "Airport/Fairgrounds",
+              "children": [
+                {
+                  "id": "/neighborhoods/salt-lake-city/airport-fairgrounds/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/airport-fairgrounds/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/airport-fairgrounds/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/airport-fairgrounds/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/salt-lake-city/avenues-capitol-hill",
+              "name": "Avenues/Capitol Hill",
+              "children": [
+                {
+                  "id": "/neighborhoods/salt-lake-city/avenues-capitol-hill/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/avenues-capitol-hill/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/avenues-capitol-hill/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/avenues-capitol-hill/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/avenues-capitol-hill/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/salt-lake-city/central-city",
+              "name": "Central City",
+              "children": [
+                {
+                  "id": "/neighborhoods/salt-lake-city/central-city/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/central-city/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/central-city/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/central-city/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/central-city/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/salt-lake-city/granary-ballpark",
+              "name": "Granary/Ballpark",
+              "children": [
+                {
+                  "id": "/neighborhoods/salt-lake-city/granary-ballpark/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/granary-ballpark/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/granary-ballpark/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/granary-ballpark/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/granary-ballpark/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/salt-lake-city/sugar-house",
+              "name": "Sugar House",
+              "children": [
+                {
+                  "id": "/neighborhoods/salt-lake-city/sugar-house/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/sugar-house/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/sugar-house/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/sugar-house/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/salt-lake-city/sugar-house/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "/neighborhoods/great-salt-lake",
+          "name": "Great Salt Lake"
+        },
+        {
+          "id": "/neighborhoods/midvalley",
+          "name": "Midvalley",
+          "children": [
+            {
+              "id": "/neighborhoods/midvalley/cottonwood-heights",
+              "name": "Cottonwood Heights",
+              "children": [
+                {
+                  "id": "/neighborhoods/midvalley/cottonwood-heights/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/cottonwood-heights/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/cottonwood-heights/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/cottonwood-heights/hotels",
+                  "name": "Hotels"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/cottonwood-heights/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/midvalley/holladay-murray",
+              "name": "Holladay/Murray",
+              "children": [
+                {
+                  "id": "/neighborhoods/midvalley/holladay-murray/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/holladay-murray/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/holladay-murray/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/holladay-murray/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/holladay-murray/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/midvalley/midvale",
+              "name": "Midvale",
+              "children": [
+                {
+                  "id": "/neighborhoods/midvalley/midvale/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/midvale/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/midvale/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/midvale/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/midvale/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/midvalley/millcreek",
+              "name": "Millcreek",
+              "children": [
+                {
+                  "id": "/neighborhoods/midvalley/millcreek/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/millcreek/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/millcreek/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/millcreek/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/millcreek/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/midvalley/south-salt-lake",
+              "name": "South Salt Lake",
+              "children": [
+                {
+                  "id": "/neighborhoods/midvalley/south-salt-lake/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/south-salt-lake/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/south-salt-lake/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/south-salt-lake/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/midvalley/south-salt-lake/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "/neighborhoods/mountain-resorts",
+          "name": "Mountain Resorts",
+          "children": [
+            {
+              "id": "/neighborhoods/mountain-resorts/big-cottonwood",
+              "name": "Big Cottonwood",
+              "children": [
+                {
+                  "id": "/neighborhoods/mountain-resorts/big-cottonwood/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/mountain-resorts/big-cottonwood/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/mountain-resorts/big-cottonwood/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/mountain-resorts/big-cottonwood/events",
+                  "name": "Events"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/mountain-resorts/little-cottonwood",
+              "name": "Little Cottonwood",
+              "children": [
+                {
+                  "id": "/neighborhoods/mountain-resorts/little-cottonwood/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/mountain-resorts/little-cottonwood/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/mountain-resorts/little-cottonwood/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/mountain-resorts/little-cottonwood/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/mountain-resorts/little-cottonwood/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "/neighborhoods/south-valley",
+          "name": "South Valley",
+          "children": [
+            {
+              "id": "/neighborhoods/south-valley/draper",
+              "name": "Draper",
+              "children": [
+                {
+                  "id": "/neighborhoods/south-valley/draper/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/south-valley/draper/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/south-valley/draper/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/south-valley/draper/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/south-valley/draper/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            },
+            {
+              "id": "/neighborhoods/south-valley/sandy",
+              "name": "Sandy",
+              "children": [
+                {
+                  "id": "/neighborhoods/south-valley/sandy/bars",
+                  "name": "Bars"
+                },
+                {
+                  "id": "/neighborhoods/south-valley/sandy/events",
+                  "name": "Events"
+                },
+                {
+                  "id": "/neighborhoods/south-valley/sandy/hotels-lodging",
+                  "name": "Hotels & Lodging"
+                },
+                {
+                  "id": "/neighborhoods/south-valley/sandy/restaurants",
+                  "name": "Restaurants"
+                },
+                {
+                  "id": "/neighborhoods/south-valley/sandy/shopping",
+                  "name": "Shopping"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "/neighborhoods/southwest-valley",
+          "name": "Southwest Valley",
+          "children": [
+            {
+              "id": "/neighborhoods/southwest-valley/restaurants",
+              "name": "Restaurants"
+            },
+            {
+              "id": "/neighborhoods/southwest-valley/bars",
+              "name": "Bars"
+            },
+            {
+              "id": "/neighborhoods/southwest-valley/events",
+              "name": "Events"
+            },
+            {
+              "id": "/neighborhoods/southwest-valley/hotels-lodging",
+              "name": "Hotels & Lodging"
+            },
+            {
+              "id": "/neighborhoods/southwest-valley/shopping",
+              "name": "Shopping"
+            }
+          ]
+        },
+        {
+          "id": "/neighborhoods/west-valley",
+          "name": "West Valley",
+          "children": [
+            {
+              "id": "/neighborhoods/west-valley/restaurants",
+              "name": "Restaurants"
+            },
+            {
+              "id": "/neighborhoods/west-valley/bars",
+              "name": "Bars"
+            },
+            {
+              "id": "/neighborhoods/west-valley/events",
+              "name": "Events"
+            },
+            {
+              "id": "/neighborhoods/west-valley/hotels-lodging",
+              "name": "Hotels & Lodging"
+            },
+            {
+              "id": "/neighborhoods/west-valley/shopping",
+              "name": "Shopping"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "/meetings",
+      "name": "Meetings",
+      "children": [
+        {
+          "id": "/meetings/mountain-america-expo-center",
+          "name": "Mountain America Expo Center",
+          "children": [
+            {
+              "id": "/meetings/mountain-america-expo-center/about",
+              "name": "About",
+              "children": [
+                {
+                  "id": "/meetings/mountain-america-expo-center/about/asm-global",
+                  "name": "ASM Global"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/about/contact-us",
+                  "name": "Contact Us"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/about/employment-opportunities",
+                  "name": "Employment Opportunities"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/about/mountain-america-expo-center-press-releases",
+                  "name": "Mountain America Expo Center Press Releases"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/about/sustainability",
+                  "name": "Sustainability"
+                }
+              ]
+            },
+            {
+              "id": "/meetings/mountain-america-expo-center/attend",
+              "name": "Attend",
+              "children": [
+                {
+                  "id": "/meetings/mountain-america-expo-center/attend/facility-events-calendar",
+                  "name": "Facility Events Calendar"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/attend/driving-directions-transportation",
+                  "name": "Driving Directions & Transportation"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/attend/nearby-hotels",
+                  "name": "Nearby Hotels"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/attend/parking",
+                  "name": "Parking"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/attend/venue-directory-map",
+                  "name": "Venue Directory & Map"
+                }
+              ]
+            },
+            {
+              "id": "/meetings/mountain-america-expo-center/exhibit",
+              "name": "Exhibit",
+              "children": [
+                {
+                  "id": "/meetings/mountain-america-expo-center/exhibit/equipment-pricing-services",
+                  "name": "Equipment Pricing & Services"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/exhibit/loading-docks",
+                  "name": "Loading Docks"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/exhibit/order-services",
+                  "name": "Order Services"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/exhibit/rigging-services-policies-procedures",
+                  "name": "Rigging Services, Policies & Procedures"
+                }
+              ]
+            },
+            {
+              "id": "/meetings/mountain-america-expo-center/plan",
+              "name": "Plan",
+              "children": [
+                {
+                  "id": "/meetings/mountain-america-expo-center/plan/facility-services-guide",
+                  "name": "Facility Services Guide",
+                  "children": [
+                    {
+                      "id": "/meetings/mountain-america-expo-center/plan/facility-services-guide/booking-scheduling-services",
+                      "name": "Booking, Scheduling & Services"
+                    },
+                    {
+                      "id": "/meetings/mountain-america-expo-center/plan/facility-services-guide/on-site-services-and-vendors",
+                      "name": "On-site Services and Vendors"
+                    }
+                  ]
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/plan/interactive-floor-plan",
+                  "name": "Interactive Floor Plan"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/plan/media-gallery",
+                  "name": "Media Gallery"
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/plan/policies-procedures",
+                  "name": "Policies & Procedures",
+                  "children": [
+                    {
+                      "id": "/meetings/mountain-america-expo-center/plan/policies-procedures/electrical-contract-policy",
+                      "name": "Electrical Contract Policy"
+                    },
+                    {
+                      "id": "/meetings/mountain-america-expo-center/plan/policies-procedures/encore-rigging-policies",
+                      "name": "Encore Rigging Policies"
+                    }
+                  ]
+                },
+                {
+                  "id": "/meetings/mountain-america-expo-center/plan/static-floor-plan",
+                  "name": "Static Floor Plan"
+                }
+              ]
+            },
+            {
+              "id": "/meetings/mountain-america-expo-center/specifications",
+              "name": "Specifications"
+            },
+            {
+              "id": "/meetings/mountain-america-expo-center/sustainability",
+              "name": "Sustainability"
+            },
+            {
+              "id": "/meetings/mountain-america-expo-center/catering",
+              "name": "Sodexo Live!"
+            }
+          ]
+        },
+        {
+          "id": "/meetings/salt-palace-convention-center",
+          "name": "Salt Palace Convention Center",
+          "children": [
+            {
+              "id": "/meetings/salt-palace-convention-center/about",
+              "name": "About",
+              "children": [
+                {
+                  "id": "/meetings/salt-palace-convention-center/about/asm-global",
+                  "name": "ASM Global"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/about/contact-us",
+                  "name": "Contact Us"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/about/employment-opportunities",
+                  "name": "Employment Opportunities"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/about/press-releases",
+                  "name": "Press Releases"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/about/sustainability",
+                  "name": "Sustainability"
+                }
+              ]
+            },
+            {
+              "id": "/meetings/salt-palace-convention-center/attend",
+              "name": "Visitors",
+              "children": [
+                {
+                  "id": "/meetings/salt-palace-convention-center/attend/directions",
+                  "name": "Directions"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/attend/facility-events-calendar",
+                  "name": "Facility Events Calendar"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/attend/guest-relations",
+                  "name": "Guest Relations"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/attend/hotels-nearby",
+                  "name": "Hotels Nearby"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/attend/parking-information",
+                  "name": "Parking Information"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/attend/transportation-information",
+                  "name": "Transportation Information"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/attend/venue-directory-map",
+                  "name": "Venue Directory & Map"
+                }
+              ]
+            },
+            {
+              "id": "/meetings/salt-palace-convention-center/exhibit",
+              "name": "Exhibitors",
+              "children": [
+                {
+                  "id": "/meetings/salt-palace-convention-center/exhibit/order-services",
+                  "name": "Order Services"
+                }
+              ]
+            },
+            {
+              "id": "/meetings/salt-palace-convention-center/plan",
+              "name": "Planners",
+              "children": [
+                {
+                  "id": "/meetings/salt-palace-convention-center/plan/event-technology-services",
+                  "name": "Event Technology Services",
+                  "children": [
+                    {
+                      "id": "/meetings/salt-palace-convention-center/plan/event-technology-services/event-technology-services-guide",
+                      "name": "Event Technology Services Guide"
+                    }
+                  ]
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/plan/floor-plans-virtual-tour",
+                  "name": "Floor Plans & Virtual Tour"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/plan/interactive-floor-plan",
+                  "name": "Interactive Floor Plan"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/plan/media-and-planning-tools",
+                  "name": "Media and Planning Tools"
+                },
+                {
+                  "id": "/meetings/salt-palace-convention-center/plan/video-fly-through",
+                  "name": "Video Fly Through"
+                }
+              ]
+            },
+            {
+              "id": "/meetings/salt-palace-convention-center/you-are-here",
+              "name": "You Are Here"
+            },
+            {
+              "id": "/meetings/salt-palace-convention-center/specifications",
+              "name": "Specifications"
+            },
+            {
+              "id": "/meetings/salt-palace-convention-center/sustainability",
+              "name": "Sustainability Initiatives"
+            },
+            {
+              "id": "/meetings/salt-palace-convention-center/catering",
+              "name": "Sodexo Live!"
+            }
+          ]
+        },
+        {
+          "id": "/meetings/whats-new",
+          "name": "What's New in Salt Lake",
+          "children": [
+            {
+              "id": "/meetings/whats-new/salt-palace-updates",
+              "name": "Construction Updates"
+            }
+          ]
+        },
+        {
+          "id": "/meetings/why-salt-lake",
+          "name": "Why Choose Salt Lake",
+          "children": [
+            {
+              "id": "/meetings/why-salt-lake/easy-access",
+              "name": "Airport & Accessibility",
+              "children": [
+                {
+                  "id": "/meetings/why-salt-lake/easy-access/direct-flights",
+                  "name": "Direct Flights"
+                },
+                {
+                  "id": "/meetings/why-salt-lake/easy-access/public-transportation",
+                  "name": "Public Transportation"
+                }
+              ]
+            },
+            {
+              "id": "/meetings/why-salt-lake/convention-district",
+              "name": "Compact Convention District",
+              "children": [
+                {
+                  "id": "/meetings/why-salt-lake/convention-district/restaurants",
+                  "name": "Convention District Restaurants"
+                }
+              ]
+            },
+            {
+              "id": "/meetings/why-salt-lake/salt-lake-facts",
+              "name": "All About Salt Lake"
+            },
+            {
+              "id": "/meetings/why-salt-lake/extra-days",
+              "name": "Come Early, Stay Late"
+            },
+            {
+              "id": "/meetings/why-salt-lake/sustainability",
+              "name": "Sustainability Initiatives"
+            },
+            {
+              "id": "/meetings/why-salt-lake/what-planners-say",
+              "name": "Kudos & Testimonials"
+            },
+            {
+              "id": "/meetings/why-salt-lake/ambassador-program",
+              "name": "Ambassador Program"
+            },
+            {
+              "id": "/meetings/why-salt-lake/videos",
+              "name": "Videos"
+            }
+          ]
+        },
+        {
+          "id": "/meetings/hotels",
+          "name": "Hotels",
+          "children": [
+            {
+              "id": "/meetings/hotels/convention-district",
+              "name": "Convention District Hotels",
+              "children": [
+                {
+                  "id": "/meetings/hotels/convention-district/convention-center-hotel",
+                  "name": "Convention Center Hotel"
+                }
+              ]
+            },
+            {
+              "id": "/meetings/hotels/metro-area",
+              "name": "Metro Area Hotels"
+            },
+            {
+              "id": "/meetings/hotels/mountain-resorts",
+              "name": "Mountain Resorts"
+            },
+            {
+              "id": "/meetings/hotels/south-district",
+              "name": "South District"
+            },
+            {
+              "id": "/meetings/hotels/west-district",
+              "name": "West District"
+            }
+          ]
+        },
+        {
+          "id": "/meetings/venues",
+          "name": "Venues",
+          "children": [
+            {
+              "id": "/meetings/venues/unique-venues",
+              "name": "Unique Venues"
+            }
+          ]
+        },
+        {
+          "id": "/meetings/services",
+          "name": "Destination Services",
+          "children": [
+            {
+              "id": "/meetings/services/promotional-materials",
+              "name": "Digital Marketing & Promotional Materials"
+            },
+            {
+              "id": "/meetings/services/supplier-directory",
+              "name": "Supplier Directory"
+            },
+            {
+              "id": "/meetings/services/transportation-directory",
+              "name": "Transportation Directory"
+            },
+            {
+              "id": "/meetings/services/convention-housing-services",
+              "name": "Convention Housing Services"
+            },
+            {
+              "id": "/meetings/services/community-service-opportunities",
+              "name": "Community Service Opportunities"
+            }
+          ]
+        },
+        {
+          "id": "/meetings/convention-calendar",
+          "name": "Convention Calendar"
+        },
+        {
+          "id": "/meetings/submit-rfp",
+          "name": "Submit RFP",
+          "children": [
+            {
+              "id": "/meetings/submit-rfp/thank-you",
+              "name": "Thank You"
+            }
+          ]
+        },
+        {
+          "id": "/meetings/contact",
+          "name": "Contact Us",
+          "children": [
+            {
+              "id": "/meetings/contact/meeting-newsletter-sign-up",
+              "name": "Meeting Newsletter"
+            },
+            {
+              "id": "/meetings/contact/meeting-planner-guide",
+              "name": "Meeting Planner Guide"
+            },
+            {
+              "id": "/meetings/contact/thank-you",
+              "name": "Thank You for Contacting Us"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "/travel-trade",
+      "name": "Travel Trade",
+      "children": [
+        {
+          "id": "/travel-trade/tool-kit",
+          "name": "Travel Trade Tool Kit",
+          "children": [
+            {
+              "id": "/travel-trade/tool-kit/maps-areas",
+              "name": "Maps & Areas"
+            },
+            {
+              "id": "/travel-trade/tool-kit/airport-easy-access",
+              "name": "Airport & Easy Access"
+            },
+            {
+              "id": "/travel-trade/tool-kit/skiing",
+              "name": "Skiing"
+            }
+          ]
+        },
+        {
+          "id": "/travel-trade/services",
+          "name": "Services",
+          "children": [
+            {
+              "id": "/travel-trade/services/group-restaurants",
+              "name": "Group Restaurants"
+            },
+            {
+              "id": "/travel-trade/services/transportation",
+              "name": "Group Transportation"
+            },
+            {
+              "id": "/travel-trade/services/local-receptive-operators",
+              "name": "Local Receptive Operators"
+            },
+            {
+              "id": "/travel-trade/services/local-step-on-guides",
+              "name": "Local Step-On Guides"
+            },
+            {
+              "id": "/travel-trade/services/group-hotels",
+              "name": "Group Hotels"
+            }
+          ]
+        },
+        {
+          "id": "/travel-trade/itineraries",
+          "name": "Itineraries",
+          "children": [
+            {
+              "id": "/travel-trade/itineraries/great-salt-lake-antelope-island",
+              "name": "Great Salt Lake & Antelope Island"
+            },
+            {
+              "id": "/travel-trade/itineraries/pioneer-history-walking-tour",
+              "name": "Pioneer History Walking Tour"
+            },
+            {
+              "id": "/travel-trade/itineraries/utah-fossil-geology-tour",
+              "name": "Utah Fossil & Geology Tour"
+            }
+          ]
+        },
+        {
+          "id": "/travel-trade/contact-us",
+          "name": "Contact Us"
+        }
+      ]
+    },
+    {
+      "id": "/sports",
+      "name": "Sports",
+      "children": [
+        {
+          "id": "/sports/facilities",
+          "name": "Facilities",
+          "children": [
+            {
+              "id": "/sports/facilities/all-venues",
+              "name": "Sports Venues"
+            },
+            {
+              "id": "/sports/facilities/featured",
+              "name": "Featured",
+              "children": [
+                {
+                  "id": "/sports/facilities/featured/maverik-center",
+                  "name": "Maverik Center"
+                },
+                {
+                  "id": "/sports/facilities/featured/mountain-america-expo-center",
+                  "name": "Mountain America Expo Center"
+                },
+                {
+                  "id": "/sports/facilities/featured/salt-palace-convention-center",
+                  "name": "Salt Palace Convention Center"
+                },
+                {
+                  "id": "/sports/facilities/featured/delta-center",
+                  "name": "The Delta Center"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "/sports/why-salt-lake",
+          "name": "Why Salt Lake?",
+          "children": [
+            {
+              "id": "/sports/why-salt-lake/5-reasons-sports-salt-lake-stands-out-as-an-all-star-host-for-your-next-event",
+              "name": "5 Reasons Sports Salt Lake Stands Out as an All-Star Host for Your Next Event"
+            }
+          ]
+        },
+        {
+          "id": "/sports/services",
+          "name": "Services",
+          "children": [
+            {
+              "id": "/sports/services/volunteers",
+              "name": "Volunteers"
+            },
+            {
+              "id": "/sports/services/athlete-experiences",
+              "name": "Athlete Experiences"
+            },
+            {
+              "id": "/sports/services/logistical-promotional-support",
+              "name": "Logistical & Promotional Support"
+            }
+          ]
+        },
+        {
+          "id": "/sports/sports-events-calendar",
+          "name": "Sports Salt Lake Events Calendar"
+        },
+        {
+          "id": "/sports/summit",
+          "name": "Sports Symposium"
+        },
+        {
+          "id": "/sports/sports-social",
+          "name": "Sports Social"
+        },
+        {
+          "id": "/sports/contact-us",
+          "name": "Contact Us",
+          "children": [
+            {
+              "id": "/sports/contact-us/rfp",
+              "name": "RFP"
+            },
+            {
+              "id": "/sports/contact-us/sports-newsletter-sign-up",
+              "name": "Sports Newsletter Sign Up"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "/film",
+      "name": "Film",
+      "children": [
+        {
+          "id": "/film/permitting-information",
+          "name": "Permitting Information"
+        }
+      ]
+    },
+    {
+      "id": "/members",
+      "name": "Members",
+      "children": [
+        {
+          "id": "/members/become-a-member",
+          "name": "Become a Member",
+          "children": [
+            {
+              "id": "/members/become-a-member/10-reasons-to-become-a-member",
+              "name": "10 Reasons to Become a Member"
+            },
+            {
+              "id": "/members/become-a-member/sign-up-online",
+              "name": "Sign-Up Online"
+            },
+            {
+              "id": "/members/become-a-member/member-dues-rates",
+              "name": "Member Dues Rates"
+            },
+            {
+              "id": "/members/become-a-member/become-a-member-faq",
+              "name": "Become a Member FAQ"
+            }
+          ]
+        },
+        {
+          "id": "/members/member-resources",
+          "name": "Member Resources",
+          "children": [
+            {
+              "id": "/members/member-resources/member-listings",
+              "name": "Member Listings"
+            },
+            {
+              "id": "/members/member-resources/member-news-archive",
+              "name": "Member News Archive"
+            },
+            {
+              "id": "/members/member-resources/sign-up-for-email-newsletters",
+              "name": "Sign-up for Email Newsletters"
+            }
+          ]
+        },
+        {
+          "id": "/members/member-events",
+          "name": "Member Events",
+          "children": [
+            {
+              "id": "/members/member-events/afterhours-networking",
+              "name": "Afterhours Networking"
+            },
+            {
+              "id": "/members/member-events/quarterly-luncheons",
+              "name": "Quarterly Luncheons"
+            },
+            {
+              "id": "/members/member-events/salt-summit-and-awards",
+              "name": "Salt Summit and Awards"
+            },
+            {
+              "id": "/members/member-events/ski-biz-expo",
+              "name": "Ski Biz Expo"
+            },
+            {
+              "id": "/members/member-events/brew-ha-ha",
+              "name": "Brew HA HA"
+            },
+            {
+              "id": "/members/member-events/attractions-pass-palooza",
+              "name": "Attractions Pass Palooza"
+            },
+            {
+              "id": "/members/member-events/member-portal-trainings",
+              "name": "Member Portal Trainings"
+            },
+            {
+              "id": "/members/member-events/educational-webinars",
+              "name": "Educational Webinars"
+            },
+            {
+              "id": "/members/member-events/visitor-experience-exchange",
+              "name": "Visitor Experience Exchange",
+              "children": [
+                {
+                  "id": "/members/member-events/visitor-experience-exchange/thank-you",
+                  "name": "Thank You"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "/members/contact-us",
+          "name": "Contact Us"
+        },
+        {
+          "id": "/members/members-only",
+          "name": "Members Only"
+        }
+      ]
+    },
+    {
+      "id": "/press-research",
+      "name": "Press & Research",
+      "children": [
+        {
+          "id": "/press-research/press-releases",
+          "name": "Press Releases"
+        },
+        {
+          "id": "/press-research/salt-lake-news-notes",
+          "name": "Salt Lake News & Notes"
+        },
+        {
+          "id": "/press-research/photos-videos",
+          "name": "Photos & Videos"
+        },
+        {
+          "id": "/press-research/facts-info",
+          "name": "Facts & Info"
+        },
+        {
+          "id": "/press-research/awards-rankings",
+          "name": "Awards & Rankings"
+        },
+        {
+          "id": "/press-research/local-media",
+          "name": "Local Media"
+        },
+        {
+          "id": "/press-research/contact",
+          "name": "Contact"
+        },
+        {
+          "id": "/press-research/state-of-the-visitor-economy",
+          "name": "State of the Visitor Economy"
+        }
+      ]
+    },
+    {
+      "id": "/about-us",
+      "name": "About Us",
+      "children": [
+        {
+          "id": "/about-us/staff-directory",
+          "name": "Staff Directory"
+        },
+        {
+          "id": "/about-us/green-meeting-standards",
+          "name": "Green Meeting Standards"
+        },
+        {
+          "id": "/about-us/awards",
+          "name": "Awards"
+        },
+        {
+          "id": "/about-us/brand-guidelines",
+          "name": "Brand Guidelines"
+        },
+        {
+          "id": "/about-us/board-of-directors",
+          "name": "Board of Directors"
+        },
+        {
+          "id": "/about-us/ctaa-committee",
+          "name": "CTAA Committee"
+        },
+        {
+          "id": "/about-us/employment-opportunities",
+          "name": "Employment Opportunities"
+        },
+        {
+          "id": "/about-us/volunteer-opportunities",
+          "name": "Volunteer Opportunities"
+        },
+        {
+          "id": "/about-us/our-policies-disclosures",
+          "name": "Our Policies & Disclosures",
+          "children": [
+            {
+              "id": "/about-us/our-policies-disclosures/990-non-profit-tax-forms",
+              "name": "990 Non-Profit Tax Forms"
+            },
+            {
+              "id": "/about-us/our-policies-disclosures/audited-financial-statements",
+              "name": "Audited Financial Statements"
+            }
+          ]
+        },
+        {
+          "id": "/about-us/sponsors",
+          "name": "Sponsors"
+        },
+        {
+          "id": "/about-us/sponsorship-request",
+          "name": "Sponsorship Request"
+        },
+        {
+          "id": "/about-us/activation-request",
+          "name": "Brand Activation Request"
+        }
+      ]
+    },
+    {
+      "id": "/contact",
+      "name": "Contact"
+    },
+    {
+      "id": "/speak-salt-lake",
+      "name": "Speak Salt Lake",
+      "children": [
+        {
+          "id": "/speak-salt-lake/browse-all-speakers",
+          "name": "Browse All Speakers"
+        },
+        {
+          "id": "/speak-salt-lake/olympic-athletes",
+          "name": "Olympic Athletes"
+        },
+        {
+          "id": "/speak-salt-lake/business-leaders",
+          "name": "Business Leaders"
+        },
+        {
+          "id": "/speak-salt-lake/consult-and-book",
+          "name": "Consult and Book"
+        }
+      ]
+    }
+  ]
+}
