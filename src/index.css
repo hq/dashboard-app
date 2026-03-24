@@ -68,3 +68,141 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   opacity: 0.5;
 }
+
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Nav link base */
+.nav-link {
+  text-decoration: none;
+  padding-bottom: 5px;
+}
+
+/* ── HQ Design System ─────────────────────────────────── */
+
+/* Nib Pro font */
+@font-face {
+  font-family: 'Nib Pro';
+  src: url('/fonts/NibPro-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Typography scale */
+h1.jumbo {
+  font-family: 'Nib Pro', Georgia, serif;
+  font-size: 5.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+h1 {
+  font-family: 'Nib Pro', Georgia, serif;
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+h2 {
+  font-family: 'Nib Pro', Georgia, serif;
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+p {
+  line-height: 160%;
+}
+
+/* Preheading label */
+.preheading {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+/* Button: sky fill-up on hover */
+.btn-fill-up {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text);
+  background: #84D7DC;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 0.35s ease;
+}
+.btn-fill-up::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-fill-up:hover {
+  color: #fff;
+}
+.btn-fill-up:hover::before {
+  transform: translateY(0);
+}
+.btn-fill-up span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Button: draw border on hover */
+.btn-draw-border {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: inherit;
+  background: transparent;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.btn-draw-border::before,
+.btn-draw-border::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 2px solid var(--draw-color, currentColor);
+  transition: clip-path 0.4s ease;
+}
+.btn-draw-border::before {
+  clip-path: inset(0 100% 100% 0);
+}
+.btn-draw-border::after {
+  clip-path: inset(100% 0 0 100%);
+}
+.btn-draw-border:hover::before {
+  clip-path: inset(0 0 0 0);
+}
+.btn-draw-border:hover::after {
+  clip-path: inset(0 0 0 0);
+}
