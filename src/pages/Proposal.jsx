@@ -298,7 +298,7 @@ export default function Proposal() {
 
         {/* Discovery */}
         {activeTab === 1 && (
-          <div className="space-y-8">
+          <div>
             <div className="-mx-6 -mt-6 bg-deep h-[342px] flex">
               <img src="/assets/hero-discovery.jpg" alt="" className="h-full w-auto object-cover object-center" />
               <div className="flex items-center ml-[80px]">
@@ -308,7 +308,30 @@ export default function Proposal() {
                 </div>
               </div>
             </div>
-            <DiscoveryDashboard />
+            <div className="-mx-6 relative bg-orange h-[342px] flex">
+              <div className="h-full w-[337px] shrink-0 bg-orange-dark relative overflow-hidden">
+                <img
+                  src="/assets/waves-use-on-orange-or-sky-blue-bg.svg"
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+              <div className="flex items-center flex-1 ml-[80px] pr-16">
+                <div className="flex items-start gap-[80px] w-full">
+                  <div className="max-w-[400px] shrink-0">
+                    <p className="preheading text-deep/50 mb-4">Discovery</p>
+                    <h2 className="text-deep">Our Approach</h2>
+                  </div>
+                  <p className="text-deep max-w-[430px] ml-auto">
+                    Lorem ipsum the larger the company, the more challenging it is to innovate and push projects through like a nimble startup can. We bring speed, ambition, and Swiss Army skillsets to supplement existing teams. We help you navigate changing markets by building better products.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <DiscoveryDashboard />
+            </div>
           </div>
         )}
 
