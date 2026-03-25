@@ -8,6 +8,7 @@ import Layout from './components/Layout'
 import Capture from './pages/Capture'
 import Estimate from './pages/Estimate'
 import Proposal from './pages/Proposal'
+import ProposalDaniel from './pages/ProposalDaniel'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
               <Route path="/" element={<Capture />} />
               <Route path="/estimate" element={<Estimate />} />
               <Route path="/proposal" element={<Proposal />} />
+              <Route path="/proposal-daniel" element={<ProposalDaniel />} />
             </Route>
           </Routes>
         </ProposalTabProvider>
