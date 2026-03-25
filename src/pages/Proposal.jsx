@@ -196,26 +196,6 @@ export default function Proposal() {
     URL.revokeObjectURL(url)
   }
 
-  // Empty state
-  if (state.pages.length === 0 && state.screenshots.length === 0) {
-    return (
-      <div className="text-center py-16">
-        <p className="text-deep-muted mb-2">No project data yet.</p>
-        <p className="text-sm text-deep-muted">
-          Go to{' '}
-          <Link to="/" className="text-deep underline underline-offset-2">
-            Capture
-          </Link>{' '}
-          to upload a video and capture screenshots, then{' '}
-          <Link to="/estimate" className="text-deep underline underline-offset-2">
-            Estimate
-          </Link>{' '}
-          to annotate hours.
-        </p>
-      </div>
-    )
-  }
-
   return (
     <div className="space-y-6">
       {/* Tab content */}
