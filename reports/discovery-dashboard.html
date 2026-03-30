@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visit Salt Lake — Discovery Dashboard</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --surface: #1a1f2e;
+    --surface2: #232836;
+    --border: #2d3348;
+    --text: #e4e8f1;
+    --text2: #8b92a8;
+    --accent: #2FB2B8;
+    --accent2: #264A50;
+    --green: #34d399;
+    --yellow: #fbbf24;
+    --red: #f87171;
+    --orange: #fb923c;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+
+  .sidebar { width: 240px; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 0; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 10; }
+  .sidebar h1 { font-size: 14px; padding: 0 20px 20px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+  .sidebar h1 span { display: block; font-size: 11px; color: var(--text2); text-transform: none; letter-spacing: 0; margin-top: 4px; }
+  .nav-section { padding: 12px 0 4px; }
+  .nav-section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text2); padding: 0 20px; margin-bottom: 4px; }
+  .nav-item { display: block; padding: 8px 20px; font-size: 13px; color: var(--text2); cursor: pointer; transition: all 0.15s; text-decoration: none; border-left: 3px solid transparent; }
+  .nav-item:hover { background: var(--surface2); color: var(--text); }
+  .nav-item.active { color: var(--accent); border-left-color: var(--accent); background: rgba(47,178,184,0.08); }
+  .nav-item .count { float: right; font-size: 11px; background: var(--surface2); padding: 1px 6px; border-radius: 8px; }
+
+  .main { margin-left: 240px; flex: 1; padding: 32px 40px; max-width: 1200px; }
+  .page { display: none; }
+  .page.active { display: block; }
+  h2 { font-size: 24px; margin-bottom: 8px; }
+  h3 { font-size: 16px; margin: 24px 0 12px; color: var(--accent); }
+  .subtitle { color: var(--text2); font-size: 14px; margin-bottom: 28px; }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .stat .value { font-size: 32px; font-weight: 700; }
+  .stat .label { font-size: 12px; color: var(--text2); margin-top: 4px; }
+  .stat.green .value { color: var(--green); }
+  .stat.yellow .value { color: var(--yellow); }
+  .stat.red .value { color: var(--red); }
+  .stat.blue .value { color: var(--blue); }
+  .stat.accent .value { color: var(--accent); }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .card-title { font-size: 15px; font-weight: 600; }
+
+  .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+  .badge.green { background: rgba(52,211,153,0.15); color: var(--green); }
+  .badge.yellow { background: rgba(251,191,36,0.15); color: var(--yellow); }
+  .badge.red { background: rgba(248,113,113,0.15); color: var(--red); }
+  .badge.blue { background: rgba(96,165,250,0.15); color: var(--blue); }
+  .badge.purple { background: rgba(167,139,250,0.15); color: var(--purple); }
+  .badge.orange { background: rgba(251,146,60,0.15); color: var(--orange); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--border); color: var(--text2); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:hover td { background: rgba(47,178,184,0.04); }
+
+  .q-item { padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; }
+  .q-item:last-child { border-bottom: none; }
+  .q-check { width: 18px; height: 18px; border-radius: 4px; border: 2px solid var(--border); flex-shrink: 0; margin-top: 2px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 11px; transition: all 0.15s; }
+  .q-check.checked { background: var(--green); border-color: var(--green); color: var(--bg); }
+  .q-text { flex: 1; font-size: 13px; line-height: 1.5; }
+  .q-text strong { color: var(--text); }
+  .q-note { color: var(--text2); font-size: 12px; margin-top: 4px; display: block; }
+  .q-category { margin-bottom: 24px; }
+  .q-category-header { font-size: 14px; font-weight: 600; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+  .q-category-count { font-size: 12px; color: var(--text2); }
+
+  .int-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 900px) { .int-grid { grid-template-columns: 1fr; } }
+  .int-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+  .int-name { font-size: 14px; font-weight: 600; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+  .int-desc { font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 10px; }
+  .int-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .audit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .audit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.15s; }
+  .audit-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .audit-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .audit-desc { font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 12px; }
+  .audit-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+  .audit-url { font-size: 11px; color: var(--text2); margin-bottom: 8px; }
+
+  .flow-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .flow-source { width: 160px; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+  .flow-arrow { color: var(--accent); flex-shrink: 0; }
+  .flow-dest { font-size: 13px; color: var(--text2); }
+  .flow-via { font-size: 11px; color: var(--text2); background: var(--surface2); padding: 2px 8px; border-radius: 4px; margin-left: 8px; }
+
+  .progress { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; margin-top: 8px; }
+  .progress-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+
+  .tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 0; }
+  .tab { padding: 8px 16px; font-size: 13px; color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .flow-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .flow-card-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .flow-card-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+  .flow-detail { display: flex; gap: 24px; flex-wrap: wrap; }
+  .flow-detail-section { }
+  .flow-detail-label { font-size: 11px; color: var(--text2); text-transform: uppercase; margin-bottom: 6px; }
+  .flow-detail-item { font-size: 12px; margin-bottom: 2px; }
+  .flow-detail-item.warning { color: var(--yellow); }
+
+  .key-finding { font-size: 14px; line-height: 2; color: var(--text2); padding-left: 20px; }
+  .key-finding li { margin-bottom: 4px; }
+  .key-finding strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h1>Visit Salt Lake <span>Discovery Dashboard</span></h1>
+  <div class="nav-section">
+    <div class="nav-section-label">Overview</div>
+    <a class="nav-item active" data-page="overview">Dashboard</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Discovery</div>
+    <a class="nav-item" data-page="pages">Page Audits <span class="count">16</span></a>
+    <a class="nav-item" data-page="integrations">Integrations <span class="count">18</span></a>
+    <a class="nav-item" data-page="datasources">Data Sources</a>
+    <a class="nav-item" data-page="flows">User Flows <span class="count">6</span></a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Action Items</div>
+    <a class="nav-item" data-page="questions">Client Questions <span class="count">70+</span></a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">CMS Audit</div>
+    <a class="nav-item" data-page="cms">CMS Structure</a>
+  </div>
+</div>
+
+<div class="main" id="main-content"></div>
+
+<script>
+// All data is defined here, rendered safely via DOM APIs below
+
+const pageAudits = [
+  { id: 'homepage', title: 'Homepage', file: 'homepage.md', lines: 542, desc: '14 content sections, hero carousel, featured events, neighborhood map, discount passport with A/B test', badges: [['Verified','green'],['542 lines','blue']], url: '/' },
+  { id: 'event-detail', title: 'Event Detail', file: 'event-detail.md', lines: 182, desc: 'Event info, dates, venue map, NowPlayingUtah attribution, share buttons, What\'s Nearby tabs', badges: [['Verified','green'],['~1,800 pages','purple']], url: '/event/{category}/{slug}/{id}/' },
+  { id: 'event-category', title: 'Event Category Index', file: 'event-category.md', lines: 282, desc: 'Keyword search, date filters, calendar picker, 10 category checkboxes, 19 location checkboxes', badges: [['Verified','green'],['282 lines','blue']], url: '/events/' },
+  { id: 'listing-detail', title: 'Listing Detail', file: 'listing-detail.md', lines: 190, desc: 'Most complex page: dozens of CRM fields, TripAdvisor reviews, facility/meeting room specs, related stories', badges: [['Verified','green'],['~2,000 pages','purple']], url: '/listing/{slug}/{id}/' },
+  { id: 'category-index', title: 'Category Index', file: 'category-index.md', lines: 141, desc: 'Restaurant/listing index with Experiences/Cuisines/Drinks tabs, keyword search, filters', badges: [['Verified','green']], url: '/restaurants/' },
+  { id: 'places-to-stay', title: 'Places to Stay', file: 'places-to-stay.md', lines: 151, desc: 'Hotel index with type filters, mysterious Search button (Ripe?), TripAdvisor ratings', badges: [['Verified','green'],['~204 listings','purple']], url: '/places-to-stay/' },
+  { id: 'blog-article', title: 'Blog & Articles', file: 'blog-article.md', lines: 76, desc: 'Two separate content sections (/blog/ and /articles/), 13 blog categories, ~460 published pieces', badges: [['Partial','yellow']], url: '/blog/' },
+  { id: 'neighborhood', title: 'Neighborhoods', file: 'neighborhood.md', lines: 76, desc: 'Hand-curated editorial per neighborhood, inline venue links, 6 regions with ~20 neighborhoods', badges: [['Partial','yellow']], url: '/salt-lake-city/downtown/' },
+  { id: 'plan-your-visit', title: 'Plan Your Visit', file: 'plan-your-visit.md', lines: 84, desc: 'Trip ideas, transportation. "Free Visitors Guide" CTA is misleading \u2014 no printed guide exists', badges: [['Partial','yellow']], url: '/plan-your-visit/' },
+  { id: 'meetings', title: 'Meetings & Convention', file: 'meetings-convention.md', lines: 103, desc: 'Full mini-site with own nav. 80+ field RFP form, convention calendar, venue specs', badges: [['Verified','green'],['Mini-site','orange']], url: '/meetings/' },
+  { id: 'sports', title: 'Sports', file: 'sports.md', lines: 93, desc: 'Parallel mini-site with own nav. Sports Play Book PDF, Playeasy integration', badges: [['Verified','green'],['Mini-site','orange']], url: '/sports/' },
+  { id: 'jobs', title: 'Hospitality Jobs', file: 'hospitality-jobs.md', lines: 51, desc: '~72 job listings. Apply mechanism unknown. Not directly inspected.', badges: [['Needs Verification','red']], url: '/hospitality-jobs/' },
+  { id: 'corporate', title: 'Static & Corporate', file: 'static-corporate.md', lines: 84, desc: 'Members section with Simpleview Extranet login, membership tiers, press/research', badges: [['Partial','yellow']], url: '/members/' },
+  { id: 'search', title: 'Search Results', file: 'search-results.md', lines: 87, desc: 'Flat mixed-type results, no faceted filtering, no pagination, unknown search engine', badges: [['Verified','green']], url: '/search/' },
+  { id: 'passes', title: 'Passes & Tickets', file: 'passes-tickets.md', lines: 83, desc: 'Discount Passport, Attractions Pass, Brewery Pass, Ski Super Pass. Bandwango for most.', badges: [['Partial','yellow']], url: 'Various' },
+  { id: 'forms', title: 'CRM Forms', file: 'subscribe-forms.md', lines: 126, desc: 'Newsletter signup (CRM formbuilder), RFP form (80+ fields), reCAPTCHA, hidden fields', badges: [['Verified','green'],['126 lines','blue']], url: '/rfp/, /subscribe/' },
+];
+
+const integrations = [
+  { name:'Simpleview CMS', status:'confirmed', crit:'Critical', type:'Core platform', desc:'Server-side CMS rendering every page. Goatee templating for dynamic widgets.', scope:'Every page' },
+  { name:'Simpleview CRM', status:'confirmed', crit:'Critical', type:'Database/API', desc:'Source of truth for listings, events, forms. Posts to saltlake.simpleviewcrm.com.', scope:'Listings, events, forms' },
+  { name:'Google Tag Manager', status:'confirmed', crit:'High', type:'Tag manager', desc:'2 containers: GTM-5L5W32, GTM-NFBVG93. GA4 event tracking on nav links.', scope:'Global' },
+  { name:'VWO', status:'confirmed', crit:'Medium', type:'A/B testing', desc:'Account 967565. Active experiment on Discount Passport. Hides body on load.', scope:'Global + specific tests' },
+  { name:'NowPlayingUtah', status:'confirmed', crit:'High', type:'Content feed', desc:'Leisure events imported with attribution text. Unknown mechanism.', scope:'Event pages' },
+  { name:'TripAdvisor', status:'confirmed', crit:'Medium-High', type:'Reviews API', desc:'Ratings, rankings, reviews on some listings. Server-side rendered.', scope:'Some listings' },
+  { name:'Google Maps', status:'confirmed', crit:'Medium', type:'Outbound links', desc:'"Get Directions" links with lat/long. Not embedded maps.', scope:'Event + listing detail' },
+  { name:'Goatee', status:'confirmed', crit:'Critical', type:'JS templating', desc:'Simpleview client-side renderer. Powers weather widget.', scope:'Dynamic blocks' },
+  { name:'Map Publisher', status:'partial', crit:'Unknown', type:'CRM maps', desc:'Simpleview add-on. Not found on inspected pages.', scope:'Unknown' },
+  { name:'Bandwango', status:'partial', crit:'High', type:'Ticketing', desc:'"Get FREE Passport" CTA exists but actual integration not found.', scope:'Passport block' },
+  { name:'Act On', status:'missing', crit:'Medium', type:'Marketing', desc:'Not in page source. Forms post to CRM. May be via GTM.', scope:'Unknown' },
+  { name:'Ripe', status:'missing', crit:'Unknown', type:'Booking', desc:'Not found on any page including Places to Stay.', scope:'Unknown' },
+  { name:'EventsForce', status:'missing', crit:'Unknown', type:'Ticketing', desc:'Not found on any event page inspected.', scope:'Unknown' },
+  { name:'Mint+', status:'missing', crit:'Unknown', type:'Sales tool', desc:'Not on any public page. Likely internal only.', scope:'Internal?' },
+  { name:'Civic Plus', status:'missing', crit:'Low', type:'ADA overlay', desc:'Widget not visible. Site has native ARIA. May be via GTM.', scope:'Unknown' },
+  { name:'Bluetoad', status:'missing', crit:'Low', type:'Publications', desc:'Sports Play Book is PDF on Simpleview, not Bluetoad.', scope:'Sports only' },
+  { name:'Playeasy', status:'new', crit:'Low', type:'Sports content', desc:'External story links in Sports section. Not in client list.', scope:'Sports section' },
+  { name:'Shopify', status:'new', crit:'Low', type:'E-commerce', desc:'"Local Crafts \u0026 Gifts" links to Shopify store.', scope:'Footer link' },
+];
+
+const flows = [
+  { id:'C1', title:'Visitor Planning', desc:'Homepage \u2192 neighborhoods \u2192 restaurant \u2192 directions. Homepage \u2192 events \u2192 filter \u2192 event detail \u2192 add to calendar.', handoffs:['Google Maps','External venue websites'], friction:['No clear "book now" on listings','Calendar integration unverified'] },
+  { id:'C2', title:'Convention Planner', desc:'Meetings section \u2192 venues \u2192 floor plans \u2192 RFP form. 80+ field form posts to Simpleview CRM API.', handoffs:['Simpleview CRM'], friction:['Mint+ not found','RFP form is very long'] },
+  { id:'C3', title:'Pass/Ticket Purchase', desc:'"Get FREE Passport" destination unknown. EventsForce tickets not found on any event page.', handoffs:['Bandwango (likely)','EventsForce (not found)'], friction:['Actual purchase flow not testable'] },
+  { id:'C4', title:'Newsletter/Guide Request', desc:'Newsletter via CRM formbuilder. Visitor guide page reveals no printed guide exists.', handoffs:['Simpleview CRM'], friction:['"Request a free copy" CTA is misleading'] },
+  { id:'C5', title:'Member/Partner', desc:'Members page \u2192 login redirects to Simpleview extranet. What\'s behind auth is unknown.', handoffs:['Simpleview Extranet'], friction:['Cannot test without credentials'] },
+  { id:'C6', title:'Job Seeker', desc:'Hospitality jobs \u2192 browse ~72 listings \u2192 apply mechanism unknown.', handoffs:['Unknown'], friction:['Apply mechanism not documented'] },
+];
+
+const questionCategories = [
+  { name:'Integrations \u0026 Vendors', questions:[
+    {t:'Bandwango scope: Where does "Get FREE Passport" link to?',s:'open'},
+    {t:'Bandwango vs. EventsForce: Different sales types.',s:'answered',n:'Completely different sales types, may consolidate later'},
+    {t:'EventsForce: On which events do ticket links appear?',s:'open'},
+    {t:'Ripe booking: Not found. Where does it appear?',s:'open'},
+    {t:'Act On: How does CRM connect to Act On?',s:'open'},
+    {t:'Mint+: Not found on public site. Internal only?',s:'open'},
+    {t:'NowPlayingUtah: API, data dump, or CRM import?',s:'open'},
+    {t:'Google Cloud: What business data comes from Google?',s:'open'},
+    {t:'Super Pass: Where is it sold if not on Bandwango?',s:'open'},
+    {t:'Playeasy: Ongoing integration or one-off link?',s:'open'},
+    {t:'Civic Plus: Still active? Loaded via GTM?',s:'open'},
+    {t:'Two GTM containers: Why two? What\u0027s in each?',s:'open'},
+    {t:'VWO: How actively used? Who manages experiments?',s:'open'},
+    {t:'Shopify store: Revenue? In scope for rebuild?',s:'open'},
+    {t:'TripAdvisor: Live API or periodic sync?',s:'open'},
+  ]},
+  { name:'Content \u0026 Data', questions:[
+    {t:'Featured content: How are homepage items selected? Curated or algorithmic?',s:'open'},
+    {t:'Content freshness: How often updated?',s:'open'},
+    {t:'Event lifecycle: What happens to past events?',s:'open'},
+    {t:'Multi-location listings: Subway has 68 pages. Intentional?',s:'open'},
+    {t:'Blog vs. Articles: Why two sections?',s:'open'},
+    {t:'Listing tiers: "Premiere Partner" \u2014 what tiers? Paid?',s:'open'},
+    {t:'COVID-19 fields: Still relevant or drop?',s:'open'},
+    {t:'Facility/meeting data: How many listings have it? Worth migrating?',s:'open'},
+    {t:'Pass inclusions: Where is the relationship stored?',s:'open'},
+    {t:'Instagram gallery: Live feed or CMS-managed?',s:'open'},
+    {t:'Neighborhood content: Same depth everywhere? Links manual?',s:'open'},
+  ]},
+  { name:'Forms \u0026 Lead Capture', questions:[
+    {t:'CRM form udf_3845: What is this custom checkbox?',s:'open'},
+    {t:'Newsletter lists: How many separate lists?',s:'open'},
+    {t:'RFP submission: What happens after submit?',s:'open'},
+    {t:'Event submission: Who reviews? Approval workflow?',s:'open'},
+    {t:'Sports RFP: Same form as meetings?',s:'open'},
+  ]},
+  { name:'Access \u0026 Auth', questions:[
+    {t:'Member portal: What can members do behind login?',s:'open'},
+    {t:'Membership tiers: What exists? What\u0027s behind each?',s:'open'},
+    {t:'Travel trade: Restricted access? B2B needs?',s:'open'},
+    {t:'Partner self-service: Can partners update their own listings?',s:'open'},
+  ]},
+  { name:'Business \u0026 Priorities', questions:[
+    {t:'Must-haves vs. nice-to-haves for launch?',s:'open'},
+    {t:'Revenue features: Which drive revenue?',s:'open'},
+    {t:'Simpleview contract: Timeline or data access obligations?',s:'open'},
+    {t:'Analytics/reporting: What reports are critical?',s:'open'},
+    {t:'Pass revenue: What do passes generate?',s:'open'},
+  ]},
+  { name:'Technical', questions:[
+    {t:'Simpleview data export: Formats? API? CSV?',s:'open'},
+    {t:'URL structure: Keep current patterns?',s:'open'},
+    {t:'Accessibility: WCAG requirements?',s:'open'},
+    {t:'Search engine: What powers it? Replaceable?',s:'open'},
+    {t:'Filter behavior: AJAX? Pagination beyond initial results?',s:'open'},
+    {t:'Language support: 8 languages. Google Translate or real?',s:'open'},
+    {t:'Visitor guide: CTA says "Request a copy" but no guide. Update?',s:'open'},
+    {t:'Map integration: Where does Map Publisher appear?',s:'open'},
+  ]},
+];
+
+// Helpers for safe DOM creation
+function el(tag, attrs, children) {
+  const e = document.createElement(tag);
+  if (attrs) Object.entries(attrs).forEach(([k,v]) => {
+    if (k === 'class') e.className = v;
+    else if (k === 'style') e.style.cssText = v;
+    else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+    else e.setAttribute(k, v);
+  });
+  if (children) {
+    if (typeof children === 'string') e.textContent = children;
+    else if (Array.isArray(children)) children.forEach(c => { if (c) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    else e.appendChild(children);
+  }
+  return e;
+}
+
+function badge(text, color) {
+  return el('span', {class: 'badge ' + color}, text);
+}
+
+// Build all pages
+function buildApp() {
+  const main = document.getElementById('main-content');
+
+  // OVERVIEW PAGE
+  const overview = el('div', {class:'page active', id:'overview'}, [
+    el('h2', null, 'Discovery Dashboard'),
+    el('p', {class:'subtitle'}, 'Visit Salt Lake website rebuild \u2014 functional audit status as of March 2026'),
+    buildStats([
+      {v:'7,692',l:'URLs crawled',c:'accent'},{v:'1,275',l:'CMS pages',c:'blue'},
+      {v:'16',l:'Page types audited',c:'green'},{v:'70+',l:'Client questions',c:'yellow'},
+      {v:'6',l:'Integrations not found',c:'red'},{v:'18',l:'Integrations mapped',c:'blue'},
+    ]),
+    el('h3', null, 'Audit Completion'),
+    buildAuditTable(),
+    el('h3', null, 'Key Findings'),
+    buildFindings(),
+    el('h3', null, 'Content Scale'),
+    buildStats([
+      {v:'3,723',l:'CRM Listings'},{v:'~1,800',l:'Events'},
+      {v:'~460',l:'Published Articles/Blog'},{v:'2,259',l:'Unpublished Content'},
+      {v:'15',l:'Collection Types'},{v:'136K',l:'Weekly Pageviews'},
+    ]),
+  ]);
+
+  // PAGE AUDITS
+  const pages = el('div', {class:'page', id:'pages'}, [
+    el('h2', null, 'Page Type Audits'),
+    el('p', {class:'subtitle'}, '16 page types documented with full functional analysis'),
+    buildAuditGrid(),
+  ]);
+
+  // INTEGRATIONS
+  const intPage = el('div', {class:'page', id:'integrations'}, [
+    el('h2', null, 'Integration Depth'),
+    el('p', {class:'subtitle'}, '18 integrations assessed \u2014 8 confirmed, 6 not found, 2 partial, 2 new'),
+    buildIntTabs(),
+    el('div', {class:'int-grid', id:'int-grid'}),
+  ]);
+
+  // DATA SOURCES
+  const dsPage = el('div', {class:'page', id:'datasources'}, [
+    el('h2', null, 'Data Sources'),
+    el('p', {class:'subtitle'}, 'Where every piece of content on visitsaltlake.com comes from'),
+    el('h3', null, 'Content Types & Sources'),
+    buildContentSourcesTable(),
+    el('h3', null, 'External Data Flows'),
+    buildDataFlows(),
+    el('h3', null, 'Image & Asset Hosting'),
+    buildAssetTable(),
+  ]);
+
+  // USER FLOWS
+  const flowPage = el('div', {class:'page', id:'flows'}, [
+    el('h2', null, 'User Flows'),
+    el('p', {class:'subtitle'}, '6 end-to-end visitor journeys documented'),
+    ...flows.map(buildFlowCard),
+  ]);
+
+  // QUESTIONS
+  const qPage = el('div', {class:'page', id:'questions'}, [
+    el('h2', null, 'Client Questions'),
+    el('p', {class:'subtitle'}, 'Questions needing Visit Salt Lake input. Click checkboxes to track.'),
+    buildQuestionStats(),
+    ...questionCategories.map(buildQuestionCategory),
+  ]);
+
+  // CMS
+  const cmsPage = el('div', {class:'page', id:'cms'}, [
+    el('h2', null, 'CMS Structure'),
+    el('p', {class:'subtitle'}, 'From the Simpleview admin audit'),
+    buildStats([
+      {v:'1,275',l:'Total CMS Pages',c:'accent'},{v:'10',l:'Nav Sections',c:'blue'},
+      {v:'6',l:'CMS Modules',c:'green'},{v:'15',l:'Collection Types',c:'yellow'},
+      {v:'~20',l:'Daily Admin Users'},
+    ]),
+    el('h3', null, 'Pages by Section'),
+    buildCMSPagesTable(),
+    el('h3', null, 'CMS Modules'),
+    buildCMSModulesTable(),
+    el('h3', null, '15 Collection Types'),
+    buildCollectionTypes(),
+    el('h3', null, 'Homepage Widget Types'),
+    buildWidgetTable(),
+    el('h3', null, 'Content Volumes (CRM)'),
+    buildCRMVolumes(),
+  ]);
+
+  [overview, pages, intPage, dsPage, flowPage, qPage, cmsPage].forEach(p => main.appendChild(p));
+  renderIntGrid('all');
+}
+
+function buildStats(items) {
+  const grid = el('div', {class:'stats'});
+  items.forEach(i => {
+    const s = el('div', {class: 'stat' + (i.c ? ' ' + i.c : '')}, [
+      el('div', {class:'value'}, i.v),
+      el('div', {class:'label'}, i.l),
+    ]);
+    grid.appendChild(s);
+  });
+  return grid;
+}
+
+function buildAuditTable() {
+  const phases = [
+    ['A','Global Elements (header, footer, nav, scripts)','Complete',100],
+    ['B','Page Type Walkthroughs (16 types)','Complete',100],
+    ['C','User Flows (6 journeys)','Complete',100],
+    ['D','Data Sources Map','Complete',100],
+    ['E','Integration Depth Assessment','Complete',100],
+    ['F','CMS Admin Audit','Partial',40],
+  ];
+  const card = el('div', {class:'card'});
+  const table = el('table');
+  const thead = el('thead', null, el('tr', null, ['Phase','Description','Status','Progress'].map(h => el('th', null, h))));
+  const tbody = el('tbody');
+  phases.forEach(([phase, desc, status, pct]) => {
+    const color = status === 'Complete' ? 'green' : 'yellow';
+    const tr = el('tr', null, [
+      el('td', null, phase),
+      el('td', null, desc),
+      el('td', null, badge(status, color)),
+      el('td', null, (() => {
+        const prog = el('div', {class:'progress'});
+        prog.appendChild(el('div', {class:'progress-fill', style:'width:'+pct+'%;background:var(--'+color+')'}));
+        return prog;
+      })()),
+    ]);
+    tbody.appendChild(tr);
+  });
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  card.appendChild(table);
+  return card;
+}
+
+function buildFindings() {
+  const findings = [
+    ['CRM is the real beast','Events & listings live in Simpleview CRM, not the CMS. 3,723+ listings and 1,800+ events.'],
+    ['6 integrations invisible','Ripe, EventsForce, Mint+, Civic Plus, Act On, and Bluetoad not found on any public page.'],
+    ['Massive hidden content','1,030 unpublished articles + 1,229 unpublished blog posts in the CMS.'],
+    ['Listing pages are complex','Dozens of CRM fields, TripAdvisor reviews, meeting room specs, facility data.'],
+    ['Two event sources','CMS-authored events and NowPlayingUtah feed imports display identically.'],
+    ['RFP form has 80+ fields','Posts to Simpleview CRM API. Critical revenue pipeline for meetings team.'],
+    ['~20 employees use admin daily','CMS replacement must work for the whole team, not just visitors.'],
+    ['Multiple mini-sites','Meetings and Sports each have their own navigation, templates, and content.'],
+  ];
+  const card = el('div', {class:'card'});
+  const ul = el('ul', {class:'key-finding'});
+  findings.forEach(([title, desc]) => {
+    const li = el('li');
+    li.appendChild(el('strong', null, title));
+    li.appendChild(document.createTextNode(' \u2014 ' + desc));
+    ul.appendChild(li);
+  });
+  card.appendChild(ul);
+  return card;
+}
+
+function buildAuditGrid() {
+  const grid = el('div', {class:'audit-grid'});
+  pageAudits.forEach(p => {
+    const card = el('div', {class:'audit-card', onclick: () => window.open('https://github.com/zarin-hq/dashboard-app/blob/main/discovery/front-end/pages/' + p.file, '_blank')}, [
+      el('div', {class:'audit-title'}, p.title),
+      el('div', {class:'audit-desc'}, p.desc),
+      el('div', {class:'audit-url'}, p.url),
+      (() => {
+        const meta = el('div', {class:'audit-meta'});
+        p.badges.forEach(([text,color]) => meta.appendChild(badge(text,color)));
+        return meta;
+      })(),
+    ]);
+    grid.appendChild(card);
+  });
+  return grid;
+}
+
+function buildIntTabs() {
+  const tabs = el('div', {class:'tabs'});
+  [['all','All (18)'],['confirmed','Confirmed (8)'],['missing','Not Found (6)'],['partial','Partial (2)'],['new','New (2)']].forEach(([key,label], i) => {
+    const t = el('div', {class:'tab' + (i===0?' active':''), onclick: (e) => {
+      tabs.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      e.target.classList.add('active');
+      renderIntGrid(key);
+    }}, label);
+    tabs.appendChild(t);
+  });
+  return tabs;
+}
+
+function renderIntGrid(filter) {
+  const grid = document.getElementById('int-grid');
+  if (!grid) return;
+  while (grid.firstChild) grid.removeChild(grid.firstChild);
+  const items = filter === 'all' ? integrations : integrations.filter(i => i.status === filter);
+  const sc = {confirmed:'green', missing:'red', partial:'yellow', 'new':'blue'};
+  const cc = {Critical:'red', High:'orange', 'Medium-High':'orange', Medium:'yellow', Low:'blue', Unknown:'purple'};
+  items.forEach(i => {
+    const card = el('div', {class:'int-card'}, [
+      el('div', {class:'int-name'}, [document.createTextNode(i.name), badge(i.status, sc[i.status]||'blue')]),
+      el('div', {class:'int-desc'}, i.desc),
+      el('div', {class:'int-meta'}, [badge(i.crit, cc[i.crit]||'purple'), badge(i.type, 'blue'), badge(i.scope, 'purple')]),
+    ]);
+    grid.appendChild(card);
+  });
+}
+
+function buildContentSourcesTable() {
+  const rows = [
+    ['Events','Simpleview CMS + NowPlayingUtah','~1,800','Daily'],
+    ['Listings','Simpleview CRM + TripAdvisor','~2,000','Ongoing'],
+    ['Hotels','Simpleview CRM + TripAdvisor','~204','Ongoing'],
+    ['Blog Posts','Simpleview CMS','~305','Weekly'],
+    ['Articles','Simpleview CMS','~155','As needed'],
+    ['Neighborhoods','Simpleview CMS','~50','Seasonal'],
+    ['Jobs','Simpleview CMS/CRM','~72','Unknown'],
+    ['Passes/Tickets','CMS + Bandwango + EventsForce','Unknown','As deals change'],
+    ['Facilities','Simpleview CRM','Subset','Partner-managed'],
+    ['Weather','Simpleview API','1 widget','Real-time'],
+    ['Maps','Map Publisher + Google Maps','Per-listing','Synced'],
+    ['Static Pages','Simpleview CMS','~30','Occasional'],
+  ];
+  const card = el('div', {class:'card'});
+  const table = el('table');
+  table.appendChild(el('thead', null, el('tr', null, ['Content','Source','Volume','Frequency'].map(h => el('th',null,h)))));
+  const tbody = el('tbody');
+  rows.forEach(r => tbody.appendChild(el('tr', null, r.map(c => el('td',null,c)))));
+  table.appendChild(tbody);
+  card.appendChild(table);
+  return card;
+}
+
+function buildDataFlows() {
+  const card = el('div', {class:'card'});
+  card.appendChild(el('div', {style:'font-size:13px;color:var(--green);margin-bottom:12px;font-weight:600'}, 'Data INTO the site'));
+  [['NowPlayingUtah','Leisure events','API/import'],['TripAdvisor','Reviews, ratings','API/sync'],['Weather API','Conditions + forecast','Real-time'],['Google Maps','Directions links','Outbound']].forEach(([src,dest,via]) => {
+    const row = el('div', {class:'flow-row'}, [
+      el('div', {class:'flow-source'}, src),
+      el('div', {class:'flow-arrow'}, '\u2192'),
+      (() => { const d = el('div', {class:'flow-dest'}); d.appendChild(document.createTextNode(dest + ' ')); d.appendChild(el('span',{class:'flow-via'},via)); return d; })(),
+    ]);
+    card.appendChild(row);
+  });
+  card.appendChild(el('div', {style:'font-size:13px;color:var(--red);margin:20px 0 12px;font-weight:600'}, 'Data OUT OF the site'));
+  [['RFP Submissions','Simpleview CRM','Form POST'],['Newsletter Signups','Simpleview CRM','Form POST'],['Page Analytics','GTM (2 containers)','JS beacon'],['A/B Test Data','VWO','JS beacon'],['Marketing Data','Act On','Via CRM sync?']].forEach(([src,dest,via]) => {
+    const row = el('div', {class:'flow-row'}, [
+      el('div', {class:'flow-source'}, src),
+      el('div', {class:'flow-arrow'}, '\u2192'),
+      (() => { const d = el('div', {class:'flow-dest'}); d.appendChild(document.createTextNode(dest + ' ')); d.appendChild(el('span',{class:'flow-via'},via)); return d; })(),
+    ]);
+    card.appendChild(row);
+  });
+  return card;
+}
+
+function buildAssetTable() {
+  const card = el('div', {class:'card'});
+  const table = el('table');
+  table.appendChild(el('thead', null, el('tr', null, ['Type','Host','Pattern'].map(h => el('th',null,h)))));
+  const tbody = el('tbody');
+  [['CRM images','saltLake.simpleviewcrm.com','/images/calendar/, /images/listings/'],['CMS assets','assets.simpleviewinc.com','/simpleview/image/upload/...'],['Site assets','www.visitsaltlake.com','/includes/public/assets/']].forEach(r => tbody.appendChild(el('tr',null,r.map(c=>el('td',null,c)))));
+  table.appendChild(tbody);
+  card.appendChild(table);
+  return card;
+}
+
+function buildFlowCard(f) {
+  const card = el('div', {class:'flow-card'}, [
+    el('div', {class:'flow-card-title'}, f.id + '. ' + f.title),
+    el('div', {class:'flow-card-desc'}, f.desc),
+    el('div', {class:'flow-detail'}, [
+      (() => {
+        const sec = el('div', {class:'flow-detail-section'});
+        sec.appendChild(el('div', {class:'flow-detail-label'}, 'Third-Party Handoffs'));
+        f.handoffs.forEach(h => sec.appendChild(el('div', {class:'flow-detail-item'}, '\u2192 ' + h)));
+        return sec;
+      })(),
+      (() => {
+        const sec = el('div', {class:'flow-detail-section'});
+        sec.appendChild(el('div', {class:'flow-detail-label'}, 'Friction Points'));
+        f.friction.forEach(fr => sec.appendChild(el('div', {class:'flow-detail-item warning'}, '\u26A0 ' + fr)));
+        return sec;
+      })(),
+    ]),
+  ]);
+  return card;
+}
+
+function buildQuestionStats() {
+  let open = 0, answered = 0;
+  questionCategories.forEach(c => c.questions.forEach(q => { if(q.s==='answered') answered++; else open++; }));
+  return buildStats([{v:String(open),l:'Open',c:'yellow'},{v:String(answered),l:'Answered',c:'green'},{v:String(open+answered),l:'Total',c:'blue'}]);
+}
+
+function buildQuestionCategory(cat) {
+  const div = el('div', {class:'q-category'});
+  const open = cat.questions.filter(q => q.s === 'open').length;
+  const header = el('div', {class:'q-category-header'}, [
+    el('span', null, cat.name),
+    el('span', {class:'q-category-count'}, open + ' open / ' + cat.questions.length + ' total'),
+  ]);
+  div.appendChild(header);
+  cat.questions.forEach(q => {
+    const check = el('div', {class:'q-check' + (q.s==='answered'?' checked':'')}, q.s==='answered' ? '\u2713' : '');
+    check.addEventListener('click', () => {
+      check.classList.toggle('checked');
+      check.textContent = check.classList.contains('checked') ? '\u2713' : '';
+    });
+    const textDiv = el('div', {class:'q-text'}, q.t);
+    if (q.n) textDiv.appendChild(el('span', {class:'q-note'}, '\u2713 ' + q.n));
+    div.appendChild(el('div', {class:'q-item'}, [check, textDiv]));
+  });
+  return div;
+}
+
+function buildCMSPagesTable() {
+  const rows = [['Main Navigation',357,100],['Footer Navigation',306,85],['Conventions',153,43],['System',153,43],['Microsites',153,43],['Industry',102,29],['Meetings Microsite Nav',51,14]];
+  const colors = ['var(--accent)','var(--accent)','var(--blue)','var(--text2)','var(--purple)','var(--orange)','var(--yellow)'];
+  const card = el('div', {class:'card'});
+  const table = el('table');
+  table.appendChild(el('thead', null, el('tr', null, ['Section','Pages',''].map(h => el('th',null,h)))));
+  const tbody = el('tbody');
+  rows.forEach(([name,count,pct], i) => {
+    const prog = el('div', {class:'progress'});
+    prog.appendChild(el('div', {class:'progress-fill', style:'width:'+pct+'%;background:'+colors[i]}));
+    tbody.appendChild(el('tr', null, [el('td',null,name), el('td',null,String(count)), el('td',null,prog)]));
+  });
+  table.appendChild(tbody);
+  card.appendChild(table);
+  return card;
+}
+
+function buildCMSModulesTable() {
+  const rows = [['Public Relations','Articles, Articles (Ski City), Blog posts'],['Collection Types','15 custom types (Alerts, Hero Slides, FAQ, Staff, Videos, etc.)'],['Dynamic Content','Dynamic content blocks'],['Map Publisher','CRM-integrated maps'],['Auto Responder','Automated email responses'],['Visitors','Visitor tracking/analytics']];
+  const card = el('div', {class:'card'});
+  const table = el('table');
+  table.appendChild(el('thead', null, el('tr', null, ['Module','Manages'].map(h => el('th',null,h)))));
+  const tbody = el('tbody');
+  rows.forEach(r => tbody.appendChild(el('tr', null, r.map(c => el('td',null,c)))));
+  table.appendChild(tbody);
+  card.appendChild(table);
+  return card;
+}
+
+function buildCollectionTypes() {
+  const types = ['Alerts','Announcements','Contact Slides','Expanding Content','Hero Slides','Microsite Slides','Navigation Links','Neighborhood Slides','Questions (FAQ)','Regions Slides','Resort Slides','Slides (generic)','Social Slides','Staff Departments','Vertical Videos'];
+  const card = el('div', {class:'card'});
+  const wrap = el('div', {style:'display:flex;flex-wrap:wrap;gap:8px'});
+  types.forEach(t => wrap.appendChild(badge(t, 'blue')));
+  card.appendChild(wrap);
+  return card;
+}
+
+function buildWidgetTable() {
+  const rows = [['core-marquee','Hero slider/carousel'],['core-side-by-side','Side-by-side content blocks'],['events-marquee','Featured events banner'],['upcoming-events','Event listing'],['related-content','Content cards'],['marquee-side-by-side','Combo layout'],['core-callout-tiles','2 and 3 column tile grids']];
+  const card = el('div', {class:'card'});
+  const table = el('table');
+  table.appendChild(el('thead', null, el('tr', null, ['Widget','Purpose'].map(h => el('th',null,h)))));
+  const tbody = el('tbody');
+  rows.forEach(([w,p]) => {
+    const code = el('code', {style:'background:var(--surface2);padding:2px 6px;border-radius:4px;font-size:12px'}, w);
+    const td1 = el('td');
+    td1.appendChild(code);
+    tbody.appendChild(el('tr', null, [td1, el('td',null,p)]));
+  });
+  table.appendChild(tbody);
+  card.appendChild(table);
+  return card;
+}
+
+function buildCRMVolumes() {
+  const rows = [['Listings','3,723+','Most without media'],['Events','163+ without images','Hundreds total'],['Articles (unpublished)','1,030+','Not on public site'],['Blog Posts (unpublished)','1,229+','Not on public site'],['Unpublished Pages','195','CMS pages not live']];
+  const card = el('div', {class:'card'});
+  const table = el('table');
+  table.appendChild(el('thead', null, el('tr', null, ['Type','Count','Notes'].map(h => el('th',null,h)))));
+  const tbody = el('tbody');
+  rows.forEach(r => tbody.appendChild(el('tr', null, r.map(c => el('td',null,c)))));
+  table.appendChild(tbody);
+  card.appendChild(table);
+  return card;
+}
+
+// Nav
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    item.classList.add('active');
+    const page = document.getElementById(item.dataset.page);
+    if (page) page.classList.add('active');
+  });
+});
+
+buildApp();
+</script>
+</body>
+</html>
