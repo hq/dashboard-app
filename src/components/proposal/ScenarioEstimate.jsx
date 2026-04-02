@@ -7,7 +7,7 @@ import { DISCIPLINE_COLORS } from '../../lib/proposalData'
 function getComplexityLabel(total) {
   if (total < 800) return 'Moderate'
   if (total < 1500) return 'Significant'
-  return 'Complex'
+  return 'Comprehensive'
 }
 
 export default function ScenarioEstimate({ scenarios, activeId }) {
