@@ -57,18 +57,6 @@ const INTEGRATIONS = [
   { name: 'Weather API', status: 'confirmed', criticality: 'medium', description: 'Real-time weather widget in header on every page' },
 ]
 
-const CMS_BACKEND = [
-  { label: 'Collection Types', value: '15', detail: 'Alerts, Hero Slides, FAQ, Slides, Vertical Videos, Staff, and 9 more' },
-  { label: 'Page Builder Widgets', value: '70+', detail: 'Layout, navigation, collections, CTAs, dynamic content, search, social, utilities' },
-  { label: 'Backend Layouts', value: '11', detail: 'Default, Main Nav, Footer Nav, Secondary Nav, Meetings, Sports, Ski, Microsite' },
-  { label: 'User Roles', value: '9', detail: 'Admin, Marketing (no delete), PR Team, SMG Access, Membership, HR, and 3 more' },
-  { label: 'Translation Namespaces', value: '10', detail: 'Common, Events, Listings, Offers, Search, Trip Builder, Media Gallery, Trails' },
-  { label: 'CMS Tags', value: '1,432', detail: 'System-wide tags — ~40% are image-specific with "Image >" prefix' },
-  { label: 'Blog Tags', value: '280', detail: 'Fine-grained tagging for blog posts' },
-  { label: 'Redirects', value: '9,156', detail: 'URL redirect rules — critical for SEO migration' },
-  { label: 'Personas', value: '7', detail: 'Craft Beverages, Family Fun, LGBTQ, Leisure, Outdoor, Restaurants, Winter' },
-]
-
 const MEDIA_LIBRARY = [
   { type: 'Images', count: '3,110', detail: '12 fields each — alt text, credits, focal points, categories, expiration' },
   { type: 'Documents', count: '590', detail: 'PDFs, DOCs, PPTs — categorized by file type' },
@@ -131,14 +119,6 @@ const RISKS = [
     '9,156 existing redirects must be fully exported before decommission',
     'Structured data (JSON-LD) varies by listing type — must replicate per category',
   ]},
-]
-
-const NEXT_STEPS = [
-  { label: 'CRM Backend Access', description: 'Audit hidden functionality, workflows, and automations', priority: 'critical' },
-  { label: 'API Credentials', description: 'Request from Simpleview for data extraction planning', priority: 'critical' },
-  { label: 'Service Ownership', description: 'Verify which third-party accounts are client-owned vs Simpleview', priority: 'high' },
-  { label: 'Contract Review', description: 'Confirm data export rights in Simpleview contract', priority: 'high' },
-  { label: 'Microsite Triage', description: '79 convention microsites — which are active and need migration?', priority: 'medium' },
 ]
 
 // CEO plan #1: Real client questions with status indicators (ported from legacy DiscoveryDashboard)
@@ -224,11 +204,6 @@ function SectionBadge({ section }) {
   )
 }
 
-function PriorityBadge({ priority }) {
-  const styles = { critical: 'bg-red-100 text-red-700', high: 'bg-amber-100 text-amber-700', medium: 'bg-blue-100 text-blue-700' }
-  return <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded ${styles[priority] || 'bg-gray-100 text-gray-500'}`}>{priority}</span>
-}
-
 function ScoreBadge({ score }) {
   const color = score >= 90 ? 'text-emerald-600' : score >= 50 ? 'text-amber-600' : 'text-red-600'
   return <span className={`text-lg font-bold ${color}`}>{score}</span>
@@ -296,19 +271,6 @@ export default function DiscoveryDashboard() {
           </table>
         </div>
         <p className="text-xs text-deep-muted mt-2">* Some URLs match multiple template categories. Unique URL total is 7,692 per sitemap crawl.</p>
-      </CollapsibleSection>
-
-      {/* CMS Backend */}
-      <CollapsibleSection title="CMS Backend" count={CMS_BACKEND.length + ' areas documented'}>
-        <div className="space-y-2">
-          {CMS_BACKEND.map((item) => (
-            <div key={item.label} className="flex items-start gap-3 py-2 border-b border-tan/50 last:border-0">
-              <div className="w-48 shrink-0"><span className="font-medium">{item.label}</span></div>
-              <div className="w-16 shrink-0 font-bold text-deep">{item.value}</div>
-              <div className="flex-1 text-deep-muted">{item.detail}</div>
-            </div>
-          ))}
-        </div>
       </CollapsibleSection>
 
       {/* Media Library */}
@@ -431,20 +393,6 @@ export default function DiscoveryDashboard() {
         </div>
       </CollapsibleSection>
 
-      {/* Next Steps */}
-      <CollapsibleSection title="Next Steps" count={NEXT_STEPS.length}>
-        <div className="space-y-2">
-          {NEXT_STEPS.map((item) => (
-            <div key={item.label} className="flex items-start gap-3 py-2 border-b border-tan/50 last:border-0">
-              <PriorityBadge priority={item.priority} />
-              <div>
-                <span className="font-medium">{item.label}</span>
-                <span className="text-deep-muted ml-2">— {item.description}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </CollapsibleSection>
     </div>
   )
 }

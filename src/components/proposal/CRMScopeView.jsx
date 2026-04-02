@@ -49,7 +49,6 @@ export default function CRMScopeView() {
       <CollapsibleSection title="CRM Data Volumes & Details">
         <div className="space-y-2 text-xs text-deep-muted">
           <p><strong className="text-deep">Convention Microsites:</strong> 79 templated welcome pages for visiting conventions — "Salt Lake Welcomes [Event]"</p>
-          <p><strong className="text-deep">URL Redirects:</strong> 9,156 managed in CMS — critical for SEO preservation during migration</p>
           <p><strong className="text-deep">Partner Portal:</strong> Members section with partnership tiers. Login redirects to Simpleview CRM extranet for listing/imagery management.</p>
           <p><strong className="text-deep">Convention Calendar:</strong> CRM-powered widget on meetings pages displaying upcoming conventions.</p>
         </div>
