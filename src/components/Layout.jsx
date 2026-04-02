@@ -75,7 +75,7 @@ export default function Layout() {
 
         {/* Proposal tabs */}
         {isProposal && (
-          <nav ref={navRef} className="relative flex items-center gap-6 ml-8 overflow-x-auto">
+          <nav ref={navRef} className="relative flex items-center gap-6 ml-8 overflow-x-auto pr-4">
             {PROPOSAL_TABS.map((tab, i) => (
               <button
                 key={tab.id}
