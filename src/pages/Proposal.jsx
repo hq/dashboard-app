@@ -175,30 +175,30 @@ export default function Proposal() {
         {/* Tab 1: What We Found */}
         {activeTab === 1 && (
           <div>
-            <div className="-mx-6 -mt-6 bg-deep h-[342px] flex">
-              <img src="/assets/hero-discovery.jpg" alt="" className="h-full w-auto object-cover object-center" />
-              <div className="flex items-center ml-[80px]">
+            <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
+              <img src="/assets/hero-discovery.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />
+              <div className="flex items-center px-6 py-8 md:ml-[80px] md:px-0 md:py-0">
                 <div>
                   <p className="preheading text-orange mb-4">Discovery</p>
                   <h1 className="text-white">What We Found</h1>
                 </div>
               </div>
             </div>
-            <div className="-mx-6 relative bg-orange h-[342px] flex">
-              <div className="h-full w-[337px] shrink-0 bg-orange-dark relative overflow-hidden">
+            <div className="-mx-6 relative bg-orange md:h-[342px] flex flex-col md:flex-row">
+              <div className="h-24 md:h-full w-full md:w-[337px] shrink-0 bg-orange-dark relative overflow-hidden">
                 <img
                   src="/assets/waves-use-on-orange-or-sky-blue-bg.svg"
                   alt=""
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
-              <div className="flex items-center flex-1 ml-[80px] pr-16">
-                <div className="flex items-start gap-[80px] w-full">
-                  <div className="max-w-[400px] shrink-0">
+              <div className="flex items-center flex-1 px-6 py-8 md:ml-[80px] md:pr-16 md:px-0 md:py-0">
+                <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-[80px] w-full">
+                  <div className="md:max-w-[400px] shrink-0">
                     <p className="preheading text-deep/50 mb-4">Discovery</p>
                     <h2 className="text-deep">Our Approach</h2>
                   </div>
-                  <p className="text-deep max-w-[430px] ml-auto">
+                  <p className="text-deep md:max-w-[430px] md:ml-auto">
                     We analyzed every layer of your site, from the public frontend templates and URL structure, through the CMS admin with its content types and workflows, down to the media library, taxonomy systems, and third-party integrations. The results are broken down below.
                   </p>
                 </div>
@@ -214,9 +214,9 @@ export default function Proposal() {
         {/* Tab 2: The Scope: flat Marketing / CMS / CRM navigation */}
         {activeTab === 2 && (
           <div className="space-y-8">
-            <div className="-mx-6 -mt-6 bg-deep h-[342px] flex">
-              <img src="/assets/hero-scope.jpg" alt="" className="h-full w-auto object-cover object-center" />
-              <div className="flex items-center ml-[80px]">
+            <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
+              <img src="/assets/hero-scope.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />
+              <div className="flex items-center px-6 py-8 md:ml-[80px] md:px-0 md:py-0">
                 <div>
                   <p className="preheading text-orange mb-4">Scope</p>
                   <h1 className="text-white">Site Architecture</h1>
@@ -239,9 +239,9 @@ export default function Proposal() {
         {/* Tab 3: How We Deliver: scenarios + comparison + timeline */}
         {activeTab === 3 && (
           <div className="space-y-8">
-            <div className="-mx-6 -mt-6 bg-deep h-[342px] flex">
-              <img src="/assets/hero-scenarios.jpg" alt="" className="h-full w-auto object-cover object-center" />
-              <div className="flex items-center ml-[80px]">
+            <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
+              <img src="/assets/hero-scenarios.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />
+              <div className="flex items-center px-6 py-8 md:ml-[80px] md:px-0 md:py-0">
                 <div>
                   <p className="preheading text-orange mb-4">Delivery</p>
                   <h1 className="text-white">How We Deliver</h1>
@@ -291,9 +291,9 @@ export default function Proposal() {
         {/* Tab 4: Next Steps: Phase 2 deliverables list */}
         {activeTab === 4 && (
           <div className="space-y-8">
-            <div className="-mx-6 -mt-6 bg-deep h-[342px] flex">
-              <img src="/assets/hero-estimate.jpg" alt="" className="h-full w-auto object-cover object-center" />
-              <div className="flex items-center ml-[80px]">
+            <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
+              <img src="/assets/hero-estimate.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />
+              <div className="flex items-center px-6 py-8 md:ml-[80px] md:px-0 md:py-0">
                 <div>
                   <p className="preheading text-orange mb-4">What's Next</p>
                   <h1 className="text-white">Next Steps</h1>
