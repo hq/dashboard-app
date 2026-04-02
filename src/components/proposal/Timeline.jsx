@@ -33,7 +33,7 @@ export default function Timeline({ scenarioHours }) {
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-sm font-semibold text-deep">{phase.name}</span>
                   <span className="text-xs text-deep-muted tabular-nums">
-                    {phase.weeks}w &mdash; {formatDate(phase.start)} &ndash; {formatDate(phase.end)}
+                    {phase.weeks}w · {formatDate(phase.start)} &ndash; {formatDate(phase.end)}
                   </span>
                 </div>
                 <div className="h-3 rounded-full bg-sand-dark overflow-hidden">

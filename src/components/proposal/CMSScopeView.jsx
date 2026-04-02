@@ -147,7 +147,7 @@ export default function CMSScopeView() {
             </div>
           </div>
           <div>
-            <p className="font-semibold mb-2">Dynamic Content &mdash; Personalization</p>
+            <p className="font-semibold mb-2">Dynamic Content: Personalization</p>
             <p className="text-xs text-deep-muted mb-2">7 persona tags with matching profiles for content targeting:</p>
             <div className="flex flex-wrap gap-1.5">
               {PERSONA_TAGS.map((tag) => (
