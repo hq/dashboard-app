@@ -356,7 +356,7 @@ export default function Proposal() {
           disabled={activeTab === 0}
           className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-colors ${
             activeTab === 0
-              ? 'text-tan cursor-not-allowed'
+              ? 'text-deep-muted/40 cursor-not-allowed'
               : 'text-deep hover:text-deep-dark'
           }`}
         >
@@ -371,7 +371,7 @@ export default function Proposal() {
           disabled={activeTab === PROPOSAL_TABS.length - 1}
           className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-colors ${
             activeTab === PROPOSAL_TABS.length - 1
-              ? 'text-tan cursor-not-allowed'
+              ? 'text-deep-muted/40 cursor-not-allowed'
               : 'text-deep hover:text-deep-dark'
           }`}
         >
