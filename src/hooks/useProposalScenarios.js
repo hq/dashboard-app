@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useProject } from './useProject'
-import { SCENARIOS, getModuleForPage, MODULE_BASE_HOURS } from '../lib/proposalData'
+import { SCENARIOS, getModuleForPage, MODULE_BASE_HOURS, WORK_LAYERS, CONTINGENCY_PERCENT, computeLayerTotals } from '../lib/proposalData'
 
 /**
  * Merges live annotation totals with scenario multipliers.
@@ -58,7 +58,15 @@ export default function useProposalScenarios(moduleFilter = 'all') {
       const backend = Math.round(raw.backend * scenario.multipliers.backend * 10) / 10
       const misc = scenario.miscHours
       const total = Math.round((design + frontend + backend + misc) * 10) / 10
-      return { ...scenario, hours: { design, frontend, backend, misc, total } }
+      const layerTotals = computeLayerTotals()
+      return {
+        ...scenario,
+        hours: { design, frontend, backend, misc, total },
+        layers: WORK_LAYERS,
+        totals: layerTotals.raw,
+        withContingency: layerTotals.withContingency,
+        contingencyPercent: CONTINGENCY_PERCENT,
+      }
     })
   }, [state.annotations, state.pages, state.screenshots, moduleFilter])
 }

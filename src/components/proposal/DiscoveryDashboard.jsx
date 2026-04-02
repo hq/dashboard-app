@@ -102,12 +102,65 @@ const OPEN_QUESTIONS = [
 ]
 
 const CLIENT_QUESTIONS = [
-  { category: 'Integrations & Vendors', count: 14 },
-  { category: 'Content & Data', count: 11 },
-  { category: 'Forms & Lead Capture', count: 5 },
-  { category: 'Access & Auth', count: 4 },
-  { category: 'Business & Priorities', count: 5 },
-  { category: 'Technical', count: 8 },
+  { category: 'Integrations & Vendors', questions: [
+    'Bandwango scope: Where does "Get FREE Passport" link to? Embed, redirect, or widget?',
+    'EventsForce: On which events do ticket links appear?',
+    'Ripe booking: Not found on any page. Where does it appear?',
+    'Act On: Forms submit to CRM, not Act On. How does CRM connect to Act On?',
+    'Mint+: Not found on public site. Internal-only tool?',
+    'NowPlayingUtah: Is the feed an API, data dump, or CRM import? How often does it update?',
+    'Google Cloud: What business data comes from Google?',
+    'Super Pass: Where is it sold if not on Bandwango?',
+    'Playeasy: Ongoing integration or one-off link?',
+    'Civic Plus: Still active? Loaded via GTM?',
+    'Two GTM containers (GTM-5L5W32, GTM-NFBVG93): Why two? What\u2019s in each?',
+    'VWO: How actively used? Who manages experiments?',
+    'Shopify store: Revenue? In scope for rebuild?',
+    'TripAdvisor: Live API or periodic sync? Who manages?',
+  ]},
+  { category: 'Content & Data', questions: [
+    'Featured content: How are homepage events, blogs, and cards selected? Curated or algorithmic?',
+    'Content freshness: How often are listings, events, and articles updated?',
+    'Event lifecycle: What happens to past events? Archived? Deleted?',
+    'Multi-location listings: Subway has 68 pages. Intentional? Partner-managed?',
+    'Blog vs. Articles: Why two separate content areas?',
+    'Listing tiers: "Premiere Partner" badge \u2014 what tiers exist? Paid?',
+    'COVID-19 fields: Dozens of fields on listings. Still relevant?',
+    'Facility/meeting data: How many listings have meeting specs? Worth migrating?',
+    'Pass inclusions: "Included in Brewery Pass" \u2014 where is that stored?',
+    'Instagram gallery: Live feed or CMS-managed images?',
+    'Neighborhood content: Same depth everywhere? Venue links manual?',
+  ]},
+  { category: 'Forms & Lead Capture', questions: [
+    'CRM form udf_3845: What is this custom checkbox?',
+    'Newsletter lists: How many separate lists?',
+    'RFP submission: What happens after submit? Email to whom? CRM pipeline?',
+    'Event submission: Who reviews? Approval workflow?',
+    'Sports RFP: Same form as meetings or different fields?',
+  ]},
+  { category: 'Access & Auth', questions: [
+    'Member portal: What can members do behind login?',
+    'Membership tiers: What exists? What\u2019s behind each?',
+    'Travel trade: Restricted access? B2B needs?',
+    'Partner self-service: Can partners update their own listings?',
+  ]},
+  { category: 'Business & Priorities', questions: [
+    'Must-haves vs. nice-to-haves for launch?',
+    'Revenue features: Which drive revenue?',
+    'Simpleview contract: Timeline or data access obligations?',
+    'Analytics/reporting: What reports are critical?',
+    'Pass revenue: What do passes generate?',
+  ]},
+  { category: 'Technical', questions: [
+    'Simpleview data export: Formats? API access? CSV?',
+    'URL structure: Keep current patterns?',
+    'Accessibility: WCAG requirements beyond Civic Plus overlay?',
+    'Search engine: What powers site search? Replaceable?',
+    'Filter behavior: AJAX? Pagination beyond initial results?',
+    'Language support: 8 languages in footer. Google Translate or real?',
+    'Visitor guide: CTA says "Request a copy" but no guide exists. Update?',
+    'Map integration: Where does Map Publisher appear?',
+  ]},
 ]
 
 function StatusBadge({ status }) {
@@ -185,7 +238,7 @@ export default function DiscoveryDashboard() {
   const totalUrls = 7692
   const templateCount = PAGE_TYPES.length
   const completedPhases = AUDIT_PHASES.filter(p => p.status === 'complete').length
-  const totalQuestions = CLIENT_QUESTIONS.reduce((sum, c) => sum + c.count, 0)
+  const totalQuestions = CLIENT_QUESTIONS.reduce((sum, c) => sum + c.questions.length, 0)
   const confirmedIntegrations = INTEGRATIONS.filter(i => i.status === 'confirmed').length
   const notFoundIntegrations = INTEGRATIONS.filter(i => i.status === 'not-found').length
 
@@ -293,12 +346,18 @@ export default function DiscoveryDashboard() {
       </div>
 
       {/* Client Questions */}
-      <CollapsibleSection title="Questions for Client" count={totalQuestions}>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+      <CollapsibleSection title="Questions for Client" count={totalQuestions} defaultOpen>
+        <p className="text-xs text-deep-muted mb-3">Questions needing Visit Salt Lake input before we can finalize the estimate.</p>
+        <div className="space-y-4">
           {CLIENT_QUESTIONS.map((cat) => (
-            <div key={cat.category} className="p-3 border border-tan/50 bg-sand-light">
-              <p className="text-lg font-bold text-deep">{cat.count}</p>
-              <p className="text-xs text-deep-muted">{cat.category}</p>
+            <div key={cat.category}>
+              <div className="flex items-center justify-between mb-2">
+                <p className="font-semibold">{cat.category}</p>
+                <span className="text-xs text-deep-muted">{cat.questions.length} questions</span>
+              </div>
+              <ul className="list-disc list-inside space-y-1 text-deep-muted">
+                {cat.questions.map((q, i) => <li key={i}>{q}</li>)}
+              </ul>
             </div>
           ))}
         </div>
