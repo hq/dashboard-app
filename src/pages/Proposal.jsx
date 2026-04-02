@@ -146,7 +146,7 @@ export default function Proposal() {
               </p>
             </div>
 
-            <div className="relative overflow-hidden -mx-6" style={{ height: 680 }}>
+            <div className="relative overflow-hidden -mx-6 h-[400px] md:h-[680px]">
               <div className="absolute overflow-hidden" style={{ top: 40, bottom: 40, left: 0, right: 0 }}>
                 <InteractiveWavesGraphic />
               </div>
@@ -166,7 +166,7 @@ export default function Proposal() {
               </p>
             </div>
 
-            <div className="mt-16 -mx-6" style={{ height: '300px' }}>
+            <div className="mt-16 -mx-6 h-[200px] md:h-[300px]">
               <ParticleLogos />
             </div>
           </>
