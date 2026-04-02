@@ -1,15 +1,10 @@
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid,
 } from 'recharts'
-
-const DISCIPLINE_COLORS = {
-  design: '#264A50',
-  frontend: '#84D7DC',
-  backend: '#FFB584',
-  misc: '#BCAB96',
-}
+import { DISCIPLINE_COLORS } from '../../lib/proposalData'
 
 export default function ScenarioComparison({ scenarios }) {
+  // Proportional comparison — bars show relative effort, no hour numbers
   const comparisonData = scenarios.map((s) => ({
     name: s.name,
     Design: s.hours.design,
@@ -25,8 +20,9 @@ export default function ScenarioComparison({ scenarios }) {
           <BarChart data={comparisonData} barSize={36}>
             <CartesianGrid strokeDasharray="3 3" stroke="#E4D5C3" />
             <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#7C8E8E' }} />
-            <YAxis tick={{ fontSize: 12, fill: '#7C8E8E' }} />
-            <Tooltip formatter={(v) => `${v}h`} cursor={false} />
+            {/* Y-axis hidden — proportional comparison only, no hour scale */}
+            <YAxis hide />
+            <Tooltip formatter={(v, name) => [name, '']} cursor={false} />
             <Legend wrapperStyle={{ fontSize: 12 }} />
             <Bar dataKey="Design" stackId="a" fill={DISCIPLINE_COLORS.design} />
             <Bar dataKey="Frontend" stackId="a" fill={DISCIPLINE_COLORS.frontend} />

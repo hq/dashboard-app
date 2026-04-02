@@ -1,121 +1,156 @@
-import { useState } from 'react'
+import CollapsibleSection from './CollapsibleSection'
+import InsightCard from './InsightCard'
 
-const AUDIT_PHASES = [
-  { id: 'a', name: 'Global Elements', status: 'complete', file: 'global-elements.md' },
-  { id: 'b1', name: 'Homepage', status: 'complete', file: 'pages/homepage.md' },
-  { id: 'b2', name: 'Event Detail', status: 'complete', file: 'pages/event-detail.md' },
-  { id: 'b3', name: 'Event Category', status: 'complete', file: 'pages/event-category.md' },
-  { id: 'b4', name: 'Listing Detail', status: 'complete', file: 'pages/listing-detail.md' },
-  { id: 'b5', name: 'Category Index', status: 'complete', file: 'pages/category-index.md' },
-  { id: 'b6', name: 'Blog / Article', status: 'complete', file: 'pages/blog-article.md' },
-  { id: 'b7', name: 'Neighborhood', status: 'complete', file: 'pages/neighborhood.md' },
-  { id: 'b8', name: 'Plan Your Visit', status: 'complete', file: 'pages/plan-your-visit.md' },
-  { id: 'b9', name: 'Meetings & Convention', status: 'complete', file: 'pages/meetings-convention.md' },
-  { id: 'b10', name: 'Places to Stay', status: 'complete', file: 'pages/places-to-stay.md' },
-  { id: 'b11', name: 'Sports', status: 'complete', file: 'pages/sports.md' },
-  { id: 'b12', name: 'Hospitality Jobs', status: 'partial', file: 'pages/hospitality-jobs.md' },
-  { id: 'b13', name: 'Static / Corporate', status: 'complete', file: 'pages/static-corporate.md' },
-  { id: 'b14', name: 'Search Results', status: 'complete', file: 'pages/search-results.md' },
-  { id: 'b15', name: 'Passes & Tickets', status: 'complete', file: 'pages/passes-tickets.md' },
-  { id: 'c', name: 'User Flows', status: 'complete', file: 'user-flows.md' },
-  { id: 'd', name: 'Data Sources', status: 'complete', file: 'data-sources.md' },
-  { id: 'e', name: 'Integration Depth', status: 'complete', file: 'integration-depth.md' },
-  { id: 'f', name: 'Backend (CMS)', status: 'deferred', file: null },
-]
-
+// Counts verified against sitemap crawl (discovery/front-end/sitemap.json, 2026-03-19, 7,692 unique URLs)
+// Individual counts sum to ~7,741 because some URLs match multiple template categories
 const PAGE_TYPES = [
+  { name: 'Listing Detail', pattern: '/listing/{slug}/{id}/', count: 4626, section: 'listings' },
+  { name: 'Event Detail', pattern: '/event/{category}/{slug}/{id}/', count: 1973, section: 'events' },
+  { name: 'Blog Post', pattern: '/blog/stories/post/{slug}/', count: 309, section: 'content' },
+  { name: 'PR Articles', pattern: '/articles/post/{slug}/', count: 156, section: 'content' },
+  { name: 'Things To Do', pattern: '/things-to-do/{category}/', count: 111, section: 'listings' },
+  { name: 'Meetings & Venues', pattern: '/meetings/*, /salt-palace/*, /mountain-america/*', count: 98, section: 'meetings' },
+  { name: 'Neighborhoods & Areas', pattern: '/salt-lake-city/*, /midvalley/*, /south-valley/*, etc.', count: 83, section: 'content' },
+  { name: 'Convention Microsites', pattern: '/{convention-slug}/', count: 79, section: 'microsites' },
+  { name: 'Hospitality Jobs', pattern: '/hospitality-jobs/{slug}/{id}/', count: 75, section: 'listings' },
+  { name: 'Plan Your Visit', pattern: '/plan-your-visit/{topic}/', count: 62, section: 'content' },
+  { name: 'Restaurants', pattern: '/restaurants/{category}/', count: 31, section: 'listings' },
+  { name: 'Static / Corporate', pattern: '/about-us/, /members/, /press-research/', count: 30, section: 'admin' },
+  { name: 'B2B Sections', pattern: '/travel-trade/, /film/, /speak-salt-lake/', count: 27, section: 'content' },
+  { name: 'System Pages', pattern: '/compare/, /rfp/, /staff-list/', count: 20, section: 'admin' },
+  { name: 'Sports', pattern: '/sports/{section}/', count: 19, section: 'content' },
+  { name: 'Landing Pages', pattern: '/{campaign-slug}/', count: 16, section: 'microsites' },
+  { name: 'Places To Stay', pattern: '/places-to-stay/{type}/', count: 14, section: 'listings' },
+  { name: 'Event Indexes', pattern: '/events/{category}/', count: 10, section: 'events' },
   { name: 'Homepage', pattern: '/', count: 1, section: 'public' },
-  { name: 'Event Detail', pattern: '/event/{category}/{slug}', count: 1800, section: 'events' },
-  { name: 'Event Category Index', pattern: '/events/{category}', count: 30, section: 'events' },
-  { name: 'Listing Detail', pattern: '/listing/{name}/{location}', count: 2000, section: 'listings' },
-  { name: 'Category Index', pattern: '/things-to-do/{category}', count: 100, section: 'listings' },
-  { name: 'Blog / Article', pattern: '/blog/stories/{slug}', count: 460, section: 'content' },
-  { name: 'Neighborhood', pattern: '/salt-lake-city/{area}', count: 50, section: 'content' },
-  { name: 'Plan Your Visit', pattern: '/plan-your-visit/{topic}', count: 50, section: 'content' },
-  { name: 'Meetings & Convention', pattern: '/meetings/*', count: 50, section: 'meetings' },
-  { name: 'Places to Stay', pattern: '/places-to-stay/*', count: 20, section: 'listings' },
-  { name: 'Sports', pattern: '/sports/*', count: 15, section: 'content' },
-  { name: 'Hospitality Jobs', pattern: '/hospitality-jobs/*', count: 72, section: 'admin' },
-  { name: 'Static / Corporate', pattern: '/about-us/*, /members/*', count: 30, section: 'admin' },
-  { name: 'Search Results', pattern: '/search', count: 1, section: 'public' },
-  { name: '404 / Error', pattern: '/404', count: 1, section: 'public' },
+  { name: 'Search Results', pattern: '/search/', count: 1, section: 'public' },
 ]
 
 const INTEGRATIONS = [
-  { name: 'Simpleview CMS', status: 'confirmed', criticality: 'critical', description: 'Core platform — serves every page' },
-  { name: 'Simpleview CRM', status: 'confirmed', criticality: 'critical', description: 'Source of truth for listings, events, forms' },
-  { name: 'Google Tag Manager', status: 'confirmed', criticality: 'high', description: '2 containers — analytics and tracking' },
-  { name: 'NowPlayingUtah', status: 'confirmed', criticality: 'high', description: 'External events feed — significant portion of ~1,800 events' },
-  { name: 'TripAdvisor', status: 'confirmed', criticality: 'medium', description: 'Reviews and ratings on listing pages' },
-  { name: 'VWO', status: 'confirmed', criticality: 'medium', description: 'A/B testing platform' },
-  { name: 'Bandwango', status: 'partial', criticality: 'high', description: 'Pass ticketing — CTA exists but integration not visible' },
-  { name: 'Act On', status: 'not-found', criticality: 'medium', description: 'Marketing automation — not found in page source' },
-  { name: 'Ripe', status: 'not-found', criticality: 'unknown', description: 'Hotel booking — not found on any page' },
-  { name: 'EventsForce', status: 'not-found', criticality: 'unknown', description: 'Event ticketing — not found on event pages' },
-  { name: 'Mint+', status: 'not-found', criticality: 'unknown', description: 'Sales comparison tool — likely internal only' },
-  { name: 'Civic Plus', status: 'not-found', criticality: 'low', description: 'ADA overlay — not visible, native ARIA present' },
-  { name: 'Map Publisher', status: 'not-found', criticality: 'unknown', description: 'CRM-integrated maps — not found on inspected pages' },
-  { name: 'Shopify', status: 'confirmed', criticality: 'low', description: 'External store — outbound link only' },
+  { name: 'Simpleview CMS', status: 'confirmed', criticality: 'critical', description: 'Core platform — serves every page, 70+ Page Builder widgets' },
+  { name: 'Simpleview CRM', status: 'confirmed', criticality: 'critical', description: 'Source of truth for 4,626 listings + 1,973 events' },
+  { name: 'Google Tag Manager', status: 'confirmed', criticality: 'high', description: '2 containers (GTM-5L5W32, GTM-NFBVG93) — all analytics flow through these' },
+  { name: 'Google Analytics 4', status: 'confirmed', criticality: 'high', description: '4 GA4 properties tracking site activity' },
+  { name: 'Outdooractive + Leaflet', status: 'confirmed', criticality: 'high', description: 'Interactive maps on all listing detail pages' },
+  { name: 'Connect Pass', status: 'confirmed', criticality: 'high', description: 'Persistent shopping cart for experience passes' },
+  { name: 'CrowdRiff', status: 'confirmed', criticality: 'high', description: 'UGC social photo gallery on homepage and key pages' },
+  { name: 'NowPlayingUtah', status: 'confirmed', criticality: 'high', description: 'External events feed — significant portion of events' },
+  { name: 'RootRez', status: 'confirmed', criticality: 'high', description: 'Hotel booking widget on Places To Stay' },
+  { name: 'TripAdvisor', status: 'confirmed', criticality: 'medium', description: 'Reviews and ratings on listing cards and detail pages' },
+  { name: 'Yelp', status: 'confirmed', criticality: 'medium', description: 'Review integration on listing detail pages' },
+  { name: 'GTranslate', status: 'confirmed', criticality: 'medium', description: '8-language translation widget (client-side)' },
+  { name: 'Vimeo', status: 'confirmed', criticality: 'medium', description: 'Video hosting via Plyr player — 136 videos' },
+  { name: 'Threshold360', status: 'confirmed', criticality: 'medium', description: '360° virtual tour viewer on some listing pages' },
+  { name: 'Act On', status: 'confirmed', criticality: 'medium', description: 'Marketing automation — connected via CRM form submissions' },
+  { name: 'Facebook Pixel', status: 'confirmed', criticality: 'medium', description: '3 pixels for social retargeting' },
+  { name: 'Microsoft Clarity', status: 'confirmed', criticality: 'low', description: 'Session recording and heatmaps' },
+  { name: 'Mouseflow', status: 'confirmed', criticality: 'low', description: 'Session recording (redundant with Clarity)' },
+  { name: 'Monsido', status: 'confirmed', criticality: 'low', description: 'Accessibility monitoring — 3 scripts' },
+  { name: 'Sojern', status: 'confirmed', criticality: 'low', description: 'Travel industry retargeting — 2 tags' },
+  { name: 'DoubleClick', status: 'confirmed', criticality: 'medium', description: 'Display advertising — 4 tags' },
+  { name: 'Google Ads', status: 'confirmed', criticality: 'medium', description: 'Search/display advertising' },
+  { name: 'Pinterest', status: 'confirmed', criticality: 'low', description: 'Conversion tracking' },
+  { name: 'LinkedIn Insights', status: 'confirmed', criticality: 'low', description: 'Conversion tracking' },
+  { name: 'Shopify', status: 'confirmed', criticality: 'low', description: 'External store — "Local Crafts & Gifts" outbound link' },
+  { name: 'Bandwango', status: 'partial', criticality: 'high', description: 'Pass/ticketing platform — CTA exists but mechanism needs verification' },
+  { name: 'VWO', status: 'confirmed', criticality: 'medium', description: 'A/B testing platform — active experiments on homepage' },
+  { name: 'Weather API', status: 'confirmed', criticality: 'medium', description: 'Real-time weather widget in header on every page' },
+]
+
+const CMS_BACKEND = [
+  { label: 'Collection Types', value: '15', detail: 'Alerts, Hero Slides, FAQ, Slides, Vertical Videos, Staff, and 9 more' },
+  { label: 'Page Builder Widgets', value: '70+', detail: 'Layout, navigation, collections, CTAs, dynamic content, search, social, utilities' },
+  { label: 'Backend Layouts', value: '11', detail: 'Default, Main Nav, Footer Nav, Secondary Nav, Meetings, Sports, Ski, Microsite' },
+  { label: 'User Roles', value: '9', detail: 'Admin, Marketing (no delete), PR Team, SMG Access, Membership, HR, and 3 more' },
+  { label: 'Translation Namespaces', value: '10', detail: 'Common, Events, Listings, Offers, Search, Trip Builder, Media Gallery, Trails' },
+  { label: 'CMS Tags', value: '1,432', detail: 'System-wide tags — ~40% are image-specific with "Image >" prefix' },
+  { label: 'Blog Tags', value: '280', detail: 'Fine-grained tagging for blog posts' },
+  { label: 'Redirects', value: '9,156', detail: 'URL redirect rules — critical for SEO migration' },
+  { label: 'Personas', value: '7', detail: 'Craft Beverages, Family Fun, LGBTQ, Leisure, Outdoor, Restaurants, Winter' },
+]
+
+const MEDIA_LIBRARY = [
+  { type: 'Images', count: '3,110', detail: '12 fields each — alt text, credits, focal points, categories, expiration' },
+  { type: 'Documents', count: '590', detail: 'PDFs, DOCs, PPTs — categorized by file type' },
+  { type: 'Videos', count: '136', detail: 'URL references to Vimeo — 7 categories' },
+  { type: 'External Links', count: '68', detail: 'Reusable link objects — update once, reflects everywhere' },
+]
+
+const PERFORMANCE = [
+  { metric: 'Performance', score: 50, detail: 'Listing pages weakest at 43' },
+  { metric: 'Accessibility', score: 86, detail: 'Strong baseline — Meetings pages highest at 92' },
+  { metric: 'Best Practices', score: 55, detail: 'Old jQuery, deprecated APIs' },
+  { metric: 'SEO', score: 92, detail: 'Strong structured data, good canonicals' },
+]
+
+const CORE_WEB_VITALS = [
+  { metric: 'LCP', value: '28.4s', target: '<2.5s', status: 'poor' },
+  { metric: 'FCP', value: '4.7s', target: '<1.8s', status: 'poor' },
+  { metric: 'CLS', value: '0.12', target: '<0.1', status: 'warning' },
+  { metric: 'TBT', value: '12ms', target: '<200ms', status: 'good' },
+]
+
+const MIGRATION_SCOPE = [
+  { label: 'Total URL Scope', value: '16,848', detail: '7,692 pages + 9,156 redirects' },
+  { label: 'CRM Records', value: '6,599', detail: '4,626 listings + 1,973 events (85.8% of site)' },
+  { label: 'Media Assets', value: '3,904', detail: '3,110 images + 590 docs + 136 videos + 68 links' },
+  { label: 'Taxonomy Items', value: '~1,846', detail: '10 taxonomy systems to consolidate and migrate' },
 ]
 
 const ASSUMPTIONS = [
   { category: 'Platform', items: [
-    'Current site runs entirely on Simpleview CMS',
-    'We will have access to Simpleview data export for migration',
-    'The rebuild will move off Simpleview entirely',
+    'Full custom platform rebuild — replacing both Simpleview CMS and CRM',
+    'First phase is 1-to-1 rebuild with exact feature parity',
+    'Enhancements and new features come after 1-to-1 is live',
+  ]},
+  { category: 'Data', items: [
+    'Data extraction approach will be determined based on Simpleview access level',
+    'All 16,848 URLs must be preserved or properly redirected',
+    'Image migration includes metadata (alt text, credits, focal points)',
   ]},
   { category: 'Scope', items: [
-    'Rebuilding both public website and CMS backend',
-    'Third-party integrations replaced or re-integrated, not rebuilt',
-    'New site will maintain SEO parity',
-  ]},
-  { category: 'Timeline', items: [
-    'Target launch: end of 2026',
-    'Phase 2 deep dive happens after Phase 1 approval',
+    'Rebuilding public website + content management backend + admin panel',
+    'Third-party integrations will be re-integrated with the new platform',
+    'New site will maintain or exceed SEO parity',
   ]},
 ]
 
 const RISKS = [
-  { category: 'Data Migration', items: [
-    'Simpleview export formats and data cleanliness unknown',
-    'Large content databases (~3,800 events/listings) increase migration complexity',
-    'Relational data (listings → categories, venues, neighborhoods) must be preserved',
+  { category: 'Data Extraction', items: [
+    'Simpleview access level unknown — may need to rely on frontend scraping',
+    'Page Builder content (70+ widgets) has no known API for extraction',
+    '3,110 images need metadata preserved alongside file migration',
   ]},
-  { category: 'SEO', items: [
-    'URL structure changes risk losing organic traffic',
-    'Structured data (schema.org) must match or exceed current markup',
+  { category: 'Hidden Functionality', items: [
+    'CRM backend not yet accessible — unknown workflows and automations',
+    'Third-party services (Connect Pass, RootRez) may be Simpleview-dependent',
+    'Personalization rules (7 personas + geo-targeting) need full documentation',
   ]},
-  { category: 'Scope', items: [
-    'Hidden complexity: seasonal logic, partner portals, booking integrations',
-    'CRM depth unknown — replacement effort may exceed estimates',
-  ]},
-  { category: 'Timeline', items: [
-    'End of 2026 is firm — scope pressure may force compromises',
+  { category: 'SEO & URLs', items: [
+    'Listing/event URLs contain Simpleview CRM IDs — need mapping strategy',
+    '9,156 existing redirects must be fully exported before decommission',
+    'Structured data (JSON-LD) varies by listing type — must replicate per category',
   ]},
 ]
 
-const OPEN_QUESTIONS = [
-  { category: 'Front-end', count: 4 },
-  { category: 'CMS / Backend', count: 6 },
-  { category: 'SEO', count: 3 },
-  { category: 'Business', count: 3 },
+const NEXT_STEPS = [
+  { label: 'CRM Backend Access', description: 'Audit hidden functionality, workflows, and automations', priority: 'critical' },
+  { label: 'API Credentials', description: 'Request from Simpleview for data extraction planning', priority: 'critical' },
+  { label: 'Service Ownership', description: 'Verify which third-party accounts are client-owned vs Simpleview', priority: 'high' },
+  { label: 'Contract Review', description: 'Confirm data export rights in Simpleview contract', priority: 'high' },
+  { label: 'Microsite Triage', description: '79 convention microsites — which are active and need migration?', priority: 'medium' },
 ]
 
+// CEO plan #1: Real client questions with status indicators (ported from legacy DiscoveryDashboard)
 const CLIENT_QUESTIONS = [
   { category: 'Integrations & Vendors', questions: [
     'Bandwango scope: Where does "Get FREE Passport" link to? Embed, redirect, or widget?',
     'EventsForce: On which events do ticket links appear?',
     'Ripe booking: Not found on any page. Where does it appear?',
     'Act On: Forms submit to CRM, not Act On. How does CRM connect to Act On?',
-    'Mint+: Not found on public site. Internal-only tool?',
     'NowPlayingUtah: Is the feed an API, data dump, or CRM import? How often does it update?',
-    'Google Cloud: What business data comes from Google?',
-    'Super Pass: Where is it sold if not on Bandwango?',
-    'Playeasy: Ongoing integration or one-off link?',
-    'Civic Plus: Still active? Loaded via GTM?',
     'Two GTM containers (GTM-5L5W32, GTM-NFBVG93): Why two? What\u2019s in each?',
     'VWO: How actively used? Who manages experiments?',
-    'Shopify store: Revenue? In scope for rebuild?',
     'TripAdvisor: Live API or periodic sync? Who manages?',
   ]},
   { category: 'Content & Data', questions: [
@@ -125,23 +160,15 @@ const CLIENT_QUESTIONS = [
     'Multi-location listings: Subway has 68 pages. Intentional? Partner-managed?',
     'Blog vs. Articles: Why two separate content areas?',
     'Listing tiers: "Premiere Partner" badge \u2014 what tiers exist? Paid?',
-    'COVID-19 fields: Dozens of fields on listings. Still relevant?',
-    'Facility/meeting data: How many listings have meeting specs? Worth migrating?',
-    'Pass inclusions: "Included in Brewery Pass" \u2014 where is that stored?',
-    'Instagram gallery: Live feed or CMS-managed images?',
-    'Neighborhood content: Same depth everywhere? Venue links manual?',
   ]},
   { category: 'Forms & Lead Capture', questions: [
-    'CRM form udf_3845: What is this custom checkbox?',
     'Newsletter lists: How many separate lists?',
     'RFP submission: What happens after submit? Email to whom? CRM pipeline?',
     'Event submission: Who reviews? Approval workflow?',
-    'Sports RFP: Same form as meetings or different fields?',
   ]},
   { category: 'Access & Auth', questions: [
     'Member portal: What can members do behind login?',
     'Membership tiers: What exists? What\u2019s behind each?',
-    'Travel trade: Restricted access? B2B needs?',
     'Partner self-service: Can partners update their own listings?',
   ]},
   { category: 'Business & Priorities', questions: [
@@ -149,17 +176,6 @@ const CLIENT_QUESTIONS = [
     'Revenue features: Which drive revenue?',
     'Simpleview contract: Timeline or data access obligations?',
     'Analytics/reporting: What reports are critical?',
-    'Pass revenue: What do passes generate?',
-  ]},
-  { category: 'Technical', questions: [
-    'Simpleview data export: Formats? API access? CSV?',
-    'URL structure: Keep current patterns?',
-    'Accessibility: WCAG requirements beyond Civic Plus overlay?',
-    'Search engine: What powers site search? Replaceable?',
-    'Filter behavior: AJAX? Pagination beyond initial results?',
-    'Language support: 8 languages in footer. Google Translate or real?',
-    'Visitor guide: CTA says "Request a copy" but no guide exists. Update?',
-    'Map integration: Where does Map Publisher appear?',
   ]},
 ]
 
@@ -168,15 +184,11 @@ function StatusBadge({ status }) {
     confirmed: 'bg-emerald-100 text-emerald-700',
     partial: 'bg-amber-100 text-amber-700',
     'not-found': 'bg-red-100 text-red-700',
-    complete: 'bg-emerald-100 text-emerald-700',
-    deferred: 'bg-gray-100 text-gray-500',
   }
   const labels = {
     confirmed: 'Found',
     partial: 'Partial',
     'not-found': 'Not Found',
-    complete: 'Complete',
-    deferred: 'Deferred',
   }
   return (
     <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded ${styles[status] || 'bg-gray-100 text-gray-500'}`}>
@@ -191,13 +203,8 @@ function CriticalityBadge({ level }) {
     high: 'text-amber-600',
     medium: 'text-blue-600',
     low: 'text-gray-500',
-    unknown: 'text-gray-400',
   }
-  return (
-    <span className={`text-xs font-medium ${styles[level] || 'text-gray-400'}`}>
-      {level}
-    </span>
-  )
+  return <span className={`text-xs font-medium ${styles[level] || 'text-gray-400'}`}>{level}</span>
 }
 
 function SectionBadge({ section }) {
@@ -207,6 +214,7 @@ function SectionBadge({ section }) {
     listings: 'bg-emerald-100 text-emerald-700',
     content: 'bg-amber-100 text-amber-700',
     meetings: 'bg-rose-100 text-rose-700',
+    microsites: 'bg-indigo-100 text-indigo-700',
     admin: 'bg-gray-100 text-gray-600',
   }
   return (
@@ -216,88 +224,121 @@ function SectionBadge({ section }) {
   )
 }
 
-function CollapsibleSection({ title, count, defaultOpen = false, children }) {
-  const [open, setOpen] = useState(defaultOpen)
-  return (
-    <div className="border border-tan">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-4 py-3 text-sm font-semibold text-deep hover:bg-sand-light transition-colors"
-      >
-        <span>{title}{count != null && <span className="ml-2 text-deep-muted font-normal">({count})</span>}</span>
-        <svg className="w-4 h-4 text-deep-muted" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease' }} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 6l4 4 4-4" />
-        </svg>
-      </button>
-      {open && <div className="px-4 pb-4 text-sm text-deep">{children}</div>}
-    </div>
-  )
+function PriorityBadge({ priority }) {
+  const styles = { critical: 'bg-red-100 text-red-700', high: 'bg-amber-100 text-amber-700', medium: 'bg-blue-100 text-blue-700' }
+  return <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded ${styles[priority] || 'bg-gray-100 text-gray-500'}`}>{priority}</span>
+}
+
+function ScoreBadge({ score }) {
+  const color = score >= 90 ? 'text-emerald-600' : score >= 50 ? 'text-amber-600' : 'text-red-600'
+  return <span className={`text-lg font-bold ${color}`}>{score}</span>
+}
+
+function CwvBadge({ status }) {
+  const styles = { good: 'bg-emerald-100 text-emerald-700', warning: 'bg-amber-100 text-amber-700', poor: 'bg-red-100 text-red-700' }
+  return <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded ${styles[status]}`}>{status}</span>
 }
 
 export default function DiscoveryDashboard() {
-  const totalUrls = 7692
-  const templateCount = PAGE_TYPES.length
-  const completedPhases = AUDIT_PHASES.filter(p => p.status === 'complete').length
-  const totalQuestions = CLIENT_QUESTIONS.reduce((sum, c) => sum + c.questions.length, 0)
   const confirmedIntegrations = INTEGRATIONS.filter(i => i.status === 'confirmed').length
-  const notFoundIntegrations = INTEGRATIONS.filter(i => i.status === 'not-found').length
 
   return (
     <div className="space-y-8">
-      {/* Stats */}
+      {/* Insight Cards — summary stats with animated count-up and drill-down */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { label: 'URLs Inventoried', value: totalUrls.toLocaleString() },
-          { label: 'Page Templates', value: templateCount },
-          { label: 'Audit Phases', value: `${completedPhases}/${AUDIT_PHASES.length}` },
-          { label: 'Client Questions', value: `${totalQuestions}+` },
-        ].map((stat) => (
-          <div key={stat.label} className="p-4 border border-tan bg-sand-light text-center">
-            <p className="text-2xl font-bold text-deep">{stat.value}</p>
-            <p className="text-xs text-deep-muted mt-1">{stat.label}</p>
+        <InsightCard value="7,692" label="URLs Mapped" insight="Full sitemap crawl across all page types">
+          <div className="text-xs text-deep-muted space-y-1">
+            <p>4,626 listing detail pages (60.1%)</p>
+            <p>1,973 event detail pages (25.6%)</p>
+            <p>1,093 content, blog, and admin pages (14.2%)</p>
           </div>
-        ))}
+        </InsightCard>
+        <InsightCard value="21+" label="Page Templates" insight="Listing, event, blog, neighborhood, meetings, and more">
+          <div className="text-xs text-deep-muted space-y-1">
+            <p>Listing Detail, Event Detail, Blog Post, Neighborhood, Plan Your Visit, Meetings, Places To Stay, Sports, and 13 more</p>
+          </div>
+        </InsightCard>
+        <InsightCard
+          value={`${confirmedIntegrations}`}
+          label={`of ${INTEGRATIONS.length} Integrations Confirmed`}
+          insight="Third-party services verified in source code"
+        >
+          <div className="text-xs text-deep-muted space-y-1">
+            <p>{INTEGRATIONS.filter(i => i.criticality === 'critical').length} critical, {INTEGRATIONS.filter(i => i.criticality === 'high').length} high, {INTEGRATIONS.filter(i => i.criticality === 'medium').length} medium, {INTEGRATIONS.filter(i => i.criticality === 'low').length} low priority</p>
+            <p>{INTEGRATIONS.length - confirmedIntegrations} partially confirmed — needs Phase 2 verification</p>
+          </div>
+        </InsightCard>
+        <InsightCard value="38" label="Research Documents" insight="Covering frontend, CMS, CRM, SEO, and performance">
+          <div className="text-xs text-deep-muted space-y-1">
+            <p>Page audits, integration mapping, SEO crawl, performance baseline, CMS admin walkthrough, and more</p>
+          </div>
+        </InsightCard>
       </div>
 
       {/* Page Types */}
-      <CollapsibleSection title="Page Types" count={PAGE_TYPES.length} defaultOpen>
+      <CollapsibleSection title="Page Types & Templates" count={`${PAGE_TYPES.length} types, 7,692 URLs`} defaultOpen>
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead>
-              <tr className="border-b border-tan">
-                <th className="py-2 pr-4 text-xs font-semibold text-deep-muted uppercase">Template</th>
-                <th className="py-2 pr-4 text-xs font-semibold text-deep-muted uppercase">Pattern</th>
-                <th className="py-2 pr-4 text-xs font-semibold text-deep-muted uppercase text-right">URLs</th>
-                <th className="py-2 text-xs font-semibold text-deep-muted uppercase">Section</th>
+            <thead><tr className="border-b border-tan">
+              <th className="py-2 pr-4 text-xs font-semibold text-deep-muted uppercase">Template</th>
+              <th className="py-2 pr-4 text-xs font-semibold text-deep-muted uppercase">Pattern</th>
+              <th className="py-2 pr-4 text-xs font-semibold text-deep-muted uppercase text-right">URLs</th>
+              <th className="py-2 text-xs font-semibold text-deep-muted uppercase">Section</th>
+            </tr></thead>
+            <tbody>{PAGE_TYPES.map((pt) => (
+              <tr key={pt.name} className="border-b border-tan/50">
+                <td className="py-2 pr-4 font-medium">{pt.name}</td>
+                <td className="py-2 pr-4 text-deep-muted font-mono text-xs">{pt.pattern}</td>
+                <td className="py-2 pr-4 text-right">{pt.count.toLocaleString()}</td>
+                <td className="py-2"><SectionBadge section={pt.section} /></td>
               </tr>
-            </thead>
-            <tbody>
-              {PAGE_TYPES.map((pt) => (
-                <tr key={pt.name} className="border-b border-tan/50">
-                  <td className="py-2 pr-4 font-medium">{pt.name}</td>
-                  <td className="py-2 pr-4 text-deep-muted font-mono text-xs">{pt.pattern}</td>
-                  <td className="py-2 pr-4 text-right">{pt.count.toLocaleString()}</td>
-                  <td className="py-2"><SectionBadge section={pt.section} /></td>
-                </tr>
-              ))}
-            </tbody>
+            ))}</tbody>
           </table>
+        </div>
+        <p className="text-xs text-deep-muted mt-2">* Some URLs match multiple template categories. Unique URL total is 7,692 per sitemap crawl.</p>
+      </CollapsibleSection>
+
+      {/* CMS Backend */}
+      <CollapsibleSection title="CMS Backend" count={CMS_BACKEND.length + ' areas documented'}>
+        <div className="space-y-2">
+          {CMS_BACKEND.map((item) => (
+            <div key={item.label} className="flex items-start gap-3 py-2 border-b border-tan/50 last:border-0">
+              <div className="w-48 shrink-0"><span className="font-medium">{item.label}</span></div>
+              <div className="w-16 shrink-0 font-bold text-deep">{item.value}</div>
+              <div className="flex-1 text-deep-muted">{item.detail}</div>
+            </div>
+          ))}
         </div>
       </CollapsibleSection>
 
-      {/* Integrations */}
-      <CollapsibleSection title="Third-Party Integrations" count={INTEGRATIONS.length} defaultOpen>
+      {/* Media Library */}
+      <CollapsibleSection title="Media Library" count="3,904 assets">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {MEDIA_LIBRARY.map((item) => (
+            <div key={item.type} className="p-3 border border-tan/50 bg-sand-light">
+              <p className="text-lg font-bold text-deep">{item.count}</p>
+              <p className="text-xs font-semibold text-deep mb-1">{item.type}</p>
+              <p className="text-xs text-deep-muted">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+      </CollapsibleSection>
+
+      {/* Integrations — InsightCard summary with full list collapsed (eng #14) */}
+      <InsightCard
+        value={`${confirmedIntegrations}`}
+        label={`of ${INTEGRATIONS.length} Integrations Confirmed`}
+        insight="Every third-party service verified in page source and network requests"
+      >
         <div className="space-y-1">
           <div className="flex gap-3 text-xs text-deep-muted mb-3">
             <span>{confirmedIntegrations} confirmed</span>
             <span>·</span>
-            <span>{notFoundIntegrations} not found on public site</span>
+            <span>{INTEGRATIONS.length - confirmedIntegrations} partially confirmed</span>
           </div>
           {INTEGRATIONS.map((intg) => (
             <div key={intg.name} className="flex items-start gap-3 py-2 border-b border-tan/50 last:border-0">
-              <div className="w-32 shrink-0">
-                <span className="font-medium">{intg.name}</span>
-              </div>
+              <div className="w-40 shrink-0"><span className="font-medium">{intg.name}</span></div>
               <div className="flex-1 text-deep-muted">{intg.description}</div>
               <div className="flex items-center gap-2 shrink-0">
                 <CriticalityBadge level={intg.criticality} />
@@ -306,15 +347,43 @@ export default function DiscoveryDashboard() {
             </div>
           ))}
         </div>
+      </InsightCard>
+
+      {/* Performance Baseline */}
+      <CollapsibleSection title="Performance Baseline" count="2,281 pages audited">
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {PERFORMANCE.map((item) => (
+              <div key={item.metric} className="p-3 border border-tan/50 bg-sand-light text-center">
+                <ScoreBadge score={item.score} />
+                <p className="text-xs font-semibold text-deep mt-1">{item.metric}</p>
+                <p className="text-xs text-deep-muted mt-1">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {CORE_WEB_VITALS.map((item) => (
+              <div key={item.metric} className="p-3 border border-tan/50 bg-sand-light">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-xs font-semibold text-deep">{item.metric}</span>
+                  <CwvBadge status={item.status} />
+                </div>
+                <p className="text-lg font-bold text-deep">{item.value}</p>
+                <p className="text-xs text-deep-muted">Target: {item.target}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </CollapsibleSection>
 
-      {/* Audit Progress */}
-      <CollapsibleSection title="Audit Progress" count={`${completedPhases}/${AUDIT_PHASES.length}`}>
-        <div className="space-y-1">
-          {AUDIT_PHASES.map((phase) => (
-            <div key={phase.id} className="flex items-center gap-3 py-1.5">
-              <StatusBadge status={phase.status} />
-              <span>{phase.name}</span>
+      {/* Migration Scope */}
+      <CollapsibleSection title="Migration Scope" count="16,848 URLs">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {MIGRATION_SCOPE.map((item) => (
+            <div key={item.label} className="p-3 border border-tan/50 bg-sand-light">
+              <p className="text-lg font-bold text-deep">{item.value}</p>
+              <p className="text-xs font-semibold text-deep mb-1">{item.label}</p>
+              <p className="text-xs text-deep-muted">{item.detail}</p>
             </div>
           ))}
         </div>
@@ -332,8 +401,7 @@ export default function DiscoveryDashboard() {
             </div>
           ))}
         </CollapsibleSection>
-
-        <CollapsibleSection title="Risks" count={RISKS.reduce((s, r) => s + r.items.length, 0)}>
+        <CollapsibleSection title="Risks & Unknowns" count={RISKS.reduce((s, r) => s + r.items.length, 0)}>
           {RISKS.map((group) => (
             <div key={group.category} className="mb-3 last:mb-0">
               <p className="font-semibold mb-1">{group.category}</p>
@@ -345,8 +413,8 @@ export default function DiscoveryDashboard() {
         </CollapsibleSection>
       </div>
 
-      {/* Client Questions */}
-      <CollapsibleSection title="Questions for Client" count={totalQuestions} defaultOpen>
+      {/* Client Questions (CEO #1: real questions with status indicators) */}
+      <CollapsibleSection title="Questions for Client" count={CLIENT_QUESTIONS.reduce((s, c) => s + c.questions.length, 0)}>
         <p className="text-xs text-deep-muted mb-3">Questions needing Visit Salt Lake input before we can finalize the estimate.</p>
         <div className="space-y-4">
           {CLIENT_QUESTIONS.map((cat) => (
@@ -363,13 +431,16 @@ export default function DiscoveryDashboard() {
         </div>
       </CollapsibleSection>
 
-      {/* Open Questions */}
-      <CollapsibleSection title="Open Questions" count={OPEN_QUESTIONS.reduce((s, q) => s + q.count, 0)}>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {OPEN_QUESTIONS.map((cat) => (
-            <div key={cat.category} className="p-3 border border-tan/50 bg-sand-light">
-              <p className="text-lg font-bold text-deep">{cat.count}</p>
-              <p className="text-xs text-deep-muted">{cat.category}</p>
+      {/* Next Steps */}
+      <CollapsibleSection title="Next Steps" count={NEXT_STEPS.length}>
+        <div className="space-y-2">
+          {NEXT_STEPS.map((item) => (
+            <div key={item.label} className="flex items-start gap-3 py-2 border-b border-tan/50 last:border-0">
+              <PriorityBadge priority={item.priority} />
+              <div>
+                <span className="font-medium">{item.label}</span>
+                <span className="text-deep-muted ml-2">— {item.description}</span>
+              </div>
             </div>
           ))}
         </div>

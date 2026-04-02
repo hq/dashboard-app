@@ -3,11 +3,11 @@ import { createContext, useContext, useState } from 'react'
 const ProposalTabContext = createContext()
 
 export const PROPOSAL_TABS = [
-  { id: 'intro', label: 'Intro' },
-  { id: 'discovery', label: 'Discovery' },
-  { id: 'scope', label: 'Scope' },
-  { id: 'estimate', label: 'Estimate' },
-  { id: 'scenarios', label: 'Scenarios' },
+  { id: 'opportunity', label: 'The Opportunity' },
+  { id: 'discovery', label: 'What We Found' },
+  { id: 'scope', label: 'The Scope' },
+  { id: 'delivery', label: 'How We Deliver' },
+  { id: 'next-steps', label: 'Next Steps' },
 ]
 
 export function ProposalTabProvider({ children }) {

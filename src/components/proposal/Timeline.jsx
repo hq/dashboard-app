@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { buildTimeline } from '../../lib/proposalDataDaniel'
+import { buildTimeline } from '../../lib/proposalData'
 
 function formatDate(date) {
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })

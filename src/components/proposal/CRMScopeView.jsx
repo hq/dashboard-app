@@ -1,29 +1,11 @@
-import { useState } from 'react'
+import CollapsibleSection from './CollapsibleSection'
 
-function CollapsibleSection({ title, count, defaultOpen = false, children }) {
-  const [open, setOpen] = useState(defaultOpen)
-  return (
-    <div className="border border-tan">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-4 py-3 text-sm font-semibold text-deep hover:bg-sand-light transition-colors"
-      >
-        <span>{title}{count != null && <span className="ml-2 text-deep-muted font-normal">({count})</span>}</span>
-        <svg className="w-4 h-4 text-deep-muted" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease' }} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 6l4 4 4-4" />
-        </svg>
-      </button>
-      {open && <div className="px-4 pb-4 text-sm text-deep">{children}</div>}
-    </div>
-  )
-}
-
-const CRM_DATA = [
-  { label: 'Listings (businesses, venues)', count: '3,723+', note: 'Most without media' },
-  { label: 'Events', count: '1,800+', note: '154 without images' },
-  { label: 'Member organizations', count: 'Unknown', note: '3 membership tiers' },
-  { label: 'Sales leads', count: 'Unknown', note: 'Sports, meetings, PR pipelines' },
-  { label: 'Contacts', count: 'Unknown', note: 'CRM contact database' },
+// 3-4 headline stats (eng #13: most impressive stats as cards)
+const CRM_HEADLINE_STATS = [
+  { value: '4,626', label: 'Business Listings', detail: 'Hotels, restaurants, attractions, trails, shops — 25+ fields per listing' },
+  { value: '1,973', label: 'Events', detail: '15 categories (Music, Art, Festivals, Theatre, Sports, etc.)' },
+  { value: '85.8%', label: 'CRM-Powered Content', detail: 'Listings + events = 6,599 of 7,692 URLs' },
+  { value: '6', label: 'CRM Forms', detail: 'Contact, Subscribe, Meeting Planner, Newsletter, Influencer, RFP (80+ fields)' },
 ]
 
 const CRM_INTEGRATIONS = [
@@ -41,38 +23,40 @@ const API_ENDPOINTS = [
   { api: 'CRM SOAP API', protocol: 'SOAP/XML', endpoints: 'Listings, Contacts, Membership', auth: 'clientUserName + clientPassword', notes: 'ColdFusion backend (.cfc endpoints). PHP helper library available.' },
 ]
 
-const UNKNOWNS = [
-  'What can partners actually do in the extranet? (Update listings, view analytics, manage payments?)',
-  'How complete are CRM listing fields across all 3,723 entries?',
-  'What data relationships exist? (listing \u2192 category, listing \u2192 neighborhood, event \u2192 venue)',
-  'What is the CRM data export format? Do relationships persist in exports?',
-  'How many active members/partners pay for listings?',
-  'What CRM reports does the sales team rely on daily?',
-  'Is there a staging/sandbox CRM environment for testing migration?',
-  'How does the NowPlayingUtah event feed get into the CRM?',
+// Phase 2 Deep Dive deliverables for CRM (eng #7, design doc)
+const CRM_PHASE2_DELIVERABLES = [
+  { title: 'CRM Entity Audit', description: 'Full access to Simpleview CRM — document every entity type, field structure, and data relationship across listings, events, contacts, and members.' },
+  { title: 'Data Migration Mapping', description: 'Field-by-field analysis: what moves, what gets archived, what format the data is in. Test export formats and verify relationship preservation.' },
+  { title: 'Partner Portal Workflows', description: 'Document the full partner self-service experience — listing management, imagery uploads, account settings, analytics access, payment flows.' },
+  { title: 'Integration Verification', description: 'Test every CRM-CMS integration point end-to-end. Verify data sync mechanisms, API contracts, and identify Simpleview-dependent services that need replacement.' },
 ]
 
 export default function CRMScopeView() {
   return (
     <div className="space-y-4">
-      {/* Data Volumes */}
-      <div className="rounded-xl border border-tan bg-sand-light p-5 space-y-4">
-        <p className="preheading">CRM Data Volumes</p>
-        <div className="space-y-1.5">
-          {CRM_DATA.map((item) => (
-            <div key={item.label} className="flex items-center justify-between py-2 border-b border-tan/50 last:border-0">
-              <span>{item.label}</span>
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-deep-muted">{item.note}</span>
-                <span className="font-bold text-deep tabular-nums">{item.count}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* Headline Stats — 3-4 most impressive (eng #13) */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {CRM_HEADLINE_STATS.map((stat) => (
+          <div key={stat.label} className="p-4 border border-tan bg-sand-light">
+            <p className="text-2xl font-bold text-deep">{stat.value}</p>
+            <p className="text-xs font-semibold text-deep mt-1">{stat.label}</p>
+            <p className="text-xs text-deep-muted mt-1">{stat.detail}</p>
+          </div>
+        ))}
       </div>
 
+      {/* Remaining CRM details collapsed */}
+      <CollapsibleSection title="CRM Data Volumes & Details">
+        <div className="space-y-2 text-xs text-deep-muted">
+          <p><strong className="text-deep">Convention Microsites:</strong> 79 templated welcome pages for visiting conventions — "Salt Lake Welcomes [Event]"</p>
+          <p><strong className="text-deep">URL Redirects:</strong> 9,156 managed in CMS — critical for SEO preservation during migration</p>
+          <p><strong className="text-deep">Partner Portal:</strong> Members section with partnership tiers. Login redirects to Simpleview CRM extranet for listing/imagery management.</p>
+          <p><strong className="text-deep">Convention Calendar:</strong> CRM-powered widget on meetings pages displaying upcoming conventions.</p>
+        </div>
+      </CollapsibleSection>
+
       {/* Partner Portal Flow */}
-      <CollapsibleSection title="Partner Portal Flow" defaultOpen>
+      <CollapsibleSection title="Partner Portal Flow">
         <div className="space-y-3">
           <p className="text-xs text-deep-muted">How partners interact with the CRM through the public site:</p>
           <div className="flex flex-col gap-2">
@@ -141,13 +125,26 @@ export default function CRMScopeView() {
         </div>
       </CollapsibleSection>
 
-      {/* Key Unknowns */}
-      <CollapsibleSection title="Key Unknowns (Phase 2)" count={UNKNOWNS.length} defaultOpen>
-        <p className="text-xs text-deep-muted mb-3">These questions require CRM admin access to answer and are critical for accurate migration estimates:</p>
-        <ul className="list-disc list-inside space-y-1.5 text-deep-muted">
-          {UNKNOWNS.map((q, i) => <li key={i}>{q}</li>)}
-        </ul>
-      </CollapsibleSection>
+      {/* Phase 2 Deep Dive — replaces "coming soon" / unknowns pattern (eng #7) */}
+      <div className="rounded-xl border-2 border-dashed border-sky/50 bg-sky/5 p-5 space-y-4">
+        <div>
+          <p className="preheading text-sky-dark mb-1">Phase 2 Deep Dive</p>
+          <p className="text-sm text-deep">
+            The CRM powers 85.8% of the site's content but we've only seen it from the outside. Phase 2 gives us full admin access to document the data model, workflows, and integrations that drive the public experience.
+          </p>
+        </div>
+        <div className="space-y-3">
+          {CRM_PHASE2_DELIVERABLES.map((item) => (
+            <div key={item.title} className="flex items-start gap-3 p-3 border border-sky/20 bg-white">
+              <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-sky mt-1.5" />
+              <div>
+                <p className="font-semibold text-sm text-deep">{item.title}</p>
+                <p className="text-xs text-deep-muted mt-0.5">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
