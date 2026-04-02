@@ -1,30 +1,33 @@
 import { useState } from 'react'
 
+// Counts verified against sitemap crawl (discovery/front-end/sitemap.json, 2026-03-19, 7,692 unique URLs)
+// Individual counts sum to ~7,741 because some URLs match multiple template categories
 const PAGE_TYPES = [
-  { name: 'Listing Detail', pattern: '/listing/{slug}/{id}/', count: 4629, section: 'listings' },
-  { name: 'Event Detail', pattern: '/event/{category}/{slug}/{id}/', count: 1898, section: 'events' },
-  { name: 'Blog Post', pattern: '/blog/stories/post/{slug}/', count: 310, section: 'content' },
-  { name: 'PR Articles', pattern: '/articles/post/{slug}/', count: 206, section: 'content' },
-  { name: 'Things To Do', pattern: '/things-to-do/{category}/', count: 112, section: 'listings' },
+  { name: 'Listing Detail', pattern: '/listing/{slug}/{id}/', count: 4626, section: 'listings' },
+  { name: 'Event Detail', pattern: '/event/{category}/{slug}/{id}/', count: 1973, section: 'events' },
+  { name: 'Blog Post', pattern: '/blog/stories/post/{slug}/', count: 309, section: 'content' },
+  { name: 'PR Articles', pattern: '/articles/post/{slug}/', count: 156, section: 'content' },
+  { name: 'Things To Do', pattern: '/things-to-do/{category}/', count: 111, section: 'listings' },
+  { name: 'Meetings & Venues', pattern: '/meetings/*, /salt-palace/*, /mountain-america/*', count: 98, section: 'meetings' },
+  { name: 'Neighborhoods & Areas', pattern: '/salt-lake-city/*, /midvalley/*, /south-valley/*, etc.', count: 83, section: 'content' },
   { name: 'Convention Microsites', pattern: '/{convention-slug}/', count: 79, section: 'microsites' },
-  { name: 'Hospitality Jobs', pattern: '/hospitality-jobs/{slug}/{id}/', count: 76, section: 'listings' },
-  { name: 'Plan Your Visit', pattern: '/plan-your-visit/{topic}/', count: 63, section: 'content' },
-  { name: 'Meetings Microsite', pattern: '/meetings/{section}/', count: 46, section: 'meetings' },
-  { name: 'Neighborhoods & Areas', pattern: '/salt-lake-city/{area}/', count: 104, section: 'content' },
-  { name: 'Restaurants', pattern: '/restaurants/{category}/', count: 32, section: 'listings' },
-  { name: 'Places To Stay', pattern: '/places-to-stay/{type}/', count: 15, section: 'listings' },
-  { name: 'Sports', pattern: '/sports/{section}/', count: 20, section: 'content' },
-  { name: 'B2B Sections', pattern: '/travel-trade/, /film/, /speak-salt-lake/', count: 27, section: 'content' },
-  { name: 'Landing Pages', pattern: '/{campaign-slug}/', count: 16, section: 'microsites' },
+  { name: 'Hospitality Jobs', pattern: '/hospitality-jobs/{slug}/{id}/', count: 75, section: 'listings' },
+  { name: 'Plan Your Visit', pattern: '/plan-your-visit/{topic}/', count: 62, section: 'content' },
+  { name: 'Restaurants', pattern: '/restaurants/{category}/', count: 31, section: 'listings' },
   { name: 'Static / Corporate', pattern: '/about-us/, /members/, /press-research/', count: 30, section: 'admin' },
+  { name: 'B2B Sections', pattern: '/travel-trade/, /film/, /speak-salt-lake/', count: 27, section: 'content' },
+  { name: 'System Pages', pattern: '/compare/, /rfp/, /staff-list/', count: 20, section: 'admin' },
+  { name: 'Sports', pattern: '/sports/{section}/', count: 19, section: 'content' },
+  { name: 'Landing Pages', pattern: '/{campaign-slug}/', count: 16, section: 'microsites' },
+  { name: 'Places To Stay', pattern: '/places-to-stay/{type}/', count: 14, section: 'listings' },
+  { name: 'Event Indexes', pattern: '/events/{category}/', count: 10, section: 'events' },
   { name: 'Homepage', pattern: '/', count: 1, section: 'public' },
   { name: 'Search Results', pattern: '/search/', count: 1, section: 'public' },
-  { name: 'System Pages', pattern: '/compare/, /rfp/, /staff-list/', count: 20, section: 'admin' },
 ]
 
 const INTEGRATIONS = [
   { name: 'Simpleview CMS', status: 'confirmed', criticality: 'critical', description: 'Core platform — serves every page, 70+ Page Builder widgets' },
-  { name: 'Simpleview CRM', status: 'confirmed', criticality: 'critical', description: 'Source of truth for 4,629 listings + 1,898 events' },
+  { name: 'Simpleview CRM', status: 'confirmed', criticality: 'critical', description: 'Source of truth for 4,626 listings + 1,973 events' },
   { name: 'Google Tag Manager', status: 'confirmed', criticality: 'high', description: '2 containers (GTM-5L5W32, GTM-NFBVG93) — all analytics flow through these' },
   { name: 'Google Analytics 4', status: 'confirmed', criticality: 'high', description: '4 GA4 properties tracking site activity' },
   { name: 'Outdooractive + Leaflet', status: 'confirmed', criticality: 'high', description: 'Interactive maps on all listing detail pages' },
@@ -87,8 +90,8 @@ const CORE_WEB_VITALS = [
 ]
 
 const MIGRATION_SCOPE = [
-  { label: 'Total URL Scope', value: '16,775', detail: '7,619 pages + 9,156 redirects' },
-  { label: 'CRM Records', value: '6,527', detail: '4,629 listings + 1,898 events (85.7% of site)' },
+  { label: 'Total URL Scope', value: '16,848', detail: '7,692 pages + 9,156 redirects' },
+  { label: 'CRM Records', value: '6,599', detail: '4,626 listings + 1,973 events (85.8% of site)' },
   { label: 'Media Assets', value: '3,904', detail: '3,110 images + 590 docs + 136 videos + 68 links' },
   { label: 'Taxonomy Items', value: '~1,846', detail: '10 taxonomy systems to consolidate and migrate' },
 ]
@@ -101,7 +104,7 @@ const ASSUMPTIONS = [
   ]},
   { category: 'Data', items: [
     'Data extraction approach will be determined based on Simpleview access level',
-    'All 16,775 URLs must be preserved or properly redirected',
+    'All 16,848 URLs must be preserved or properly redirected',
     'Image migration includes metadata (alt text, credits, focal points)',
   ]},
   { category: 'Scope', items: [
@@ -218,7 +221,7 @@ export default function DiscoveryDashboardDaniel() {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'URLs Mapped', value: '7,619' },
+          { label: 'URLs Mapped', value: '7,692' },
           { label: 'Page Templates', value: '21+' },
           { label: 'Integrations Found', value: `${INTEGRATIONS.length}` },
           { label: 'Research Documents', value: '38' },
@@ -231,7 +234,7 @@ export default function DiscoveryDashboardDaniel() {
       </div>
 
       {/* Page Types */}
-      <CollapsibleSection title="Page Types & Templates" count={`${PAGE_TYPES.length} types, 7,619 URLs`} defaultOpen>
+      <CollapsibleSection title="Page Types & Templates" count={`${PAGE_TYPES.length} types, 7,692 URLs`} defaultOpen>
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead><tr className="border-b border-tan">
@@ -250,6 +253,7 @@ export default function DiscoveryDashboardDaniel() {
             ))}</tbody>
           </table>
         </div>
+        <p className="text-xs text-deep-muted mt-2">* Some URLs match multiple template categories. Unique URL total is 7,692 per sitemap crawl.</p>
       </CollapsibleSection>
 
       {/* CMS Backend */}
@@ -327,7 +331,7 @@ export default function DiscoveryDashboardDaniel() {
       </CollapsibleSection>
 
       {/* Migration Scope */}
-      <CollapsibleSection title="Migration Scope" count="16,775 URLs">
+      <CollapsibleSection title="Migration Scope" count="16,848 URLs">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {MIGRATION_SCOPE.map((item) => (
             <div key={item.label} className="p-3 border border-tan/50 bg-sand-light">

@@ -3,7 +3,7 @@ set -euo pipefail
 
 # ─── Configuration ───────────────────────────────────────────────────────────
 BASE_URL="https://visit-salt-lake-proposal-tool.vercel.app"
-PAGE="/proposal"
+PAGE="/"
 SCREENSHOT_DIR="$(cd "$(dirname "$0")/../screenshots" && pwd)"
 AB="npx agent-browser"
 SESSION="smoke-$$"
@@ -92,12 +92,12 @@ echo "║     Proposal Page — Visual Smoke Test            ║"
 echo "╚══════════════════════════════════════════════════╝"
 echo ""
 
-# 1. Open the app root first to seed localStorage, then navigate to /proposal
+# 1. Open the app root to seed localStorage (ProposalDaniel is now at /)
 echo "→ Seeding project data into localStorage..."
 $AB --session "$SESSION" open "${BASE_URL}"
 $AB --session "$SESSION" wait 2000
 
-# Inject seed data into localStorage and reload to /proposal
+# Inject seed data into localStorage and reload
 ESCAPED_STATE=$(echo "$SEED_STATE" | tr -d '\n' | sed "s/'/\\\\'/g")
 $AB --session "$SESSION" eval "localStorage.setItem('estimate-app-state', '$ESCAPED_STATE')"
 echo "  Data seeded."
@@ -113,33 +113,38 @@ $AB --session "$SESSION" screenshot --full "$SCREENSHOT_DIR/01-baseline.png"
 pass "Baseline screenshot captured"
 echo ""
 
-# 3. Verify all 6 collapsible sections exist
-echo "→ Checking collapsible sections..."
-check_text "Section: Scenarios"              "Scenarios"
-check_text "Section: Sitemap"                "Sitemap"
-check_text "Section: Screens & Annotations"  "Screens & Annotations"
-check_text "Section: Approach"               "Approach"
-check_text "Section: Project Timeline"       "Project Timeline"
-check_text "Section: Project Estimate"       "Project Estimate"
+# 3. Verify initial tab content (Tab 0 = Intro, shows Approach)
+echo "→ Checking initial tab content..."
+check_text "Section: Approach"    "Approach"
+check_text "Section: What We Found"  "What We Found"
 echo ""
 
-# 4. Click through scenario filter tabs and screenshot each
+# 4. Navigate through proposal tabs (Intro, Discovery, Scope, Estimate, Scenarios)
+echo "→ Testing proposal nav tabs..."
+# Tab buttons are in the header nav bar
+click_and_screenshot 'button:has-text("Discovery")' "02-tab-discovery.png" "Tab: Discovery"
+click_and_screenshot 'button:has-text("Scope")'     "03-tab-scope.png"     "Tab: Scope"
+click_and_screenshot 'button:has-text("Estimate")'   "04-tab-estimate.png"  "Tab: Estimate"
+click_and_screenshot 'button:has-text("Scenarios")'   "05-tab-scenarios.png" "Tab: Scenarios"
+echo ""
+
+# 5. Within Estimate tab, test scenario filters
 echo "→ Testing scenario filter tabs..."
-click_and_screenshot '[data-id="2026"]' "02-scenario-2026.png" "Scenario: Launch in 2026"
-click_and_screenshot '[data-id="2027"]' "03-scenario-2027.png" "Scenario: Launch in 2027"
+click_and_screenshot '[data-id="2026"]' "06-scenario-2026.png" "Scenario: Launch in 2026"
+click_and_screenshot '[data-id="2027"]' "07-scenario-2027.png" "Scenario: Launch in 2027"
 echo ""
 
-# 5. Click through module filter tabs and screenshot each
-echo "→ Testing module filter tabs..."
-click_and_screenshot '[data-id="marketing"]' "04-module-marketing.png" "Module: Marketing Website"
-click_and_screenshot '[data-id="cms"]'       "05-module-cms.png"       "Module: CMS"
-click_and_screenshot '[data-id="crm"]'       "06-module-crm.png"       "Module: CRM"
-click_and_screenshot '[data-id="all"]'       "07-module-all.png"       "Module: All"
+# 6. Within Scope tab, test inner tabs
+echo "→ Testing scope inner tabs..."
+click_and_screenshot 'button:has-text("Scope")' "08-scope-tab.png" "Navigate to Scope tab"
+click_and_screenshot '[data-id="marketing"]' "09-scope-marketing.png" "Scope: Marketing"
+click_and_screenshot '[data-id="cms"]'       "10-scope-cms.png"       "Scope: CMS"
+click_and_screenshot '[data-id="crm"]'       "11-scope-crm.png"       "Scope: CRM"
 echo ""
 
-# 6. Annotated screenshot for AI-readable verification
+# 7. Annotated screenshot for AI-readable verification
 echo "→ Capturing annotated screenshot..."
-$AB --session "$SESSION" screenshot --full --annotate "$SCREENSHOT_DIR/08-annotated.png"
+$AB --session "$SESSION" screenshot --full --annotate "$SCREENSHOT_DIR/12-annotated.png"
 pass "Annotated screenshot captured"
 echo ""
 

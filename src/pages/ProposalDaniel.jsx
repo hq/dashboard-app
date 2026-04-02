@@ -4,7 +4,6 @@ import useProposalScenariosDaniel from '../hooks/useProposalScenariosDaniel'
 import { MODULE_CATEGORIES } from '../lib/proposalDataDaniel'
 import ScenarioComparison from '../components/proposal/ScenarioComparison'
 import ScenarioEstimate from '../components/proposal/ScenarioEstimate'
-import Sitemap from '../components/proposal/Sitemap'
 import VslSitemap from '../components/proposal/VslSitemap'
 import ScreensBreakdown from '../components/proposal/ScreensBreakdown'
 import Timeline from '../components/proposal/Timeline'
@@ -43,7 +42,7 @@ function ScopeTabBar({ tabs, activeId, onChange }) {
               : 'border-transparent text-deep-muted hover:text-deep'
           }`}
         >
-          {tab.label}
+          {tab.name}
         </button>
       ))}
     </div>
@@ -125,12 +124,12 @@ function ScopeTabs() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="space-y-3">
                   <div className="p-3 border border-tan/50 bg-white">
-                    <p className="font-bold text-2xl text-deep">4,629</p>
+                    <p className="font-bold text-2xl text-deep">4,626</p>
                     <p className="text-xs text-deep-muted">Business Listings</p>
                     <p className="text-xs text-deep-muted mt-1">Hotels, restaurants, attractions, trails, shops — 25+ fields per listing with maps, reviews, and categories</p>
                   </div>
                   <div className="p-3 border border-tan/50 bg-white">
-                    <p className="font-bold text-2xl text-deep">1,898</p>
+                    <p className="font-bold text-2xl text-deep">1,973</p>
                     <p className="text-xs text-deep-muted">Events</p>
                     <p className="text-xs text-deep-muted mt-1">15 categories (Music, Art, Festivals, Theatre, Sports, etc.) + convention events with special ID format</p>
                   </div>
@@ -142,9 +141,9 @@ function ScopeTabs() {
                 </div>
                 <div className="space-y-3">
                   <div className="p-3 border border-tan/50 bg-white">
-                    <p className="font-bold text-2xl text-deep">85.7%</p>
+                    <p className="font-bold text-2xl text-deep">85.8%</p>
                     <p className="text-xs text-deep-muted">CRM-Powered Content</p>
-                    <p className="text-xs text-deep-muted mt-1">Listings + events = 6,527 of 7,619 URLs. The CRM is the site's primary data source.</p>
+                    <p className="text-xs text-deep-muted mt-1">Listings + events = 6,599 of 7,692 URLs. The CRM is the site's primary data source.</p>
                   </div>
                   <div className="p-3 border border-tan/50 bg-white">
                     <p className="font-bold text-2xl text-deep">79</p>
@@ -173,11 +172,6 @@ function ScopeTabs() {
           {innerTab === 'marketing' && (
             <>
               <ScreensBreakdown />
-              <div className="flex justify-center">
-                <button className="btn-draw-border text-sm">
-                  See all 1,041
-                </button>
-              </div>
             </>
           )}
           {innerTab === 'cms' && (
@@ -277,14 +271,14 @@ export default function ProposalDaniel() {
             <div className="max-w-[600px] mx-auto text-sm text-deep leading-relaxed mt-10">
               <h3 className="mb-2">Approach</h3>
               <p className="mb-4">
-                We conducted a comprehensive analysis of visitsaltlake.com — mapping every page template, content type, integration, and backend feature across both the public website and CMS admin. Our research spans 38 documents covering 7,619 URLs, 28+ third-party integrations, and the full Simpleview CMS backend.
+                We conducted a comprehensive analysis of visitsaltlake.com — mapping every page template, content type, integration, and backend feature across both the public website and CMS admin. Our research spans 38 documents covering 7,692 URLs, 28+ third-party integrations, and the full Simpleview CMS backend.
               </p>
               <p className="mb-4">
                 The goal is a complete custom platform rebuild — replacing both Simpleview CMS and CRM with a modern, flexible system that gives Visit Salt Lake full ownership of their digital presence. The first phase delivers a 1-to-1 rebuild with exact feature parity; enhancements come after.
               </p>
               <h3 className="mb-2 mt-8">What We Found</h3>
               <p className="mb-4">
-                Visit Salt Lake's site is a 7,619-page tourism platform where 85.7% of content is powered by the Simpleview CRM — 4,629 business listings and 1,898 events. The CMS manages the remaining 14.3%: editorial pages, blog posts, convention microsites, and B2B industry sections. The site features 21+ distinct page templates, 70+ page builder widget types, 7-persona content personalization, A/B testing, and a sophisticated publishing workflow with scheduled content and multi-user collaboration.
+                Visit Salt Lake's site is a 7,692-page tourism platform where 85.8% of content is powered by the Simpleview CRM — 4,626 business listings and 1,973 events. The CMS manages the remaining 14.2%: editorial pages, blog posts, convention microsites, and B2B industry sections. The site features 21+ distinct page templates, 70+ page builder widget types, 7-persona content personalization, A/B testing, and a sophisticated publishing workflow with scheduled content and multi-user collaboration.
               </p>
               <p className="mb-4">
                 We documented every content type field structure, all 15 collection types, 9 user roles with 166 permissions each, 10 taxonomy systems with 1,846 items, and a media library of 3,904 assets. We also ran full-site performance audits across 2,281 pages and an SEO crawl of 8,818 URLs — establishing clear baselines for the rebuild to match and exceed.
