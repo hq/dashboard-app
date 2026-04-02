@@ -2,8 +2,7 @@ import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useProject } from '../hooks/useProject'
 import useProposalScenarios from '../hooks/useProposalScenarios'
-import { buildSitemapFromPages, buildSitemapText, MODULE_CATEGORIES } from '../lib/proposalData'
-import ScenarioComparison from '../components/proposal/ScenarioComparison'
+import { buildSitemapFromPages, buildSitemapText } from '../lib/proposalData'
 import ScenarioEstimate from '../components/proposal/ScenarioEstimate'
 import Sitemap from '../components/proposal/Sitemap'
 import VslSitemap from '../components/proposal/VslSitemap'
@@ -16,9 +15,9 @@ import ParticleLogos from '../components/ParticleLogos'
 import InteractiveWavesGraphic from '../components/InteractiveWavesGraphic'
 import PhonePopIn from '../components/PhonePopIn'
 import DiscoveryDashboard from '../components/proposal/DiscoveryDashboard'
+import CMSScopeView from '../components/proposal/CMSScopeView'
+import CRMScopeView from '../components/proposal/CRMScopeView'
 import { useProposalTab } from '../contexts/ProposalTabContext'
-
-const MODULE_OPTIONS = [{ id: 'all', name: 'All' }, ...MODULE_CATEGORIES]
 
 const SCOPE_OUTER_TABS = [
   { id: 'sitemap', name: 'Site Map' },
@@ -73,16 +72,8 @@ function ScopeTabs() {
       {outerTab === 'sitemap' && (
         <>
           {innerTab === 'marketing' && <VslSitemap />}
-          {innerTab === 'cms' && (
-            <div className="rounded-xl border border-tan bg-sand-light p-8 text-center text-sm text-deep-muted">
-              CMS sitemap coming soon — pending admin access.
-            </div>
-          )}
-          {innerTab === 'crm' && (
-            <div className="rounded-xl border border-tan bg-sand-light p-8 text-center text-sm text-deep-muted">
-              CRM sitemap coming soon — pending admin access.
-            </div>
-          )}
+          {innerTab === 'cms' && <CMSScopeView />}
+          {innerTab === 'crm' && <CRMScopeView />}
         </>
       )}
 
@@ -170,9 +161,7 @@ export default function Proposal() {
   const { state } = useProject()
   const { activeTab, goTo } = useProposalTab()
   const [activeScenarioId, setActiveScenarioId] = useState('2026')
-  const [activeModuleId, setActiveModuleId] = useState('all')
-
-  const scenarios = useProposalScenarios(activeModuleId)
+  const scenarios = useProposalScenarios()
   const activeScenario = scenarios.find((s) => s.id === activeScenarioId) || scenarios[0]
 
   const sitemapRoot = useMemo(
@@ -338,13 +327,6 @@ export default function Proposal() {
               </div>
             </div>
             <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-3">
-                <FilterButtonGroup
-                  options={MODULE_OPTIONS}
-                  activeId={activeModuleId}
-                  onChange={setActiveModuleId}
-                />
-              </div>
               <ScenarioEstimate
                 scenarios={scenarios}
                 activeId={activeScenarioId}
@@ -366,36 +348,35 @@ export default function Proposal() {
               </div>
             </div>
             <div className="space-y-4">
-              <p className="preheading mb-3">Launch Scenarios</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-deep">
-                <div className="p-4 border border-tan bg-sand-light">
-                  <p className="font-bold mb-1">Launch in 2026</p>
-                  <p>
-                    An aggressive, reduced-scope timeline that prioritizes the most impactful screens
-                    and features to hit a 2026 launch date. Design, frontend, and backend hours are
-                    scaled down to focus on core deliverables.
-                  </p>
-                </div>
-                <div className="p-4 border border-tan bg-sand-light">
-                  <p className="font-bold mb-1">Launch in 2027</p>
-                  <p>
-                    The full-scope build covering every screen and feature across all modules. This
-                    timeline allows for a comprehensive implementation with no compromises on
-                    functionality or polish.
-                  </p>
+              <p className="preheading mb-3">Project Scope</p>
+              <div className="rounded-xl border border-tan bg-sand-light p-5 space-y-4 text-sm text-deep">
+                <p>
+                  {"The full rebuild spans 9 work layers\u2014from page templates and CMS platform to data migration, integrations, and launch support. The ranges below reflect our Phase 1 confidence level. Phase 2 will narrow these to locked estimates."}
+                </p>
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <div className="p-3 bg-sand-dark/30 rounded-lg">
+                    <p className="text-2xl font-bold">{activeScenario.totals?.low.toLocaleString()}&ndash;{activeScenario.totals?.high.toLocaleString()}</p>
+                    <p className="text-xs text-deep-muted mt-1">Hours (before contingency)</p>
+                  </div>
+                  <div className="p-3 bg-sand-dark/30 rounded-lg">
+                    <p className="text-2xl font-bold">{activeScenario.withContingency?.low.toLocaleString()}&ndash;{activeScenario.withContingency?.high.toLocaleString()}</p>
+                    <p className="text-xs text-deep-muted mt-1">Hours (with {activeScenario.contingencyPercent}% contingency)</p>
+                  </div>
+                  <div className="p-3 bg-sand-dark/30 rounded-lg">
+                    <p className="text-2xl font-bold">9</p>
+                    <p className="text-xs text-deep-muted mt-1">Work Layers</p>
+                  </div>
                 </div>
               </div>
-              <ScenarioComparison scenarios={scenarios} />
+              <ScenarioEstimate
+                scenarios={scenarios}
+                activeId={activeScenarioId}
+              />
             </div>
 
             <div className="space-y-4">
               <p className="preheading mb-3">Delivery Schedule</p>
-              <FilterButtonGroup
-                options={scenarios}
-                activeId={activeScenarioId}
-                onChange={setActiveScenarioId}
-              />
-              <Timeline scenarioHours={activeScenario.hours} />
+              <Timeline />
             </div>
           </div>
         )}
