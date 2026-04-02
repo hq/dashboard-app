@@ -17,9 +17,9 @@ createRoot(document.getElementById('root')).render(
         <ProposalTabProvider>
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<Capture />} />
-              <Route path="/estimate" element={<Estimate />} />
-              <Route path="/proposal" element={<Proposal />} />
+              <Route path="/" element={<Proposal />} />
+              <Route path="/tools/capture" element={<Capture />} />
+              <Route path="/tools/estimate" element={<Estimate />} />
               <Route path="/proposal-daniel" element={<ProposalDaniel />} />
             </Route>
           </Routes>
