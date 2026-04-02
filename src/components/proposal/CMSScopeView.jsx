@@ -4,8 +4,8 @@ import CollapsibleSection from './CollapsibleSection'
 const CMS_HEADLINE_STATS = [
   { value: '70+', label: 'Page Builder Widgets', detail: 'Layout, navigation, collections, CTAs, dynamic content, personalization, A/B testing' },
   { value: '15', label: 'Collection Types', detail: 'Alerts, Hero Slides, FAQ, Slides, Vertical Videos, Staff, and 9 more' },
-  { value: '9', label: 'User Roles', detail: '166 permissions each — Admin, Marketing, PR, Membership, HR, and 4 more' },
-  { value: '9,156', label: 'Active Redirects', detail: 'URL redirect rules — critical for SEO preservation during migration' },
+  { value: '9', label: 'User Roles', detail: '166 permissions each: Admin, Marketing, PR, Membership, HR, and 4 more' },
+  { value: '9,156', label: 'Active Redirects', detail: 'URL redirect rules, critical for SEO preservation during migration' },
 ]
 
 const SITEMAP_SECTIONS = [
@@ -61,7 +61,7 @@ const LAYOUTS = [
 
 // Phase 2 Deep Dive deliverables for CMS (eng #7, design doc)
 const CMS_PHASE2_DELIVERABLES = [
-  { title: 'Content Type Field Mapping', description: 'Field-by-field analysis of all 15 collection types — what moves to the new CMS, what gets consolidated, what gets archived.' },
+  { title: 'Content Type Field Mapping', description: 'Field-by-field analysis of all 15 collection types: what moves to the new CMS, what gets consolidated, what gets archived.' },
   { title: 'Page Builder Widget Audit', description: 'Document every widget type across 70+ Page Builder components. Map each to a new CMS block type or identify custom build requirements.' },
   { title: 'Admin Workflow Documentation', description: 'Screen recordings and interviews with CMS users across all 9 roles. Document draft/publish/schedule workflows and permission requirements.' },
   { title: 'Taxonomy & Tag Consolidation Plan', description: 'Rationalize 1,846 taxonomy items across 10 systems into a clean, unified taxonomy for the new platform.' },
@@ -70,7 +70,7 @@ const CMS_PHASE2_DELIVERABLES = [
 export default function CMSScopeView() {
   return (
     <div className="space-y-4">
-      {/* Headline Stats — 3-4 most impressive (eng #13) */}
+      {/* Headline Stats: 3-4 most impressive (eng #13) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {CMS_HEADLINE_STATS.map((stat) => (
           <div key={stat.label} className="p-4 border border-tan bg-sand-light">
@@ -178,12 +178,12 @@ export default function CMSScopeView() {
         </div>
       </CollapsibleSection>
 
-      {/* Phase 2 Deep Dive — replaces "coming soon" pattern (eng #7) */}
+      {/* Phase 2 Deep Dive: replaces "coming soon" pattern (eng #7) */}
       <div className="rounded-xl border-2 border-dashed border-sky/50 bg-sky/5 p-5 space-y-4">
         <div>
           <p className="preheading text-sky-dark mb-1">Phase 2 Deep Dive</p>
           <p className="text-sm text-deep">
-            We've documented the CMS from the outside — every widget type, layout, role, and workflow visible from the admin. Phase 2 gives us hands-on access to verify what we've mapped and uncover what's hidden.
+            We've documented the CMS from the outside, documenting every widget type, layout, role, and workflow visible from the admin. Phase 2 gives us hands-on access to verify what we've mapped and uncover what's hidden.
           </p>
         </div>
         <div className="space-y-3">

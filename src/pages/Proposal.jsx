@@ -77,7 +77,7 @@ function FilterButtonGroup({ options, activeId, onChange }) {
 const PHASE_2_DELIVERABLES = [
   {
     title: 'CRM Backend Audit',
-    description: 'Full access to Simpleview CRM — document listing management workflows, event creation, partner self-service, sales pipelines, and automations.',
+    description: 'Full access to Simpleview CRM to document listing management workflows, event creation, partner self-service, sales pipelines, and automations.',
     priority: 'critical',
   },
   {
@@ -87,7 +87,7 @@ const PHASE_2_DELIVERABLES = [
   },
   {
     title: 'Integration Depth Assessment',
-    description: 'Deep dive into each of the 28+ third-party services — connection mechanisms, data flows, API contracts, and replacement strategies.',
+    description: 'Deep dive into each of the 28+ third-party services: connection mechanisms, data flows, API contracts, and replacement strategies.',
     priority: 'high',
   },
   {
@@ -102,7 +102,7 @@ const PHASE_2_DELIVERABLES = [
   },
   {
     title: 'Locked Estimate with Ranges',
-    description: 'Final scope, timeline, and pricing grounded in real data — no assumptions. Ranges narrow from Phase 1 confidence (80-90%) to Phase 2 confidence (99%).',
+    description: 'Final scope, timeline, and pricing grounded in real data, not assumptions. Ranges narrow from Phase 1 confidence (80-90%) to Phase 2 confidence (99%).',
     priority: 'critical',
   },
 ]
@@ -135,14 +135,14 @@ export default function Proposal() {
             <div className="max-w-[600px] mx-auto text-sm text-deep leading-relaxed mt-10">
               <h3 className="mb-2">Approach</h3>
               <p className="mb-4">
-                We conducted a comprehensive analysis of visitsaltlake.com — mapping every page template, content type, integration, and backend feature across both the public website and CMS admin. Our research spans 38 documents covering the full public site, 28+ third-party integrations, and the complete Simpleview CMS backend.
+                We conducted a comprehensive analysis of visitsaltlake.com, mapping every page template, content type, integration, and backend feature across both the public website and CMS admin. Our research spans 38 documents covering the full public site, 28+ third-party integrations, and the complete Simpleview CMS backend.
               </p>
               <p className="mb-4">
-                The goal is a complete custom platform rebuild — replacing both Simpleview CMS and CRM with a modern, flexible system that gives Visit Salt Lake full ownership of their digital presence. The first phase delivers a 1-to-1 rebuild with exact feature parity; enhancements come after.
+                The goal is a complete custom platform rebuild, replacing both Simpleview CMS and CRM with a modern, flexible system that gives Visit Salt Lake full ownership of their digital presence. The first phase delivers a 1-to-1 rebuild with exact feature parity; enhancements come after.
               </p>
               <h3 className="mb-2 mt-8">What We Found</h3>
               <p className="mb-4">
-                Visit Salt Lake's digital presence is far more complex than a typical tourism website. The public site, CMS backend, CRM data layer, and third-party integrations form an interconnected system that touches every part of the organization — from marketing to sales to partner management. The next section breaks down exactly what we found.
+                Visit Salt Lake's digital presence is far more complex than a typical tourism website. The public site, CMS backend, CRM data layer, and third-party integrations form an interconnected system that touches every part of the organization, from marketing to sales to partner management. The next section breaks down exactly what we found.
               </p>
             </div>
 
@@ -156,10 +156,10 @@ export default function Proposal() {
             <div className="max-w-[600px] mx-auto text-sm text-deep leading-relaxed mt-10">
               <h3 className="mb-2">Design & Development</h3>
               <p className="mb-4">
-                The rebuild will deliver a custom-built platform — a modern marketing website, content management system, and admin panel purpose-built for Visit Salt Lake's needs. No more dependency on proprietary tourism CMS platforms. Full flexibility to build, extend, and evolve.
+                The rebuild will deliver a custom-built platform: a modern marketing website, content management system, and admin panel purpose-built for Visit Salt Lake's needs. No more dependency on proprietary tourism CMS platforms. Full flexibility to build, extend, and evolve.
               </p>
               <p className="mb-4">
-                We'll replicate every page template with responsive design, matching the current navigation patterns and interactive features — faceted filters, date pickers, trip planner, compare tool, booking widgets, and persistent cart — rebuilt with modern frameworks for better performance and maintainability.
+                We'll replicate every page template with responsive design, matching the current navigation patterns and interactive features (faceted filters, date pickers, trip planner, compare tool, booking widgets, and persistent cart) rebuilt with modern frameworks for better performance and maintainability.
               </p>
               <p className="mb-4">
                 Performance is a key opportunity. The current site has significant room for improvement on mobile load times and core web vitals. With modern server-side rendering, optimized image delivery, and code splitting, we'll transform the visitor experience while preserving strong SEO and improving accessibility.
@@ -199,7 +199,7 @@ export default function Proposal() {
                     <h2 className="text-deep">Our Approach</h2>
                   </div>
                   <p className="text-deep max-w-[430px] ml-auto">
-                    We analyzed every layer of your site — from the public frontend templates and URL structure, through the CMS admin with its content types and workflows, down to the media library, taxonomy systems, and third-party integrations. The results are broken down below.
+                    We analyzed every layer of your site, from the public frontend templates and URL structure, through the CMS admin with its content types and workflows, down to the media library, taxonomy systems, and third-party integrations. The results are broken down below.
                   </p>
                 </div>
               </div>
@@ -211,7 +211,7 @@ export default function Proposal() {
           </div>
         )}
 
-        {/* Tab 2: The Scope — flat Marketing / CMS / CRM navigation */}
+        {/* Tab 2: The Scope: flat Marketing / CMS / CRM navigation */}
         {activeTab === 2 && (
           <div className="space-y-8">
             <div className="-mx-6 -mt-6 bg-deep h-[342px] flex">
@@ -236,7 +236,7 @@ export default function Proposal() {
           </div>
         )}
 
-        {/* Tab 3: How We Deliver — scenarios + comparison + timeline */}
+        {/* Tab 3: How We Deliver: scenarios + comparison + timeline */}
         {activeTab === 3 && (
           <div className="space-y-8">
             <div className="-mx-6 -mt-6 bg-deep h-[342px] flex">
@@ -288,7 +288,7 @@ export default function Proposal() {
           </div>
         )}
 
-        {/* Tab 4: Next Steps — Phase 2 deliverables list */}
+        {/* Tab 4: Next Steps: Phase 2 deliverables list */}
         {activeTab === 4 && (
           <div className="space-y-8">
             <div className="-mx-6 -mt-6 bg-deep h-[342px] flex">
@@ -303,7 +303,7 @@ export default function Proposal() {
 
             <div className="max-w-[800px]">
               <p className="text-sm text-deep leading-relaxed mb-6">
-                Phase 1 gave us 80-90% confidence in the scope of the marketing website. Phase 2 is where we go deep — a paid engagement (typically 3-4 weeks) that delivers the remaining 10-20% of understanding needed to lock the final scope, timeline, and price.
+                Phase 1 gave us 80-90% confidence in the scope of the marketing website. Phase 2 is where we go deep: a paid engagement (typically 3-4 weeks) that delivers the remaining 10-20% of understanding needed to lock the final scope, timeline, and price.
               </p>
 
               <p className="preheading mb-4">Phase 2 Deliverables</p>
@@ -349,7 +349,7 @@ export default function Proposal() {
         )}
       </div>
 
-      {/* Previous / Next navigation — uses PROPOSAL_TABS labels */}
+      {/* Previous / Next navigation: uses PROPOSAL_TABS labels */}
       <div className="flex items-center justify-between border-t border-tan pt-4">
         <button
           onClick={() => goTo(activeTab - 1)}

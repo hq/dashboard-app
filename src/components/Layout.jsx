@@ -102,7 +102,7 @@ export default function Layout() {
           </nav>
         )}
 
-        {/* Tools dropdown — only visible in internal mode */}
+        {/* Tools dropdown, only visible in internal mode */}
         {isInternal && (
           <div className="ml-auto mr-6 relative" ref={dropdownRef}>
             <button

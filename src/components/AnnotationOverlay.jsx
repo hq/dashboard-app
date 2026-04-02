@@ -49,7 +49,7 @@ export default function AnnotationOverlay({
     if (w > 0.01 && h > 0.01) {
       onAddAnnotation({ x, y, width: w, height: h })
     } else {
-      // Tiny click — check if inside an existing annotation to select it
+      // Tiny click: check if inside an existing annotation to select it
       const clickX = drawing.startX
       const clickY = drawing.startY
       const clicked = [...annotations].reverse().find((a) =>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { idbGet } from '../lib/db'
 
 /**
- * Resolves an image URL — if it starts with "idb://", loads the data from
+ * Resolves an image URL. If it starts with "idb://", loads the data from
  * IndexedDB and creates a blob URL. Regular URLs pass through unchanged.
  */
 export default function useImageUrl(url) {

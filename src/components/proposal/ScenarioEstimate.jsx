@@ -13,7 +13,7 @@ function getComplexityLabel(total) {
 export default function ScenarioEstimate({ scenarios, activeId }) {
   const active = scenarios.find((s) => s.id === activeId) || scenarios[0]
 
-  // Proportional bars — no hour numbers visible
+  // Proportional bars, no hour numbers visible
   const activeData = [
     {
       name: active.name,
@@ -36,7 +36,7 @@ export default function ScenarioEstimate({ scenarios, activeId }) {
         <span className="text-lg font-bold text-deep">{complexity}</span>
       </div>
 
-      {/* Discipline legend — proportional labels, no hours */}
+      {/* Discipline legend: proportional labels, no hours */}
       <div className="flex gap-4 text-xs">
         <span className="font-medium" style={{ color: DISCIPLINE_COLORS.design }}>Design</span>
         <span className="font-medium" style={{ color: DISCIPLINE_COLORS.frontend }}>Frontend</span>

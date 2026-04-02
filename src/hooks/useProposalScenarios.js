@@ -3,7 +3,7 @@ import { SCENARIOS, MODULE_BASE_HOURS } from '../lib/proposalData'
 
 /**
  * Uses real estimation data from 255-point matrix.
- * Computes scenario hours directly from MODULE_BASE_HOURS — no ProjectProvider dependency.
+ * Computes scenario hours directly from MODULE_BASE_HOURS with no ProjectProvider dependency.
  * The proposal page shows research-based estimates, not annotation-driven totals.
  */
 export default function useProposalScenarios() {

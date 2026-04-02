@@ -1,5 +1,5 @@
 /**
- * Proposal scenarios, modules, and timeline — powered by 255-point estimation matrix.
+ * Proposal scenarios, modules, and timeline, powered by 255-point estimation matrix.
  */
 
 // --- Scenarios ---
@@ -7,14 +7,14 @@ export const SCENARIOS = [
   {
     id: '2026',
     name: 'Launch in 2026',
-    description: '1-to-1 rebuild — prioritized scope targeting the most critical templates, integrations, and data migration for a 2026 launch.',
+    description: '1-to-1 rebuild: prioritized scope targeting the most critical templates, integrations, and data migration for a 2026 launch.',
     multipliers: { design: 0.6, frontend: 0.65, backend: 0.7 },
     miscHours: 80,
   },
   {
     id: '2027',
     name: 'Launch in 2027',
-    description: 'Full scope — complete custom platform rebuild with all 21+ templates, 28+ integrations, CMS admin, and enhancements.',
+    description: 'Full scope: complete custom platform rebuild with all 21+ templates, 28+ integrations, CMS admin, and enhancements.',
     multipliers: { design: 1, frontend: 1, backend: 1 },
     miscHours: 160,
   },
@@ -52,7 +52,7 @@ export const MODULE_BASE_HOURS = {
   cms:          { design: 80,  frontend: 80,  backend: 120 },
 }
 
-// Shared color palette for discipline charts — imported by ScenarioEstimate and ScenarioComparison
+// Shared color palette for discipline charts, imported by ScenarioEstimate and ScenarioComparison
 export const DISCIPLINE_COLORS = {
   design: '#264A50',
   frontend: '#84D7DC',

@@ -2,7 +2,7 @@ import CollapsibleSection from './CollapsibleSection'
 
 // 3-4 headline stats (eng #13: most impressive stats as cards)
 const CRM_HEADLINE_STATS = [
-  { value: '4,626', label: 'Business Listings', detail: 'Hotels, restaurants, attractions, trails, shops — 25+ fields per listing' },
+  { value: '4,626', label: 'Business Listings', detail: 'Hotels, restaurants, attractions, trails, and shops with 25+ fields per listing' },
   { value: '1,973', label: 'Events', detail: '15 categories (Music, Art, Festivals, Theatre, Sports, etc.)' },
   { value: '85.8%', label: 'CRM-Powered Content', detail: 'Listings + events = 6,599 of 7,692 URLs' },
   { value: '6', label: 'CRM Forms', detail: 'Contact, Subscribe, Meeting Planner, Newsletter, Influencer, RFP (80+ fields)' },
@@ -25,16 +25,16 @@ const API_ENDPOINTS = [
 
 // Phase 2 Deep Dive deliverables for CRM (eng #7, design doc)
 const CRM_PHASE2_DELIVERABLES = [
-  { title: 'CRM Entity Audit', description: 'Full access to Simpleview CRM — document every entity type, field structure, and data relationship across listings, events, contacts, and members.' },
+  { title: 'CRM Entity Audit', description: 'Full access to Simpleview CRM to document every entity type, field structure, and data relationship across listings, events, contacts, and members.' },
   { title: 'Data Migration Mapping', description: 'Field-by-field analysis: what moves, what gets archived, what format the data is in. Test export formats and verify relationship preservation.' },
-  { title: 'Partner Portal Workflows', description: 'Document the full partner self-service experience — listing management, imagery uploads, account settings, analytics access, payment flows.' },
+  { title: 'Partner Portal Workflows', description: 'Document the full partner self-service experience: listing management, imagery uploads, account settings, analytics access, payment flows.' },
   { title: 'Integration Verification', description: 'Test every CRM-CMS integration point end-to-end. Verify data sync mechanisms, API contracts, and identify Simpleview-dependent services that need replacement.' },
 ]
 
 export default function CRMScopeView() {
   return (
     <div className="space-y-4">
-      {/* Headline Stats — 3-4 most impressive (eng #13) */}
+      {/* Headline Stats: 3-4 most impressive (eng #13) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {CRM_HEADLINE_STATS.map((stat) => (
           <div key={stat.label} className="p-4 border border-tan bg-sand-light">
@@ -48,7 +48,7 @@ export default function CRMScopeView() {
       {/* Remaining CRM details collapsed */}
       <CollapsibleSection title="CRM Data Volumes & Details">
         <div className="space-y-2 text-xs text-deep-muted">
-          <p><strong className="text-deep">Convention Microsites:</strong> 79 templated welcome pages for visiting conventions — "Salt Lake Welcomes [Event]"</p>
+          <p><strong className="text-deep">Convention Microsites:</strong> 79 templated welcome pages for visiting conventions ("Salt Lake Welcomes [Event]")</p>
           <p><strong className="text-deep">Partner Portal:</strong> Members section with partnership tiers. Login redirects to Simpleview CRM extranet for listing/imagery management.</p>
           <p><strong className="text-deep">Convention Calendar:</strong> CRM-powered widget on meetings pages displaying upcoming conventions.</p>
         </div>
@@ -124,7 +124,7 @@ export default function CRMScopeView() {
         </div>
       </CollapsibleSection>
 
-      {/* Phase 2 Deep Dive — replaces "coming soon" / unknowns pattern (eng #7) */}
+      {/* Phase 2 Deep Dive: replaces "coming soon" / unknowns pattern (eng #7) */}
       <div className="rounded-xl border-2 border-dashed border-sky/50 bg-sky/5 p-5 space-y-4">
         <div>
           <p className="preheading text-sky-dark mb-1">Phase 2 Deep Dive</p>
