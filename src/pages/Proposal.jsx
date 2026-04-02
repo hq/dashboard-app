@@ -252,7 +252,7 @@ export default function Proposal() {
             <div className="space-y-4">
               <p className="preheading mb-3">Launch Scenarios</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-deep">
-                <div className="p-4 border border-tan bg-sand-light">
+                <div className="p-4 border-l-4 border-l-sky border border-tan bg-sand-light">
                   <p className="font-bold mb-1">Launch in 2026</p>
                   <p>
                     An aggressive, reduced-scope timeline that prioritizes the most impactful screens
@@ -260,7 +260,7 @@ export default function Proposal() {
                     scaled down to focus on core deliverables.
                   </p>
                 </div>
-                <div className="p-4 border border-tan bg-sand-light">
+                <div className="p-4 border-l-4 border-l-orange border border-tan bg-sand-light">
                   <p className="font-bold mb-1">Launch in 2027</p>
                   <p>
                     The full-scope build covering every screen and feature across all modules. This
