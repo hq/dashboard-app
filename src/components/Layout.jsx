@@ -5,8 +5,8 @@ import { clearAllScreenshotImages } from '../lib/db'
 import { PROPOSAL_TABS, useProposalTab } from '../contexts/ProposalTabContext'
 
 const toolLinks = [
-  { to: '/', label: 'Capture' },
-  { to: '/estimate', label: 'Estimate' },
+  { to: '/tools/capture', label: 'Capture' },
+  { to: '/tools/estimate', label: 'Estimate' },
 ]
 
 export default function Layout() {
@@ -20,7 +20,7 @@ export default function Layout() {
   const { activeTab, goTo } = useProposalTab()
   const [underline, setUnderline] = useState({ left: 0, width: 0, visible: false })
 
-  const isProposal = pathname.startsWith('/proposal')
+  const isProposal = pathname === '/' || pathname.startsWith('/proposal')
 
   const updateUnderline = useCallback(() => {
     if (!isProposal) {
