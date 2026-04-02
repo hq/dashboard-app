@@ -26,3 +26,4 @@ dist-ssr
 
 # E2E test screenshots
 tests/screenshots/*.png
+.gstack/
