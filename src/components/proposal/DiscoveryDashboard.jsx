@@ -27,46 +27,46 @@ const PAGE_TYPES = [
 ]
 
 const INTEGRATIONS = [
-  { name: 'Simpleview CMS', status: 'confirmed', criticality: 'critical', description: 'Core platform — serves every page, 70+ Page Builder widgets' },
+  { name: 'Simpleview CMS', status: 'confirmed', criticality: 'critical', description: 'Core platform that serves every page, 70+ Page Builder widgets' },
   { name: 'Simpleview CRM', status: 'confirmed', criticality: 'critical', description: 'Source of truth for 4,626 listings + 1,973 events' },
-  { name: 'Google Tag Manager', status: 'confirmed', criticality: 'high', description: '2 containers (GTM-5L5W32, GTM-NFBVG93) — all analytics flow through these' },
+  { name: 'Google Tag Manager', status: 'confirmed', criticality: 'high', description: '2 containers (GTM-5L5W32, GTM-NFBVG93); all analytics flow through these' },
   { name: 'Google Analytics 4', status: 'confirmed', criticality: 'high', description: '4 GA4 properties tracking site activity' },
   { name: 'Outdooractive + Leaflet', status: 'confirmed', criticality: 'high', description: 'Interactive maps on all listing detail pages' },
   { name: 'Connect Pass', status: 'confirmed', criticality: 'high', description: 'Persistent shopping cart for experience passes' },
   { name: 'CrowdRiff', status: 'confirmed', criticality: 'high', description: 'UGC social photo gallery on homepage and key pages' },
-  { name: 'NowPlayingUtah', status: 'confirmed', criticality: 'high', description: 'External events feed — significant portion of events' },
+  { name: 'NowPlayingUtah', status: 'confirmed', criticality: 'high', description: 'External events feed, significant portion of events' },
   { name: 'RootRez', status: 'confirmed', criticality: 'high', description: 'Hotel booking widget on Places To Stay' },
   { name: 'TripAdvisor', status: 'confirmed', criticality: 'medium', description: 'Reviews and ratings on listing cards and detail pages' },
   { name: 'Yelp', status: 'confirmed', criticality: 'medium', description: 'Review integration on listing detail pages' },
   { name: 'GTranslate', status: 'confirmed', criticality: 'medium', description: '8-language translation widget (client-side)' },
-  { name: 'Vimeo', status: 'confirmed', criticality: 'medium', description: 'Video hosting via Plyr player — 136 videos' },
+  { name: 'Vimeo', status: 'confirmed', criticality: 'medium', description: 'Video hosting via Plyr player (136 videos)' },
   { name: 'Threshold360', status: 'confirmed', criticality: 'medium', description: '360° virtual tour viewer on some listing pages' },
-  { name: 'Act On', status: 'confirmed', criticality: 'medium', description: 'Marketing automation — connected via CRM form submissions' },
+  { name: 'Act On', status: 'confirmed', criticality: 'medium', description: 'Marketing automation, connected via CRM form submissions' },
   { name: 'Facebook Pixel', status: 'confirmed', criticality: 'medium', description: '3 pixels for social retargeting' },
   { name: 'Microsoft Clarity', status: 'confirmed', criticality: 'low', description: 'Session recording and heatmaps' },
   { name: 'Mouseflow', status: 'confirmed', criticality: 'low', description: 'Session recording (redundant with Clarity)' },
-  { name: 'Monsido', status: 'confirmed', criticality: 'low', description: 'Accessibility monitoring — 3 scripts' },
-  { name: 'Sojern', status: 'confirmed', criticality: 'low', description: 'Travel industry retargeting — 2 tags' },
-  { name: 'DoubleClick', status: 'confirmed', criticality: 'medium', description: 'Display advertising — 4 tags' },
+  { name: 'Monsido', status: 'confirmed', criticality: 'low', description: 'Accessibility monitoring (3 scripts)' },
+  { name: 'Sojern', status: 'confirmed', criticality: 'low', description: 'Travel industry retargeting (2 tags)' },
+  { name: 'DoubleClick', status: 'confirmed', criticality: 'medium', description: 'Display advertising (4 tags)' },
   { name: 'Google Ads', status: 'confirmed', criticality: 'medium', description: 'Search/display advertising' },
   { name: 'Pinterest', status: 'confirmed', criticality: 'low', description: 'Conversion tracking' },
   { name: 'LinkedIn Insights', status: 'confirmed', criticality: 'low', description: 'Conversion tracking' },
-  { name: 'Shopify', status: 'confirmed', criticality: 'low', description: 'External store — "Local Crafts & Gifts" outbound link' },
-  { name: 'Bandwango', status: 'partial', criticality: 'high', description: 'Pass/ticketing platform — CTA exists but mechanism needs verification' },
-  { name: 'VWO', status: 'confirmed', criticality: 'medium', description: 'A/B testing platform — active experiments on homepage' },
+  { name: 'Shopify', status: 'confirmed', criticality: 'low', description: 'External store ("Local Crafts & Gifts") outbound link' },
+  { name: 'Bandwango', status: 'partial', criticality: 'high', description: 'Pass/ticketing platform; CTA exists but mechanism needs verification' },
+  { name: 'VWO', status: 'confirmed', criticality: 'medium', description: 'A/B testing platform with active experiments on homepage' },
   { name: 'Weather API', status: 'confirmed', criticality: 'medium', description: 'Real-time weather widget in header on every page' },
 ]
 
 const MEDIA_LIBRARY = [
-  { type: 'Images', count: '3,110', detail: '12 fields each — alt text, credits, focal points, categories, expiration' },
-  { type: 'Documents', count: '590', detail: 'PDFs, DOCs, PPTs — categorized by file type' },
-  { type: 'Videos', count: '136', detail: 'URL references to Vimeo — 7 categories' },
-  { type: 'External Links', count: '68', detail: 'Reusable link objects — update once, reflects everywhere' },
+  { type: 'Images', count: '3,110', detail: '12 fields each: alt text, credits, focal points, categories, expiration' },
+  { type: 'Documents', count: '590', detail: 'PDFs, DOCs, PPTs, categorized by file type' },
+  { type: 'Videos', count: '136', detail: 'URL references to Vimeo (7 categories)' },
+  { type: 'External Links', count: '68', detail: 'Reusable link objects: update once, reflects everywhere' },
 ]
 
 const PERFORMANCE = [
   { metric: 'Performance', score: 50, detail: 'Listing pages weakest at 43' },
-  { metric: 'Accessibility', score: 86, detail: 'Strong baseline — Meetings pages highest at 92' },
+  { metric: 'Accessibility', score: 86, detail: 'Strong baseline; Meetings pages highest at 92' },
   { metric: 'Best Practices', score: 55, detail: 'Old jQuery, deprecated APIs' },
   { metric: 'SEO', score: 92, detail: 'Strong structured data, good canonicals' },
 ]
@@ -87,7 +87,7 @@ const MIGRATION_SCOPE = [
 
 const ASSUMPTIONS = [
   { category: 'Platform', items: [
-    'Full custom platform rebuild — replacing both Simpleview CMS and CRM',
+    'Full custom platform rebuild, replacing both Simpleview CMS and CRM',
     'First phase is 1-to-1 rebuild with exact feature parity',
     'Enhancements and new features come after 1-to-1 is live',
   ]},
@@ -105,19 +105,19 @@ const ASSUMPTIONS = [
 
 const RISKS = [
   { category: 'Data Extraction', items: [
-    'Simpleview access level unknown — may need to rely on frontend scraping',
+    'Simpleview access level unknown; may need to rely on frontend scraping',
     'Page Builder content (70+ widgets) has no known API for extraction',
     '3,110 images need metadata preserved alongside file migration',
   ]},
   { category: 'Hidden Functionality', items: [
-    'CRM backend not yet accessible — unknown workflows and automations',
+    'CRM backend not yet accessible; unknown workflows and automations',
     'Third-party services (Connect Pass, RootRez) may be Simpleview-dependent',
     'Personalization rules (7 personas + geo-targeting) need full documentation',
   ]},
   { category: 'SEO & URLs', items: [
-    'Listing/event URLs contain Simpleview CRM IDs — need mapping strategy',
+    'Listing/event URLs contain Simpleview CRM IDs and need a mapping strategy',
     '9,156 existing redirects must be fully exported before decommission',
-    'Structured data (JSON-LD) varies by listing type — must replicate per category',
+    'Structured data (JSON-LD) varies by listing type and must be replicated per category',
   ]},
 ]
 
@@ -219,8 +219,8 @@ export default function DiscoveryDashboard() {
 
   return (
     <div className="space-y-8">
-      {/* Insight Cards — summary stats with animated count-up and drill-down */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {/* Insight Cards: summary stats with animated count-up and drill-down */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         <InsightCard value="7,692" label="URLs Mapped" insight="Full sitemap crawl across all page types">
           <div className="text-xs text-deep-muted space-y-1">
             <p>4,626 listing detail pages (60.1%)</p>
@@ -240,7 +240,7 @@ export default function DiscoveryDashboard() {
         >
           <div className="text-xs text-deep-muted space-y-1">
             <p>{INTEGRATIONS.filter(i => i.criticality === 'critical').length} critical, {INTEGRATIONS.filter(i => i.criticality === 'high').length} high, {INTEGRATIONS.filter(i => i.criticality === 'medium').length} medium, {INTEGRATIONS.filter(i => i.criticality === 'low').length} low priority</p>
-            <p>{INTEGRATIONS.length - confirmedIntegrations} partially confirmed — needs Phase 2 verification</p>
+            <p>{INTEGRATIONS.length - confirmedIntegrations} partially confirmed, needs Phase 2 verification</p>
           </div>
         </InsightCard>
         <InsightCard value="38" label="Research Documents" insight="Covering frontend, CMS, CRM, SEO, and performance">
@@ -286,7 +286,7 @@ export default function DiscoveryDashboard() {
         </div>
       </CollapsibleSection>
 
-      {/* Integrations — InsightCard summary with full list collapsed (eng #14) */}
+      {/* Integrations: InsightCard summary with full list collapsed (eng #14) */}
       <InsightCard
         value={`${confirmedIntegrations}`}
         label={`of ${INTEGRATIONS.length} Integrations Confirmed`}
