@@ -7,7 +7,6 @@ import { ProposalTabProvider } from './contexts/ProposalTabContext'
 import Layout from './components/Layout'
 import Capture from './pages/Capture'
 import Estimate from './pages/Estimate'
-import Proposal from './pages/Proposal'
 import ProposalDaniel from './pages/ProposalDaniel'
 
 createRoot(document.getElementById('root')).render(
@@ -17,10 +16,9 @@ createRoot(document.getElementById('root')).render(
         <ProposalTabProvider>
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<Proposal />} />
+              <Route path="/" element={<ProposalDaniel />} />
               <Route path="/tools/capture" element={<Capture />} />
               <Route path="/tools/estimate" element={<Estimate />} />
-              <Route path="/proposal-daniel" element={<ProposalDaniel />} />
             </Route>
           </Routes>
         </ProposalTabProvider>

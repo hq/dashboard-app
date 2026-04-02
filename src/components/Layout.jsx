@@ -20,7 +20,7 @@ export default function Layout() {
   const { activeTab, goTo } = useProposalTab()
   const [underline, setUnderline] = useState({ left: 0, width: 0, visible: false })
 
-  const isProposal = pathname === '/' || pathname.startsWith('/proposal')
+  const isProposal = pathname === '/'
 
   const updateUnderline = useCallback(() => {
     if (!isProposal) {
@@ -68,7 +68,7 @@ export default function Layout() {
     <div className="min-h-screen bg-sand">
       <header className="fixed top-0 left-0 w-full h-20 bg-sand-light z-50 flex items-center">
         <NavLink
-          to="/proposal"
+          to="/"
           onClick={() => goTo(0)}
           className="h-full"
           onMouseEnter={() => setLogoHovered(true)}
