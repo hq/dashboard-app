@@ -74,10 +74,10 @@ export function getModuleForPage(pageName) {
 }
 
 // --- Timeline phases ---
-// Two-phase structure: Phase 2 (deep dive, 6-8 weeks) then Phase 3 (production rebuild through end of 2026)
+// Two-phase structure: Phase 2 (deep dive, 8-10 weeks) then Phase 3 (production rebuild through end of 2026)
 export const TIMELINE_PHASES = [
-  // Phase 2: Deep Dive (6-8 weeks)
-  { id: 'phase2-discovery', name: 'Phase 2: Deep Dive & Planning', fixedWeeks: 7, color: '#264A50', phase: 2 },
+  // Phase 2: Deep Dive (8-10 weeks)
+  { id: 'phase2-discovery', name: 'Phase 2: Deep Dive & Planning', fixedWeeks: 9, color: '#264A50', phase: 2 },
   // Phase 3: Production Rebuild (through end of 2026)
   { id: 'design', name: 'Design', hourKey: 'design', color: '#2FB2B8', phase: 3 },
   { id: 'frontend', name: 'Frontend Development', hourKey: 'frontend', color: '#84D7DC', phase: 3 },
