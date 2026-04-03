@@ -81,7 +81,7 @@ export default function Layout() {
                 key={tab.id}
                 ref={(el) => { if (el) tabRefs.current.set(i, el) }}
                 onClick={() => goTo(i)}
-                className={`nav-link text-base font-semibold transition-colors whitespace-nowrap py-3.5 ${
+                className={`nav-link text-base font-semibold transition-colors whitespace-nowrap py-3 min-h-[44px] ${
                   activeTab === i
                     ? 'text-deep'
                     : 'text-deep hover:text-sky-dark'
