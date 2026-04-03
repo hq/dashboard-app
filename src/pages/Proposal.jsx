@@ -310,7 +310,7 @@ export default function Proposal() {
                 Phase 1 told us what we can see from the outside. Phase 2 is where we get inside the systems.
               </p>
               <p className="text-sm text-deep leading-relaxed mb-4">
-                The research so far covers the public site, the page templates, and the integrations we can verify from the frontend. But the parts of this project that carry the most risk — the CRM, the membership workflows, the partner portal, the sales team's daily processes — can only be understood with direct access and direct conversation with the people who use them.
+                The research so far covers the public site, the page templates, and the integrations we can verify from the frontend. But the parts of this project that carry the most risk, the CRM, the membership workflows, the partner portal, the sales team's daily processes, can only be understood with direct access and direct conversation with the people who use them.
               </p>
               <p className="text-sm text-deep leading-relaxed mb-4">
                 This phase is a standalone engagement. At the end of it, both teams have a more complete picture: content types mapped and every workflow documented with the people who do the work. That's the foundation for a locked scope and timeline. It's also a decision point. If the findings change the equation, Visit Salt Lake can step back before committing to the full build.
@@ -321,17 +321,13 @@ export default function Proposal() {
             </div>
 
             {/* Phase 2 Timeline */}
-            <div className="max-w-[800px]">
+            <div className="max-w-[800px] mx-auto">
               <div className="rounded-xl border border-tan bg-sand-light p-5">
                 <Timeline scenarioHours={activeScenario.hours} phaseFilter={2} />
               </div>
             </div>
 
-            <div className="max-w-[800px]">
-              <p className="text-sm text-deep leading-relaxed mb-6">
-                Phase 1 gave us 80-90% confidence in the scope of the marketing website. Phase 2 is where we go deep: a paid engagement (typically 6-8 weeks) that delivers the remaining 10-20% of understanding needed to lock the final scope, timeline, and price.
-              </p>
-
+            <div className="max-w-[800px] mx-auto">
               <p className="preheading mb-4">Phase 2 Deliverables</p>
               <div className="space-y-3">
                 {PHASE_2_DELIVERABLES.map((item) => (
