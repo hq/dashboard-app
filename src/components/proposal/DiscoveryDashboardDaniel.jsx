@@ -91,7 +91,7 @@ const CORE_WEB_VITALS = [
 
 const MIGRATION_SCOPE = [
   { label: 'Total URL Scope', value: '16,848', detail: '7,692 pages + 9,156 redirects' },
-  { label: 'CRM Records', value: '6,599', detail: '4,626 listings + 1,973 events (85.8% of site)' },
+  { label: 'CRM Records', value: '6,599', detail: '4,626 listings + 1,973 events (85.8% of pages)' },
   { label: 'Media Assets', value: '3,904', detail: '3,110 images + 590 docs + 136 videos + 68 links' },
   { label: 'Taxonomy Items', value: '~1,846', detail: '10 taxonomy systems to consolidate and migrate' },
 ]

@@ -142,8 +142,8 @@ function ScopeTabs() {
                 <div className="space-y-3">
                   <div className="p-3 border border-tan/50 bg-white">
                     <p className="font-bold text-2xl text-deep">85.8%</p>
-                    <p className="text-xs text-deep-muted">CRM-Powered Content</p>
-                    <p className="text-xs text-deep-muted mt-1">Listings + events = 6,599 of 7,692 URLs. The CRM is the site's primary data source.</p>
+                    <p className="text-xs text-deep-muted">CRM-Generated Pages</p>
+                    <p className="text-xs text-deep-muted mt-1">6,599 of 7,692 URLs are CRM records (4,626 listings + 1,973 events). The CRM is the site's primary data source.</p>
                   </div>
                   <div className="p-3 border border-tan/50 bg-white">
                     <p className="font-bold text-2xl text-deep">79</p>
@@ -278,7 +278,7 @@ export default function ProposalDaniel() {
               </p>
               <h3 className="mb-2 mt-8">What We Found</h3>
               <p className="mb-4">
-                Visit Salt Lake's site is a 7,692-page tourism platform where 85.8% of content is powered by the Simpleview CRM — 4,626 business listings and 1,973 events. The CMS manages the remaining 14.2%: editorial pages, blog posts, convention microsites, and B2B industry sections. The site features 21+ distinct page templates, 70+ page builder widget types, 7-persona content personalization, A/B testing, and a sophisticated publishing workflow with scheduled content and multi-user collaboration.
+                Visit Salt Lake's site is a 7,692-page tourism platform where 85.8% of pages are CRM-generated — 4,626 business listings and 1,973 events. The CMS manages the remaining 14.2%: editorial pages, blog posts, convention microsites, and B2B industry sections. The site features 21+ distinct page templates, 70+ page builder widget types, 7-persona content personalization, A/B testing, and a sophisticated publishing workflow with scheduled content and multi-user collaboration.
               </p>
               <p className="mb-4">
                 We documented every content type field structure, all 15 collection types, 9 user roles with 166 permissions each, 10 taxonomy systems with 1,846 items, and a media library of 3,904 assets. We also ran full-site performance audits across 2,281 pages and an SEO crawl of 8,818 URLs — establishing clear baselines for the rebuild to match and exceed.
