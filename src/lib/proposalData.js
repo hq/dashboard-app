@@ -88,38 +88,46 @@ export const TIMELINE_PHASES = [
 
 /**
  * Compute timeline from scenario hours.
- * Phase 2 (deep dive) runs first, then Phase 3 (production rebuild) follows.
- * Design and frontend can overlap within Phase 3.
- * Target: launch by end of 2026.
+ * Phase 2 (deep dive) runs first as a fixed block.
+ * Phase 3 (production rebuild) fills the remaining time until Dec 31, 2026.
+ * Tasks within Phase 3 are distributed proportionally by their hour weight.
  */
 export function buildTimeline(scenarioHours, startDate = new Date()) {
-  const BUFFER_WEEKS = 1
-  let cursor = new Date(startDate)
+  const DEADLINE = new Date(2026, 11, 31) // Dec 31, 2026
   const results = []
 
-  for (const phase of TIMELINE_PHASES) {
-    const weeks = phase.fixedWeeks ?? Math.max(1, Math.ceil((scenarioHours[phase.hourKey] || 0) / 40))
+  // Phase 2: fixed duration
+  const phase2Phases = TIMELINE_PHASES.filter((p) => p.phase === 2)
+  let cursor = new Date(startDate)
+  for (const phase of phase2Phases) {
+    const weeks = phase.fixedWeeks
+    const start = new Date(cursor)
+    cursor = new Date(cursor)
+    cursor.setDate(cursor.getDate() + weeks * 7)
+    const end = new Date(cursor)
+    results.push({ ...phase, weeks, start, end })
+  }
 
-    // Design and frontend run in parallel within Phase 3
-    if (phase.id === 'frontend') {
-      const designPhase = results.find((p) => p.id === 'design')
-      if (designPhase) {
-        const start = new Date(designPhase.start)
-        start.setDate(start.getDate() + BUFFER_WEEKS * 7)
-        const end = new Date(start)
-        end.setDate(end.getDate() + weeks * 7)
-        const frontendEnd = end.getTime()
-        if (frontendEnd > cursor.getTime()) cursor = new Date(frontendEnd)
-        results.push({ ...phase, weeks, start, end })
-        continue
-      }
-    }
+  // Phase 3: distribute available weeks proportionally
+  const phase3Start = new Date(cursor)
+  const availableMs = DEADLINE.getTime() - phase3Start.getTime()
+  const availableWeeks = Math.floor(availableMs / (7 * 24 * 60 * 60 * 1000))
 
-    // Buffer before QA
-    if (phase.id === 'qa') {
-      cursor.setDate(cursor.getDate() + BUFFER_WEEKS * 7)
-    }
+  const phase3Phases = TIMELINE_PHASES.filter((p) => p.phase === 3)
 
+  // Calculate raw week weights for each Phase 3 task
+  const rawWeeks = phase3Phases.map((phase) => {
+    return phase.fixedWeeks ?? Math.max(1, Math.ceil((scenarioHours[phase.hourKey] || 0) / 40))
+  })
+  const totalRawWeeks = rawWeeks.reduce((sum, w) => sum + w, 0)
+
+  // Scale to fit the available window
+  const scaledWeeks = rawWeeks.map((w) => Math.max(1, Math.round((w / totalRawWeeks) * availableWeeks)))
+
+  // Assign dates sequentially
+  for (let i = 0; i < phase3Phases.length; i++) {
+    const phase = phase3Phases[i]
+    const weeks = scaledWeeks[i]
     const start = new Date(cursor)
     cursor = new Date(cursor)
     cursor.setDate(cursor.getDate() + weeks * 7)
