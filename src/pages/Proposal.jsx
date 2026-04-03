@@ -234,6 +234,36 @@ export default function Proposal() {
               <DiscoveryDashboard />
             </div>
 
+            {/* Areas of Focus */}
+            <div className="mt-8 border border-tan bg-sand-light p-6">
+              <p className="preheading mb-3">Areas of Focus</p>
+              <p className="text-sm text-deep-muted leading-relaxed mb-6">
+                Our research surfaced areas of the site where scope extends well beyond standard page templates. These are the sections where Phase 2 will focus the deepest attention.
+              </p>
+
+              <div className="space-y-4">
+                <div className="border border-tan bg-white p-5">
+                  <p className="font-semibold text-sm text-deep mb-2">Events</p>
+                  <p className="text-xs text-deep-muted leading-relaxed">
+                    Events represents ~23% of the site (~1,800 pages) and functions as a search product with multi-faceted filtering, live counts, date pickers, and geospatial proximity results. It also pulls from an external NowPlayingUtah feed with an unknown integration mechanism, and has an event submission workflow we haven't been able to fully audit.
+                  </p>
+                </div>
+
+                <div className="border border-tan bg-white p-5">
+                  <p className="font-semibold text-sm text-deep mb-2">Members &amp; Partners</p>
+                  <p className="text-xs text-deep-muted leading-relaxed">
+                    The members section spans three systems: the public site, a Simpleview partner portal behind authentication, and Chargebee for payments. The portal hasn't been auditable, and whether to keep it or replace it is the single largest scope decision in the project.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 pt-5 border-t border-tan">
+                <p className="text-xs text-deep-muted leading-relaxed">
+                  These sections, along with listings, integrations, and admin workflows, have open questions that can only be answered with direct system access and stakeholder interviews. That's what Phase 2 is designed for.
+                </p>
+              </div>
+            </div>
+
             {/* Scope breakdown: Marketing / CMS / CRM */}
             <div className="mt-8 space-y-4">
               <p className="preheading mb-1">Scope Breakdown</p>
