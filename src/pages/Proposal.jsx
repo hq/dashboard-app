@@ -368,6 +368,22 @@ export default function Proposal() {
 
             <TabNav />
 
+            <div className="max-w-[700px] mx-auto mb-10">
+              <h3 className="text-deep mb-4">Full Build and Launch</h3>
+              <p className="text-sm text-deep leading-relaxed mb-4">
+                Everything researched in Phase 1 and validated in Phase 2 gets turned into a production platform.
+              </p>
+              <p className="text-sm text-deep leading-relaxed mb-4">
+                The priority is exact feature parity with the current site before any new functionality gets added. Every page template, every integration, every content workflow that exists today will exist in the new system. The difference is that it will be on a platform Visit Salt Lake owns and controls, built to work as one system instead of twenty disconnected tools.
+              </p>
+              <p className="text-sm text-deep leading-relaxed mb-4">
+                The timeline below breaks the work into design, frontend, backend, QA, and launch. The schedule is built around the December 2026 deadline, with enough margin in each phase that delays in one area don't cascade into the next. Phase 2 findings will refine these estimates, but the structure holds.
+              </p>
+              <p className="text-sm text-deep leading-relaxed">
+                By the end of this phase, the team is trained, the data is migrated, and the Simpleview dependency is gone.
+              </p>
+            </div>
+
             <div className="space-y-4">
               <ScenarioEstimate
                 scenarios={scenarios}
