@@ -230,6 +230,16 @@ export default function Proposal() {
 
             <TabNav />
 
+            <div className="max-w-[700px] mb-10">
+              <h3 className="text-deep mb-4">Our Research</h3>
+              <p className="text-sm text-deep leading-relaxed mb-4">
+                This page is the output of our Phase 1 research. Our primary goal was to determine whether this project is feasible and likely to succeed, given how important this website is to the organization and the community it serves. We took that seriously.
+              </p>
+              <p className="text-sm text-deep leading-relaxed">
+                Over the past several weeks, we independently analyzed the full visitsaltlake.com platform, from the public site through the CMS backend and every third-party integration we could identify. This dashboard is a representation of that work. The research was designed to surface the major risks, and based on what we've found, we're at roughly 90% confidence that this project can be completed successfully within the parameters of success and will be a significant upgrade for the team.
+              </p>
+            </div>
+
             <div>
               <DiscoveryDashboard />
             </div>
