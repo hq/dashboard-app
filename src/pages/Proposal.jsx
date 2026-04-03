@@ -222,7 +222,7 @@ export default function Proposal() {
                     <h2 className="text-deep">Our Approach</h2>
                   </div>
                   <p className="text-deep md:max-w-[430px] md:ml-auto">
-                    We analyzed every layer of your site, from the public frontend templates and URL structure, through the CMS admin with its content types and workflows, down to the media library, taxonomy systems, and third-party integrations. The results are broken down below.
+                    We audited visitsaltlake.com from both sides, crawling the full public site to map page types, user flows, and integrations, and logging into the Simpleview CMS admin to document the page builder, content types, user roles, media library, redirects, and publishing workflows. The main gaps are the CRM, the member/partner portal, events, newsletters, and potentially some of the checkout experiences, all of which we'll need deeper access to scope accurately in Phase 2.
                   </p>
                 </div>
               </div>
