@@ -305,18 +305,15 @@ export default function Proposal() {
             <TabNav />
 
             <div className="max-w-[700px] mx-auto mb-10">
-              <h3 className="text-deep mb-4">Proof of Concept</h3>
+              <h3 className="text-deep mb-4">Interactive Demos and Scaffolding</h3>
               <p className="text-sm text-deep leading-relaxed mb-4">
                 Phase 1 told us what we can see from the outside. Phase 2 is where we get inside the systems.
               </p>
               <p className="text-sm text-deep leading-relaxed mb-4">
                 The research so far covers the public site, the page templates, and the integrations we can verify from the frontend. But the parts of this project that carry the most risk, the CRM, the membership workflows, the partner portal, the sales team's daily processes, can only be understood with direct access and direct conversation with the people who use them.
               </p>
-              <p className="text-sm text-deep leading-relaxed mb-4">
-                This phase is a standalone engagement. At the end of it, both teams have a more complete picture: content types mapped and every workflow documented with the people who do the work. That's the foundation for a locked scope and timeline. It's also a decision point. If the findings change the equation, Visit Salt Lake can step back before committing to the full build.
-              </p>
               <p className="text-sm text-deep leading-relaxed">
-                The deliverables below are what we'll produce during those 6-8 weeks.
+                This phase is a standalone engagement. At the end of it, both teams have a more complete picture: content types mapped and every workflow documented with the people who do the work. That's the foundation for a locked scope and timeline. It's also a decision point. If the findings change the equation, Visit Salt Lake can step back before committing to the full build.
               </p>
             </div>
 
@@ -348,24 +345,10 @@ export default function Proposal() {
               <div className="mt-8 p-5 border border-tan bg-sand-light">
                 <p className="font-semibold text-sm text-deep mb-2">The goal of Phase 2</p>
                 <p className="text-sm text-deep-muted">
-                  99% confidence. When we present the final scope and timeline, there should be no surprises for either side. Every content type mapped field-by-field, every integration tested end-to-end, every workflow documented with the people who use it daily.
+                  Full confidence before committing to Phase 3 of the project. We will have validated demos and workflows built with minimized risk of compromising launch issues.
                 </p>
               </div>
 
-              <div className="mt-6 grid grid-cols-3 gap-4 text-center">
-                <div className="p-4 border border-tan bg-sand-light">
-                  <p className="text-2xl font-bold text-deep">6-8</p>
-                  <p className="text-xs text-deep-muted mt-1">Weeks</p>
-                </div>
-                <div className="p-4 border border-tan bg-sand-light">
-                  <p className="text-2xl font-bold text-deep">6</p>
-                  <p className="text-xs text-deep-muted mt-1">Deliverables</p>
-                </div>
-                <div className="p-4 border border-tan bg-sand-light">
-                  <p className="text-2xl font-bold text-deep">99%</p>
-                  <p className="text-xs text-deep-muted mt-1">Confidence Target</p>
-                </div>
-              </div>
             </div>
           </div>
         )}
