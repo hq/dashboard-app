@@ -92,7 +92,6 @@ const RISKS = [
 // CEO plan #1: Real client questions with status indicators (ported from legacy DiscoveryDashboard)
 const CLIENT_QUESTIONS = [
   { category: 'Integrations & Vendors', questions: [
-    'Bandwango scope: Where does "Get FREE Passport" link to? Embed, redirect, or widget?',
     'EventsForce: On which events do ticket links appear?',
     'Ripe booking: Not found on any page. Where does it appear?',
     'Act On: Forms submit to CRM, not Act On. How does CRM connect to Act On?',
@@ -106,7 +105,6 @@ const CLIENT_QUESTIONS = [
     'Content freshness: How often are listings, events, and articles updated?',
     'Event lifecycle: What happens to past events? Archived? Deleted?',
     'Multi-location listings: Subway has 68 pages. Intentional? Partner-managed?',
-    'Blog vs. Articles: Why two separate content areas?',
     'Listing tiers: "Premiere Partner" badge \u2014 what tiers exist? Paid?',
   ]},
   { category: 'Forms & Lead Capture', questions: [
@@ -118,12 +116,6 @@ const CLIENT_QUESTIONS = [
     'Member portal: What can members do behind login?',
     'Membership tiers: What exists? What\u2019s behind each?',
     'Partner self-service: Can partners update their own listings?',
-  ]},
-  { category: 'Business & Priorities', questions: [
-    'Must-haves vs. nice-to-haves for launch?',
-    'Revenue features: Which drive revenue?',
-    'Simpleview contract: Timeline or data access obligations?',
-    'Analytics/reporting: What reports are critical?',
   ]},
 ]
 

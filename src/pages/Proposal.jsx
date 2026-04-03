@@ -11,7 +11,7 @@ import ParticleLogos from '../components/ParticleLogos'
 import DiscoveryDashboard from '../components/proposal/DiscoveryDashboard'
 import { PROPOSAL_TABS, useProposalTab } from '../contexts/ProposalTabContext'
 
-// Flat scope sub-tabs: Marketing / CMS / CRM (no outer sitemap/screenshots nesting)
+// Flat scope sub-tabs: Marketing / CMS / CRM
 const SCOPE_TABS = [
   { id: 'marketing', name: 'Marketing Site' },
   { id: 'cms', name: 'CMS' },
@@ -79,7 +79,7 @@ const PHASE_2_DELIVERABLES = [
   },
   {
     title: 'Content Migration Mapping',
-    description: 'Field-by-field analysis of every content type: what moves, what gets archived, and how relationships (listing → category, event → venue) are preserved.',
+    description: 'Field-by-field analysis of every content type: what moves, what gets archived, and how relationships (listing to category, event to venue) are preserved.',
     priority: 'critical',
   },
   {
@@ -104,6 +104,44 @@ const PHASE_2_DELIVERABLES = [
   },
 ]
 
+// Prev/Next navigation component, placed at the top of content on each tab
+function TabNav() {
+  const { activeTab, goTo } = useProposalTab()
+  return (
+    <div className="flex items-center justify-between border-b border-tan pb-4 mb-6">
+      <button
+        onClick={() => goTo(activeTab - 1)}
+        disabled={activeTab === 0}
+        className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-colors ${
+          activeTab === 0
+            ? 'text-deep-muted/40 cursor-not-allowed'
+            : 'text-deep hover:text-deep-dark'
+        }`}
+      >
+        <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M10 3L5 8l5 5V3z" />
+        </svg>
+        {activeTab > 0 ? PROPOSAL_TABS[activeTab - 1].label : 'Previous'}
+      </button>
+
+      <button
+        onClick={() => goTo(activeTab + 1)}
+        disabled={activeTab === PROPOSAL_TABS.length - 1}
+        className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-colors ${
+          activeTab === PROPOSAL_TABS.length - 1
+            ? 'text-deep-muted/40 cursor-not-allowed'
+            : 'text-deep hover:text-deep-dark'
+        }`}
+      >
+        {activeTab < PROPOSAL_TABS.length - 1 ? PROPOSAL_TABS[activeTab + 1].label : 'Next'}
+        <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M6 3l5 5-5 5V3z" />
+        </svg>
+      </button>
+    </div>
+  )
+}
+
 export default function Proposal() {
   const { activeTab, goTo } = useProposalTab()
   const [activeScenarioId, setActiveScenarioId] = useState('2026')
@@ -115,7 +153,7 @@ export default function Proposal() {
   return (
     <div className="space-y-6">
       <div>
-        {/* Tab 0: The Opportunity */}
+        {/* Tab 0: The Objective */}
         {activeTab === 0 && (
           <>
             <div className="relative -mx-6 -mt-6 overflow-hidden" style={{ minHeight: '480px', background: 'var(--accent)' }}>
@@ -123,13 +161,12 @@ export default function Proposal() {
               <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-24" style={{ minHeight: '480px' }}>
                 <p className="preheading mb-4" style={{ color: '#FFB584' }}>Website Rebuild Proposal</p>
                 <h1 className="jumbo text-white mb-6">Visit Salt Lake <GradientText text="Rebuild" /></h1>
-                <button onClick={() => goTo(1)} className="btn-fill-up" style={{ '--fill-bg': '#84D7DC', '--fill-hover': '#FFB584', '--fill-text': '#264A50', '--fill-hover-text': '#264A50' }}>
-                  <span>Explore the Proposal</span>
-                </button>
               </div>
             </div>
 
-            <div className="max-w-[600px] mx-auto text-sm text-deep leading-relaxed mt-10">
+            <TabNav />
+
+            <div className="max-w-[600px] mx-auto text-sm text-deep leading-relaxed">
               <h3 className="mb-2">Approach</h3>
               <p className="mb-4">
                 We conducted a comprehensive analysis of visitsaltlake.com, mapping every page template, content type, integration, and backend feature across both the public website and CMS admin. Our research spans 38 documents covering the full public site, 28+ third-party integrations, and the complete Simpleview CMS backend.
@@ -158,7 +195,7 @@ export default function Proposal() {
           </>
         )}
 
-        {/* Tab 1: What We Found */}
+        {/* Tab 1: Our Research */}
         {activeTab === 1 && (
           <div>
             <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
@@ -166,7 +203,7 @@ export default function Proposal() {
               <div className="flex items-center px-6 py-8 md:ml-[80px] md:px-0 md:py-0">
                 <div>
                   <p className="preheading text-orange mb-4">Discovery</p>
-                  <h1 className="text-white">What We Found</h1>
+                  <h1 className="text-white">Our Research</h1>
                 </div>
               </div>
             </div>
@@ -191,7 +228,9 @@ export default function Proposal() {
               </div>
             </div>
 
-            <div className="mt-8">
+            <TabNav />
+
+            <div>
               <DiscoveryDashboard />
             </div>
 
@@ -210,35 +249,8 @@ export default function Proposal() {
           </div>
         )}
 
-        {/* Tab 2: How We Deliver: scenarios + comparison + timeline */}
+        {/* Tab 2: Next Steps */}
         {activeTab === 2 && (
-          <div className="space-y-8">
-            <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
-              <img src="/assets/hero-scenarios.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />
-              <div className="flex items-center px-6 py-8 md:ml-[80px] md:px-0 md:py-0">
-                <div>
-                  <p className="preheading text-orange mb-4">Delivery</p>
-                  <h1 className="text-white">How We Deliver</h1>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <ScenarioEstimate
-                scenarios={scenarios}
-                activeId={activeScenarioId}
-              />
-            </div>
-
-            <div className="space-y-4">
-              <p className="preheading mb-3">Delivery Schedule</p>
-              <Timeline scenarioHours={activeScenario.hours} />
-            </div>
-          </div>
-        )}
-
-        {/* Tab 3: Next Steps: Phase 2 deliverables list */}
-        {activeTab === 3 && (
           <div className="space-y-8">
             <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
               <img src="/assets/hero-estimate.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />
@@ -250,9 +262,11 @@ export default function Proposal() {
               </div>
             </div>
 
+            <TabNav />
+
             <div className="max-w-[800px]">
               <p className="text-sm text-deep leading-relaxed mb-6">
-                Phase 1 gave us 80-90% confidence in the scope of the marketing website. Phase 2 is where we go deep: a paid engagement (typically 3-4 weeks) that delivers the remaining 10-20% of understanding needed to lock the final scope, timeline, and price.
+                Phase 1 gave us 80-90% confidence in the scope of the marketing website. Phase 2 is where we go deep: a paid engagement (typically 6-8 weeks) that delivers the remaining 10-20% of understanding needed to lock the final scope, timeline, and price.
               </p>
 
               <p className="preheading mb-4">Phase 2 Deliverables</p>
@@ -281,7 +295,7 @@ export default function Proposal() {
 
               <div className="mt-6 grid grid-cols-3 gap-4 text-center">
                 <div className="p-4 border border-tan bg-sand-light">
-                  <p className="text-2xl font-bold text-deep">3-4</p>
+                  <p className="text-2xl font-bold text-deep">6-8</p>
                   <p className="text-xs text-deep-muted mt-1">Weeks</p>
                 </div>
                 <div className="p-4 border border-tan bg-sand-light">
@@ -296,39 +310,35 @@ export default function Proposal() {
             </div>
           </div>
         )}
-      </div>
 
-      {/* Previous / Next navigation: uses PROPOSAL_TABS labels */}
-      <div className="flex items-center justify-between border-t border-tan pt-4">
-        <button
-          onClick={() => goTo(activeTab - 1)}
-          disabled={activeTab === 0}
-          className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-colors ${
-            activeTab === 0
-              ? 'text-deep-muted/40 cursor-not-allowed'
-              : 'text-deep hover:text-deep-dark'
-          }`}
-        >
-          <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M10 3L5 8l5 5V3z" />
-          </svg>
-          {activeTab > 0 ? PROPOSAL_TABS[activeTab - 1].label : 'Previous'}
-        </button>
+        {/* Tab 3: Timeline */}
+        {activeTab === 3 && (
+          <div className="space-y-8">
+            <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
+              <img src="/assets/hero-scenarios.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />
+              <div className="flex items-center px-6 py-8 md:ml-[80px] md:px-0 md:py-0">
+                <div>
+                  <p className="preheading text-orange mb-4">Schedule</p>
+                  <h1 className="text-white">Timeline</h1>
+                </div>
+              </div>
+            </div>
 
-        <button
-          onClick={() => goTo(activeTab + 1)}
-          disabled={activeTab === PROPOSAL_TABS.length - 1}
-          className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-colors ${
-            activeTab === PROPOSAL_TABS.length - 1
-              ? 'text-deep-muted/40 cursor-not-allowed'
-              : 'text-deep hover:text-deep-dark'
-          }`}
-        >
-          {activeTab < PROPOSAL_TABS.length - 1 ? PROPOSAL_TABS[activeTab + 1].label : 'Next'}
-          <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M6 3l5 5-5 5V3z" />
-          </svg>
-        </button>
+            <TabNav />
+
+            <div className="space-y-4">
+              <ScenarioEstimate
+                scenarios={scenarios}
+                activeId={activeScenarioId}
+              />
+            </div>
+
+            <div className="space-y-4">
+              <p className="preheading mb-3">Delivery Schedule</p>
+              <Timeline scenarioHours={activeScenario.hours} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

@@ -74,29 +74,33 @@ export function getModuleForPage(pageName) {
 }
 
 // --- Timeline phases ---
+// Two-phase structure: Phase 2 (deep dive, 6-8 weeks) then Phase 3 (production rebuild through end of 2026)
 export const TIMELINE_PHASES = [
-  { id: 'discovery', name: 'Discovery & Planning', fixedWeeks: 3, color: '#264A50' },
-  { id: 'design', name: 'Design', hourKey: 'design', color: '#2FB2B8' },
-  { id: 'frontend', name: 'Frontend Development', hourKey: 'frontend', color: '#84D7DC' },
-  { id: 'backend', name: 'Backend Development', hourKey: 'backend', color: '#FFB584' },
-  { id: 'qa', name: 'QA & Testing', fixedWeeks: 4, color: '#FAA46A' },
-  { id: 'launch', name: 'Launch & Handoff', fixedWeeks: 2, color: '#335C63' },
+  // Phase 2: Deep Dive (6-8 weeks)
+  { id: 'phase2-discovery', name: 'Phase 2: Deep Dive & Planning', fixedWeeks: 7, color: '#264A50', phase: 2 },
+  // Phase 3: Production Rebuild (through end of 2026)
+  { id: 'design', name: 'Design', hourKey: 'design', color: '#2FB2B8', phase: 3 },
+  { id: 'frontend', name: 'Frontend Development', hourKey: 'frontend', color: '#84D7DC', phase: 3 },
+  { id: 'backend', name: 'Backend Development', hourKey: 'backend', color: '#FFB584', phase: 3 },
+  { id: 'qa', name: 'QA & Testing', fixedWeeks: 4, color: '#FAA46A', phase: 3 },
+  { id: 'launch', name: 'Launch & Handoff', fixedWeeks: 2, color: '#335C63', phase: 3 },
 ]
 
 /**
  * Compute timeline from scenario hours.
- * Design and frontend can overlap (parallel tracks), with a 1-week buffer
- * between review cycles (design→frontend handoff, backend→QA handoff).
+ * Phase 2 (deep dive) runs first, then Phase 3 (production rebuild) follows.
+ * Design and frontend can overlap within Phase 3.
+ * Target: launch by end of 2026.
  */
 export function buildTimeline(scenarioHours, startDate = new Date()) {
-  const BUFFER_WEEKS = 1 // Review cycle buffer between major handoffs
+  const BUFFER_WEEKS = 1
   let cursor = new Date(startDate)
   const results = []
 
   for (const phase of TIMELINE_PHASES) {
     const weeks = phase.fixedWeeks ?? Math.max(1, Math.ceil((scenarioHours[phase.hourKey] || 0) / 40))
 
-    // Design and frontend run in parallel: frontend starts after design + buffer
+    // Design and frontend run in parallel within Phase 3
     if (phase.id === 'frontend') {
       const designPhase = results.find((p) => p.id === 'design')
       if (designPhase) {
@@ -104,7 +108,6 @@ export function buildTimeline(scenarioHours, startDate = new Date()) {
         start.setDate(start.getDate() + BUFFER_WEEKS * 7)
         const end = new Date(start)
         end.setDate(end.getDate() + weeks * 7)
-        // Cursor advances to whichever finishes later (frontend end or current cursor)
         const frontendEnd = end.getTime()
         if (frontendEnd > cursor.getTime()) cursor = new Date(frontendEnd)
         results.push({ ...phase, weeks, start, end })
@@ -112,7 +115,7 @@ export function buildTimeline(scenarioHours, startDate = new Date()) {
       }
     }
 
-    // Add buffer before QA (backend→QA handoff)
+    // Buffer before QA
     if (phase.id === 'qa') {
       cursor.setDate(cursor.getDate() + BUFFER_WEEKS * 7)
     }
