@@ -57,11 +57,14 @@ function PhaseGroup({ label, description, phases, maxWeeks }) {
   )
 }
 
-export default function Timeline({ scenarioHours }) {
-  const phases = useMemo(
+export default function Timeline({ scenarioHours, phaseFilter }) {
+  const allPhases = useMemo(
     () => buildTimeline(scenarioHours || {}),
     [scenarioHours]
   )
+
+  // If a phaseFilter is provided, only show that phase
+  const phases = phaseFilter ? allPhases.filter((p) => p.phase === phaseFilter) : allPhases
 
   const totalWeeks = phases.reduce((sum, p) => sum + p.weeks, 0)
   const maxWeeks = Math.max(...phases.map((p) => p.weeks))
@@ -78,25 +81,21 @@ export default function Timeline({ scenarioHours }) {
       </div>
 
       {phase2.length > 0 && (
-        <div className="rounded-xl border border-tan bg-sand-light p-5">
-          <PhaseGroup
-            label="Phase 2: Deep Dive"
-            description="CRM audit, migration mapping, integration verification, workflow documentation"
-            phases={phase2}
-            maxWeeks={maxWeeks}
-          />
-        </div>
+        <PhaseGroup
+          label="Phase 2: Deep Dive"
+          description="CRM audit, migration mapping, integration verification, workflow documentation"
+          phases={phase2}
+          maxWeeks={maxWeeks}
+        />
       )}
 
       {phase3.length > 0 && (
-        <div className="rounded-xl border border-tan bg-sand-light p-5">
-          <PhaseGroup
-            label="Phase 3: Production Rebuild"
-            description="Full custom platform: marketing site, CMS, admin panel, data migration, launch"
-            phases={phase3}
-            maxWeeks={maxWeeks}
-          />
-        </div>
+        <PhaseGroup
+          label="Phase 3: Production Rebuild"
+          description="Full custom platform: marketing site, CMS, admin panel, data migration, launch"
+          phases={phase3}
+          maxWeeks={maxWeeks}
+        />
       )}
     </div>
   )

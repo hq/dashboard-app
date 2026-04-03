@@ -195,7 +195,7 @@ export default function Proposal() {
           </>
         )}
 
-        {/* Tab 1: Our Research */}
+        {/* Tab 1: Phase 1 */}
         {activeTab === 1 && (
           <div>
             <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
@@ -203,7 +203,7 @@ export default function Proposal() {
               <div className="flex items-center px-6 py-8 md:ml-[80px] md:px-0 md:py-0">
                 <div>
                   <p className="preheading text-orange mb-4">Discovery</p>
-                  <h1 className="text-white">Our Research</h1>
+                  <h1 className="text-white">Phase 1</h1>
                 </div>
               </div>
             </div>
@@ -279,20 +279,27 @@ export default function Proposal() {
           </div>
         )}
 
-        {/* Tab 2: Next Steps */}
+        {/* Tab 2: Phase 2 */}
         {activeTab === 2 && (
           <div className="space-y-8">
             <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
               <img src="/assets/hero-estimate.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />
               <div className="flex items-center px-6 py-8 md:ml-[80px] md:px-0 md:py-0">
                 <div>
-                  <p className="preheading text-orange mb-4">What's Next</p>
-                  <h1 className="text-white">Next Steps</h1>
+                  <p className="preheading text-orange mb-4">Deep Dive</p>
+                  <h1 className="text-white">Phase 2</h1>
                 </div>
               </div>
             </div>
 
             <TabNav />
+
+            {/* Phase 2 Timeline */}
+            <div className="max-w-[800px]">
+              <div className="rounded-xl border border-tan bg-sand-light p-5">
+                <Timeline scenarioHours={activeScenario.hours} phaseFilter={2} />
+              </div>
+            </div>
 
             <div className="max-w-[800px]">
               <p className="text-sm text-deep leading-relaxed mb-6">
@@ -341,15 +348,15 @@ export default function Proposal() {
           </div>
         )}
 
-        {/* Tab 3: Timeline */}
+        {/* Tab 3: Phase 3 */}
         {activeTab === 3 && (
           <div className="space-y-8">
             <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
               <img src="/assets/hero-scenarios.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />
               <div className="flex items-center px-6 py-8 md:ml-[80px] md:px-0 md:py-0">
                 <div>
-                  <p className="preheading text-orange mb-4">Schedule</p>
-                  <h1 className="text-white">Timeline</h1>
+                  <p className="preheading text-orange mb-4">Production Rebuild</p>
+                  <h1 className="text-white">Phase 3</h1>
                 </div>
               </div>
             </div>
@@ -365,7 +372,7 @@ export default function Proposal() {
 
             <div className="space-y-4">
               <p className="preheading mb-3">Delivery Schedule</p>
-              <Timeline scenarioHours={activeScenario.hours} />
+              <Timeline scenarioHours={activeScenario.hours} phaseFilter={3} />
             </div>
           </div>
         )}
