@@ -59,7 +59,7 @@ function lsSave(state) {
   try {
     localStorage.setItem(LS_KEY, JSON.stringify(state))
   } catch {
-    // localStorage full or unavailable — ignore
+    // localStorage full or unavailable; ignore
   }
 }
 
@@ -125,7 +125,7 @@ export async function saveState(state) {
       body: JSON.stringify(state),
     })
   } catch {
-    // cloud unavailable — localStorage already saved
+    // cloud unavailable; localStorage already saved
   }
 }
 

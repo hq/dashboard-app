@@ -1,4 +1,4 @@
-// Shared SVG cache — fetched once, reused across all wave components
+// Shared SVG cache: fetched once, reused across all wave components
 let svgCache = null;
 
 export function fetchWaveSvg() {

@@ -13,3 +13,4 @@ Each file covers one major section of the site. As we learn more — from client
 ## Files
 
 - `events.md` — Events section (index, detail, filtering, feeds)
+- `members.md` — Members/partner section (directory, portal, payments, sponsorships)

@@ -78,7 +78,7 @@ export default function Estimate() {
                       Annotations
                       {annotations.length > 0 && (
                         <span className="ml-1 text-deep-muted/50">
-                          — {annotations.reduce((s, a) => s + (a.designHours || 0) + (a.frontendHours || 0) + (a.backendHours || 0), 0)}h
+                          · {annotations.reduce((s, a) => s + (a.designHours || 0) + (a.frontendHours || 0) + (a.backendHours || 0), 0)}h
                         </span>
                       )}
                     </h4>

@@ -1,27 +1,29 @@
 import { useMemo } from 'react'
-import { buildTimeline } from '../../lib/proposalDataDaniel'
+import { buildTimeline } from '../../lib/proposalData'
 
 function formatDate(date) {
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 }
 
-export default function Timeline({ scenarioHours }) {
-  const phases = useMemo(
-    () => buildTimeline(scenarioHours || {}),
-    [scenarioHours]
-  )
-
-  const totalWeeks = phases.reduce((sum, p) => sum + p.weeks, 0)
-  const maxWeeks = Math.max(...phases.map((p) => p.weeks))
+function PhaseGroup({ label, description, phases, maxWeeks }) {
+  const groupWeeks = phases.reduce((sum, p) => sum + p.weeks, 0)
+  const groupStart = phases[0]?.start
+  const groupEnd = phases[phases.length - 1]?.end
 
   return (
-    <div className="rounded-xl border border-tan bg-sand-light p-5 space-y-4">
-      <span className="text-sm font-semibold text-deep">{totalWeeks} weeks total</span>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="preheading mb-1">{label}</p>
+          {description && <p className="text-xs text-deep-muted">{description}</p>}
+        </div>
+        <span className="text-xs text-deep-muted tabular-nums">
+          {groupWeeks}w · {groupStart && formatDate(groupStart)} &ndash; {groupEnd && formatDate(groupEnd)}
+        </span>
+      </div>
 
       <div className="relative pl-6">
-        {/* Vertical line */}
         <div className="absolute left-[7px] top-2 bottom-2 w-0.5 bg-tan" />
-
         <div className="space-y-5">
           {phases.map((phase) => (
             <div key={phase.id} className="relative flex items-start gap-4">
@@ -33,7 +35,7 @@ export default function Timeline({ scenarioHours }) {
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-sm font-semibold text-deep">{phase.name}</span>
                   <span className="text-xs text-deep-muted tabular-nums">
-                    {phase.weeks}w &mdash; {formatDate(phase.start)} &ndash; {formatDate(phase.end)}
+                    {phase.weeks}w · {formatDate(phase.start)} &ndash; {formatDate(phase.end)}
                   </span>
                 </div>
                 <div className="h-3 rounded-full bg-sand-dark overflow-hidden">
@@ -51,6 +53,51 @@ export default function Timeline({ scenarioHours }) {
           ))}
         </div>
       </div>
+    </div>
+  )
+}
+
+export default function Timeline({ scenarioHours }) {
+  const phases = useMemo(
+    () => buildTimeline(scenarioHours || {}),
+    [scenarioHours]
+  )
+
+  const totalWeeks = phases.reduce((sum, p) => sum + p.weeks, 0)
+  const maxWeeks = Math.max(...phases.map((p) => p.weeks))
+
+  // Split into Phase 2 and Phase 3
+  const phase2 = phases.filter((p) => p.phase === 2)
+  const phase3 = phases.filter((p) => p.phase === 3)
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <span className="text-sm font-semibold text-deep">{totalWeeks} weeks total</span>
+        <span className="text-xs text-deep-muted">Target: end of 2026</span>
+      </div>
+
+      {phase2.length > 0 && (
+        <div className="rounded-xl border border-tan bg-sand-light p-5">
+          <PhaseGroup
+            label="Phase 2: Deep Dive"
+            description="CRM audit, migration mapping, integration verification, workflow documentation"
+            phases={phase2}
+            maxWeeks={maxWeeks}
+          />
+        </div>
+      )}
+
+      {phase3.length > 0 && (
+        <div className="rounded-xl border border-tan bg-sand-light p-5">
+          <PhaseGroup
+            label="Phase 3: Production Rebuild"
+            description="Full custom platform: marketing site, CMS, admin panel, data migration, launch"
+            phases={phase3}
+            maxWeeks={maxWeeks}
+          />
+        </div>
+      )}
     </div>
   )
 }

@@ -133,7 +133,7 @@ p {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--text-muted);
+  color: #335C63; /* deep-light — passes WCAG AA (5.8:1) on sand bg, unlike text-muted (2.9:1) */
 }
 
 /* Button: sky fill-up on hover */
