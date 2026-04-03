@@ -195,22 +195,10 @@ export default function Proposal() {
             <div className="mt-8">
               <DiscoveryDashboard />
             </div>
-          </div>
-        )}
 
-        {/* Tab 2: The Scope: flat Marketing / CMS / CRM navigation */}
-        {activeTab === 2 && (
-          <div className="space-y-8">
-            <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
-              <img src="/assets/hero-scope.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />
-              <div className="flex items-center px-6 py-8 md:ml-[80px] md:px-0 md:py-0">
-                <div>
-                  <p className="preheading text-orange mb-4">Scope</p>
-                  <h1 className="text-white">Site Architecture</h1>
-                </div>
-              </div>
-            </div>
-            <div className="space-y-4">
+            {/* Scope breakdown: Marketing / CMS / CRM */}
+            <div className="mt-8 space-y-4">
+              <p className="preheading mb-1">Scope Breakdown</p>
               <FilterButtonGroup
                 options={SCOPE_TABS}
                 activeId={activeScopeTab}
@@ -223,8 +211,8 @@ export default function Proposal() {
           </div>
         )}
 
-        {/* Tab 3: How We Deliver: scenarios + comparison + timeline */}
-        {activeTab === 3 && (
+        {/* Tab 2: How We Deliver: scenarios + comparison + timeline */}
+        {activeTab === 2 && (
           <div className="space-y-8">
             <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
               <img src="/assets/hero-scenarios.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />
@@ -275,8 +263,8 @@ export default function Proposal() {
           </div>
         )}
 
-        {/* Tab 4: Next Steps: Phase 2 deliverables list */}
-        {activeTab === 4 && (
+        {/* Tab 3: Next Steps: Phase 2 deliverables list */}
+        {activeTab === 3 && (
           <div className="space-y-8">
             <div className="-mx-6 -mt-6 bg-deep md:h-[342px] flex flex-col md:flex-row">
               <img src="/assets/hero-estimate.jpg" alt="" className="h-48 md:h-full w-full md:w-auto object-cover object-center" />

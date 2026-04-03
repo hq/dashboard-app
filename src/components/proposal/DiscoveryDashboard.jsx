@@ -1,31 +1,6 @@
 import CollapsibleSection from './CollapsibleSection'
 import InsightCard from './InsightCard'
 
-// Counts verified against sitemap crawl (discovery/front-end/sitemap.json, 2026-03-19, 7,692 unique URLs)
-// Individual counts sum to ~7,741 because some URLs match multiple template categories
-const PAGE_TYPES = [
-  { name: 'Listing Detail', pattern: '/listing/{slug}/{id}/', count: 4626, section: 'listings' },
-  { name: 'Event Detail', pattern: '/event/{category}/{slug}/{id}/', count: 1973, section: 'events' },
-  { name: 'Blog Post', pattern: '/blog/stories/post/{slug}/', count: 309, section: 'content' },
-  { name: 'PR Articles', pattern: '/articles/post/{slug}/', count: 156, section: 'content' },
-  { name: 'Things To Do', pattern: '/things-to-do/{category}/', count: 111, section: 'listings' },
-  { name: 'Meetings & Venues', pattern: '/meetings/*, /salt-palace/*, /mountain-america/*', count: 98, section: 'meetings' },
-  { name: 'Neighborhoods & Areas', pattern: '/salt-lake-city/*, /midvalley/*, /south-valley/*, etc.', count: 83, section: 'content' },
-  { name: 'Convention Microsites', pattern: '/{convention-slug}/', count: 79, section: 'microsites' },
-  { name: 'Hospitality Jobs', pattern: '/hospitality-jobs/{slug}/{id}/', count: 75, section: 'listings' },
-  { name: 'Plan Your Visit', pattern: '/plan-your-visit/{topic}/', count: 62, section: 'content' },
-  { name: 'Restaurants', pattern: '/restaurants/{category}/', count: 31, section: 'listings' },
-  { name: 'Static / Corporate', pattern: '/about-us/, /members/, /press-research/', count: 30, section: 'admin' },
-  { name: 'B2B Sections', pattern: '/travel-trade/, /film/, /speak-salt-lake/', count: 27, section: 'content' },
-  { name: 'System Pages', pattern: '/compare/, /rfp/, /staff-list/', count: 20, section: 'admin' },
-  { name: 'Sports', pattern: '/sports/{section}/', count: 19, section: 'content' },
-  { name: 'Landing Pages', pattern: '/{campaign-slug}/', count: 16, section: 'microsites' },
-  { name: 'Places To Stay', pattern: '/places-to-stay/{type}/', count: 14, section: 'listings' },
-  { name: 'Event Indexes', pattern: '/events/{category}/', count: 10, section: 'events' },
-  { name: 'Homepage', pattern: '/', count: 1, section: 'public' },
-  { name: 'Search Results', pattern: '/search/', count: 1, section: 'public' },
-]
-
 const INTEGRATIONS = [
   { name: 'Simpleview CMS', status: 'confirmed', criticality: 'critical', description: 'Core platform that serves every page, 70+ Page Builder widgets' },
   { name: 'Simpleview CRM', status: 'confirmed', criticality: 'critical', description: 'Source of truth for 4,626 listings + 1,973 events' },
@@ -55,13 +30,6 @@ const INTEGRATIONS = [
   { name: 'Bandwango', status: 'partial', criticality: 'high', description: 'Pass/ticketing platform; CTA exists but mechanism needs verification' },
   { name: 'VWO', status: 'confirmed', criticality: 'medium', description: 'A/B testing platform with active experiments on homepage' },
   { name: 'Weather API', status: 'confirmed', criticality: 'medium', description: 'Real-time weather widget in header on every page' },
-]
-
-const MEDIA_LIBRARY = [
-  { type: 'Images', count: '3,110', detail: '12 fields each: alt text, credits, focal points, categories, expiration' },
-  { type: 'Documents', count: '590', detail: 'PDFs, DOCs, PPTs, categorized by file type' },
-  { type: 'Videos', count: '136', detail: 'URL references to Vimeo (7 categories)' },
-  { type: 'External Links', count: '68', detail: 'Reusable link objects: update once, reflects everywhere' },
 ]
 
 const PERFORMANCE = [
@@ -187,22 +155,7 @@ function CriticalityBadge({ level }) {
   return <span className={`text-xs font-medium ${styles[level] || 'text-gray-400'}`}>{level}</span>
 }
 
-function SectionBadge({ section }) {
-  const styles = {
-    public: 'bg-sky-100 text-sky-700',
-    events: 'bg-violet-100 text-violet-700',
-    listings: 'bg-emerald-100 text-emerald-700',
-    content: 'bg-amber-100 text-amber-700',
-    meetings: 'bg-rose-100 text-rose-700',
-    microsites: 'bg-indigo-100 text-indigo-700',
-    admin: 'bg-gray-100 text-gray-600',
-  }
-  return (
-    <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded ${styles[section] || 'bg-gray-100 text-gray-500'}`}>
-      {section}
-    </span>
-  )
-}
+
 
 function ScoreBadge({ score }) {
   const color = score >= 90 ? 'text-emerald-600' : score >= 50 ? 'text-amber-600' : 'text-red-600'
@@ -249,42 +202,6 @@ export default function DiscoveryDashboard() {
           </div>
         </InsightCard>
       </div>
-
-      {/* Page Types */}
-      <CollapsibleSection title="Page Types & Templates" count={`${PAGE_TYPES.length} types, 7,692 URLs`} defaultOpen>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead><tr className="border-b border-tan">
-              <th className="py-2 pr-4 text-xs font-semibold text-deep-muted uppercase">Template</th>
-              <th className="py-2 pr-4 text-xs font-semibold text-deep-muted uppercase">Pattern</th>
-              <th className="py-2 pr-4 text-xs font-semibold text-deep-muted uppercase text-right">URLs</th>
-              <th className="py-2 text-xs font-semibold text-deep-muted uppercase">Section</th>
-            </tr></thead>
-            <tbody>{PAGE_TYPES.map((pt) => (
-              <tr key={pt.name} className="border-b border-tan/50">
-                <td className="py-2 pr-4 font-medium">{pt.name}</td>
-                <td className="py-2 pr-4 text-deep-muted font-mono text-xs">{pt.pattern}</td>
-                <td className="py-2 pr-4 text-right">{pt.count.toLocaleString()}</td>
-                <td className="py-2"><SectionBadge section={pt.section} /></td>
-              </tr>
-            ))}</tbody>
-          </table>
-        </div>
-        <p className="text-xs text-deep-muted mt-2">* Some URLs match multiple template categories. Unique URL total is 7,692 per sitemap crawl.</p>
-      </CollapsibleSection>
-
-      {/* Media Library */}
-      <CollapsibleSection title="Media Library" count="3,904 assets">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {MEDIA_LIBRARY.map((item) => (
-            <div key={item.type} className="p-3 border border-tan/50 bg-sand-light">
-              <p className="text-lg font-bold text-deep">{item.count}</p>
-              <p className="text-xs font-semibold text-deep mb-1">{item.type}</p>
-              <p className="text-xs text-deep-muted">{item.detail}</p>
-            </div>
-          ))}
-        </div>
-      </CollapsibleSection>
 
       {/* Integrations: InsightCard summary with full list collapsed (eng #14) */}
       <InsightCard
