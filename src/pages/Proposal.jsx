@@ -9,8 +9,6 @@ import Timeline from '../components/proposal/Timeline'
 import GradientText from '../components/GradientText'
 import RippleWaves from '../components/RippleWaves'
 import ParticleLogos from '../components/ParticleLogos'
-import InteractiveWavesGraphic from '../components/InteractiveWavesGraphic'
-import PhonePopIn from '../components/PhonePopIn'
 import DiscoveryDashboard from '../components/proposal/DiscoveryDashboard'
 import { PROPOSAL_TABS, useProposalTab } from '../contexts/ProposalTabContext'
 
@@ -140,17 +138,6 @@ export default function Proposal() {
               <p className="mb-4">
                 The goal is a complete custom platform rebuild, replacing both Simpleview CMS and CRM with a modern, flexible system that gives Visit Salt Lake full ownership of their digital presence. The first phase delivers a 1-to-1 rebuild with exact feature parity; enhancements come after.
               </p>
-              <h3 className="mb-2 mt-8">What We Found</h3>
-              <p className="mb-4">
-                Visit Salt Lake's digital presence is far more complex than a typical tourism website. The public site, CMS backend, CRM data layer, and third-party integrations form an interconnected system that touches every part of the organization, from marketing to sales to partner management. The next section breaks down exactly what we found.
-              </p>
-            </div>
-
-            <div className="relative overflow-hidden -mx-6 h-[400px] md:h-[680px]">
-              <div className="absolute overflow-hidden" style={{ top: 40, bottom: 40, left: 0, right: 0 }}>
-                <InteractiveWavesGraphic />
-              </div>
-              <PhonePopIn />
             </div>
 
             <div className="max-w-[600px] mx-auto text-sm text-deep leading-relaxed mt-10">
