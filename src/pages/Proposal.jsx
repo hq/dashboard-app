@@ -112,7 +112,7 @@ function TabNav() {
       <button
         onClick={() => goTo(activeTab - 1)}
         disabled={activeTab === 0}
-        className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-colors ${
+        className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold transition-colors ${
           activeTab === 0
             ? 'text-deep-muted/40 cursor-not-allowed'
             : 'text-deep hover:text-deep-dark'
@@ -127,7 +127,7 @@ function TabNav() {
       <button
         onClick={() => goTo(activeTab + 1)}
         disabled={activeTab === PROPOSAL_TABS.length - 1}
-        className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-colors ${
+        className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold transition-colors ${
           activeTab === PROPOSAL_TABS.length - 1
             ? 'text-deep-muted/40 cursor-not-allowed'
             : 'text-deep hover:text-deep-dark'
