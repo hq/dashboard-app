@@ -30,6 +30,9 @@ discovery/
     meeting-notes/    Notes from client calls and internal syncs
     walkthroughs/     Notes from video walkthroughs of the site/CMS
 
+  complexity/         Per-section complexity notes for Phase 2 scoping
+    events.md         Events section deep dive
+
   scripts/            Scraping and data processing tools
 ```
 
