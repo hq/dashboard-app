@@ -11,13 +11,6 @@ export const SCENARIOS = [
     multipliers: { design: 0.6, frontend: 0.65, backend: 0.7 },
     miscHours: 80,
   },
-  {
-    id: '2027',
-    name: 'Launch in 2027',
-    description: 'Full scope: complete custom platform rebuild with all 21+ templates, 28+ integrations, CMS admin, and enhancements.',
-    multipliers: { design: 1, frontend: 1, backend: 1 },
-    miscHours: 160,
-  },
 ]
 
 // --- Module categories (mapped to real estimation data) ---
