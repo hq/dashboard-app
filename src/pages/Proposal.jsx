@@ -230,7 +230,7 @@ export default function Proposal() {
 
             <TabNav />
 
-            <div className="max-w-[700px] mb-10">
+            <div className="max-w-[700px] mx-auto mb-10">
               <h3 className="text-deep mb-4">Our Research</h3>
               <p className="text-sm text-deep leading-relaxed mb-4">
                 This page is the output of our Phase 1 research. Our primary goal was to determine whether this project is feasible and likely to succeed, given how important this website is to the organization and the community it serves. We took that seriously.
@@ -255,7 +255,7 @@ export default function Proposal() {
                 <div className="border border-tan bg-white p-5">
                   <p className="font-semibold text-sm text-deep mb-2">Events</p>
                   <p className="text-xs text-deep-muted leading-relaxed">
-                    Events represents ~23% of the site (~1,800 pages) and functions as a search product with multi-faceted filtering, live counts, date pickers, and geospatial proximity results. It also pulls from an external NowPlayingUtah feed with an unknown integration mechanism, and has an event submission workflow we haven't been able to fully audit.
+                    Events represent a significant portion of the pages (~1,800) and functions as a search product with multi-faceted filtering, live counts, date pickers, and geospatial proximity results. It also pulls from an external NowPlayingUtah feed with an unknown integration mechanism, and has an event submission workflow we haven't been able to fully audit.
                   </p>
                 </div>
 
