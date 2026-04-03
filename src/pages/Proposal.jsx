@@ -166,26 +166,36 @@ export default function Proposal() {
 
             <TabNav />
 
-            <div className="max-w-[600px] mx-auto text-sm text-deep leading-relaxed">
-              <h3 className="mb-2">Approach</h3>
+            <div className="max-w-[700px] mx-auto text-sm text-deep leading-relaxed">
+              <h3 className="mb-2">Why This Project</h3>
               <p className="mb-4">
-                We conducted a comprehensive analysis of visitsaltlake.com, mapping every page template, content type, integration, and backend feature across both the public website and CMS admin. Our research spans 38 documents covering the full public site, 28+ third-party integrations, and the complete Simpleview CMS backend.
+                Visit Salt Lake's digital infrastructure is built on more than a decade of layered systems. The website, CMS, CRM, and 20+ third-party plugins each handle a piece of the operation, but they are expensive and offer a poor user experience. The organization is paying for tools that overlap, conflict, or sit unused, and the current platform provider has limited ability to evolve with the team's needs as it is controlled by Simpleview.
               </p>
               <p className="mb-4">
-                The goal is a complete custom platform rebuild, replacing both Simpleview CMS and CRM with a modern, flexible system that gives Visit Salt Lake full ownership of their digital presence. The first phase delivers a 1-to-1 rebuild with exact feature parity; enhancements come after.
+                The end project is a complete platform rebuild. One system, purpose-built for how Visit Salt Lake operates, replacing the current stack and giving the team full ownership of the digital presence.
               </p>
             </div>
 
-            <div className="max-w-[600px] mx-auto text-sm text-deep leading-relaxed mt-10">
-              <h3 className="mb-2">Design & Development</h3>
+            <div className="max-w-[700px] mx-auto text-sm text-deep leading-relaxed mt-10">
+              <h3 className="mb-2">What We Set Out to Answer</h3>
               <p className="mb-4">
-                The rebuild will deliver a custom-built platform: a modern marketing website, content management system, and admin panel purpose-built for Visit Salt Lake's needs. No more dependency on proprietary tourism CMS platforms. Full flexibility to build, extend, and evolve.
+                Before proposing anything, we needed to answer some questions: is this project feasible, and can it succeed? Given how important this website is to the organization and the community it serves, we weren't willing to pitch something we did not have an extremely high confidence in.
               </p>
               <p className="mb-4">
-                We'll replicate every page template with responsive design, matching the current navigation patterns and interactive features (faceted filters, date pickers, trip planner, compare tool, booking widgets, and persistent cart) rebuilt with modern frameworks for better performance and maintainability.
+                We analyzed the public-facing site and analyzed the CMS. That research produced 38 documents and brought us to roughly 90% confidence that this project can be completed to the high standard of quality we have and will be a significant upgrade for the team.
               </p>
               <p className="mb-4">
-                Performance is a key opportunity. The current site has significant room for improvement on mobile load times and core web vitals. With modern server-side rendering, optimized image delivery, and code splitting, we'll transform the visitor experience while preserving strong SEO and improving accessibility.
+                The remaining 10% requires more access to the backend systems and direct conversation with the people who use them. That's what Phase 2 is designed for.
+              </p>
+            </div>
+
+            <div className="max-w-[700px] mx-auto text-sm text-deep leading-relaxed mt-10">
+              <h3 className="mb-2">How It's Structured</h3>
+              <p className="mb-4">
+                The engagement is three sequential phases, each its own commitment with a decision point at the end. Phase 1 (this research) establishes feasibility. Phase 2 gets inside the systems, validates every assumption, and produces working demos. Phase 3 is the production build.
+              </p>
+              <p className="mb-4">
+                Each phase produces the confidence needed to decide whether and how to proceed to the next. No commitments get made about things that haven't been fully mapped.
               </p>
             </div>
 
